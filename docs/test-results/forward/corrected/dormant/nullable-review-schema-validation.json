@@ -1,0 +1,14 @@
+{
+  "command": [
+    "node",
+    "/tmp/cloudflare-cost-safety-forward-corrected/tool/scripts/cli.mjs",
+    "validate",
+    "--schema",
+    "semantic-review",
+    "--file",
+    "/tmp/cloudflare-cost-safety-forward-corrected/dormant/.cost-safety/corrected/semantic-review-null-not-run.json"
+  ],
+  "exit_code": 0,
+  "stdout": "valid\n",
+  "stderr": ""
+}

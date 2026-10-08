@@ -1,0 +1,486 @@
+{
+  "schema_version": "1.0",
+  "version": "1.0.0",
+  "rules": [
+    {
+      "id": "CF-DO-001",
+      "title": "DO生命周期与Alarm重新调度",
+      "candidate_trigger": "constructor/onStart/初始化hook调用setAlarm，或间接调用调度器。",
+      "case_ids": [
+        "C01",
+        "C02"
+      ],
+      "source_ids": [
+        "CF-ALARMS",
+        "CF-SKILL-DO"
+      ],
+      "units": [
+        "alarm invocations",
+        "SQL rows read/written",
+        "active duration"
+      ],
+      "native_control_limit": "One scheduled alarm per object does not cap future alarm invocations; deleteAlarm is object runtime API.",
+      "recommendation": "用官方Alarm行为核验；deleteAlarm是对象内操作，不是账户级停用；优先寻找实际可用平台控制，禁止捏造pause接口。",
+      "samples": [
+        {
+          "kind": "unsafe",
+          "contract": "对象每次重新激活都安排下一轮健康检查；没有工作仍读取全表并继续调度。"
+        },
+        {
+          "kind": "safe",
+          "contract": "一次性任务只有持久化待办才安排Alarm；完成后不重启；重新激活测试不产生额外业务扫描。"
+        },
+        {
+          "kind": "unknown",
+          "contract": "SDK的onStart语义或调度实现不在仓库，无法确定激活是否安排新任务。"
+        }
+      ],
+      "implementation": {
+        "static": "AST stub RPC activation → local constructor → alarm → storage → rearm; DO-owned schema required",
+        "agent": "Mandatory semantic review with actual source locations and official context; static candidates are not complete coverage",
+        "local_tests": "workerd activation/alarm/eviction, getAlarm null and empty-work tests",
+        "unsupported": "External activation/history, Agents SDK internals and conditional schema initialization"
+      }
+    },
+    {
+      "id": "CF-DO-002",
+      "title": "后台逻辑任务无进展或预算重置",
+      "candidate_trigger": "alarm/RPC/后台循环显式重调度、catch后setAlarm或在内存里保存attempts。",
+      "case_ids": [
+        "C01",
+        "C02",
+        "C07"
+      ],
+      "source_ids": [
+        "CF-ALARMS",
+        "CF-WORKER-LIMIT",
+        "CF-DO-SQL"
+      ],
+      "units": [
+        "events per logical job/window",
+        "rows per event",
+        "instances"
+      ],
+      "native_control_limit": "Single-event CPU and platform failure retries do not cap application-created alarms or SQL row usage.",
+      "recommendation": "认可真实的单次资源限制，但不得将CPU限制解释成SQL读写或月费上限；原生覆盖不足时报告缺口。",
+      "samples": [
+        {
+          "kind": "unsafe",
+          "contract": "处理失败后创建新Alarm并把尝试次数重置；对象重启后重新获得完整尝试预算。"
+        },
+        {
+          "kind": "safe",
+          "contract": "有限任务持久化attempts/progress；空任务停止；合法周期任务具有被执行的频率、单次工作量及实例数边界。"
+        },
+        {
+          "kind": "unknown",
+          "contract": "仅在配置中声明每分钟上限，但没有代码或平台执行证据。"
+        }
+      ],
+      "implementation": {
+        "static": "AST memory field/constructor reset plus alarm reschedule; persistent get guard distinguished",
+        "agent": "Mandatory semantic review with actual source locations and official context; static candidates are not complete coverage",
+        "local_tests": "workerd eviction resets attempts while durable runs persist; finite task and periodic window",
+        "unsupported": "General transaction/fault invariants and arbitrary counter names require Agent evidence"
+      }
+    },
+    {
+      "id": "CF-DEP-001",
+      "title": "预览环境与对象数量放大",
+      "candidate_trigger": "CI为PR/分支生成Worker、binding、Namespace、对象ID或启动后台任务。",
+      "case_ids": [
+        "C02"
+      ],
+      "source_ids": [
+        "CF-ALARMS",
+        "CF-SKILL-WORKER"
+      ],
+      "units": [
+        "active environments",
+        "active objects",
+        "events per object"
+      ],
+      "native_control_limit": "Preview URLs do not imply separate namespaces. Removing a route does not stop existing background alarms.",
+      "recommendation": "优先已核实的环境/触发器配置控制；禁止以删除持久化Namespace作为默认清理或隔离。",
+      "samples": [
+        {
+          "kind": "unsafe",
+          "contract": "每次预览都创建独立后台执行者，PR结束没有停止机制或资源存续预算。"
+        },
+        {
+          "kind": "safe",
+          "contract": "核验实际生成配置；预览不启动后台任务，或具有有界环境/对象数量、到期失活与验收记录。"
+        },
+        {
+          "kind": "unknown",
+          "contract": "只能看到模板，生成配置和生产/预览绑定关系缺失。"
+        }
+      ],
+      "implementation": {
+        "static": "AST newUniqueId plus activated class alarms; real JSONC/TOML environment bindings",
+        "agent": "Mandatory semantic review with actual source locations and official context; static candidates are not complete coverage",
+        "local_tests": "Config drift/generator gaps; bounded shared/independent-resource models",
+        "unsupported": "Live namespace counts and expiry; no claim that a preview URL creates resources"
+      }
+    },
+    {
+      "id": "CF-SQL-001",
+      "title": "读取扫描放大与迁移丢失索引",
+      "candidate_trigger": "热路径SQL、JOIN/ORDER BY、LIMIT、ORM变更或索引迁移。",
+      "case_ids": [
+        "C06",
+        "C02"
+      ],
+      "source_ids": [
+        "CF-D1-PRICE",
+        "CF-DO-SQL"
+      ],
+      "units": [
+        "rows_read",
+        "rowsRead",
+        "rows_written for index maintenance"
+      ],
+      "native_control_limit": "LIMIT and returned rows do not bound scanned rows; plans and consumed-cursor metrics are required.",
+      "recommendation": "使用原生计量/查询计划验证；不要虚构每查询费用上限。",
+      "samples": [
+        {
+          "kind": "unsafe",
+          "contract": "按非索引字段查询并排序；返回1行却随表规模全表扫描；迁移漏掉关键索引。"
+        },
+        {
+          "kind": "safe",
+          "contract": "使用适配谓词/排序的索引；本地测量多组数据分布下扫描量，阈值来自业务契约。"
+        },
+        {
+          "kind": "unknown",
+          "contract": "动态SQL/ORM无法展开，缺表规模、迁移或可测量数据库后端。"
+        }
+      ],
+      "implementation": {
+        "static": "SQL AST predicates/order/LIMIT plus per-database committed indexes and hot call closure",
+        "agent": "Mandatory semantic review with actual source locations and official context; static candidates are not complete coverage",
+        "local_tests": "Actual DO SQL cursor rows and D1 local meta; SQLite plan probe separately labelled",
+        "unsupported": "Dynamic ORM/SQL, unsupported syntax, complex joins/selectivity and production schema"
+      }
+    },
+    {
+      "id": "CF-SQL-002",
+      "title": "大范围写入与冗余写放大",
+      "candidate_trigger": "UPDATE/DELETE范围变化；upsert、批量写、相同记录重复状态镜像。",
+      "case_ids": [
+        "C03",
+        "C04",
+        "C05"
+      ],
+      "source_ids": [
+        "CF-D1-PRICE",
+        "CF-DO-SQL"
+      ],
+      "units": [
+        "rows written",
+        "index writes",
+        "storage operations"
+      ],
+      "native_control_limit": "Batch/upsert result idempotency does not imply zero write billing; indexes also incur writes.",
+      "recommendation": "优先官方存储/行数计量和现有受支持限制；不要自动删除数据或关闭必要持久化。",
+      "samples": [
+        {
+          "kind": "unsafe",
+          "contract": "单行UPDATE的WHERE在重构中移除；无变化的数据在每次事件上重复upsert并维护多份状态。"
+        },
+        {
+          "kind": "safe",
+          "contract": "唯一键限定写入；有界维护任务得到明确授权；重复事件的必要持久化与不必要重复写分开测量。"
+        },
+        {
+          "kind": "unknown",
+          "contract": "表规模与触发频率未知，或者数据库后端不明。"
+        }
+      ],
+      "implementation": {
+        "static": "SQL AST whole-table UPDATE/DELETE on known database schema; hot vs maintenance entry",
+        "agent": "Mandatory semantic review with actual source locations and official context; static candidates are not complete coverage",
+        "local_tests": "Actual DO broad writes, low selectivity, repeated upsert rowsWritten",
+        "unsupported": "General selective bounds, transactions, trigger/index amplification need workload evidence"
+      }
+    },
+    {
+      "id": "CF-JOB-001",
+      "title": "Cron/批处理没有持久化进度",
+      "candidate_trigger": "scheduled、seed、backfill、embedding、migration持续读取并写入批次。",
+      "case_ids": [
+        "C04"
+      ],
+      "source_ids": [
+        "CF-D1-PRICE",
+        "CF-ALARMS"
+      ],
+      "units": [
+        "rows per batch",
+        "batches per job",
+        "Cron runs"
+      ],
+      "native_control_limit": "Cron frequency limits triggers, not repeated per-job work or crash replay.",
+      "recommendation": "原生Cron配置是触发源控制候选；需实施时查当前管理文档；不能据此取消DO Alarm。",
+      "samples": [
+        {
+          "kind": "unsafe",
+          "contract": "每次Cron读取相同首批记录，游标不提交；崩溃后再次执行无界重写。"
+        },
+        {
+          "kind": "safe",
+          "contract": "持久化单调进度/去重；明确事务边界；故障注入后重复工作量有上限；任务完成停止处理。"
+        },
+        {
+          "kind": "unknown",
+          "contract": "检查点或事务实现由外部服务提供，无法获取契约。"
+        }
+      ],
+      "implementation": {
+        "static": "Scheduled/alarm SELECT LIMIT + writes with no committed progress transition",
+        "agent": "Mandatory semantic review with actual source locations and official context; static candidates are not complete coverage",
+        "local_tests": "Bounded checkpoint/crash simulation and finite DO work across eviction",
+        "unsupported": "Checkpoint transactions and external processing, arbitrary business progress semantics"
+      }
+    },
+    {
+      "id": "CF-Q-001",
+      "title": "Queue→API→Queue形成新消息反馈环",
+      "candidate_trigger": "queue消费函数调用公共业务API/RPC，该目标存在send/sendBatch或异步入队分支。",
+      "case_ids": [
+        "C03"
+      ],
+      "source_ids": [
+        "CF-QUEUE-RETRY"
+      ],
+      "units": [
+        "new messages",
+        "reads/retries",
+        "downstream writes"
+      ],
+      "native_control_limit": "max_retries and DLQ apply to one message, not new messages in the same logical task.",
+      "recommendation": "优先平台单消息重试/DLQ配置，但明确其作用域；暂停投递不能阻止生产者继续发送。",
+      "samples": [
+        {
+          "kind": "unsafe",
+          "contract": "消费者保留async标志调用原入口；旧消息ack成功但创建新jobId并再次入队。"
+        },
+        {
+          "kind": "safe",
+          "contract": "消费执行路径不再入队；或受控业务工作流的rootJobId/hops随新消息保留且有持久化边界。"
+        },
+        {
+          "kind": "unknown",
+          "contract": "消费者调用的外部endpoint不可分析，不能证明不产生新消息。"
+        }
+      ],
+      "implementation": {
+        "static": "Consumer → same-repository cross-file producer → new send without preserved root/hops guard",
+        "agent": "Mandatory semantic review with actual source locations and official context; static candidates are not complete coverage",
+        "local_tests": "Bounded 20-step fresh-ID/ack feedback and bounded root/hops chain with real Queue test helpers",
+        "unsupported": "External producers, DLQ replay semantics and real cloud Queue scheduling"
+      }
+    },
+    {
+      "id": "CF-Q-002",
+      "title": "重复投递与批处理副作用放大",
+      "candidate_trigger": "整批处理、异常throw、手动retry/ack、外部副作用及重试设置变更。",
+      "case_ids": [
+        "C03"
+      ],
+      "source_ids": [
+        "CF-QUEUE-RETRY",
+        "CF-QUEUE-PAUSE"
+      ],
+      "units": [
+        "delivery attempts",
+        "batch repetitions",
+        "side-effect costs"
+      ],
+      "native_control_limit": "At-least-once delivery and acknowledgement cannot promise exactly-once side effects.",
+      "recommendation": "原生重试、ack、DLQ和pause优先；吞掉所有错误来减少费用不是安全修复。",
+      "samples": [
+        {
+          "kind": "unsafe",
+          "contract": "批次最后一条失败导致前面已成功的高成本副作用不断重做；重试耗尽另造新消息继续。"
+        },
+        {
+          "kind": "safe",
+          "contract": "使用适当ack与幂等设计；已核实平台默认或显式重试上限；DLQ无自动无界回灌；重复工作预算清楚。"
+        },
+        {
+          "kind": "unknown",
+          "contract": "副作用在外部API且无幂等契约，无法界定重复代价。"
+        }
+      ],
+      "implementation": {
+        "static": "Billable side effects plus explicit retryAll without per-item ack",
+        "agent": "Mandatory semantic review with actual source locations and official context; static candidates are not complete coverage",
+        "local_tests": "Bounded partial-success/write-before-ack/DLQ simulation using Queue test helpers",
+        "unsupported": "Exactly-once side effects, external payments and production delivery behavior"
+      }
+    },
+    {
+      "id": "CF-KV-001",
+      "title": "KV热路径list回退及分页失控",
+      "candidate_trigger": "请求鉴权/查询失败进入KV.list；循环使用cursor进行分页。",
+      "case_ids": [
+        "C03"
+      ],
+      "source_ids": [
+        "CF-KV-PRICE"
+      ],
+      "units": [
+        "KV read",
+        "KV write",
+        "KV list"
+      ],
+      "native_control_limit": "KV cache is not a global strongly consistent limiter; reads, writes, lists are distinct.",
+      "recommendation": "以KV原生计量/套餐额度为证据，应用缓存不能被当成全局强一致限流器。",
+      "samples": [
+        {
+          "kind": "unsafe",
+          "contract": "普通key miss后扫描整个namespace；分页cursor不更新或空页后错误重试。"
+        },
+        {
+          "kind": "safe",
+          "contract": "热点使用定向key查找；必要的迁移扫描离线、有页数和总项数上限、检查点与失败策略。"
+        },
+        {
+          "kind": "unknown",
+          "contract": "key分布/命中率未提供，无法估计回退频度。"
+        }
+      ],
+      "implementation": {
+        "static": "KV list in unbounded AST loop without cursor advance; bounded loops distinguished",
+        "agent": "Mandatory semantic review with actual source locations and official context; static candidates are not complete coverage",
+        "local_tests": "Actual local KV miss/list/cursor pagination; stuck cursor mutation",
+        "unsupported": "Business miss cardinality, globally consistent admission and cross-region state"
+      }
+    },
+    {
+      "id": "CF-R2-001",
+      "title": "R2备份同步/轮询操作放大",
+      "candidate_trigger": "Put/List/Head循环、Litestream等复制配置、备份/预览环境、重试周期。",
+      "case_ids": [
+        "C08"
+      ],
+      "source_ids": [
+        "CF-R2-PRICE"
+      ],
+      "units": [
+        "Class A",
+        "Class B",
+        "GB-month",
+        "retrieval when applicable"
+      ],
+      "native_control_limit": "Free egress does not imply free requests. ListObjects is Class A; storage/retrieval are separate.",
+      "recommendation": "优先核实产品自身可用限制/访问控制；只关闭公共域名不能覆盖S3凭证与内部binding。",
+      "samples": [
+        {
+          "kind": "unsafe",
+          "contract": "无变更仍高频上传或列举；多个环境倍增；失败无退避且重试重新获得预算。"
+        },
+        {
+          "kind": "safe",
+          "contract": "明确实际同步周期、变更检测、页数/分片数量、重试边界以及全部环境的每窗口操作数。"
+        },
+        {
+          "kind": "unknown",
+          "contract": "依赖默认sync interval但版本或生效配置未知。"
+        }
+      ],
+      "implementation": {
+        "static": "Reachable fast timer/alarm with unconditional put/list; change guard candidate",
+        "agent": "Mandatory semantic review with actual source locations and official context; static candidates are not complete coverage",
+        "local_tests": "Actual local R2 put/list plus bounded frequency/environment arithmetic",
+        "unsupported": "S3/public access, object-event loops, change-detection/retry semantics and live scope"
+      }
+    },
+    {
+      "id": "CF-HTTP-001",
+      "title": "公共入口、轮询和缓存位置误判",
+      "candidate_trigger": "前端轮询/重连、公共GET/写API、Worker代理缓存、认证后才限流、业务高成本入口。",
+      "case_ids": [
+        "C03",
+        "C05",
+        "C09"
+      ],
+      "source_ids": [
+        "CF-WORKER-PRICE",
+        "CF-R2-PRICE",
+        "COMMUNITY-SKILL"
+      ],
+      "units": [
+        "Worker invocations",
+        "downstream operations",
+        "requests per active client"
+      ],
+      "native_control_limit": "In-Worker cache hits still invoke the Worker; regional rate limits are not account-wide caps.",
+      "recommendation": "优先当前套餐支持且覆盖实际入口的原生限流/WAF/缓存；报告workers.dev、直连或后台等未覆盖路径。",
+      "samples": [
+        {
+          "kind": "unsafe",
+          "contract": "每用户每秒轮询触发多次数据库操作；前端退避可被直接请求绕过；内部缓存命中被误当作消除Worker入口调用。"
+        },
+        {
+          "kind": "safe",
+          "contract": "画出计费前后路径；适用的原生保护与缓存经过核验；用户/租户/全局预算作用域清楚，鉴权数据不泄露进公共缓存。"
+        },
+        {
+          "kind": "unknown",
+          "contract": "WAF/缓存/限流只在控制台设置，仓库无导出或核验证据。"
+        }
+      ],
+      "implementation": {
+        "static": "Literal browser script served by configured assets + fast relative polling + costly Worker handler",
+        "agent": "Mandatory semantic review with actual source locations and official context; static candidates are not complete coverage",
+        "local_tests": "Static same-origin asset fixture and public entry gaps; no live WAF test",
+        "unsupported": "Dynamic routes/templates, cache/WAF account state and general public traffic bounds"
+      }
+    },
+    {
+      "id": "CF-SAFE-001",
+      "title": "伪安全保证与不可执行的隔离声明",
+      "candidate_trigger": "预算/CPU/retry/getAlarm/暂停/全局开关被用来证明安全，或代码生成虚构平台配置/API。",
+      "case_ids": [
+        "C01",
+        "C07",
+        "C09"
+      ],
+      "source_ids": [
+        "CF-BUDGET",
+        "CF-WORKER-LIMIT",
+        "CF-ALARMS",
+        "CF-QUEUE-PAUSE",
+        "CF-TEST"
+      ],
+      "units": [
+        "coverage of cost-producing paths",
+        "residual storage/fixed charges"
+      ],
+      "native_control_limit": "Budget alerts notify only. Test resets, CPU limits and queue pause are not a hard monthly cap.",
+      "recommendation": "原生优先但不虚构能力；测试API不是生产API；真实缺口才建议最小代码边界，危险运行时操作不属于v1。",
+      "samples": [
+        {
+          "kind": "unsafe",
+          "contract": "报告将邮件预算告警称为硬上限；拿本地abortAllDurableObjects测试API当线上账户停用API；生产者未停却报告Queue费用归零。"
+        },
+        {
+          "kind": "safe",
+          "contract": "每个控制都注明官方来源、版本/套餐、作用域、实际执行证据和残留风险；没有已核实原生能力时明确unknown/gap。"
+        },
+        {
+          "kind": "unknown",
+          "contract": "能力依赖企业合同/未公开功能或官方页面无法确认。"
+        }
+      ],
+      "implementation": {
+        "static": "Structured false control guarantees and reachable test reset helper",
+        "agent": "Mandatory semantic review with actual source locations and official context; static candidates are not complete coverage",
+        "local_tests": "Five native scope falsification tests, signed false hard-cap schema rejection",
+        "unsupported": "Plan/contract applicability, runtime control state and any production isolation"
+      }
+    }
+  ]
+}

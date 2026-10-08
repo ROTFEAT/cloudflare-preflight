@@ -1,0 +1,6 @@
+{
+  "id": "CF-SQL-001",
+  "kind": "safe",
+  "assertion": "no unjustified BLOCK",
+  "synthetic": true
+}

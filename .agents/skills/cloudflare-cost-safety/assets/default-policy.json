@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0",
+  "mode": "review_only",
+  "cloud_access": "disabled",
+  "remote_tests": false,
+  "local_test_budget": {
+    "max_events": 50,
+    "max_messages": 50,
+    "max_fixture_rows": 10000,
+    "max_wall_seconds_per_child": 10,
+    "max_memory_mb": 256,
+    "network": "deny"
+  },
+  "required_tests": [],
+  "exemptions": [],
+  "max_evidence_age_hours": 24
+}

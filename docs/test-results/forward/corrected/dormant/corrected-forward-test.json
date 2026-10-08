@@ -1,0 +1,1022 @@
+{
+  "schema_version": "forward-host-evaluation/1",
+  "recorded_at": "2026-10-08T11:15:50.033388+00:00",
+  "test_kind": "actual_host_explicit_focused_review_rerun",
+  "host_agent": "/root/skill_forward_review",
+  "model": "Codex, GPT-6 family; exact backend model identifier/version not exposed in session",
+  "invocation_metadata": {
+    "explicit_skill": "$cloudflare-cost-safety",
+    "skill_path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/SKILL.md",
+    "request": "Focused explicit review of dormant and activated synthetic JS Workers for production publisher handoff.",
+    "host_test_invocations_this_record": 1,
+    "fixtures_in_this_host_rerun": 2,
+    "implicit_skill_selection_tests": 0,
+    "repeated_independent_trials": 0,
+    "preflight_cli_calls_for_this_fixture": 3,
+    "counting_note": "One host review rerun includes initial preflight, nullable-not_run renderer reproduction, and final semantic-bound preflight. These are not three independent host trials. No implicit trigger behavior was tested. Prior original three-app evaluation remains separate."
+  },
+  "candidate": "dormant",
+  "candidate_files_actually_read": [
+    {
+      "path": "/tmp/cloudflare-cost-safety-forward-corrected/dormant/main.js",
+      "resolved_path": "/tmp/cloudflare-cost-safety-forward-corrected/dormant/main.js",
+      "sha256": "187f558c1f9068268dfa9f060acb0b5d82d0acc9e8c0afe5caa170973a39b1f4",
+      "lines": 6,
+      "review_operation": "actual content read",
+      "scope": "full content read"
+    },
+    {
+      "path": "/tmp/cloudflare-cost-safety-forward-corrected/dormant/migrations/0001.sql",
+      "resolved_path": "/tmp/cloudflare-cost-safety-forward-corrected/dormant/migrations/0001.sql",
+      "sha256": "e94bb21bf79426c53ea2579dbc50c8cedcb17a0af5bebb131a4ca39da8699da6",
+      "lines": 1,
+      "review_operation": "actual content read",
+      "scope": "full content read"
+    },
+    {
+      "path": "/tmp/cloudflare-cost-safety-forward-corrected/dormant/package-lock.json",
+      "resolved_path": "/tmp/cloudflare-cost-safety-forward-corrected/dormant/package-lock.json",
+      "sha256": "97a123aa68ccb918c140b085cc6a52aac04955c3ecdba02a6d34ef725e5a1f5d",
+      "lines": 9,
+      "review_operation": "actual content read",
+      "scope": "full content read"
+    },
+    {
+      "path": "/tmp/cloudflare-cost-safety-forward-corrected/dormant/wrangler.jsonc",
+      "resolved_path": "/tmp/cloudflare-cost-safety-forward-corrected/dormant/wrangler.jsonc",
+      "sha256": "6bad7d0ddb0766326b6ff4174b8677bca2298181de4cb8495cd5e5e604336e40",
+      "lines": 28,
+      "review_operation": "actual content read",
+      "scope": "full content read"
+    }
+  ],
+  "trusted_tool": {
+    "path": "/tmp/cloudflare-cost-safety-forward-corrected/tool",
+    "expected_fingerprint": "66654b1d231d8cb1064a3fee6c986219578e781f17427426e564fcebdc9a222f",
+    "before_fingerprint": "66654b1d231d8cb1064a3fee6c986219578e781f17427426e564fcebdc9a222f",
+    "after_fingerprint": "66654b1d231d8cb1064a3fee6c986219578e781f17427426e564fcebdc9a222f",
+    "fingerprint_command": [
+      "node",
+      "/tmp/cloudflare-cost-safety-forward-corrected/tool/scripts/cli.mjs",
+      "fingerprint"
+    ],
+    "fingerprint_exit_code": 0,
+    "fingerprint_stdout": "66654b1d231d8cb1064a3fee6c986219578e781f17427426e564fcebdc9a222f\n",
+    "fingerprint_stderr": "",
+    "unchanged_during_review": true,
+    "prepared_dependencies": "Existing trusted node_modules symlink; no dependency installation/download."
+  },
+  "policy_files_actually_read": [
+    {
+      "path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/SKILL.md",
+      "resolved_path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/SKILL.md",
+      "sha256": "78798df3a06ce7797dfd75a814809b4fce1c2a4809393bfb1f81f0ab7d121be7",
+      "lines": 55,
+      "review_operation": "actual content read",
+      "scope": "full content read"
+    },
+    {
+      "path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/references/review-procedure.md",
+      "resolved_path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/references/review-procedure.md",
+      "sha256": "fca359a5f940add6e29f250a836fd3a9f870077d2746870674b3e8a4fae35556",
+      "lines": 11,
+      "review_operation": "actual content read",
+      "scope": "full content read"
+    },
+    {
+      "path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/references/official-skills.md",
+      "resolved_path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/references/official-skills.md",
+      "sha256": "51e99e095df63d722de8d4a2354499c99b9794a58320802264bc4fbc82910886",
+      "lines": 11,
+      "review_operation": "actual content read",
+      "scope": "full content read"
+    },
+    {
+      "path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/references/platform-facts.md",
+      "resolved_path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/references/platform-facts.md",
+      "sha256": "f0bba58e20840e937eabb8264623da3192c80ce80646a4bc82a5ba7a52ef4935",
+      "lines": 15,
+      "review_operation": "actual content read",
+      "scope": "full content read"
+    },
+    {
+      "path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/references/native-controls.md",
+      "resolved_path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/references/native-controls.md",
+      "sha256": "4806228a2a799c0b6858de7b308d1c4ed61393cfe3b8da60a112662a18e6c6ab",
+      "lines": 9,
+      "review_operation": "actual content read",
+      "scope": "full content read"
+    },
+    {
+      "path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/references/predeploy-gate.md",
+      "resolved_path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/references/predeploy-gate.md",
+      "sha256": "c484783a163f76178add5fe59124cdfd52f1f2d41b37e0efb80017f8d3f76d48",
+      "lines": 13,
+      "review_operation": "actual content read",
+      "scope": "full content read"
+    },
+    {
+      "path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/references/rules.md",
+      "resolved_path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/references/rules.md",
+      "sha256": "5a8d3af9bfb4e973ed6c12ec6d4e8d7d15875cb426c461b2e7ffa0e5bcd65334",
+      "lines": 308,
+      "review_operation": "actual content read",
+      "scope": "full content read"
+    },
+    {
+      "path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/assets/semantic-review.schema.json",
+      "resolved_path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/assets/semantic-review.schema.json",
+      "sha256": "81f5271547ec8295f23679ecae2c1234b198f8243acef80dd55aec30fe93f163",
+      "lines": 640,
+      "review_operation": "actual content read",
+      "scope": "full content read"
+    },
+    {
+      "path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/assets/rules/catalog.json",
+      "resolved_path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/assets/rules/catalog.json",
+      "sha256": "755f8ccfabc9c198779e3b6e6eaa0084253592664a9d117fad0b6c13b67ff5f3",
+      "lines": 486,
+      "review_operation": "actual content read",
+      "scope": "full content read"
+    }
+  ],
+  "official_files_actually_read": [
+    {
+      "path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/vendor/workers-best-practices/SKILL.md",
+      "resolved_path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/vendor/workers-best-practices/SKILL.md",
+      "sha256": "8ae8c6e7359171ba6a1688503850fa05ce47199c4e288343bf55b5e277351bae",
+      "lines": 60,
+      "review_operation": "actual content read",
+      "scope": "full content read",
+      "skill": "workers-best-practices",
+      "revision": "41e0d19858946d18af9ee2c2feebbe2e11d829ff",
+      "matches_review_binding": true
+    },
+    {
+      "path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/vendor/workers-best-practices/references/configuration.md",
+      "resolved_path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/vendor/workers-best-practices/references/configuration.md",
+      "sha256": "cdb5c9cd5168231373523332c0e7a5cf8811dc244c48298823e3ccc5eb7157c1",
+      "lines": 139,
+      "review_operation": "actual content read",
+      "scope": "full content read",
+      "skill": "workers-best-practices",
+      "revision": "41e0d19858946d18af9ee2c2feebbe2e11d829ff",
+      "matches_review_binding": true
+    },
+    {
+      "path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/vendor/workers-best-practices/references/platform-apis.md",
+      "resolved_path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/vendor/workers-best-practices/references/platform-apis.md",
+      "sha256": "9ca9f5a7a82f92de45d310f5e2ee05aa464ddb7a63a737529caa17fff3660f28",
+      "lines": 51,
+      "review_operation": "actual content read",
+      "scope": "full content read",
+      "skill": "workers-best-practices",
+      "revision": "41e0d19858946d18af9ee2c2feebbe2e11d829ff",
+      "matches_review_binding": true
+    },
+    {
+      "path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/vendor/workers-best-practices/references/runtime-patterns.md",
+      "resolved_path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/vendor/workers-best-practices/references/runtime-patterns.md",
+      "sha256": "704ce8d4ff62c7655eb1d15f804ad566ed2012d11c2086e0d94bd3addb4d2c07",
+      "lines": 339,
+      "review_operation": "actual content read",
+      "scope": "full content read",
+      "skill": "workers-best-practices",
+      "revision": "41e0d19858946d18af9ee2c2feebbe2e11d829ff",
+      "matches_review_binding": true
+    },
+    {
+      "path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/vendor/wrangler/SKILL.md",
+      "resolved_path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/vendor/wrangler/SKILL.md",
+      "sha256": "9d9bd78c79823cdad36a88dbece8e48d8512c7262c66546ccbfac64ae08d310f",
+      "lines": 71,
+      "review_operation": "actual content read",
+      "scope": "full content read",
+      "skill": "wrangler",
+      "revision": "41e0d19858946d18af9ee2c2feebbe2e11d829ff",
+      "matches_review_binding": true
+    },
+    {
+      "path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/vendor/durable-objects/SKILL.md",
+      "resolved_path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/vendor/durable-objects/SKILL.md",
+      "sha256": "2468c1795f439f494f076eb13a2202a3c4e579e71e6e2ed98b4d1f5ce62fef1b",
+      "lines": 180,
+      "review_operation": "actual content read",
+      "scope": "full content read",
+      "skill": "durable-objects",
+      "revision": "41e0d19858946d18af9ee2c2feebbe2e11d829ff",
+      "matches_review_binding": true
+    },
+    {
+      "path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/vendor/durable-objects/references/rules.md",
+      "resolved_path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/vendor/durable-objects/references/rules.md",
+      "sha256": "8ec51f1270d6014763139236c3fb9f3a21a3bed4054c99b101f392eb5cb363bf",
+      "lines": 19,
+      "review_operation": "actual content read",
+      "scope": "full content read",
+      "skill": "durable-objects",
+      "revision": "41e0d19858946d18af9ee2c2feebbe2e11d829ff",
+      "matches_review_binding": true
+    },
+    {
+      "path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/vendor/durable-objects/references/testing.md",
+      "resolved_path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/vendor/durable-objects/references/testing.md",
+      "sha256": "1a99e6a2e1bd7f2fa34573b07ad036e3c2ddcf97df6a42926d737eb2d87b3168",
+      "lines": 23,
+      "review_operation": "actual content read",
+      "scope": "full content read",
+      "skill": "durable-objects",
+      "revision": "41e0d19858946d18af9ee2c2feebbe2e11d829ff",
+      "matches_review_binding": true
+    },
+    {
+      "path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/vendor/durable-objects/references/workers.md",
+      "resolved_path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/vendor/durable-objects/references/workers.md",
+      "sha256": "3149c3ee371b5dbf3a84dac7d5bb42c4c6553762480741f6d2808e4ca20fd932",
+      "lines": 346,
+      "review_operation": "actual content read",
+      "scope": "full content read",
+      "skill": "durable-objects",
+      "revision": "41e0d19858946d18af9ee2c2feebbe2e11d829ff",
+      "matches_review_binding": true
+    }
+  ],
+  "trusted_implementation_metadata_actually_read": [
+    {
+      "path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/scripts/cli.mjs",
+      "resolved_path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/scripts/cli.mjs",
+      "sha256": "25077e728da598d067cf2671e4313c3d75d9d4c009a1931efa964b6fdb21fb5f",
+      "lines": 65,
+      "review_operation": "actual content read",
+      "scope": "lines 1-85; complete file of 65 lines"
+    },
+    {
+      "path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/scripts/lib/probe.py",
+      "resolved_path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/scripts/lib/probe.py",
+      "sha256": "27455f39185a38c2bfc6ea7df931014826f671bd4cf78a522f4805e23d279245",
+      "lines": 89,
+      "review_operation": "actual content read",
+      "scope": "first 70 lines; sandbox/authorizer/EXPLAIN core"
+    },
+    {
+      "path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/scripts/lib/preflight.mjs",
+      "resolved_path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/scripts/lib/preflight.mjs",
+      "sha256": "11ae54df0360aa873926a79e554940cf5afeb5da7e4947d5c1636215e0dcc014",
+      "lines": 168,
+      "review_operation": "actual content read",
+      "scope": "lines 45-105; semantic application and result deduplication"
+    },
+    {
+      "path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/scripts/lib/render.mjs",
+      "resolved_path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/scripts/lib/render.mjs",
+      "sha256": "22e793cc974103cc02e9701b174b50a04e210f9973b2e59e88487c841ab85827",
+      "lines": 7,
+      "review_operation": "actual content read",
+      "scope": "actual renderer read for nullable not_run failure"
+    },
+    {
+      "path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/node_modules/wrangler/package.json",
+      "resolved_path": "/home/ubuntu/github/cloudflare-preflight/node_modules/wrangler/package.json",
+      "sha256": "101ed6193158af11fe0633ad225bcc043d0cc5c6d62ff19ffb8dfbaacbe7757c",
+      "lines": 216,
+      "review_operation": "actual content read",
+      "scope": "parsed package version 4.148.0"
+    },
+    {
+      "path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/node_modules/wrangler/config-schema.json",
+      "resolved_path": "/home/ubuntu/github/cloudflare-preflight/node_modules/wrangler/config-schema.json",
+      "sha256": "d239d961fa53ba630ebe4a47e64bb079d88fa2eaec030caeef0f3feb37adfd2c",
+      "lines": 6854,
+      "review_operation": "actual content read",
+      "scope": "parsed affected RawConfig name/account/main/date/observability/DO/migrations, RawDurableObjectsConfig and DurableObjectMigration properties"
+    }
+  ],
+  "deployment_identity": {
+    "schema_version": "1.0",
+    "source_snapshot_digest": "3a5aac25f8e844d3b984d5bc72aa24d2aa1ee696c3bfb384c1a77fd7116af490",
+    "commit": null,
+    "artifact_digest": "187f558c1f9068268dfa9f060acb0b5d82d0acc9e8c0afe5caa170973a39b1f4",
+    "artifact_path": "main.js",
+    "effective_config_digest": "b10ded46cc63ad770f852016c853bcef9cb3ae376dc7f8aebdeb6cc2affda249",
+    "config_path": "wrangler.jsonc",
+    "target": {
+      "account_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "application": "app-a",
+      "environment": "production",
+      "action": "deploy",
+      "candidate_version": null
+    },
+    "official_skills_lock_digest": "296f2a111e4c5cb6fd6f6608ad95d3bef13f998ed4ef210b7302edf12beb5d12",
+    "policy_digest": "2312ecff40b38a74d728cf6a5c4b4429cbdd3511b65cfb78fd84907bd19bb856",
+    "rules_digest": "88fc454c8e182a2a254eb0e40b3e34ecc0066f4eb487fa41c95586a2562e2a28",
+    "tool_digest": "66654b1d231d8cb1064a3fee6c986219578e781f17427426e564fcebdc9a222f",
+    "toolchain": {
+      "node": "v24.11.1",
+      "typescript": "5.9.3",
+      "wrangler": "4.148.0",
+      "wrangler_locked": "4.148.0",
+      "wrangler_source": "trusted_tool_installed_package",
+      "wrangler_package_digest": "101ed6193158af11fe0633ad225bcc043d0cc5c6d62ff19ffb8dfbaacbe7757c",
+      "lockfiles": [
+        "package-lock.json"
+      ]
+    },
+    "migration_digest": "376221e076514089cf580fee1453edaf12cd90730e2484a5e21843f2b581f156",
+    "builder": "explicit-forward-direct-js@1",
+    "digest": "3fc0a30e1a0497195bc9a98bf3816268546cde8de372a52fb4526622b2865818"
+  },
+  "semantic_review_file": "/tmp/cloudflare-cost-safety-forward-corrected/dormant/.cost-safety/corrected/semantic-review.json",
+  "semantic_review_sha256": "a139838351fa2e0e40a4bb6da9921eb6e154204f21b011513717a1ca617f8a7d",
+  "all_12_semantic_rules": [
+    {
+      "rule_id": "CF-DO-001",
+      "status": "unknown",
+      "reason": "fetch line 6 returns a constant response; the bound Task class is never obtained or invoked locally. Constructor/alarm declarations lines 3-4 do not establish activation. Standalone migrations/0001.sql is not executed by the DO constructor and cannot prove DO-owned table initialization. External callers, pre-existing instances and scheduled alarms are unknown. No supported reachable billable recurrence is established, so the former BLOCK is unjustified for these bytes. Missing activation/history/lifecycle evidence remains INCOMPLETE.",
+      "evidence": [
+        {
+          "path": "main.js",
+          "start_line": 3,
+          "end_line": 4
+        },
+        {
+          "path": "main.js",
+          "start_line": 6
+        },
+        {
+          "path": "wrangler.jsonc",
+          "start_line": 12,
+          "end_line": 27
+        },
+        {
+          "path": "migrations/0001.sql",
+          "start_line": 1
+        }
+      ]
+    },
+    {
+      "rule_id": "CF-DO-002",
+      "status": "unknown",
+      "reason": "The declared constructor/alarm contain no durable cumulative job/window budget, but no local entry activates the class. External activation/history and job contract are absent. No finite-job or periodic-window/eviction claim is justified.",
+      "evidence": [
+        {
+          "path": "main.js",
+          "start_line": 3,
+          "end_line": 4
+        },
+        {
+          "path": "main.js",
+          "start_line": 6
+        }
+      ]
+    },
+    {
+      "rule_id": "CF-DEP-001",
+      "status": "pass",
+      "reason": "Scoped local config: one fixed application name, one TASKS binding and one new_sqlite_classes Task migration; no environment generator, preview resource creator or newUniqueId exists. No local object identity allocation exists. This passes only the supported multiplication pattern. Live namespace/environment counts, old objects and independent release systems were not inspected.",
+      "evidence": [
+        {
+          "path": "wrangler.jsonc",
+          "start_line": 1,
+          "end_line": 28
+        },
+        {
+          "path": "main.js",
+          "start_line": 6
+        }
+      ]
+    },
+    {
+      "rule_id": "CF-SQL-001",
+      "status": "unknown",
+      "reason": "The declared alarm contains full-table SELECT, but no proven activation or constructor-owned CREATE for jobs. The offline probe had zero reachable queries and did not validate this query/table. The standalone migration does not establish a DO-owned schema. Row-cost coverage is unresolved, not confirmed safe or confirmed billable.",
+      "evidence": [
+        {
+          "path": "main.js",
+          "start_line": 4
+        },
+        {
+          "path": "migrations/0001.sql",
+          "start_line": 1
+        }
+      ]
+    },
+    {
+      "rule_id": "CF-SQL-002",
+      "status": "not_applicable",
+      "reason": "Complete final artifact and schema inspected: no UPDATE, DELETE, INSERT, UPSERT or broad business-row write exists. The SQL file is table DDL and the declared alarm contains SELECT. Unobserved cloud state is not covered.",
+      "evidence": [
+        {
+          "path": "main.js",
+          "start_line": 1,
+          "end_line": 6
+        },
+        {
+          "path": "migrations/0001.sql",
+          "start_line": 1
+        }
+      ]
+    },
+    {
+      "rule_id": "CF-JOB-001",
+      "status": "not_applicable",
+      "reason": "No scheduled Worker, seed/backfill/embedding routine or batch SELECT LIMIT plus business-write/checkpoint exists in complete artifact/config. Alarm scans and rearms but processes no job/checkpoint; recurrence is covered under DO-001/002. No bounded job-processor claim is made.",
+      "evidence": [
+        {
+          "path": "main.js",
+          "start_line": 1,
+          "end_line": 6
+        },
+        {
+          "path": "wrangler.jsonc",
+          "start_line": 1,
+          "end_line": 28
+        }
+      ]
+    },
+    {
+      "rule_id": "CF-Q-001",
+      "status": "not_applicable",
+      "reason": "No queue producer/consumer binding, queue handler, send or sendBatch operation exists in complete artifact/config. Absence was checked in actual source, not solely inferred from parser output. No external producer was audited.",
+      "evidence": [
+        {
+          "path": "main.js",
+          "start_line": 1,
+          "end_line": 6
+        },
+        {
+          "path": "wrangler.jsonc",
+          "start_line": 1,
+          "end_line": 28
+        }
+      ]
+    },
+    {
+      "rule_id": "CF-Q-002",
+      "status": "not_applicable",
+      "reason": "No queue delivery, per-message ack/retry, retryAll, DLQ or side-effect-before-ack path exists in complete artifact/config. DO alarm retries are a different lifecycle and remain untested.",
+      "evidence": [
+        {
+          "path": "main.js",
+          "start_line": 1,
+          "end_line": 6
+        },
+        {
+          "path": "wrangler.jsonc",
+          "start_line": 1,
+          "end_line": 28
+        }
+      ]
+    },
+    {
+      "rule_id": "CF-KV-001",
+      "status": "not_applicable",
+      "reason": "No Workers KV binding or KV get/put/list pagination exists in complete artifact/config. ctx.storage is DO storage, so getAlarm and SQL are not Workers KV. Live cross-region KV state was not inspected.",
+      "evidence": [
+        {
+          "path": "main.js",
+          "start_line": 1,
+          "end_line": 6
+        },
+        {
+          "path": "wrangler.jsonc",
+          "start_line": 12,
+          "end_line": 27
+        }
+      ]
+    },
+    {
+      "rule_id": "CF-R2-001",
+      "status": "not_applicable",
+      "reason": "No R2 bucket binding, bucket put/list/get, S3/public object path or R2 event trigger exists in complete artifact/config. Alarm uses DO storage only; no R2 recurring-operation assertion is made.",
+      "evidence": [
+        {
+          "path": "main.js",
+          "start_line": 1,
+          "end_line": 6
+        },
+        {
+          "path": "wrangler.jsonc",
+          "start_line": 1,
+          "end_line": 28
+        }
+      ]
+    },
+    {
+      "rule_id": "CF-HTTP-001",
+      "status": "unknown",
+      "reason": "fetch returns a constant response, with no browser polling source or downstream call. Request rate and Cloudflare/native admission cannot be established from this fixture. WAF/cache/routes/account state was not accessed. Constant handler work is not a global request/spending bound.",
+      "evidence": [
+        {
+          "path": "main.js",
+          "start_line": 6
+        },
+        {
+          "path": "wrangler.jsonc",
+          "start_line": 1,
+          "end_line": 28
+        }
+      ]
+    },
+    {
+      "rule_id": "CF-SAFE-001",
+      "status": "pass",
+      "reason": "No candidate monthly-hard-cap, global-pause, delete-all isolation or budget-alert-enforcement claim exists. getAlarm is not credited as a cumulative budget. No reset/delete/pause/remote SQL/control operation was executed. CPU is per invocation; deleteAlarm is per object runtime operation; budget alerts notify. Current plan/control configuration remains unknown. This scoped check grants no production safety guarantee.",
+      "evidence": [
+        {
+          "path": "main.js",
+          "start_line": 3,
+          "end_line": 4
+        },
+        {
+          "path": "wrangler.jsonc",
+          "start_line": 1,
+          "end_line": 28
+        }
+      ]
+    }
+  ],
+  "official_semantic_reasoning": [
+    {
+      "name": "workers-best-practices",
+      "status": "reviewed",
+      "reviewed_files": [
+        {
+          "path": "vendor/workers-best-practices/SKILL.md",
+          "sha256": "8ae8c6e7359171ba6a1688503850fa05ce47199c4e288343bf55b5e277351bae"
+        },
+        {
+          "path": "vendor/workers-best-practices/references/configuration.md",
+          "sha256": "cdb5c9cd5168231373523332c0e7a5cf8811dc244c48298823e3ccc5eb7157c1"
+        },
+        {
+          "path": "vendor/workers-best-practices/references/platform-apis.md",
+          "sha256": "9ca9f5a7a82f92de45d310f5e2ee05aa464ddb7a63a737529caa17fff3660f28"
+        },
+        {
+          "path": "vendor/workers-best-practices/references/runtime-patterns.md",
+          "sha256": "704ce8d4ff62c7655eb1d15f804ad566ed2012d11c2086e0d94bd3addb4d2c07"
+        }
+      ],
+      "reason": "Actually read frozen entry and configuration/platform-apis/runtime-patterns references. Complete Worker module uses native Response and cloudflare:workers import, with no Node built-ins, eval, remote fetch or background-task handling. JSONC defines main, compatibility_date, observability and traces enabled. Synthetic plain-JS final artifact has no generated Env/TS-build claim. DO lifecycle, missing admission and row limits were separately reviewed; observability is not a cost cap. Reviewed means pinned advice was semantically applied in this scope, not passed runtime tests/live configuration/publication approval.",
+      "evidence": [
+        {
+          "path": "main.js",
+          "start_line": 1,
+          "end_line": 6
+        },
+        {
+          "path": "wrangler.jsonc",
+          "start_line": 1,
+          "end_line": 28
+        },
+        {
+          "path": "package-lock.json",
+          "start_line": 6
+        }
+      ]
+    },
+    {
+      "name": "wrangler",
+      "status": "reviewed",
+      "reviewed_files": [
+        {
+          "path": "vendor/wrangler/SKILL.md",
+          "sha256": "9d9bd78c79823cdad36a88dbece8e48d8512c7262c66546ccbfac64ae08d310f"
+        }
+      ],
+      "reason": "Actually read frozen Wrangler entry and inspected trusted installed Wrangler 4.148.0 package metadata and affected JSON-schema properties. Candidate lock version matches 4.148.0. Static JSONC main/name/account/compatibility/binding/class/new_sqlite_classes fields were checked against that schema. Explicit production target; no generated config/env override. No candidate script, Wrangler CLI, whoami, deploy, credential lookup or account operation ran. Synthetic target real existence/permission/history remain unknown. Completed offline config review is not live-account validation.",
+      "evidence": [
+        {
+          "path": "main.js",
+          "start_line": 1,
+          "end_line": 6
+        },
+        {
+          "path": "wrangler.jsonc",
+          "start_line": 1,
+          "end_line": 28
+        },
+        {
+          "path": "package-lock.json",
+          "start_line": 6
+        }
+      ]
+    },
+    {
+      "name": "durable-objects",
+      "status": "reviewed",
+      "reviewed_files": [
+        {
+          "path": "vendor/durable-objects/SKILL.md",
+          "sha256": "2468c1795f439f494f076eb13a2202a3c4e579e71e6e2ed98b4d1f5ce62fef1b"
+        },
+        {
+          "path": "vendor/durable-objects/references/rules.md",
+          "sha256": "8ec51f1270d6014763139236c3fb9f3a21a3bed4054c99b101f392eb5cb363bf"
+        },
+        {
+          "path": "vendor/durable-objects/references/testing.md",
+          "sha256": "1a99e6a2e1bd7f2fa34573b07ad036e3c2ddcf97df6a42926d737eb2d87b3168"
+        },
+        {
+          "path": "vendor/durable-objects/references/workers.md",
+          "sha256": "3149c3ee371b5dbf3a84dac7d5bb42c4c6553762480741f6d2808e4ca20fd932"
+        }
+      ],
+      "reason": "Actually read frozen DO entry and rules/testing/workers references. Task extends imported DurableObject; TASKS class_name and v1 new_sqlite_classes migration match Task. Constant fetch does not activate Task; standalone SQL migration is not DO-owned schema initialization. Former loop BLOCK cannot be justified from these bytes. External callers/history/live scheduled alarms remain unknown. Testing advice was applied by leaving do-lifecycle/do-getalarm unexecuted, not asserting passed lifecycle tests.",
+      "evidence": [
+        {
+          "path": "main.js",
+          "start_line": 1,
+          "end_line": 6
+        },
+        {
+          "path": "wrangler.jsonc",
+          "start_line": 1,
+          "end_line": 28
+        },
+        {
+          "path": "package-lock.json",
+          "start_line": 6
+        }
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "phase": "initial_preflight",
+      "command": [
+        "node",
+        "/tmp/cloudflare-cost-safety-forward-corrected/tool/scripts/cli.mjs",
+        "preflight",
+        "--root",
+        "/tmp/cloudflare-cost-safety-forward-corrected/dormant",
+        "--config",
+        "wrangler.jsonc",
+        "--env",
+        "production",
+        "--artifact",
+        "main.js",
+        "--builder",
+        "explicit-forward-direct-js@1",
+        "--action",
+        "deploy",
+        "--local-tests",
+        "--output",
+        "/tmp/cloudflare-cost-safety-forward-corrected/dormant/.cost-safety/corrected"
+      ],
+      "exit_code": 2,
+      "stdout": "INCOMPLETE: /tmp/cloudflare-cost-safety-forward-corrected/dormant/.cost-safety/corrected/report.md\n",
+      "stderr": "",
+      "duration_ms": 2082
+    },
+    {
+      "phase": "semantic_nullable_not_run_reproduction",
+      "command": [
+        "node",
+        "/tmp/cloudflare-cost-safety-forward-corrected/tool/scripts/cli.mjs",
+        "preflight",
+        "--root",
+        "/tmp/cloudflare-cost-safety-forward-corrected/dormant",
+        "--config",
+        "wrangler.jsonc",
+        "--env",
+        "production",
+        "--artifact",
+        "main.js",
+        "--builder",
+        "explicit-forward-direct-js@1",
+        "--action",
+        "deploy",
+        "--local-tests",
+        "--output",
+        "/tmp/cloudflare-cost-safety-forward-corrected/dormant/.cost-safety/corrected",
+        "--review",
+        "/tmp/cloudflare-cost-safety-forward-corrected/dormant/.cost-safety/corrected/semantic-review.json"
+      ],
+      "exit_code": 3,
+      "stdout": "",
+      "stderr": "cost-safety tool error: Cannot read properties of null (reading 'join')\n",
+      "duration_ms": 2027
+    },
+    {
+      "phase": "semantic_schema_validation",
+      "command": [
+        "node",
+        "/tmp/cloudflare-cost-safety-forward-corrected/tool/scripts/cli.mjs",
+        "validate",
+        "--schema",
+        "semantic-review",
+        "--file",
+        "/tmp/cloudflare-cost-safety-forward-corrected/dormant/.cost-safety/corrected/semantic-review-null-not-run.json"
+      ],
+      "exit_code": 0,
+      "stdout": "valid\n",
+      "stderr": ""
+    },
+    {
+      "phase": "final_semantic_preflight",
+      "command": [
+        "node",
+        "/tmp/cloudflare-cost-safety-forward-corrected/tool/scripts/cli.mjs",
+        "preflight",
+        "--root",
+        "/tmp/cloudflare-cost-safety-forward-corrected/dormant",
+        "--config",
+        "wrangler.jsonc",
+        "--env",
+        "production",
+        "--artifact",
+        "main.js",
+        "--builder",
+        "explicit-forward-direct-js@1",
+        "--action",
+        "deploy",
+        "--local-tests",
+        "--output",
+        "/tmp/cloudflare-cost-safety-forward-corrected/dormant/.cost-safety/corrected",
+        "--review",
+        "/tmp/cloudflare-cost-safety-forward-corrected/dormant/.cost-safety/corrected/semantic-review.json"
+      ],
+      "exit_code": 2,
+      "stdout": "INCOMPLETE: /tmp/cloudflare-cost-safety-forward-corrected/dormant/.cost-safety/corrected/report.md\n",
+      "stderr": "",
+      "duration_ms": 2235
+    }
+  ],
+  "command_environment": {
+    "PATH": "/usr/bin:/bin",
+    "HOME": "/nonexistent",
+    "WRANGLER_SEND_METRICS": "false",
+    "inherited_credentials": false,
+    "subprocess_wall_timeout_seconds": 40,
+    "candidate_package_scripts_executed": false
+  },
+  "final_results": {
+    "expected_status": "INCOMPLETE",
+    "overall_status": "INCOMPLETE",
+    "cost_safety_status": "INCOMPLETE",
+    "official_best_practices_status": "PASS",
+    "predeploy_gate_status": "DENY",
+    "expected_behavior_observed": true,
+    "publisher_handoff_allowed": false,
+    "publisher_calls": 0,
+    "explanation": "fetch line 6 returns a constant response; the bound Task class is never obtained or invoked locally. Constructor/alarm declarations lines 3-4 do not establish activation. Standalone migrations/0001.sql is not executed by the DO constructor and cannot prove DO-owned table initialization. External callers, pre-existing instances and scheduled alarms are unknown. No supported reachable billable recurrence is established, so the former BLOCK is unjustified for these bytes. Missing activation/history/lifecycle evidence remains INCOMPLETE.",
+    "findings": [],
+    "semantic_execution_path": [],
+    "input_digest_unchanged": true,
+    "unknown_rules": [
+      "CF-DO-001",
+      "CF-DO-002",
+      "CF-SQL-001",
+      "CF-HTTP-001"
+    ],
+    "incomplete": [],
+    "tool_errors": []
+  },
+  "execution_graph": {
+    "nodes": [
+      {
+        "id": "main.js#module",
+        "kind": "logical_task",
+        "name": "module",
+        "entry_type": null,
+        "status": "declared",
+        "location": {
+          "path": "main.js",
+          "start_line": 1,
+          "end_line": 1
+        }
+      },
+      {
+        "id": "main.js#fetch@358",
+        "kind": "entry",
+        "name": "fetch",
+        "entry_type": "fetch",
+        "status": "declared",
+        "location": {
+          "path": "main.js",
+          "start_line": 6,
+          "end_line": 6
+        }
+      },
+      {
+        "id": "resource:TASKS",
+        "kind": "resource",
+        "product": "durable_object",
+        "status": "declared",
+        "location": {
+          "path": "wrangler.jsonc",
+          "start_line": 1
+        }
+      }
+    ],
+    "edges": []
+  },
+  "actual_bundled_probe_results": [
+    {
+      "id": "bounded-local-probe",
+      "status": "passed",
+      "tool_error": false,
+      "input_digest": "3fc0a30e1a0497195bc9a98bf3816268546cde8de372a52fb4526622b2865818",
+      "command": [
+        "python3",
+        "trusted-skill/scripts/lib/probe.py"
+      ],
+      "runner_digest": "27455f39185a38c2bfc6ea7df931014826f671bd4cf78a522f4805e23d279245",
+      "duration_ms": 47,
+      "metrics": {
+        "status": "passed",
+        "engine": "sqlite3",
+        "version": "3.37.2",
+        "results": [],
+        "groups": [],
+        "billing_metrics": null,
+        "cloud_writes": 0,
+        "memory_limit_mb": 256
+      }
+    }
+  ],
+  "runtime_tests_not_run": [
+    {
+      "id": "do-lifecycle",
+      "status": "not_run",
+      "input_digest": "3fc0a30e1a0497195bc9a98bf3816268546cde8de372a52fb4526622b2865818",
+      "command": null,
+      "runner_digest": null,
+      "duration_ms": null,
+      "metrics": {
+        "reason": "Application runtime test not executed in focused offline host rerun; no runner/result is asserted.",
+        "billing_rows_read": null,
+        "billing_rows_written": null
+      }
+    },
+    {
+      "id": "do-getalarm",
+      "status": "not_run",
+      "input_digest": "3fc0a30e1a0497195bc9a98bf3816268546cde8de372a52fb4526622b2865818",
+      "command": null,
+      "runner_digest": null,
+      "duration_ms": null,
+      "metrics": {
+        "reason": "Application runtime test not executed in focused offline host rerun; no runner/result is asserted.",
+        "billing_rows_read": null,
+        "billing_rows_written": null
+      }
+    }
+  ],
+  "missing_required_tests": [
+    "do-lifecycle",
+    "do-getalarm"
+  ],
+  "billing_rows_read": null,
+  "billing_rows_written": null,
+  "usd_estimate": null,
+  "usage_assessment": {
+    "classification": "unknown",
+    "scope": "Supplied final main.js, static production JSONC, locked toolchain and local call closure; no Cloudflare account state.",
+    "vector": {
+      "events": null,
+      "queue_deliveries": null,
+      "new_messages": null,
+      "sql_rows_read": null,
+      "sql_rows_written": null,
+      "kv_reads": null,
+      "kv_writes": null,
+      "kv_lists": null,
+      "r2_class_a": null,
+      "r2_class_b": null,
+      "active_objects": null,
+      "environments": null
+    },
+    "assumptions": [
+      "Final artifact and explicit JSONC are intended publisher inputs.",
+      "Class/RPC/alarm behavior follows pinned reviewed context.",
+      "External cancellation/history/traffic/workload were not inspected."
+    ],
+    "enforced_limits": [],
+    "evidence": [
+      {
+        "path": "main.js",
+        "start_line": 1,
+        "end_line": 6
+      },
+      {
+        "path": "wrangler.jsonc",
+        "start_line": 1,
+        "end_line": 28
+      }
+    ],
+    "excluded": [
+      "Actual runtime alarm/eviction behavior",
+      "DO cursor billing rows/D1 metadata",
+      "Duration/storage/logs/traces/fixed fees/external AI",
+      "Live namespace/account/control state"
+    ],
+    "usd_estimate": null
+  },
+  "observed_behavior_defects": [
+    {
+      "id": "FORWARD-NULL-NOT-RUN-RENDER",
+      "status": "observed",
+      "location": {
+        "path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/scripts/lib/render.mjs",
+        "start_line": 6
+      },
+      "summary": "Schema-valid not_run test records with command:null cause renderer TypeError and preflight exit 3.",
+      "reproduction": {
+        "command": [
+          "node",
+          "/tmp/cloudflare-cost-safety-forward-corrected/tool/scripts/cli.mjs",
+          "preflight",
+          "--root",
+          "/tmp/cloudflare-cost-safety-forward-corrected/dormant",
+          "--config",
+          "wrangler.jsonc",
+          "--env",
+          "production",
+          "--artifact",
+          "main.js",
+          "--builder",
+          "explicit-forward-direct-js@1",
+          "--action",
+          "deploy",
+          "--local-tests",
+          "--output",
+          "/tmp/cloudflare-cost-safety-forward-corrected/dormant/.cost-safety/corrected",
+          "--review",
+          "/tmp/cloudflare-cost-safety-forward-corrected/dormant/.cost-safety/corrected/semantic-review.json"
+        ],
+        "exit_code": 3,
+        "stdout": "",
+        "stderr": "cost-safety tool error: Cannot read properties of null (reading 'join')\n",
+        "duration_ms": 2027
+      },
+      "schema_validation": {
+        "command": [
+          "node",
+          "/tmp/cloudflare-cost-safety-forward-corrected/tool/scripts/cli.mjs",
+          "validate",
+          "--schema",
+          "semantic-review",
+          "--file",
+          "/tmp/cloudflare-cost-safety-forward-corrected/dormant/.cost-safety/corrected/semantic-review-null-not-run.json"
+        ],
+        "exit_code": 0,
+        "stdout": "valid\n",
+        "stderr": ""
+      },
+      "schema_location": {
+        "path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/assets/semantic-review.schema.json",
+        "start_line": 219,
+        "end_line": 231
+      },
+      "partial_output": {
+        "path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/scripts/cli.mjs",
+        "start_line": 21,
+        "end_line": 22,
+        "observed": "New semantic report.json was emitted before Markdown rendering failed; null-not-run-emitted-report.json preserves it. Previous Markdown/context can remain stale.",
+        "saved_json": "/tmp/cloudflare-cost-safety-forward-corrected/dormant/.cost-safety/corrected/null-not-run-emitted-report.json"
+      },
+      "workaround": "Preserved nullable review in semantic-review-null-not-run.json and runtime-tests-not-run.json. Final semantic-review.json tests is empty; required tests remain missing in coverage. No implementation edit and no test success invented."
+    }
+  ],
+  "limitations": [
+    "Application-specific do-lifecycle and do-getalarm tests were not run; activated sql-rows also not run.",
+    "SQLite EXPLAIN is structural only; no DO cursor rows or D1 meta, runtime alarm, eviction or crash validation occurred.",
+    "No live account, credential, WAF/cache/route, namespace/history, publisher, attestation or native-control operation was performed.",
+    "Public request rates, production data sizes, external actors and old alarms remain unknown.",
+    "Native controls are NOT_EXECUTED; plan applicability unknown; no monthly hard spending cap or dollar estimate.",
+    "Direct CLI/dashboard/Workers Builds/independent CI paths remain unverified partial coverage.",
+    "Prepared trusted node_modules is a symlink into the shared repo; package version/schema digests were inspected, not an independently sealed entire dependency tree."
+  ],
+  "release_review_followup": {
+    "source": "Parent /root statement in task message; not independently rerun during this focused DO test",
+    "reported_fixed_and_tested_elsewhere": [
+      "Credentials refused before analysis",
+      "Async publisher callback awaited",
+      "Publisher uses sealed memfd and read-only namespace; chmod explicitly advisory"
+    ],
+    "earlier_evidence_file": "/tmp/cloudflare-cost-safety-forward/release-review.md",
+    "new_release_implementation_review_or_publisher_run_performed": false
+  },
+  "effects": {
+    "cloud_account_accesses": 0,
+    "remote_effects": 0,
+    "cloud_writes": 0,
+    "model_api_calls_from_tools": 0,
+    "dependency_downloads": 0,
+    "actual_publishing": 0,
+    "credential_requests": 0,
+    "implementation_edits": 0,
+    "write_scope": "/tmp/cloudflare-cost-safety-forward-corrected/dormant/.cost-safety/corrected"
+  },
+  "artifacts": {
+    "final_report_json": "/tmp/cloudflare-cost-safety-forward-corrected/dormant/.cost-safety/corrected/report.json",
+    "final_report_md": "/tmp/cloudflare-cost-safety-forward-corrected/dormant/.cost-safety/corrected/report.md",
+    "semantic_review": "/tmp/cloudflare-cost-safety-forward-corrected/dormant/.cost-safety/corrected/semantic-review.json",
+    "not_run_records": "/tmp/cloudflare-cost-safety-forward-corrected/dormant/.cost-safety/corrected/runtime-tests-not-run.json",
+    "nullable_schema_valid_review": "/tmp/cloudflare-cost-safety-forward-corrected/dormant/.cost-safety/corrected/semantic-review-null-not-run.json",
+    "before_semantic_report_json": "/tmp/cloudflare-cost-safety-forward-corrected/dormant/.cost-safety/corrected/before-semantic-report.json"
+  }
+}

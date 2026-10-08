@@ -1,0 +1,1 @@
+setInterval(()=>fetch("/api/poll"),1000);

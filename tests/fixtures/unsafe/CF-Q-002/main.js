@@ -1,0 +1,1 @@
+export default {async queue(batch,env){try{for(const msg of batch.messages){await env.DB.prepare("UPDATE jobs SET value=value+1 WHERE id=?").bind(msg.body.id).run();if(msg.body.fail)throw new Error("last item failed")}}catch{batch.retryAll()}}};

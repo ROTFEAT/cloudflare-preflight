@@ -1,0 +1,136 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://cloudflare-cost-safety.local/schema/policy",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "mode",
+    "cloud_access",
+    "remote_tests",
+    "local_test_budget"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "mode": {
+      "const": "review_only"
+    },
+    "cloud_access": {
+      "const": "disabled"
+    },
+    "remote_tests": {
+      "const": false
+    },
+    "local_test_budget": {
+      "type": "object",
+      "required": [
+        "max_events",
+        "max_messages",
+        "max_fixture_rows",
+        "max_wall_seconds_per_child",
+        "max_memory_mb",
+        "network"
+      ],
+      "properties": {
+        "max_events": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000
+        },
+        "max_messages": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000
+        },
+        "max_fixture_rows": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        },
+        "max_wall_seconds_per_child": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 60
+        },
+        "max_memory_mb": {
+          "type": "integer",
+          "minimum": 64,
+          "maximum": 1024
+        },
+        "network": {
+          "const": "deny"
+        }
+      },
+      "additionalProperties": false
+    },
+    "money_budget": {
+      "type": "object",
+      "required": [
+        "monthly_usd",
+        "status"
+      ],
+      "properties": {
+        "monthly_usd": {
+          "type": "number",
+          "minimum": 0
+        },
+        "status": {
+          "const": "declared_not_enforced"
+        },
+        "plan": {
+          "type": "string",
+          "minLength": 1
+        },
+        "billing_period": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "enforcement_evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "path",
+          "start_line"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "start_line": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "end_line": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "required_tests": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "exemptions": {
+      "type": "array",
+      "maxItems": 0
+    },
+    "max_evidence_age_hours": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 168
+    }
+  },
+  "additionalProperties": false
+}

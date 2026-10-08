@@ -1,0 +1,258 @@
+{
+  "schema_version": "1.0",
+  "input_digest": "01e0337ef6348ad7b48bbbdc082bf4abfc195f56d3f9ec91a1f7f610089f0c52",
+  "reviewer": "Codex independent forward-test reviewer /root/skill_forward_review",
+  "model": "Codex, GPT-6 family; exact backend model identifier/version is not exposed",
+  "invocation": "One actual Codex desktop host explicit $cloudflare-cost-safety invocation, delegated to /root/skill_forward_review, covering three synthetic fixtures. CLI reruns within this invocation are recorded; no repeated host trials or implicit-discovery test.",
+  "reviewed_at": "2026-10-08T10:27:54.087092+00:00",
+  "rules": [
+    {
+      "rule_id": "CF-DO-001",
+      "status": "not_applicable",
+      "reason": "Inspected every local JS module and final JSONC binding/trigger inventory; no corresponding product operation, handler, wrapper or generated configuration exists in this fixture. This conclusion does not cover uninspected live account integrations.",
+      "evidence": [
+        {
+          "path": "wrangler.jsonc",
+          "start_line": 1
+        },
+        {
+          "path": "main.js",
+          "start_line": 1
+        }
+      ]
+    },
+    {
+      "rule_id": "CF-DO-002",
+      "status": "not_applicable",
+      "reason": "Inspected every local JS module and final JSONC binding/trigger inventory; no corresponding product operation, handler, wrapper or generated configuration exists in this fixture. This conclusion does not cover uninspected live account integrations.",
+      "evidence": [
+        {
+          "path": "wrangler.jsonc",
+          "start_line": 1
+        },
+        {
+          "path": "main.js",
+          "start_line": 1
+        }
+      ]
+    },
+    {
+      "rule_id": "CF-DEP-001",
+      "status": "not_applicable",
+      "reason": "Inspected every local JS module and final JSONC binding/trigger inventory; no corresponding product operation, handler, wrapper or generated configuration exists in this fixture. This conclusion does not cover uninspected live account integrations.",
+      "evidence": [
+        {
+          "path": "wrangler.jsonc",
+          "start_line": 1
+        },
+        {
+          "path": "main.js",
+          "start_line": 1
+        }
+      ]
+    },
+    {
+      "rule_id": "CF-SQL-001",
+      "status": "not_applicable",
+      "reason": "Inspected every local JS module and final JSONC binding/trigger inventory; no corresponding product operation, handler, wrapper or generated configuration exists in this fixture. This conclusion does not cover uninspected live account integrations.",
+      "evidence": [
+        {
+          "path": "wrangler.jsonc",
+          "start_line": 1
+        },
+        {
+          "path": "main.js",
+          "start_line": 1
+        }
+      ]
+    },
+    {
+      "rule_id": "CF-SQL-002",
+      "status": "not_applicable",
+      "reason": "Inspected every local JS module and final JSONC binding/trigger inventory; no corresponding product operation, handler, wrapper or generated configuration exists in this fixture. This conclusion does not cover uninspected live account integrations.",
+      "evidence": [
+        {
+          "path": "wrangler.jsonc",
+          "start_line": 1
+        },
+        {
+          "path": "main.js",
+          "start_line": 1
+        }
+      ]
+    },
+    {
+      "rule_id": "CF-JOB-001",
+      "status": "not_applicable",
+      "reason": "Inspected every local JS module and final JSONC binding/trigger inventory; no corresponding product operation, handler, wrapper or generated configuration exists in this fixture. This conclusion does not cover uninspected live account integrations.",
+      "evidence": [
+        {
+          "path": "wrangler.jsonc",
+          "start_line": 1
+        },
+        {
+          "path": "main.js",
+          "start_line": 1
+        }
+      ]
+    },
+    {
+      "rule_id": "CF-Q-001",
+      "status": "finding",
+      "reason": "main.js queue handler awaits imported enqueue then acknowledges each original message. producer.js ignores the body and sends a fresh UUID with async:true. Both producer and consumer map to jobs in effective config. There is no preserved root/hops or finite-task boundary; max_retries:0 only covers retries of the old message, so each successful delivery can create the next new message.",
+      "evidence": [
+        {
+          "path": "main.js",
+          "start_line": 1
+        },
+        {
+          "path": "producer.js",
+          "start_line": 1
+        },
+        {
+          "path": "wrangler.jsonc",
+          "start_line": 12,
+          "end_line": 24
+        }
+      ]
+    },
+    {
+      "rule_id": "CF-Q-002",
+      "status": "unknown",
+      "reason": "Acknowledgement is after send. A crash after accepted send but before ack can duplicate the logical side effect, and partial batches need fault injection. Explicit max_retries:0 is recognized rather than treated as unlimited native retries. DLQ/replay and new-message counts have not been runtime-measured.",
+      "evidence": [
+        {
+          "path": "main.js",
+          "start_line": 1
+        },
+        {
+          "path": "producer.js",
+          "start_line": 1
+        },
+        {
+          "path": "wrangler.jsonc",
+          "start_line": 19,
+          "end_line": 24
+        }
+      ]
+    },
+    {
+      "rule_id": "CF-KV-001",
+      "status": "not_applicable",
+      "reason": "Inspected every local JS module and final JSONC binding/trigger inventory; no corresponding product operation, handler, wrapper or generated configuration exists in this fixture. This conclusion does not cover uninspected live account integrations.",
+      "evidence": [
+        {
+          "path": "wrangler.jsonc",
+          "start_line": 1
+        },
+        {
+          "path": "main.js",
+          "start_line": 1
+        }
+      ]
+    },
+    {
+      "rule_id": "CF-R2-001",
+      "status": "not_applicable",
+      "reason": "Inspected every local JS module and final JSONC binding/trigger inventory; no corresponding product operation, handler, wrapper or generated configuration exists in this fixture. This conclusion does not cover uninspected live account integrations.",
+      "evidence": [
+        {
+          "path": "wrangler.jsonc",
+          "start_line": 1
+        },
+        {
+          "path": "main.js",
+          "start_line": 1
+        }
+      ]
+    },
+    {
+      "rule_id": "CF-HTTP-001",
+      "status": "not_applicable",
+      "reason": "Inspected every local JS module and final JSONC binding/trigger inventory; no corresponding product operation, handler, wrapper or generated configuration exists in this fixture. This conclusion does not cover uninspected live account integrations.",
+      "evidence": [
+        {
+          "path": "wrangler.jsonc",
+          "start_line": 1
+        },
+        {
+          "path": "main.js",
+          "start_line": 1
+        }
+      ]
+    },
+    {
+      "rule_id": "CF-SAFE-001",
+      "status": "pass",
+      "reason": "No candidate hard-spend-cap or invented pause API claim is present. This review explicitly separates one-alarm scheduling, single-message retries, CPU scope, delivery pause, notifications and test helpers; none is treated as an account monthly spending cap. No controls were executed.",
+      "evidence": [
+        {
+          "path": "wrangler.jsonc",
+          "start_line": 1
+        },
+        {
+          "path": "main.js",
+          "start_line": 1
+        }
+      ]
+    }
+  ],
+  "official_skills": [
+    {
+      "name": "workers-best-practices",
+      "status": "reviewed",
+      "reviewed_files": [
+        {
+          "path": "vendor/workers-best-practices/SKILL.md",
+          "sha256": "8ae8c6e7359171ba6a1688503850fa05ce47199c4e288343bf55b5e277351bae"
+        },
+        {
+          "path": "vendor/workers-best-practices/references/configuration.md",
+          "sha256": "cdb5c9cd5168231373523332c0e7a5cf8811dc244c48298823e3ccc5eb7157c1"
+        },
+        {
+          "path": "vendor/workers-best-practices/references/platform-apis.md",
+          "sha256": "9ca9f5a7a82f92de45d310f5e2ee05aa464ddb7a63a737529caa17fff3660f28"
+        },
+        {
+          "path": "vendor/workers-best-practices/references/runtime-patterns.md",
+          "sha256": "704ce8d4ff62c7655eb1d15f804ad566ed2012d11c2086e0d94bd3addb4d2c07"
+        }
+      ],
+      "reason": "Actually read entry plus configuration, platform-apis and runtime-patterns content from the pinned context. Logs and traces are enabled and date is 2026-10-08; inspected module/class binding access, platform import, async lifetimes, serialization and state. No Node built-ins are imported, so absent nodejs_compat alone is not a defect. JS fixtures contain no hand-written Env type. Application runtime checks remain unexecuted and no live observability cost/coverage is claimed.",
+      "evidence": [
+        {
+          "path": "wrangler.jsonc",
+          "start_line": 1
+        },
+        {
+          "path": "main.js",
+          "start_line": 1
+        }
+      ]
+    },
+    {
+      "name": "wrangler",
+      "status": "unknown",
+      "reviewed_files": [
+        {
+          "path": "vendor/wrangler/SKILL.md",
+          "sha256": "9d9bd78c79823cdad36a88dbece8e48d8512c7262c66546ccbfac64ae08d310f"
+        }
+      ],
+      "reason": "Actually read and applied pinned Wrangler entry: JSONC is data, config/main/name/account/date/bindings and version 4.148.0 from synthetic lock were inspected. No cloudflare.config.ts/cf path, package scripts or generated config exists. A trusted repository prepared Wrangler 4.148.0 schema was inspected, but candidate-installed CLI/schema/help and real production account/resource/publisher command are absent. Synthetic account and D1 identifiers are not validated release targets. No CLI, install, dry-run build or remote action was executed; semantic validation of the production release remains incomplete.",
+      "evidence": [
+        {
+          "path": "wrangler.jsonc",
+          "start_line": 1
+        },
+        {
+          "path": "main.js",
+          "start_line": 1
+        }
+      ]
+    }
+  ],
+  "tests": [],
+  "findings": []
+}

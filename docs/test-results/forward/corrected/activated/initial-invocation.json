@@ -1,0 +1,26 @@
+{
+  "command": [
+    "node",
+    "/tmp/cloudflare-cost-safety-forward-corrected/tool/scripts/cli.mjs",
+    "preflight",
+    "--root",
+    "/tmp/cloudflare-cost-safety-forward-corrected/activated",
+    "--config",
+    "wrangler.jsonc",
+    "--env",
+    "production",
+    "--artifact",
+    "main.js",
+    "--builder",
+    "explicit-forward-direct-js@1",
+    "--action",
+    "deploy",
+    "--local-tests",
+    "--output",
+    "/tmp/cloudflare-cost-safety-forward-corrected/activated/.cost-safety/corrected"
+  ],
+  "exit_code": 1,
+  "stdout": "BLOCK: /tmp/cloudflare-cost-safety-forward-corrected/activated/.cost-safety/corrected/report.md\n",
+  "stderr": "",
+  "duration_ms": 1989
+}

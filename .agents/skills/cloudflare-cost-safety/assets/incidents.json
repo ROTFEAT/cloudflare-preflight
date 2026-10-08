@@ -1,0 +1,132 @@
+{
+  "schema_version": "1.0",
+  "cases": [
+    {
+      "id": "C01",
+      "title": "shmily7 / DO Alarm",
+      "evidence_level": "secondary_only_for_full_claim",
+      "independently_audited": false,
+      "rule_ids": [
+        "CF-DO-001",
+        "CF-DO-002",
+        "CF-SAFE-001"
+      ],
+      "sources": [
+        "CASE-SHMILY-X",
+        "CASE-SHMILY-ARCHIVE"
+      ]
+    },
+    {
+      "id": "C02",
+      "title": "Will Moss / preview DOs",
+      "evidence_level": "primary_full_self_report",
+      "independently_audited": false,
+      "rule_ids": [
+        "CF-DO-001",
+        "CF-DO-002",
+        "CF-DEP-001"
+      ],
+      "sources": [
+        "CASE-WILL-HN",
+        "CASE-WILL-REDDIT"
+      ]
+    },
+    {
+      "id": "C03",
+      "title": "RetainDB / feedback and amplification",
+      "evidence_level": "primary_full_self_report_with_corrections",
+      "independently_audited": false,
+      "rule_ids": [
+        "CF-Q-001",
+        "CF-Q-002",
+        "CF-SQL-002",
+        "CF-KV-001",
+        "CF-HTTP-001"
+      ],
+      "sources": [
+        "CASE-RETAIN"
+      ]
+    },
+    {
+      "id": "C04",
+      "title": "Nathan Schram / repeated D1 jobs",
+      "evidence_level": "primary_full_self_report",
+      "independently_audited": false,
+      "rule_ids": [
+        "CF-JOB-001",
+        "CF-SQL-002"
+      ],
+      "sources": [
+        "CASE-NATHAN"
+      ]
+    },
+    {
+      "id": "C05",
+      "title": "OSM / UPDATE missing WHERE",
+      "evidence_level": "primary_full_self_report_with_code_fragment",
+      "independently_audited": false,
+      "rule_ids": [
+        "CF-SQL-002",
+        "CF-HTTP-001"
+      ],
+      "sources": [
+        "CASE-OSM"
+      ]
+    },
+    {
+      "id": "C06",
+      "title": "Daryl Ginn / D1 indexes",
+      "evidence_level": "primary_snippet_plus_secondary_cause",
+      "independently_audited": false,
+      "rule_ids": [
+        "CF-SQL-001"
+      ],
+      "sources": [
+        "CASE-DARYL-X",
+        "CASE-DARYL-ARCHIVE"
+      ]
+    },
+    {
+      "id": "C07",
+      "title": "Justin Schroeder / two looping DOs",
+      "evidence_level": "primary_snippet_plus_secondary",
+      "independently_audited": false,
+      "rule_ids": [
+        "CF-DO-002",
+        "CF-SAFE-001"
+      ],
+      "sources": [
+        "CASE-JUSTIN-X",
+        "CASE-JUSTIN-ARCHIVE"
+      ]
+    },
+    {
+      "id": "C08",
+      "title": "Lucian Ghinda / Litestream to R2",
+      "evidence_level": "primary_snippet_plus_secondary_cause",
+      "independently_audited": false,
+      "rule_ids": [
+        "CF-R2-001"
+      ],
+      "sources": [
+        "CASE-LUCIAN-X",
+        "CASE-LUCIAN-ARCHIVE"
+      ]
+    },
+    {
+      "id": "C09",
+      "title": "KurosawaGeeker / polling website",
+      "evidence_level": "primary_repository_self_report",
+      "independently_audited": false,
+      "rule_ids": [
+        "CF-HTTP-001",
+        "CF-SAFE-001"
+      ],
+      "sources": [
+        "COMMUNITY-PLAYBOOK",
+        "COMMUNITY-SKILL"
+      ]
+    }
+  ],
+  "amounts_are_not_price_tests": true
+}

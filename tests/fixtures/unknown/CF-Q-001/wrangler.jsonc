@@ -1,0 +1,26 @@
+{
+  "name": "fixture-cf-q-001",
+  "account_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "main": "main.js",
+  "compatibility_date": "2026-10-08",
+  "observability": {
+    "enabled": true,
+    "traces": {
+      "enabled": true
+    }
+  },
+  "queues": {
+    "producers": [
+      {
+        "binding": "JOBS",
+        "queue": "jobs"
+      }
+    ],
+    "consumers": [
+      {
+        "queue": "jobs",
+        "max_retries": 0
+      }
+    ]
+  }
+}

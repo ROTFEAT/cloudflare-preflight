@@ -1,0 +1,86 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://cloudflare-cost-safety.local/schema/official-skills-lock",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "upstream",
+    "revision",
+    "license",
+    "license_verified",
+    "license_sha256",
+    "prepared_at",
+    "skills"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "upstream": {
+      "const": "https://github.com/cloudflare/skills"
+    },
+    "revision": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{40}$"
+    },
+    "license": {
+      "const": "Apache-2.0"
+    },
+    "license_verified": {
+      "const": true
+    },
+    "license_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "prepared_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "skills": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "upstream_path",
+          "resolved_local_path",
+          "files",
+          "content_tree_sha256"
+        ],
+        "properties": {
+          "name": {
+            "enum": [
+              "workers-best-practices",
+              "wrangler",
+              "durable-objects"
+            ]
+          },
+          "upstream_path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "resolved_local_path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "files": {
+            "type": "object",
+            "minProperties": 1,
+            "additionalProperties": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            }
+          },
+          "content_tree_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

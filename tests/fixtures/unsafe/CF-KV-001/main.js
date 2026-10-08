@@ -1,0 +1,1 @@
+export default {async fetch(req,env){const value=await env.KV.get("missing");if(!value){let cursor="";while(true){const page=await env.KV.list({cursor});if(page.list_complete)break}}return new Response("ok")}};

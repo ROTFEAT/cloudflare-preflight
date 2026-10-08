@@ -1,0 +1,272 @@
+{
+  "schema_version": "forward-test-1",
+  "test_type": "actual_host_explicit_invocation",
+  "host_invocations": 1,
+  "repeated_host_trials": 0,
+  "implicit_discovery_tested": false,
+  "host": "Codex desktop, delegated agent /root/skill_forward_review",
+  "model": "Codex, GPT-6 family; exact backend model identifier/version is not exposed",
+  "invocation": "One actual Codex desktop host explicit $cloudflare-cost-safety invocation, delegated to /root/skill_forward_review, covering three synthetic fixtures. CLI reruns within this invocation are recorded; no repeated host trials or implicit-discovery test.",
+  "recorded_at": "2026-10-08T10:27:54.087092+00:00",
+  "request": "准备把 /tmp/cloudflare-cost-safety-forward/app-a、app-b、app-c 发布到 Cloudflare production，请先逐个完成部署前成本安全预检，给出是否可以交回发布器及实际证据。",
+  "candidate": "/tmp/cloudflare-cost-safety-forward/app-b",
+  "artifact": "main.js",
+  "builder": "synthetic-direct-js@1",
+  "initial_tool_root": "/home/ubuntu/github/cloudflare-preflight/.agents/skills/cloudflare-cost-safety",
+  "initial_input_digest": "bac4cb0dc109bb6b8c069f5bed84fd70a7dc2376ccc572b9d8959672bedce59d",
+  "initial_tool_digest": "4d8b2edb6c66b3243749dee950fcfb6176bf4db609765023228dffd9b9857091",
+  "initial_preflight": {
+    "exit_code": 1,
+    "stdout": "BLOCK: /tmp/cloudflare-cost-safety-forward/app-b/.cost-safety/report.md\n",
+    "stderr": "",
+    "source": "observed exec_command transcript; preserved initial-report.json/md and initial-official-context.json"
+  },
+  "final_tool_root": "/tmp/cloudflare-cost-safety-forward-tool",
+  "frozen_input_digest": "01e0337ef6348ad7b48bbbdc082bf4abfc195f56d3f9ec91a1f7f610089f0c52",
+  "frozen_tool_digest": "78569fd83425ce443a71e3f84f65da95832db2bb311fd6f94b08126a9ab0ffe6",
+  "frozen_preflight": {
+    "exit_code": 1,
+    "stdout": "BLOCK: /tmp/cloudflare-cost-safety-forward/app-b/.cost-safety/report.md\n",
+    "stderr": ""
+  },
+  "official_revision": "41e0d19858946d18af9ee2c2feebbe2e11d829ff",
+  "actually_read_official_files": [
+    {
+      "path": "vendor/workers-best-practices/SKILL.md",
+      "sha256": "8ae8c6e7359171ba6a1688503850fa05ce47199c4e288343bf55b5e277351bae",
+      "resolved_path": "/tmp/cloudflare-cost-safety-forward-tool/vendor/workers-best-practices/SKILL.md"
+    },
+    {
+      "path": "vendor/workers-best-practices/references/configuration.md",
+      "sha256": "cdb5c9cd5168231373523332c0e7a5cf8811dc244c48298823e3ccc5eb7157c1",
+      "resolved_path": "/tmp/cloudflare-cost-safety-forward-tool/vendor/workers-best-practices/references/configuration.md"
+    },
+    {
+      "path": "vendor/workers-best-practices/references/platform-apis.md",
+      "sha256": "9ca9f5a7a82f92de45d310f5e2ee05aa464ddb7a63a737529caa17fff3660f28",
+      "resolved_path": "/tmp/cloudflare-cost-safety-forward-tool/vendor/workers-best-practices/references/platform-apis.md"
+    },
+    {
+      "path": "vendor/workers-best-practices/references/runtime-patterns.md",
+      "sha256": "704ce8d4ff62c7655eb1d15f804ad566ed2012d11c2086e0d94bd3addb4d2c07",
+      "resolved_path": "/tmp/cloudflare-cost-safety-forward-tool/vendor/workers-best-practices/references/runtime-patterns.md"
+    },
+    {
+      "path": "vendor/wrangler/SKILL.md",
+      "sha256": "9d9bd78c79823cdad36a88dbece8e48d8512c7262c66546ccbfac64ae08d310f",
+      "resolved_path": "/tmp/cloudflare-cost-safety-forward-tool/vendor/wrangler/SKILL.md"
+    }
+  ],
+  "official_method": "Read actual original vendored files and frozen context packet content, with supplemental direct reads of frozen Wrangler entry and Workers runtime tail after output truncation. Applied candidate-specific reasons are in semantic-review.json.",
+  "actual_tests": [
+    {
+      "id": "bounded-local-probe",
+      "status": "passed",
+      "input_digest": "01e0337ef6348ad7b48bbbdc082bf4abfc195f56d3f9ec91a1f7f610089f0c52",
+      "command": [
+        "python3",
+        "trusted-skill/scripts/lib/probe.py"
+      ],
+      "runner_digest": "2cda9761c5133ba6b5182ac54f7aaf70eb312f297a93dbe1d64c27353418a91c",
+      "duration_ms": 48,
+      "metrics": {
+        "status": "passed",
+        "engine": "sqlite3",
+        "version": "3.37.2",
+        "results": [],
+        "operation_budget": {
+          "max_vm_steps": 2000000,
+          "max_queries": 50
+        },
+        "billing_metrics": null,
+        "cloud_writes": 0
+      }
+    }
+  ],
+  "required_unexecuted_tests": [
+    {
+      "id": "queue-feedback",
+      "status": "not_run",
+      "runner_digest": null,
+      "duration_ms": null,
+      "billing_metrics": null,
+      "reason": "No candidate-specific approved Workers runtime/fault runner was executed in this host test. Generic repository runtime tests reported by another agent are not evidence for this candidate."
+    },
+    {
+      "id": "queue-partial",
+      "status": "not_run",
+      "runner_digest": null,
+      "duration_ms": null,
+      "billing_metrics": null,
+      "reason": "No candidate-specific approved Workers runtime/fault runner was executed in this host test. Generic repository runtime tests reported by another agent are not evidence for this candidate."
+    }
+  ],
+  "sandbox_capability_probe": {
+    "command": [
+      "python3",
+      "/home/ubuntu/github/cloudflare-preflight/scripts/sandbox.py",
+      "--timeout",
+      "5",
+      "--cwd",
+      "/tmp/cloudflare-cost-safety-forward/app-a",
+      "--",
+      "/usr/bin/true"
+    ],
+    "status": "passed",
+    "exit_code": 0,
+    "duration_ms": 57,
+    "network": "isolated_namespace",
+    "credentials": "not_inherited",
+    "checkout": "read_only",
+    "process_group_killed": true,
+    "candidate_code_executed": false
+  },
+  "observed_defects": [
+    {
+      "id": "FORWARD-PY310-AUTHORIZER",
+      "path": "/home/ubuntu/github/cloudflare-preflight/.agents/skills/cloudflare-cost-safety/scripts/lib/probe.py",
+      "line": 31,
+      "initial_tool_digest": "4d8b2edb6c66b3243749dee950fcfb6176bf4db609765023228dffd9b9857091",
+      "observation": "Python 3.10.12/sqlite 3.37.2 set_authorizer(None) causes EXPLAIN to fail not authorized. Direct bundled probe for SELECT * FROM jobs and UPDATE jobs SET status=? returned exit 0/top-level passed/per-query unsupported. No authorizer or allow-all callback produced SCAN jobs. Frozen snapshot now returns SCAN jobs for both; implementation was changed by the parent, not this reviewer.",
+      "fixed_in_frozen_snapshot": true
+    },
+    {
+      "id": "FORWARD-SANDBOX-PACKAGING",
+      "path": "/tmp/cloudflare-cost-safety-forward-tool/scripts/sandbox.py",
+      "observation": "Referenced installed scripts/sandbox.py absent from original and frozen skill file inventory; repository scripts/sandbox.py exists and passed a capability probe. Parent is preparing packaging separately."
+    },
+    {
+      "id": "FORWARD-NOTRUN-SCHEMA",
+      "path": "/tmp/cloudflare-cost-safety-forward-tool/assets/semantic-review.schema.json",
+      "observation": "not_run/unsupported test records still require non-null runner_digest, command and duration; genuinely absent candidate runners are truthfully represented here with null fields and left absent from semantic.tests."
+    }
+  ],
+  "constraints_observed": {
+    "cloud_account_accessed": false,
+    "cloud_writes": 0,
+    "network_fetches": 0,
+    "model_api_calls": 0,
+    "dependency_downloads": 0,
+    "credential_requests": 0,
+    "candidate_package_scripts_executed": 0,
+    "candidate_dynamic_configs_executed": 0,
+    "publishing": false,
+    "implementation_modified_by_reviewer": false,
+    "writes_confined_to": "/tmp/cloudflare-cost-safety-forward/app-b/.cost-safety"
+  },
+  "limitations": [
+    "All target account/resource identifiers are synthetic and online state is not observed.",
+    "Candidate-installed Wrangler binaries/schema and actual publisher command are unavailable.",
+    "No signed external trust, attestation or publisher gate execution was attempted. BLOCK and missing tests prevent handoff.",
+    "Money and unmeasured billing rows remain null. SQLite SCAN is a structural plan, not D1/DO billing evidence.",
+    "Direct CLI, dashboard, Workers Builds deploy/preview and independent CI coverage remain partial.",
+    "main.js imports producer.js outside the declared single-file artifact. Source digest binds that file but the immutable upload-module manifest/packaging is not supplied; no publish-ready package claim is made."
+  ],
+  "final_semantic_preflight": {
+    "command": [
+      "node",
+      "/tmp/cloudflare-cost-safety-forward-tool/scripts/cli.mjs",
+      "preflight",
+      "--root",
+      "/tmp/cloudflare-cost-safety-forward/app-b",
+      "--config",
+      "wrangler.jsonc",
+      "--env",
+      "production",
+      "--artifact",
+      "main.js",
+      "--builder",
+      "synthetic-direct-js@1",
+      "--action",
+      "deploy",
+      "--local-tests",
+      "--output",
+      "/tmp/cloudflare-cost-safety-forward/app-b/.cost-safety",
+      "--review",
+      "/tmp/cloudflare-cost-safety-forward/app-b/.cost-safety/semantic-review.json"
+    ],
+    "exit_code": 1,
+    "stdout": "BLOCK: /tmp/cloudflare-cost-safety-forward/app-b/.cost-safety/report.md\n",
+    "stderr": ""
+  },
+  "final_status": {
+    "overall_status": "BLOCK",
+    "official_best_practices_status": "INCOMPLETE",
+    "cost_safety_status": "BLOCK",
+    "predeploy_gate_status": "DENY",
+    "deployment_gate_coverage": "partial",
+    "incomplete": [
+      "official_semantic_review_missing:wrangler"
+    ],
+    "tool_errors": []
+  },
+  "final_input_digest": "01e0337ef6348ad7b48bbbdc082bf4abfc195f56d3f9ec91a1f7f610089f0c52",
+  "handoff_to_publisher_allowed": false,
+  "authorizer_reproduction": {
+    "source": "Observed direct probe and minimal reproduction outputs in this invocation, before the parent fix",
+    "python": "3.10.12",
+    "sqlite": "3.37.2",
+    "schema": "CREATE TABLE jobs(id INTEGER PRIMARY KEY, status TEXT, done INTEGER, value INTEGER);",
+    "queries": [
+      "SELECT * FROM jobs",
+      "UPDATE jobs SET status=?"
+    ],
+    "initial_bundled_probe_results": [
+      {
+        "query": "SELECT * FROM jobs",
+        "exit_code": 0,
+        "top_level_status": "passed",
+        "query_status": "unsupported",
+        "reason": "query_plan_unavailable",
+        "billing_rows_read": null
+      },
+      {
+        "query": "UPDATE jobs SET status=?",
+        "exit_code": 0,
+        "top_level_status": "passed",
+        "query_status": "unsupported",
+        "reason": "query_plan_unavailable",
+        "billing_rows_read": null
+      }
+    ],
+    "minimal_comparison": [
+      {
+        "authorizer_mode": "no_authorizer",
+        "select_plan": [
+          "SCAN jobs"
+        ],
+        "update_plan": [
+          "SCAN jobs"
+        ]
+      },
+      {
+        "authorizer_mode": "set_none_after_schema",
+        "select_error": "not authorized",
+        "update_error": "not authorized"
+      },
+      {
+        "authorizer_mode": "allow_all_after_schema",
+        "select_plan": [
+          "SCAN jobs"
+        ],
+        "update_plan": [
+          "SCAN jobs"
+        ]
+      }
+    ],
+    "corrected_frozen_probe_results": [
+      {
+        "status": "passed",
+        "engine": "sqlite3",
+        "version": "3.37.2",
+        "results": [],
+        "operation_budget": {
+          "max_vm_steps": 2000000,
+          "max_queries": 50
+        },
+        "billing_metrics": null,
+        "cloud_writes": 0
+      }
+    ]
+  }
+}

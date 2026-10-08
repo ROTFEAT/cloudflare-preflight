@@ -1,0 +1,28 @@
+{
+  "name": "fixture-cf-do-001",
+  "account_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "main": "main.js",
+  "compatibility_date": "2026-10-08",
+  "observability": {
+    "enabled": true,
+    "traces": {
+      "enabled": true
+    }
+  },
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "TASKS",
+        "class_name": "Task"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": [
+        "Task"
+      ]
+    }
+  ]
+}

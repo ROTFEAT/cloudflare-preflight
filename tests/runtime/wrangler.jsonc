@@ -1,0 +1,16 @@
+{
+  "name":"cost-safety-offline-runtime-fixtures",
+  "main":"worker.js",
+  "compatibility_date":"2026-10-08",
+  "compatibility_flags":["nodejs_compat"],
+  "durable_objects":{"bindings":[
+    {"name":"UNSAFE","class_name":"UnsafeTask"},
+    {"name":"SAFE","class_name":"SafeTask"},
+    {"name":"PERIODIC","class_name":"PeriodicTask"},
+    {"name":"METER","class_name":"Meter"}
+  ]},
+  "migrations":[{"tag":"v1","new_sqlite_classes":["UnsafeTask","SafeTask","PeriodicTask","Meter"]}],
+  "d1_databases":[{"binding":"DB","database_id":"local-synthetic-db","database_name":"synthetic"}],
+  "kv_namespaces":[{"binding":"KV","id":"local-synthetic-kv"}],
+  "r2_buckets":[{"binding":"BUCKET","bucket_name":"local-synthetic-r2"}]
+}

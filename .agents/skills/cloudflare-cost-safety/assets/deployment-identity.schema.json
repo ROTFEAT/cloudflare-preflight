@@ -1,0 +1,153 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://cloudflare-cost-safety.local/schema/deployment-identity",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "source_snapshot_digest",
+    "artifact_digest",
+    "artifact_path",
+    "effective_config_digest",
+    "config_path",
+    "target",
+    "official_skills_lock_digest",
+    "policy_digest",
+    "rules_digest",
+    "tool_digest",
+    "toolchain",
+    "migration_digest",
+    "digest"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "source_snapshot_digest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "commit": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "artifact_digest": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "artifact_path": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "effective_config_digest": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "config_path": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "target": {
+      "type": "object",
+      "required": [
+        "account_id",
+        "application",
+        "environment",
+        "action"
+      ],
+      "properties": {
+        "account_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "application": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "environment": {
+          "type": "string",
+          "minLength": 1
+        },
+        "action": {
+          "enum": [
+            "deploy",
+            "preview",
+            "promote",
+            "rollback",
+            "upload",
+            "secret_deploy"
+          ]
+        },
+        "candidate_version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "official_skills_lock_digest": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "policy_digest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "rules_digest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "tool_digest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "toolchain": {
+      "type": "object"
+    },
+    "migration_digest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "builder": {
+      "type": "string",
+      "minLength": 1
+    },
+    "digest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  },
+  "additionalProperties": false
+}

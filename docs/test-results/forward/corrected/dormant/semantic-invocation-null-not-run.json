@@ -1,0 +1,28 @@
+{
+  "command": [
+    "node",
+    "/tmp/cloudflare-cost-safety-forward-corrected/tool/scripts/cli.mjs",
+    "preflight",
+    "--root",
+    "/tmp/cloudflare-cost-safety-forward-corrected/dormant",
+    "--config",
+    "wrangler.jsonc",
+    "--env",
+    "production",
+    "--artifact",
+    "main.js",
+    "--builder",
+    "explicit-forward-direct-js@1",
+    "--action",
+    "deploy",
+    "--local-tests",
+    "--output",
+    "/tmp/cloudflare-cost-safety-forward-corrected/dormant/.cost-safety/corrected",
+    "--review",
+    "/tmp/cloudflare-cost-safety-forward-corrected/dormant/.cost-safety/corrected/semantic-review.json"
+  ],
+  "exit_code": 3,
+  "stdout": "",
+  "stderr": "cost-safety tool error: Cannot read properties of null (reading 'join')\n",
+  "duration_ms": 2027
+}

@@ -1,0 +1,6 @@
+Unmodified Cloudflare agent skills are vendored from:
+https://github.com/cloudflare/skills
+Revision: 41e0d19858946d18af9ee2c2feebbe2e11d829ff
+Copyright and attribution remain with the original authors.
+Licensed under Apache License 2.0; see CLOUDFLARE-LICENSE.
+This project is independent and is not an official Cloudflare billing guarantee.

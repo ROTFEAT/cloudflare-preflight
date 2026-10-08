@@ -1,0 +1,9 @@
+{
+  "claims": [
+    {
+      "control": "budget_alert",
+      "hard_monthly_cap": false,
+      "source_verified": true
+    }
+  ]
+}

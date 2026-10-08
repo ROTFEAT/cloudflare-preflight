@@ -1,0 +1,404 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://cloudflare-cost-safety.local/schema/report",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "skill_version",
+    "reviewed_at",
+    "scope",
+    "activation",
+    "deployment_identity",
+    "inventory",
+    "execution_graph",
+    "official_skills",
+    "rules",
+    "findings",
+    "tests",
+    "native_controls",
+    "coverage",
+    "usage_assessment",
+    "approvals",
+    "incomplete",
+    "tool_errors",
+    "overall_status",
+    "official_best_practices_status",
+    "cost_safety_status",
+    "predeploy_gate_status",
+    "deployment_gate_coverage",
+    "guarantees",
+    "review_identity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "skill_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reviewed_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scope": {
+      "type": "object"
+    },
+    "activation": {
+      "type": "object"
+    },
+    "deployment_identity": {
+      "$ref": "deployment-identity.schema.json"
+    },
+    "inventory": {
+      "type": "object"
+    },
+    "execution_graph": {
+      "type": "object"
+    },
+    "official_skills": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "required",
+          "applies",
+          "reason",
+          "upstream",
+          "revision",
+          "resolved_path",
+          "content_digest",
+          "loaded_references",
+          "load_status",
+          "review_status",
+          "findings",
+          "evidence"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "applies": {
+            "type": "boolean"
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          },
+          "upstream": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "revision": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "resolved_path": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "content_digest": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "loaded_references": {
+            "type": "array"
+          },
+          "load_status": {
+            "type": "string",
+            "minLength": 1
+          },
+          "review_status": {
+            "type": "string",
+            "minLength": 1
+          },
+          "findings": {
+            "type": "array"
+          },
+          "evidence": {
+            "type": "array"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "rules": {
+      "type": "array",
+      "minItems": 12,
+      "maxItems": 12,
+      "items": {
+        "type": "object",
+        "required": [
+          "rule_id",
+          "status",
+          "evidence",
+          "findings",
+          "gaps",
+          "implementation"
+        ],
+        "properties": {
+          "rule_id": {
+            "enum": [
+              "CF-DO-001",
+              "CF-DO-002",
+              "CF-DEP-001",
+              "CF-SQL-001",
+              "CF-SQL-002",
+              "CF-JOB-001",
+              "CF-Q-001",
+              "CF-Q-002",
+              "CF-KV-001",
+              "CF-R2-001",
+              "CF-HTTP-001",
+              "CF-SAFE-001"
+            ]
+          },
+          "status": {
+            "enum": [
+              "pass",
+              "finding",
+              "not_applicable",
+              "unknown",
+              "not_run"
+            ]
+          },
+          "evidence": {
+            "type": "array"
+          },
+          "findings": {
+            "type": "array"
+          },
+          "gaps": {
+            "type": "array"
+          },
+          "implementation": {
+            "type": "object"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "rule_id",
+          "origin",
+          "status",
+          "severity",
+          "confidence",
+          "location",
+          "summary",
+          "execution_path",
+          "usage_assessment",
+          "evidence"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "rule_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "origin": {
+            "enum": [
+              "official_best_practices",
+              "cost_safety",
+              "both"
+            ]
+          },
+          "status": {
+            "enum": [
+              "BLOCK",
+              "REVIEW",
+              "ADVISORY"
+            ]
+          },
+          "severity": {
+            "enum": [
+              "critical",
+              "high",
+              "medium",
+              "low",
+              "info"
+            ]
+          },
+          "confidence": {
+            "type": "string",
+            "minLength": 1
+          },
+          "location": {
+            "type": "object",
+            "required": [
+              "path",
+              "start_line"
+            ],
+            "properties": {
+              "path": {
+                "type": "string",
+                "minLength": 1
+              },
+              "start_line": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "end_line": {
+                "type": "integer",
+                "minimum": 1
+              }
+            },
+            "additionalProperties": false
+          },
+          "summary": {
+            "type": "string",
+            "minLength": 1
+          },
+          "execution_path": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "usage_assessment": {
+            "type": "object"
+          },
+          "native_control_limit": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "recommendation": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "evidence": {
+            "type": "object"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "tests": {
+      "type": "array"
+    },
+    "native_controls": {
+      "type": "array"
+    },
+    "coverage": {
+      "type": "object"
+    },
+    "usage_assessment": {
+      "type": "object"
+    },
+    "approvals": {
+      "type": "array"
+    },
+    "incomplete": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "tool_errors": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "review_identity": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "overall_status": {
+      "enum": [
+        "PASS",
+        "BLOCK",
+        "INCOMPLETE",
+        "REVIEW"
+      ]
+    },
+    "official_best_practices_status": {
+      "enum": [
+        "PASS",
+        "BLOCK",
+        "INCOMPLETE",
+        "REVIEW"
+      ]
+    },
+    "cost_safety_status": {
+      "enum": [
+        "PASS",
+        "BLOCK",
+        "INCOMPLETE",
+        "REVIEW"
+      ]
+    },
+    "predeploy_gate_status": {
+      "enum": [
+        "ALLOW",
+        "ALLOW_WITH_APPROVAL",
+        "DENY"
+      ]
+    },
+    "deployment_gate_coverage": {
+      "enum": [
+        "integrated_paths",
+        "partial"
+      ]
+    },
+    "guarantees": {
+      "type": "object",
+      "required": [
+        "hard_monthly_cap",
+        "production_isolation_performed",
+        "cloud_writes"
+      ],
+      "properties": {
+        "hard_monthly_cap": {
+          "const": false
+        },
+        "production_isolation_performed": {
+          "const": false
+        },
+        "cloud_writes": {
+          "const": 0
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

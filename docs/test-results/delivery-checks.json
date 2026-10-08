@@ -1,0 +1,84 @@
+{
+  "ran_at": "2026-10-08T12:59:32.341129+00:00",
+  "status": "passed",
+  "version": "1.0.0",
+  "display_version": "1.00",
+  "checks": [
+    {
+      "name": "skill_structure",
+      "status": "passed",
+      "detail": {
+        "command": [
+          "python3",
+          "/home/ubuntu/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+          ".agents/skills/cloudflare-cost-safety"
+        ],
+        "exit_code": 0,
+        "stdout": "Skill is valid!"
+      }
+    },
+    {
+      "name": "release_versions_and_cli",
+      "status": "passed",
+      "detail": {
+        "version": "1.0.0",
+        "display_version": "1.00",
+        "tag": "v1.00",
+        "cli_command": [
+          "node",
+          "/home/ubuntu/github/cloudflare-preflight/.agents/skills/cloudflare-cost-safety/scripts/cli.mjs",
+          "version"
+        ],
+        "cli": {
+          "name": "cloudflare-cost-safety",
+          "version": "1.0.0",
+          "display_version": "1.00",
+          "tag": "v1.00"
+        }
+      }
+    },
+    {
+      "name": "indexes_official_hashes",
+      "status": "passed",
+      "detail": {
+        "rules": 12,
+        "cases": 9,
+        "sources": 32,
+        "fixtures": 36,
+        "official_files": 9,
+        "official_revision": "41e0d19858946d18af9ee2c2feebbe2e11d829ff"
+      }
+    },
+    {
+      "name": "documents_bilingual_sources_yaml",
+      "status": "passed",
+      "detail": {
+        "documents": [
+          "README.md",
+          "README.en.md",
+          "CHANGELOG.md",
+          "docs/versioning.md",
+          "docs/coverage.md",
+          "docs/ci.md",
+          "docs/trust.md",
+          "docs/development-report.zh-CN.md",
+          "docs/test-results/README.md"
+        ],
+        "local_links": 67,
+        "bilingual_sources": 32,
+        "yaml": "parsed; Cloudflare release not executed"
+      }
+    },
+    {
+      "name": "retained_evidence_and_package",
+      "status": "passed",
+      "detail": {
+        "retained_forward_files": 72,
+        "archive": "/home/ubuntu/github/cloudflare-preflight/.cost-safety/cloudflare-cost-safety-1.0.0.tar.gz",
+        "archive_sha256": "cb096c91e0c1170d2c9a08ffe325bb214d27de7d8e1f28f8aa01ad42285b6d02",
+        "logs": "byte-identical copies",
+        "test_summary_passed": true
+      }
+    }
+  ]
+}

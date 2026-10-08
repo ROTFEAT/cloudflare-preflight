@@ -1,0 +1,406 @@
+{
+  "schema_version": "1.0",
+  "input_digest": "0f9c1a9c98e57ab75ee90e1b9e654e5729356a9561c48bf514d2882a6c790e7a",
+  "reviewer": "Codex independent forward-test reviewer /root/skill_forward_review",
+  "model": "Codex, GPT-6 family; exact backend model identifier/version is not exposed",
+  "invocation": "One actual Codex desktop host explicit $cloudflare-cost-safety invocation, delegated to /root/skill_forward_review, covering three synthetic fixtures. CLI reruns within this invocation are recorded; no repeated host trials or implicit-discovery test.",
+  "reviewed_at": "2026-10-08T10:27:54.087092+00:00",
+  "rules": [
+    {
+      "rule_id": "CF-DO-001",
+      "status": "unknown",
+      "reason": "Constructor unconditionally schedules an alarm; alarm fully consumes SELECT * and can reschedule when getAlarm is null. However fetch only returns ok and never activates TASKS. The class never creates jobs; migrations/0001.sql is not invoked by DO code. Thus a running billable self-loop requires external/existing activation and an already initialized table, neither established here. The static BLOCK is retained as tool output, not endorsed as a confirmed billable loop.",
+      "evidence": [
+        {
+          "path": "main.js",
+          "start_line": 3,
+          "end_line": 6
+        },
+        {
+          "path": "wrangler.jsonc",
+          "start_line": 12,
+          "end_line": 27
+        },
+        {
+          "path": "migrations/0001.sql",
+          "start_line": 1
+        }
+      ]
+    },
+    {
+      "rule_id": "CF-DO-002",
+      "status": "unknown",
+      "reason": "No durable pending-work, attempts, progress or window budget exists in the class. Potential repeated scheduled work has no logical-task termination boundary, but runtime activation, schema and getAlarm fault/lifecycle checks are unexecuted.",
+      "evidence": [
+        {
+          "path": "main.js",
+          "start_line": 3,
+          "end_line": 4
+        }
+      ]
+    },
+    {
+      "rule_id": "CF-DEP-001",
+      "status": "unknown",
+      "reason": "This is a production-only input with one declared DO class and no preview generator; no local path allocates an object. Existing callers, active-object count and alarm state were not accessed. Environment multiplication is not evidenced, and the live DO execution population is unknown.",
+      "evidence": [
+        {
+          "path": "wrangler.jsonc",
+          "start_line": 1,
+          "end_line": 28
+        },
+        {
+          "path": "main.js",
+          "start_line": 2,
+          "end_line": 6
+        }
+      ]
+    },
+    {
+      "rule_id": "CF-SQL-001",
+      "status": "finding",
+      "reason": "The alarm has an unconditional SELECT * FROM jobs followed by toArray. The actual bounded SQLite plan says SCAN jobs. No predicate, page/row limit or maximum table size exists; an index alone cannot bound this all-row read. Exact DO cursor rowsRead/rowsWritten are unmeasured and must remain null; activation and table initialization are unresolved.",
+      "evidence": [
+        {
+          "path": "main.js",
+          "start_line": 4
+        },
+        {
+          "path": "migrations/0001.sql",
+          "start_line": 1
+        }
+      ]
+    },
+    {
+      "rule_id": "CF-SQL-002",
+      "status": "not_applicable",
+      "reason": "Inspected every local JS module and final JSONC binding/trigger inventory; no corresponding product operation, handler, wrapper or generated configuration exists in this fixture. This conclusion does not cover uninspected live account integrations.",
+      "evidence": [
+        {
+          "path": "wrangler.jsonc",
+          "start_line": 1
+        },
+        {
+          "path": "main.js",
+          "start_line": 1
+        }
+      ]
+    },
+    {
+      "rule_id": "CF-JOB-001",
+      "status": "not_applicable",
+      "reason": "Inspected every local JS module and final JSONC binding/trigger inventory; no corresponding product operation, handler, wrapper or generated configuration exists in this fixture. This conclusion does not cover uninspected live account integrations.",
+      "evidence": [
+        {
+          "path": "wrangler.jsonc",
+          "start_line": 1
+        },
+        {
+          "path": "main.js",
+          "start_line": 1
+        }
+      ]
+    },
+    {
+      "rule_id": "CF-Q-001",
+      "status": "not_applicable",
+      "reason": "Inspected every local JS module and final JSONC binding/trigger inventory; no corresponding product operation, handler, wrapper or generated configuration exists in this fixture. This conclusion does not cover uninspected live account integrations.",
+      "evidence": [
+        {
+          "path": "wrangler.jsonc",
+          "start_line": 1
+        },
+        {
+          "path": "main.js",
+          "start_line": 1
+        }
+      ]
+    },
+    {
+      "rule_id": "CF-Q-002",
+      "status": "not_applicable",
+      "reason": "Inspected every local JS module and final JSONC binding/trigger inventory; no corresponding product operation, handler, wrapper or generated configuration exists in this fixture. This conclusion does not cover uninspected live account integrations.",
+      "evidence": [
+        {
+          "path": "wrangler.jsonc",
+          "start_line": 1
+        },
+        {
+          "path": "main.js",
+          "start_line": 1
+        }
+      ]
+    },
+    {
+      "rule_id": "CF-KV-001",
+      "status": "not_applicable",
+      "reason": "Inspected every local JS module and final JSONC binding/trigger inventory; no corresponding product operation, handler, wrapper or generated configuration exists in this fixture. This conclusion does not cover uninspected live account integrations.",
+      "evidence": [
+        {
+          "path": "wrangler.jsonc",
+          "start_line": 1
+        },
+        {
+          "path": "main.js",
+          "start_line": 1
+        }
+      ]
+    },
+    {
+      "rule_id": "CF-R2-001",
+      "status": "not_applicable",
+      "reason": "Inspected every local JS module and final JSONC binding/trigger inventory; no corresponding product operation, handler, wrapper or generated configuration exists in this fixture. This conclusion does not cover uninspected live account integrations.",
+      "evidence": [
+        {
+          "path": "wrangler.jsonc",
+          "start_line": 1
+        },
+        {
+          "path": "main.js",
+          "start_line": 1
+        }
+      ]
+    },
+    {
+      "rule_id": "CF-HTTP-001",
+      "status": "unknown",
+      "reason": "The fetch handler still incurs an invocation even though it returns a constant response and has no downstream operation. No server admission bound or exported WAF/workers.dev coverage exists. The static not_applicable result should not be read as elimination of Worker entry charges.",
+      "evidence": [
+        {
+          "path": "main.js",
+          "start_line": 6
+        },
+        {
+          "path": "wrangler.jsonc",
+          "start_line": 1,
+          "end_line": 11
+        }
+      ]
+    },
+    {
+      "rule_id": "CF-SAFE-001",
+      "status": "pass",
+      "reason": "No candidate hard-spend-cap or invented pause API claim is present. This review explicitly separates one-alarm scheduling, single-message retries, CPU scope, delivery pause, notifications and test helpers; none is treated as an account monthly spending cap. No controls were executed.",
+      "evidence": [
+        {
+          "path": "wrangler.jsonc",
+          "start_line": 1
+        },
+        {
+          "path": "main.js",
+          "start_line": 1
+        }
+      ]
+    }
+  ],
+  "official_skills": [
+    {
+      "name": "workers-best-practices",
+      "status": "reviewed",
+      "reviewed_files": [
+        {
+          "path": "vendor/workers-best-practices/SKILL.md",
+          "sha256": "8ae8c6e7359171ba6a1688503850fa05ce47199c4e288343bf55b5e277351bae"
+        },
+        {
+          "path": "vendor/workers-best-practices/references/configuration.md",
+          "sha256": "cdb5c9cd5168231373523332c0e7a5cf8811dc244c48298823e3ccc5eb7157c1"
+        },
+        {
+          "path": "vendor/workers-best-practices/references/platform-apis.md",
+          "sha256": "9ca9f5a7a82f92de45d310f5e2ee05aa464ddb7a63a737529caa17fff3660f28"
+        },
+        {
+          "path": "vendor/workers-best-practices/references/runtime-patterns.md",
+          "sha256": "704ce8d4ff62c7655eb1d15f804ad566ed2012d11c2086e0d94bd3addb4d2c07"
+        }
+      ],
+      "reason": "Actually read entry plus configuration, platform-apis and runtime-patterns content from the pinned context. Logs and traces are enabled and date is 2026-10-08; inspected module/class binding access, platform import, async lifetimes, serialization and state. No Node built-ins are imported, so absent nodejs_compat alone is not a defect. JS fixtures contain no hand-written Env type. Application runtime checks remain unexecuted and no live observability cost/coverage is claimed.",
+      "evidence": [
+        {
+          "path": "wrangler.jsonc",
+          "start_line": 1
+        },
+        {
+          "path": "main.js",
+          "start_line": 1
+        }
+      ]
+    },
+    {
+      "name": "wrangler",
+      "status": "unknown",
+      "reviewed_files": [
+        {
+          "path": "vendor/wrangler/SKILL.md",
+          "sha256": "9d9bd78c79823cdad36a88dbece8e48d8512c7262c66546ccbfac64ae08d310f"
+        }
+      ],
+      "reason": "Actually read and applied pinned Wrangler entry: JSONC is data, config/main/name/account/date/bindings and version 4.148.0 from synthetic lock were inspected. No cloudflare.config.ts/cf path, package scripts or generated config exists. A trusted repository prepared Wrangler 4.148.0 schema was inspected, but candidate-installed CLI/schema/help and real production account/resource/publisher command are absent. Synthetic account and D1 identifiers are not validated release targets. No CLI, install, dry-run build or remote action was executed; semantic validation of the production release remains incomplete.",
+      "evidence": [
+        {
+          "path": "wrangler.jsonc",
+          "start_line": 1
+        },
+        {
+          "path": "main.js",
+          "start_line": 1
+        }
+      ]
+    },
+    {
+      "name": "durable-objects",
+      "status": "reviewed",
+      "reviewed_files": [
+        {
+          "path": "vendor/durable-objects/SKILL.md",
+          "sha256": "2468c1795f439f494f076eb13a2202a3c4e579e71e6e2ed98b4d1f5ce62fef1b"
+        },
+        {
+          "path": "vendor/durable-objects/references/rules.md",
+          "sha256": "8ec51f1270d6014763139236c3fb9f3a21a3bed4054c99b101f392eb5cb363bf"
+        },
+        {
+          "path": "vendor/durable-objects/references/testing.md",
+          "sha256": "1a99e6a2e1bd7f2fa34573b07ad036e3c2ddcf97df6a42926d737eb2d87b3168"
+        },
+        {
+          "path": "vendor/durable-objects/references/workers.md",
+          "sha256": "3149c3ee371b5dbf3a84dac7d5bb42c4c6553762480741f6d2808e4ca20fd932"
+        }
+      ],
+      "reason": "Actually read DO entry and all rules/testing/workers references. Task extends DurableObject imported from cloudflare:workers; super(ctx,env), TASKS/class_name and new_sqlite_classes agree. Applied storage, initialization, lifecycle and one-alarm semantics: no jobs schema setup in constructor, no local activation path, and unconditional scheduling require explicit preconditions. Cursor is consumed by toArray before any proposed metrics. No runtime lifecycle/getAlarm measurement, no eviction claim, no fictional account pause and no execution of upstream deployment examples.",
+      "evidence": [
+        {
+          "path": "wrangler.jsonc",
+          "start_line": 1
+        },
+        {
+          "path": "main.js",
+          "start_line": 1
+        }
+      ]
+    }
+  ],
+  "tests": [],
+  "findings": [
+    {
+      "id": "SEM-A-SQL-SCAN",
+      "rule_id": "CF-SQL-001",
+      "origin": "cost_safety",
+      "status": "REVIEW",
+      "severity": "medium",
+      "confidence": "high for the inspected local code; live preconditions remain unverified",
+      "location": {
+        "path": "main.js",
+        "start_line": 4
+      },
+      "summary": "Every successful alarm materializes the entire jobs table; per-event rows are unbounded by candidate code.",
+      "execution_path": [
+        "Task.alarm",
+        "storage.sql.exec(SELECT * FROM jobs)",
+        "cursor.toArray"
+      ],
+      "usage_assessment": {
+        "classification": "unknown",
+        "units": [
+          "rowsRead per successful alarm",
+          "returned rows",
+          "alarm events"
+        ],
+        "usd_estimate": null,
+        "assumptions": [
+          "Only synthetic local inputs were inspected; no Cloudflare account state or prices were accessed."
+        ],
+        "excluded": [
+          "storage duration",
+          "fixed charges",
+          "logs/traces",
+          "external APIs"
+        ]
+      },
+      "evidence": {
+        "semantic_review": true,
+        "detail": "Actual SQLite SCAN jobs plan supports structural scan only; exact DO billing counters and live activation are not measured."
+      }
+    },
+    {
+      "id": "SEM-A-FLOATING-ALARM",
+      "rule_id": null,
+      "origin": "official_best_practices",
+      "status": "ADVISORY",
+      "severity": "low",
+      "confidence": "high for the inspected local code; live preconditions remain unverified",
+      "location": {
+        "path": "main.js",
+        "start_line": 3
+      },
+      "summary": "Constructor starts asynchronous setAlarm without attaching completion or rejection to an initialization lifetime.",
+      "execution_path": [
+        "Task.constructor",
+        "storage.setAlarm"
+      ],
+      "usage_assessment": {
+        "classification": "unknown",
+        "units": [
+          "alarm scheduling operations"
+        ],
+        "usd_estimate": null,
+        "assumptions": [
+          "Only synthetic local inputs were inspected; no Cloudflare account state or prices were accessed."
+        ],
+        "excluded": [
+          "storage duration",
+          "fixed charges",
+          "logs/traces",
+          "external APIs"
+        ]
+      },
+      "evidence": {
+        "semantic_review": true,
+        "detail": "Applied the pinned Workers promise-lifetime guidance. This is an advisory correctness observation, not an independent cost BLOCK.",
+        "skill": "workers-best-practices"
+      }
+    },
+    {
+      "id": "SEM-A-SCHEMA-PRECONDITION",
+      "rule_id": null,
+      "origin": "official_best_practices",
+      "status": "REVIEW",
+      "severity": "medium",
+      "confidence": "high for the inspected local code; live preconditions remain unverified",
+      "location": {
+        "path": "main.js",
+        "start_line": 4
+      },
+      "summary": "The DO queries jobs but its constructor has no schema initialization; the supplied SQL file is not called by the class.",
+      "execution_path": [
+        "Task.constructor",
+        "Task.alarm",
+        "SELECT * FROM jobs"
+      ],
+      "usage_assessment": {
+        "classification": "unknown",
+        "units": [
+          "alarm events",
+          "successful SQL scans: unknown"
+        ],
+        "usd_estimate": null,
+        "assumptions": [
+          "Only synthetic local inputs were inspected; no Cloudflare account state or prices were accessed."
+        ],
+        "excluded": [
+          "storage duration",
+          "fixed charges",
+          "logs/traces",
+          "external APIs"
+        ]
+      },
+      "evidence": {
+        "semantic_review": true,
+        "detail": "Applied DO schema-initialization guidance. A new_sqlite_classes migration creates the class backend; this record does not assume the standalone jobs SQL was automatically applied. Fresh-object runtime verification has not been run.",
+        "skill": "durable-objects"
+      }
+    }
+  ]
+}

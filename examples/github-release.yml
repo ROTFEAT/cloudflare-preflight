@@ -1,0 +1,56 @@
+# Copy to the application repository after configuring the protected runner,
+# environment and the external target/trust files described in docs/ci.md.
+name: Gated Cloudflare production release
+on:
+  workflow_dispatch:
+    inputs:
+      review_run_id:
+        description: Trusted review run with signed evidence and immutable candidate artifacts
+        required: true
+        type: string
+permissions:
+  contents: read
+  actions: read
+jobs:
+  release:
+    runs-on: [self-hosted, linux, cost-safety-publisher]
+    environment: cloudflare-production
+    timeout-minutes: 10
+    steps:
+      - name: Read signed evidence without executing candidate code
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: ${{ inputs.review_run_id }}
+          name: cost-safety-evidence
+          path: ${{ runner.temp }}/cost-safety-evidence
+      - name: Verify the signer before selecting the source commit
+        id: evidence
+        run: >-
+          node /opt/cloudflare-cost-safety/scripts/ci-evidence.mjs commit
+          "$RUNNER_TEMP/cost-safety-evidence" "$GITHUB_WORKSPACE/candidate"
+          /opt/cloudflare-cost-safety/trust/production-target.json
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          ref: ${{ steps.evidence.outputs.commit }}
+          path: candidate
+          persist-credentials: false
+      - name: Restore reviewed source and final prebuilt artifact
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: ${{ inputs.review_run_id }}
+          name: cost-safety-candidate
+          path: ${{ github.workspace }}/candidate
+      - name: Independently gate current files and prepare the immutable handoff
+        id: gate
+        run: >-
+          node /opt/cloudflare-cost-safety/scripts/ci-evidence.mjs stage
+          "$RUNNER_TEMP/cost-safety-evidence" "$GITHUB_WORKSPACE/candidate"
+          /opt/cloudflare-cost-safety/trust/production-target.json
+      - name: Publish only the verified bytes
+        if: success()
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          COST_SAFETY_HANDOFF: ${{ steps.gate.outputs.handoff }}
+        run: node /opt/cloudflare-cost-safety/examples/publisher-wrangler.mjs --handoff "$COST_SAFETY_HANDOFF"

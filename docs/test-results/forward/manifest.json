@@ -1,0 +1,366 @@
+{
+  "retained_at": "2026-10-08",
+  "note": "Exact evidence copies; original absolute paths and reviewed tool versions are intentionally preserved. Historical failures are not final-version test results.",
+  "files": [
+    {
+      "retained_path": "docs/test-results/forward/initial/app-a/forward-test.json",
+      "original_path": "/tmp/cloudflare-cost-safety-forward/app-a/.cost-safety/forward-test.json",
+      "sha256": "a3a98958fd70a4b18e4e42020dc79f34ce50729842080f447e0be9685a45c8a8"
+    },
+    {
+      "retained_path": "docs/test-results/forward/initial/app-a/forward-test.md",
+      "original_path": "/tmp/cloudflare-cost-safety-forward/app-a/.cost-safety/forward-test.md",
+      "sha256": "c86b1ea5930b693bc9e6d1a2c672b2cf3e3fdb0d1ef3e6471d2ed7ba6b39fcb2"
+    },
+    {
+      "retained_path": "docs/test-results/forward/initial/app-a/frozen-before-semantic-report.json",
+      "original_path": "/tmp/cloudflare-cost-safety-forward/app-a/.cost-safety/frozen-before-semantic-report.json",
+      "sha256": "43c341be8ae0c60c4f7c806ee1cdfa88ffbd129a96883c5e3ec197d26f1965a2"
+    },
+    {
+      "retained_path": "docs/test-results/forward/initial/app-a/initial-report.json",
+      "original_path": "/tmp/cloudflare-cost-safety-forward/app-a/.cost-safety/initial-report.json",
+      "sha256": "efc6dd29e0ea27a7b172a4fc5a7f08eb04a2f7fd5d66c03d0f6727f593ef018e"
+    },
+    {
+      "retained_path": "docs/test-results/forward/initial/app-a/initial-report.md",
+      "original_path": "/tmp/cloudflare-cost-safety-forward/app-a/.cost-safety/initial-report.md",
+      "sha256": "cf176aedb51b54c178e94167c03ec429f2247f0bc5887b6f845f4023dacb32db"
+    },
+    {
+      "retained_path": "docs/test-results/forward/initial/app-a/report.json",
+      "original_path": "/tmp/cloudflare-cost-safety-forward/app-a/.cost-safety/report.json",
+      "sha256": "3262ae40622b6bc79cd30b01acf0c5def18b0febd097ec5c25cfc052a78156e0"
+    },
+    {
+      "retained_path": "docs/test-results/forward/initial/app-a/report.md",
+      "original_path": "/tmp/cloudflare-cost-safety-forward/app-a/.cost-safety/report.md",
+      "sha256": "c894708b2e9d02525eb628ba6ee04cbe34d35bf33c8c80e381575e6a71f9f088"
+    },
+    {
+      "retained_path": "docs/test-results/forward/initial/app-a/semantic-review.json",
+      "original_path": "/tmp/cloudflare-cost-safety-forward/app-a/.cost-safety/semantic-review.json",
+      "sha256": "bd113b735a448316284a542e4efd5df69e033c991cc424a1d2b4ff751da0b61e"
+    },
+    {
+      "retained_path": "docs/test-results/forward/initial/app-a/input/main.js",
+      "original_path": "/tmp/cloudflare-cost-safety-forward/app-a/main.js",
+      "sha256": "187f558c1f9068268dfa9f060acb0b5d82d0acc9e8c0afe5caa170973a39b1f4"
+    },
+    {
+      "retained_path": "docs/test-results/forward/initial/app-a/input/migrations/0001.sql",
+      "original_path": "/tmp/cloudflare-cost-safety-forward/app-a/migrations/0001.sql",
+      "sha256": "e94bb21bf79426c53ea2579dbc50c8cedcb17a0af5bebb131a4ca39da8699da6"
+    },
+    {
+      "retained_path": "docs/test-results/forward/initial/app-a/input/package-lock.json",
+      "original_path": "/tmp/cloudflare-cost-safety-forward/app-a/package-lock.json",
+      "sha256": "97a123aa68ccb918c140b085cc6a52aac04955c3ecdba02a6d34ef725e5a1f5d"
+    },
+    {
+      "retained_path": "docs/test-results/forward/initial/app-a/input/wrangler.jsonc",
+      "original_path": "/tmp/cloudflare-cost-safety-forward/app-a/wrangler.jsonc",
+      "sha256": "6bad7d0ddb0766326b6ff4174b8677bca2298181de4cb8495cd5e5e604336e40"
+    },
+    {
+      "retained_path": "docs/test-results/forward/initial/app-b/forward-test.json",
+      "original_path": "/tmp/cloudflare-cost-safety-forward/app-b/.cost-safety/forward-test.json",
+      "sha256": "90603186f16aac1d859022bee381f9e30ec319f45d581b9d532a4133f9b282e7"
+    },
+    {
+      "retained_path": "docs/test-results/forward/initial/app-b/forward-test.md",
+      "original_path": "/tmp/cloudflare-cost-safety-forward/app-b/.cost-safety/forward-test.md",
+      "sha256": "1592e773b1d116e7ad8dd126c781c30e42e18b29a5e1914cdda40428a6da8440"
+    },
+    {
+      "retained_path": "docs/test-results/forward/initial/app-b/frozen-before-semantic-report.json",
+      "original_path": "/tmp/cloudflare-cost-safety-forward/app-b/.cost-safety/frozen-before-semantic-report.json",
+      "sha256": "c6adee74deb4a5520632ce55c78adf89b1efb91b941331c9c1af6ddb946d3c62"
+    },
+    {
+      "retained_path": "docs/test-results/forward/initial/app-b/initial-report.json",
+      "original_path": "/tmp/cloudflare-cost-safety-forward/app-b/.cost-safety/initial-report.json",
+      "sha256": "392002de406bc01a24a80da063942adc4d453a24c9fcfed1ba083be344300a9b"
+    },
+    {
+      "retained_path": "docs/test-results/forward/initial/app-b/initial-report.md",
+      "original_path": "/tmp/cloudflare-cost-safety-forward/app-b/.cost-safety/initial-report.md",
+      "sha256": "5492e882ba48eedef485798dde88916ff667a02e3e889626082922f2978b9769"
+    },
+    {
+      "retained_path": "docs/test-results/forward/initial/app-b/report.json",
+      "original_path": "/tmp/cloudflare-cost-safety-forward/app-b/.cost-safety/report.json",
+      "sha256": "7fb6285da2fac2b601742c0b8baf8c3d78ec3bca7a489d09d30779a641f9c38f"
+    },
+    {
+      "retained_path": "docs/test-results/forward/initial/app-b/report.md",
+      "original_path": "/tmp/cloudflare-cost-safety-forward/app-b/.cost-safety/report.md",
+      "sha256": "0d3569e774d3dfa0a64cff6f3db1f3fae66c6d12c61a8c112091c224a7d03042"
+    },
+    {
+      "retained_path": "docs/test-results/forward/initial/app-b/semantic-review.json",
+      "original_path": "/tmp/cloudflare-cost-safety-forward/app-b/.cost-safety/semantic-review.json",
+      "sha256": "5c2b7f9cb71dc964694693dcb2e5dcfa8ca5b99e7eec34d77427bc8ae8d2fe6c"
+    },
+    {
+      "retained_path": "docs/test-results/forward/initial/app-b/input/main.js",
+      "original_path": "/tmp/cloudflare-cost-safety-forward/app-b/main.js",
+      "sha256": "13c24f362f92dac4b33a09ef8414dad86f0374bd2dbe6b1729dd1cb4cbbdf769"
+    },
+    {
+      "retained_path": "docs/test-results/forward/initial/app-b/input/package-lock.json",
+      "original_path": "/tmp/cloudflare-cost-safety-forward/app-b/package-lock.json",
+      "sha256": "97a123aa68ccb918c140b085cc6a52aac04955c3ecdba02a6d34ef725e5a1f5d"
+    },
+    {
+      "retained_path": "docs/test-results/forward/initial/app-b/input/producer.js",
+      "original_path": "/tmp/cloudflare-cost-safety-forward/app-b/producer.js",
+      "sha256": "09e974a2d6cfad0286d055dbd87a08436c42714e86caffa35064bef408b172b7"
+    },
+    {
+      "retained_path": "docs/test-results/forward/initial/app-b/input/wrangler.jsonc",
+      "original_path": "/tmp/cloudflare-cost-safety-forward/app-b/wrangler.jsonc",
+      "sha256": "9a355797f0ce665e5805b6a2fb48007c71ea299308d95ae31a7991711996e9a7"
+    },
+    {
+      "retained_path": "docs/test-results/forward/initial/app-c/forward-test.json",
+      "original_path": "/tmp/cloudflare-cost-safety-forward/app-c/.cost-safety/forward-test.json",
+      "sha256": "d4c40752af087fd6de7f9f9fca798e094f805bbae2101bbab0cfb2c7d5007f3e"
+    },
+    {
+      "retained_path": "docs/test-results/forward/initial/app-c/forward-test.md",
+      "original_path": "/tmp/cloudflare-cost-safety-forward/app-c/.cost-safety/forward-test.md",
+      "sha256": "edf11b7a9a3cbba500ce100300c1420d290a9ad6d89fb77769e01dc753340998"
+    },
+    {
+      "retained_path": "docs/test-results/forward/initial/app-c/frozen-before-semantic-report.json",
+      "original_path": "/tmp/cloudflare-cost-safety-forward/app-c/.cost-safety/frozen-before-semantic-report.json",
+      "sha256": "b8543564945bdfaf27e0a66b34357fa970ef84719d17722a065989356b2a7a6a"
+    },
+    {
+      "retained_path": "docs/test-results/forward/initial/app-c/initial-report.json",
+      "original_path": "/tmp/cloudflare-cost-safety-forward/app-c/.cost-safety/initial-report.json",
+      "sha256": "12a660212ed9ec1e577088df8f880ad4a0690e28ea155bb4d5687f1d17ade200"
+    },
+    {
+      "retained_path": "docs/test-results/forward/initial/app-c/initial-report.md",
+      "original_path": "/tmp/cloudflare-cost-safety-forward/app-c/.cost-safety/initial-report.md",
+      "sha256": "8e15164b7cdccd32e12f879ea66a787a43e334abc80575757c70c27849b2dada"
+    },
+    {
+      "retained_path": "docs/test-results/forward/initial/app-c/report.json",
+      "original_path": "/tmp/cloudflare-cost-safety-forward/app-c/.cost-safety/report.json",
+      "sha256": "292c15a56334e98e15e8d9170fbf51ebcdeefc40dc87c2b75912f3ebf2f0c236"
+    },
+    {
+      "retained_path": "docs/test-results/forward/initial/app-c/report.md",
+      "original_path": "/tmp/cloudflare-cost-safety-forward/app-c/.cost-safety/report.md",
+      "sha256": "2ca1251af77de18774192d66b3d3023420dfe7d9973423fa53922e4b12808303"
+    },
+    {
+      "retained_path": "docs/test-results/forward/initial/app-c/semantic-review.json",
+      "original_path": "/tmp/cloudflare-cost-safety-forward/app-c/.cost-safety/semantic-review.json",
+      "sha256": "60c7637ea7859064878294313d97c944d4ee272ba32badfd7e9151a1b957444e"
+    },
+    {
+      "retained_path": "docs/test-results/forward/initial/app-c/input/main.js",
+      "original_path": "/tmp/cloudflare-cost-safety-forward/app-c/main.js",
+      "sha256": "4fbe14557de2f68ba449d1d4ea25c422a8799678a5e391f3c3243a859004d7d7"
+    },
+    {
+      "retained_path": "docs/test-results/forward/initial/app-c/input/migrations/0001.sql",
+      "original_path": "/tmp/cloudflare-cost-safety-forward/app-c/migrations/0001.sql",
+      "sha256": "e94bb21bf79426c53ea2579dbc50c8cedcb17a0af5bebb131a4ca39da8699da6"
+    },
+    {
+      "retained_path": "docs/test-results/forward/initial/app-c/input/package-lock.json",
+      "original_path": "/tmp/cloudflare-cost-safety-forward/app-c/package-lock.json",
+      "sha256": "97a123aa68ccb918c140b085cc6a52aac04955c3ecdba02a6d34ef725e5a1f5d"
+    },
+    {
+      "retained_path": "docs/test-results/forward/initial/app-c/input/wrangler.jsonc",
+      "original_path": "/tmp/cloudflare-cost-safety-forward/app-c/wrangler.jsonc",
+      "sha256": "11eabf77c7b9b1a703cb1683e99373b4191adea226a5ac92d073e433d02d934d"
+    },
+    {
+      "retained_path": "docs/test-results/forward/corrected/dormant/before-semantic-report.json",
+      "original_path": "/tmp/cloudflare-cost-safety-forward-corrected/dormant/.cost-safety/corrected/before-semantic-report.json",
+      "sha256": "f75fd8423392fb7742f1b16c7839d9f7d5c406b4d867dfcc69219e3b0202f62d"
+    },
+    {
+      "retained_path": "docs/test-results/forward/corrected/dormant/before-semantic-report.md",
+      "original_path": "/tmp/cloudflare-cost-safety-forward-corrected/dormant/.cost-safety/corrected/before-semantic-report.md",
+      "sha256": "f8c3ae3532fdfcc714207ee1bb0c92a4f0769da67dc844310baa3bac785b0e64"
+    },
+    {
+      "retained_path": "docs/test-results/forward/corrected/dormant/corrected-forward-test.json",
+      "original_path": "/tmp/cloudflare-cost-safety-forward-corrected/dormant/.cost-safety/corrected/corrected-forward-test.json",
+      "sha256": "c14a9225306333cd017a9670724bda78ad9c8625aa5bcdd23a563a7aecd61a8c"
+    },
+    {
+      "retained_path": "docs/test-results/forward/corrected/dormant/corrected-forward-test.md",
+      "original_path": "/tmp/cloudflare-cost-safety-forward-corrected/dormant/.cost-safety/corrected/corrected-forward-test.md",
+      "sha256": "f659c3981c5ba67ee2c10b04a069dfb55a004e6a48d748ff983597bd632ea1b1"
+    },
+    {
+      "retained_path": "docs/test-results/forward/corrected/dormant/initial-invocation.json",
+      "original_path": "/tmp/cloudflare-cost-safety-forward-corrected/dormant/.cost-safety/corrected/initial-invocation.json",
+      "sha256": "fabbe5e2cd7f5651e79fb5707d04e30f3a5a3fdebc4586a1eb0384d0f895f35d"
+    },
+    {
+      "retained_path": "docs/test-results/forward/corrected/dormant/null-not-run-emitted-report.json",
+      "original_path": "/tmp/cloudflare-cost-safety-forward-corrected/dormant/.cost-safety/corrected/null-not-run-emitted-report.json",
+      "sha256": "b7cc730f648560939aa75cf6857db587cff6ed2d688d75b267676028d6beda53"
+    },
+    {
+      "retained_path": "docs/test-results/forward/corrected/dormant/nullable-review-schema-validation.json",
+      "original_path": "/tmp/cloudflare-cost-safety-forward-corrected/dormant/.cost-safety/corrected/nullable-review-schema-validation.json",
+      "sha256": "9f51ae95c8df0f4a71330e855f745eded3866c88cd6c46e77d974e2bfe523755"
+    },
+    {
+      "retained_path": "docs/test-results/forward/corrected/dormant/report.json",
+      "original_path": "/tmp/cloudflare-cost-safety-forward-corrected/dormant/.cost-safety/corrected/report.json",
+      "sha256": "aba4532a67e1e7b32e8ce3d44f430dffd9a1d21032bfe0e79375be0154381e88"
+    },
+    {
+      "retained_path": "docs/test-results/forward/corrected/dormant/report.md",
+      "original_path": "/tmp/cloudflare-cost-safety-forward-corrected/dormant/.cost-safety/corrected/report.md",
+      "sha256": "4a78d58164359b102c1ff9daa07b9d10eef598c16ab9016637b86deaa35a9e78"
+    },
+    {
+      "retained_path": "docs/test-results/forward/corrected/dormant/runtime-tests-not-run.json",
+      "original_path": "/tmp/cloudflare-cost-safety-forward-corrected/dormant/.cost-safety/corrected/runtime-tests-not-run.json",
+      "sha256": "f6b9e1d31e1e41adb31a266938b46ceb90e5648d512611ec6c3ae72668525da1"
+    },
+    {
+      "retained_path": "docs/test-results/forward/corrected/dormant/semantic-invocation-null-not-run.json",
+      "original_path": "/tmp/cloudflare-cost-safety-forward-corrected/dormant/.cost-safety/corrected/semantic-invocation-null-not-run.json",
+      "sha256": "b37bc6becad3fe4f5f3d135782eba667b1d222fb7ea86cc5273e23422c4bbc49"
+    },
+    {
+      "retained_path": "docs/test-results/forward/corrected/dormant/semantic-invocation.json",
+      "original_path": "/tmp/cloudflare-cost-safety-forward-corrected/dormant/.cost-safety/corrected/semantic-invocation.json",
+      "sha256": "87bba8af259f71c9113746242e1170bfed8958af1ec8a88c61ed1dbc0a031056"
+    },
+    {
+      "retained_path": "docs/test-results/forward/corrected/dormant/semantic-review-null-not-run.json",
+      "original_path": "/tmp/cloudflare-cost-safety-forward-corrected/dormant/.cost-safety/corrected/semantic-review-null-not-run.json",
+      "sha256": "e53ea51cc9b15581761086c03becc8b4d3f1a61dcc825bbd8d0f8adb6680d5ef"
+    },
+    {
+      "retained_path": "docs/test-results/forward/corrected/dormant/semantic-review.json",
+      "original_path": "/tmp/cloudflare-cost-safety-forward-corrected/dormant/.cost-safety/corrected/semantic-review.json",
+      "sha256": "a139838351fa2e0e40a4bb6da9921eb6e154204f21b011513717a1ca617f8a7d"
+    },
+    {
+      "retained_path": "docs/test-results/forward/corrected/dormant/input/main.js",
+      "original_path": "/tmp/cloudflare-cost-safety-forward-corrected/dormant/main.js",
+      "sha256": "187f558c1f9068268dfa9f060acb0b5d82d0acc9e8c0afe5caa170973a39b1f4"
+    },
+    {
+      "retained_path": "docs/test-results/forward/corrected/dormant/input/migrations/0001.sql",
+      "original_path": "/tmp/cloudflare-cost-safety-forward-corrected/dormant/migrations/0001.sql",
+      "sha256": "e94bb21bf79426c53ea2579dbc50c8cedcb17a0af5bebb131a4ca39da8699da6"
+    },
+    {
+      "retained_path": "docs/test-results/forward/corrected/dormant/input/package-lock.json",
+      "original_path": "/tmp/cloudflare-cost-safety-forward-corrected/dormant/package-lock.json",
+      "sha256": "97a123aa68ccb918c140b085cc6a52aac04955c3ecdba02a6d34ef725e5a1f5d"
+    },
+    {
+      "retained_path": "docs/test-results/forward/corrected/dormant/input/wrangler.jsonc",
+      "original_path": "/tmp/cloudflare-cost-safety-forward-corrected/dormant/wrangler.jsonc",
+      "sha256": "6bad7d0ddb0766326b6ff4174b8677bca2298181de4cb8495cd5e5e604336e40"
+    },
+    {
+      "retained_path": "docs/test-results/forward/corrected/activated/before-semantic-report.json",
+      "original_path": "/tmp/cloudflare-cost-safety-forward-corrected/activated/.cost-safety/corrected/before-semantic-report.json",
+      "sha256": "1294cece0005f047f5d60369d8db660cece84b133207d8628f2c976ced4a7b01"
+    },
+    {
+      "retained_path": "docs/test-results/forward/corrected/activated/before-semantic-report.md",
+      "original_path": "/tmp/cloudflare-cost-safety-forward-corrected/activated/.cost-safety/corrected/before-semantic-report.md",
+      "sha256": "d2154be66fffe9192d25150e4cef7aea3d3d10362e7c2f9e7ffeadd86c46fa76"
+    },
+    {
+      "retained_path": "docs/test-results/forward/corrected/activated/corrected-forward-test.json",
+      "original_path": "/tmp/cloudflare-cost-safety-forward-corrected/activated/.cost-safety/corrected/corrected-forward-test.json",
+      "sha256": "85bec835771d86c7f3e097c28fb3768bb766fe8df58c2abe2310068b5447677b"
+    },
+    {
+      "retained_path": "docs/test-results/forward/corrected/activated/corrected-forward-test.md",
+      "original_path": "/tmp/cloudflare-cost-safety-forward-corrected/activated/.cost-safety/corrected/corrected-forward-test.md",
+      "sha256": "6482aad543e5bae4151d59e0248a754b905dcd4c2b4ff924b383924b7d2ce53c"
+    },
+    {
+      "retained_path": "docs/test-results/forward/corrected/activated/initial-invocation.json",
+      "original_path": "/tmp/cloudflare-cost-safety-forward-corrected/activated/.cost-safety/corrected/initial-invocation.json",
+      "sha256": "d914229dd31f822ad3e86900561c82ae36700185231312c591a3b02e82555606"
+    },
+    {
+      "retained_path": "docs/test-results/forward/corrected/activated/null-not-run-emitted-report.json",
+      "original_path": "/tmp/cloudflare-cost-safety-forward-corrected/activated/.cost-safety/corrected/null-not-run-emitted-report.json",
+      "sha256": "6c207ba725daff4b2d5a8767be35f855324513543326539864a81470d1c5c834"
+    },
+    {
+      "retained_path": "docs/test-results/forward/corrected/activated/nullable-review-schema-validation.json",
+      "original_path": "/tmp/cloudflare-cost-safety-forward-corrected/activated/.cost-safety/corrected/nullable-review-schema-validation.json",
+      "sha256": "a26e6319dbfede87e9414304e885504dcffd0bb7c4fdd6130e04c8f215b8ad81"
+    },
+    {
+      "retained_path": "docs/test-results/forward/corrected/activated/report.json",
+      "original_path": "/tmp/cloudflare-cost-safety-forward-corrected/activated/.cost-safety/corrected/report.json",
+      "sha256": "f1aeb50e3c5a5e605e814781a300c2e5b90f486662e478527e91a23946d3769a"
+    },
+    {
+      "retained_path": "docs/test-results/forward/corrected/activated/report.md",
+      "original_path": "/tmp/cloudflare-cost-safety-forward-corrected/activated/.cost-safety/corrected/report.md",
+      "sha256": "87555acf7b4672f8f0a775e32b12604f7545705614438975f2c330c2efcadf2a"
+    },
+    {
+      "retained_path": "docs/test-results/forward/corrected/activated/runtime-tests-not-run.json",
+      "original_path": "/tmp/cloudflare-cost-safety-forward-corrected/activated/.cost-safety/corrected/runtime-tests-not-run.json",
+      "sha256": "fa0ca86fce77bab4185c48d416f0e768342ad4969f240d8bb25c23ebc7fab687"
+    },
+    {
+      "retained_path": "docs/test-results/forward/corrected/activated/semantic-invocation-null-not-run.json",
+      "original_path": "/tmp/cloudflare-cost-safety-forward-corrected/activated/.cost-safety/corrected/semantic-invocation-null-not-run.json",
+      "sha256": "2cbfbb9b675adf646385ada42659f1645481e717de2e35f64e8147e879c545b3"
+    },
+    {
+      "retained_path": "docs/test-results/forward/corrected/activated/semantic-invocation.json",
+      "original_path": "/tmp/cloudflare-cost-safety-forward-corrected/activated/.cost-safety/corrected/semantic-invocation.json",
+      "sha256": "73dd35b39a5c387d057221198e94db0e0115e047cabca2535c3f2ace24b39de0"
+    },
+    {
+      "retained_path": "docs/test-results/forward/corrected/activated/semantic-review-null-not-run.json",
+      "original_path": "/tmp/cloudflare-cost-safety-forward-corrected/activated/.cost-safety/corrected/semantic-review-null-not-run.json",
+      "sha256": "f31ad8bf89fd6b4a53f81d3756b743955c55a7bb22fd42a98ff67be4ce70406a"
+    },
+    {
+      "retained_path": "docs/test-results/forward/corrected/activated/semantic-review.json",
+      "original_path": "/tmp/cloudflare-cost-safety-forward-corrected/activated/.cost-safety/corrected/semantic-review.json",
+      "sha256": "add58bca1c1132de5c869fbdaabc4feccf42175775b333e82cd4adb6fad65169"
+    },
+    {
+      "retained_path": "docs/test-results/forward/corrected/activated/input/main.js",
+      "original_path": "/tmp/cloudflare-cost-safety-forward-corrected/activated/main.js",
+      "sha256": "3ed08f237542901f98987f17251560a7bddd04e693b53958b3d8a18352229454"
+    },
+    {
+      "retained_path": "docs/test-results/forward/corrected/activated/input/package-lock.json",
+      "original_path": "/tmp/cloudflare-cost-safety-forward-corrected/activated/package-lock.json",
+      "sha256": "97a123aa68ccb918c140b085cc6a52aac04955c3ecdba02a6d34ef725e5a1f5d"
+    },
+    {
+      "retained_path": "docs/test-results/forward/corrected/activated/input/wrangler.jsonc",
+      "original_path": "/tmp/cloudflare-cost-safety-forward-corrected/activated/wrangler.jsonc",
+      "sha256": "2c8d2558a0f33cd2a7da695605dc2cc242fbb74e3a6523c92751efaa6b20f971"
+    },
+    {
+      "retained_path": "docs/test-results/forward/release-review.md",
+      "original_path": "/tmp/cloudflare-cost-safety-forward/release-review.md",
+      "sha256": "0b4a82b322f0defec221082bea2db9d130c98fc35d6bbd2746f58afc025a4492"
+    }
+  ]
+}

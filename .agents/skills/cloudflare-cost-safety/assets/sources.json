@@ -1,0 +1,232 @@
+{
+  "schema_version": "1.0",
+  "sources": [
+    {
+      "id": "CF-ALARMS",
+      "url": "https://developers.cloudflare.com/durable-objects/api/alarms/",
+      "checked_at": "2026-10-08",
+      "status": "primary_source",
+      "verification_basis": "Official documentation/repository read during preparation; no cloud account or price validation"
+    },
+    {
+      "id": "CF-D1-PRICE",
+      "url": "https://developers.cloudflare.com/d1/platform/pricing/",
+      "checked_at": "2026-10-08",
+      "status": "primary_source",
+      "verification_basis": "Official documentation/repository read during preparation; no cloud account or price validation"
+    },
+    {
+      "id": "CF-DO-SQL",
+      "url": "https://developers.cloudflare.com/durable-objects/api/sqlite-storage-api/",
+      "checked_at": "2026-10-08",
+      "status": "primary_source",
+      "verification_basis": "Official documentation/repository read during preparation; no cloud account or price validation"
+    },
+    {
+      "id": "CF-QUEUE-RETRY",
+      "url": "https://developers.cloudflare.com/queues/configuration/batching-retries/",
+      "checked_at": "2026-10-08",
+      "status": "primary_source",
+      "verification_basis": "Official documentation/repository read during preparation; no cloud account or price validation"
+    },
+    {
+      "id": "CF-QUEUE-PAUSE",
+      "url": "https://developers.cloudflare.com/queues/configuration/pause-purge/",
+      "checked_at": "2026-10-08",
+      "status": "primary_source",
+      "verification_basis": "Official documentation/repository read during preparation; no cloud account or price validation"
+    },
+    {
+      "id": "CF-TEST",
+      "url": "https://developers.cloudflare.com/workers/testing/vitest-integration/test-apis/",
+      "checked_at": "2026-10-08",
+      "status": "primary_source",
+      "verification_basis": "Official documentation/repository read during preparation; no cloud account or price validation"
+    },
+    {
+      "id": "CF-WORKER-LIMIT",
+      "url": "https://developers.cloudflare.com/workers/platform/limits/",
+      "checked_at": "2026-10-08",
+      "status": "primary_source",
+      "verification_basis": "Official documentation/repository read during preparation; no cloud account or price validation"
+    },
+    {
+      "id": "CF-WORKER-PRICE",
+      "url": "https://developers.cloudflare.com/workers/platform/pricing/",
+      "checked_at": "2026-10-08",
+      "status": "primary_source",
+      "verification_basis": "Official documentation/repository read during preparation; no cloud account or price validation"
+    },
+    {
+      "id": "CF-KV-PRICE",
+      "url": "https://developers.cloudflare.com/kv/platform/pricing/",
+      "checked_at": "2026-10-08",
+      "status": "primary_source",
+      "verification_basis": "Official documentation/repository read during preparation; no cloud account or price validation"
+    },
+    {
+      "id": "CF-R2-PRICE",
+      "url": "https://developers.cloudflare.com/r2/pricing/",
+      "checked_at": "2026-10-08",
+      "status": "primary_source",
+      "verification_basis": "Official documentation/repository read during preparation; no cloud account or price validation"
+    },
+    {
+      "id": "CF-BUDGET",
+      "url": "https://developers.cloudflare.com/billing/manage/budget-alerts/",
+      "checked_at": "2026-10-08",
+      "status": "primary_source",
+      "verification_basis": "Official documentation/repository read during preparation; no cloud account or price validation"
+    },
+    {
+      "id": "CF-SKILLS",
+      "url": "https://github.com/cloudflare/skills",
+      "checked_at": "2026-10-08",
+      "status": "primary_source",
+      "verification_basis": "Official documentation/repository read during preparation; no cloud account or price validation"
+    },
+    {
+      "id": "CF-SKILL-DO",
+      "url": "https://raw.githubusercontent.com/cloudflare/skills/main/skills/durable-objects/SKILL.md",
+      "checked_at": "2026-10-08",
+      "status": "primary_source",
+      "verification_basis": "Actual pinned upstream file read; main URL is discovery only",
+      "resolved_url": "https://raw.githubusercontent.com/cloudflare/skills/41e0d19858946d18af9ee2c2feebbe2e11d829ff/skills/durable-objects/SKILL.md"
+    },
+    {
+      "id": "CF-SKILL-WORKER",
+      "url": "https://raw.githubusercontent.com/cloudflare/skills/main/skills/workers-best-practices/SKILL.md",
+      "checked_at": "2026-10-08",
+      "status": "primary_source",
+      "verification_basis": "Actual pinned upstream file read; main URL is discovery only",
+      "resolved_url": "https://raw.githubusercontent.com/cloudflare/skills/41e0d19858946d18af9ee2c2feebbe2e11d829ff/skills/workers-best-practices/SKILL.md"
+    },
+    {
+      "id": "OPENAI-SKILLS",
+      "url": "https://developers.openai.com/codex/skills/",
+      "checked_at": "2026-10-08",
+      "status": "primary_source",
+      "verification_basis": "Official documentation/repository read during preparation; no cloud account or price validation"
+    },
+    {
+      "id": "CASE-SHMILY-X",
+      "url": "https://x.com/shmily7/status/2107481028726251762",
+      "checked_at": null,
+      "status": "user_supplied_not_independently_verified",
+      "verification_basis": "Original user-provided source status; no independent source/invoice audit"
+    },
+    {
+      "id": "CASE-SHMILY-ARCHIVE",
+      "url": "https://billflare.dev/cases/shmily7-durable-object-alarm",
+      "checked_at": null,
+      "status": "user_supplied_not_independently_verified",
+      "verification_basis": "Original user-provided source status; no independent source/invoice audit"
+    },
+    {
+      "id": "CASE-WILL-HN",
+      "url": "https://news.ycombinator.com/item?id=47787042",
+      "checked_at": null,
+      "status": "user_supplied_not_independently_verified",
+      "verification_basis": "Original user-provided source status; no independent source/invoice audit"
+    },
+    {
+      "id": "CASE-WILL-REDDIT",
+      "url": "https://www.reddit.com/r/CloudFlare/comments/1snckwa/cautionary_tale_for_anyone_using_cloudflare/",
+      "checked_at": null,
+      "status": "user_supplied_not_independently_verified",
+      "verification_basis": "Original user-provided source status; no independent source/invoice audit"
+    },
+    {
+      "id": "CASE-RETAIN",
+      "url": "https://www.reddit.com/r/CloudFlare/comments/1t1e8nh/i_accidentally_generated_16_billion_durable/",
+      "checked_at": null,
+      "status": "user_supplied_not_independently_verified",
+      "verification_basis": "Original user-provided source status; no independent source/invoice audit"
+    },
+    {
+      "id": "CASE-NATHAN",
+      "url": "https://littlebearapps.com/blog/d1-billing-disaster-circuit-breakers/",
+      "checked_at": null,
+      "status": "user_supplied_not_independently_verified",
+      "verification_basis": "Original user-provided source status; no independent source/invoice audit"
+    },
+    {
+      "id": "CASE-OSM",
+      "url": "https://www.ofsecman.io/post/postmortem-5-000-incident-in-10-seconds-due-to-cloudflare-d1",
+      "checked_at": null,
+      "status": "user_supplied_not_independently_verified",
+      "verification_basis": "Original user-provided source status; no independent source/invoice audit"
+    },
+    {
+      "id": "CASE-DARYL-X",
+      "url": "https://x.com/darylginn/status/2082413530243043780",
+      "checked_at": null,
+      "status": "user_supplied_not_independently_verified",
+      "verification_basis": "Original user-provided source status; no independent source/invoice audit"
+    },
+    {
+      "id": "CASE-DARYL-ARCHIVE",
+      "url": "https://billflare.dev/cases/darylginn-d1-missing-index",
+      "checked_at": null,
+      "status": "user_supplied_not_independently_verified",
+      "verification_basis": "Original user-provided source status; no independent source/invoice audit"
+    },
+    {
+      "id": "CASE-JUSTIN-X",
+      "url": "https://x.com/jpschroeder/status/2086144942657712500",
+      "checked_at": null,
+      "status": "user_supplied_not_independently_verified",
+      "verification_basis": "Original user-provided source status; no independent source/invoice audit"
+    },
+    {
+      "id": "CASE-JUSTIN-ARCHIVE",
+      "url": "https://billflare.dev/cases/standard-agents-durable-objects",
+      "checked_at": null,
+      "status": "user_supplied_not_independently_verified",
+      "verification_basis": "Original user-provided source status; no independent source/invoice audit"
+    },
+    {
+      "id": "CASE-LUCIAN-X",
+      "url": "https://x.com/lucianghinda/status/1957738066816446683",
+      "checked_at": null,
+      "status": "user_supplied_not_independently_verified",
+      "verification_basis": "Original user-provided source status; no independent source/invoice audit"
+    },
+    {
+      "id": "CASE-LUCIAN-ARCHIVE",
+      "url": "https://billflare.dev/cases/lucianghinda-r2-replication",
+      "checked_at": null,
+      "status": "user_supplied_not_independently_verified",
+      "verification_basis": "Original user-provided source status; no independent source/invoice audit"
+    },
+    {
+      "id": "COMMUNITY-PLAYBOOK",
+      "url": "https://github.com/KurosawaGeeker/cloudflare-cost-playbook",
+      "checked_at": null,
+      "status": "user_supplied_not_independently_verified",
+      "verification_basis": "Original user-provided source status; no independent source/invoice audit"
+    },
+    {
+      "id": "COMMUNITY-SKILL",
+      "url": "https://raw.githubusercontent.com/KurosawaGeeker/cloudflare-cost-playbook/refs/heads/docs/cloudflare-cost-playbook/SKILL.md",
+      "checked_at": null,
+      "status": "user_supplied_not_independently_verified",
+      "verification_basis": "Original user-provided source status; no independent source/invoice audit"
+    },
+    {
+      "id": "CF-SKILL-WRANGLER",
+      "url": "https://raw.githubusercontent.com/cloudflare/skills/main/skills/wrangler/SKILL.md",
+      "checked_at": "2026-10-08",
+      "status": "primary_source",
+      "verification_basis": "Actual pinned upstream file read; main URL is discovery only",
+      "resolved_url": "https://raw.githubusercontent.com/cloudflare/skills/41e0d19858946d18af9ee2c2feebbe2e11d829ff/skills/wrangler/SKILL.md"
+    },
+    {
+      "id": "CF-BUILDS-CONFIG",
+      "url": "https://developers.cloudflare.com/workers/ci-cd/builds/configuration/",
+      "checked_at": "2026-10-08",
+      "status": "primary_source",
+      "verification_basis": "Official documentation/repository read during preparation; no cloud account or price validation"
+    }
+  ]
+}

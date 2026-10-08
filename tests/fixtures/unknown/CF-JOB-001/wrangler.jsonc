@@ -1,0 +1,24 @@
+{
+  "name": "fixture-cf-job-001",
+  "account_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "main": "main.js",
+  "compatibility_date": "2026-10-08",
+  "observability": {
+    "enabled": true,
+    "traces": {
+      "enabled": true
+    }
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_id": "synthetic-database",
+      "database_name": "fixture"
+    }
+  ],
+  "triggers": {
+    "crons": [
+      "* * * * *"
+    ]
+  }
+}

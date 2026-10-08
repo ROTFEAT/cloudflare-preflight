@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "upstream": "https://github.com/cloudflare/skills",
+  "revision": "41e0d19858946d18af9ee2c2feebbe2e11d829ff",
+  "license": "Apache-2.0",
+  "license_verified": true,
+  "license_sha256": "58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd",
+  "prepared_at": "2026-10-08",
+  "skills": [
+    {
+      "name": "workers-best-practices",
+      "upstream_path": "skills/workers-best-practices",
+      "resolved_local_path": "vendor/workers-best-practices",
+      "files": {
+        "SKILL.md": "8ae8c6e7359171ba6a1688503850fa05ce47199c4e288343bf55b5e277351bae",
+        "references/configuration.md": "cdb5c9cd5168231373523332c0e7a5cf8811dc244c48298823e3ccc5eb7157c1",
+        "references/platform-apis.md": "9ca9f5a7a82f92de45d310f5e2ee05aa464ddb7a63a737529caa17fff3660f28",
+        "references/runtime-patterns.md": "704ce8d4ff62c7655eb1d15f804ad566ed2012d11c2086e0d94bd3addb4d2c07"
+      },
+      "content_tree_sha256": "131ab0c3d228c1c827bfc1ece886dd512ce92d3933e57e539b3a4a2c0147ed56"
+    },
+    {
+      "name": "wrangler",
+      "upstream_path": "skills/wrangler",
+      "resolved_local_path": "vendor/wrangler",
+      "files": {
+        "SKILL.md": "9d9bd78c79823cdad36a88dbece8e48d8512c7262c66546ccbfac64ae08d310f"
+      },
+      "content_tree_sha256": "40e6f75362b34bcc90123146192e95a762c76d04134075becd8c6ccafce38d3b"
+    },
+    {
+      "name": "durable-objects",
+      "upstream_path": "skills/durable-objects",
+      "resolved_local_path": "vendor/durable-objects",
+      "files": {
+        "SKILL.md": "2468c1795f439f494f076eb13a2202a3c4e579e71e6e2ed98b4d1f5ce62fef1b",
+        "references/rules.md": "8ec51f1270d6014763139236c3fb9f3a21a3bed4054c99b101f392eb5cb363bf",
+        "references/testing.md": "1a99e6a2e1bd7f2fa34573b07ad036e3c2ddcf97df6a42926d737eb2d87b3168",
+        "references/workers.md": "3149c3ee371b5dbf3a84dac7d5bb42c4c6553762480741f6d2808e4ca20fd932"
+      },
+      "content_tree_sha256": "d503440a9907ceaf19a63c7f49052a16eb2d877eb7a1358b4f44e5090087d2ff"
+    }
+  ]
+}

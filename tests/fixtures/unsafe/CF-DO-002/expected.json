@@ -1,0 +1,6 @@
+{
+  "id": "CF-DO-002",
+  "kind": "unsafe",
+  "assertion": "corresponding rule BLOCK with reachable source location",
+  "synthetic": true
+}

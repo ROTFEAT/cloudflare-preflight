@@ -1,0 +1,1013 @@
+{
+  "schema_version": "1.0",
+  "skill_version": "0.1.0",
+  "reviewed_at": "2026-10-08T11:13:39.845Z",
+  "scope": {
+    "repository": "/tmp/cloudflare-cost-safety-forward-corrected/dormant",
+    "commit": null,
+    "review_mode": "full",
+    "analysis_scope": "full_local_call_closure_including_configuration",
+    "changed_files": [],
+    "files": [
+      {
+        "path": "main.js",
+        "sha256": "187f558c1f9068268dfa9f060acb0b5d82d0acc9e8c0afe5caa170973a39b1f4",
+        "bytes": 395
+      },
+      {
+        "path": "migrations/0001.sql",
+        "sha256": "e94bb21bf79426c53ea2579dbc50c8cedcb17a0af5bebb131a4ca39da8699da6",
+        "bytes": 85
+      },
+      {
+        "path": "package-lock.json",
+        "sha256": "97a123aa68ccb918c140b085cc6a52aac04955c3ecdba02a6d34ef725e5a1f5d",
+        "bytes": 143
+      },
+      {
+        "path": "wrangler.jsonc",
+        "sha256": "6bad7d0ddb0766326b6ff4174b8677bca2298181de4cb8495cd5e5e604336e40",
+        "bytes": 453
+      }
+    ],
+    "cloud_account_accessed": false
+  },
+  "activation": {
+    "trigger": true,
+    "activation": "explicit_early_preflight",
+    "status": "resolved"
+  },
+  "deployment_identity": {
+    "schema_version": "1.0",
+    "source_snapshot_digest": "3a5aac25f8e844d3b984d5bc72aa24d2aa1ee696c3bfb384c1a77fd7116af490",
+    "commit": null,
+    "artifact_digest": "187f558c1f9068268dfa9f060acb0b5d82d0acc9e8c0afe5caa170973a39b1f4",
+    "artifact_path": "main.js",
+    "effective_config_digest": "b10ded46cc63ad770f852016c853bcef9cb3ae376dc7f8aebdeb6cc2affda249",
+    "config_path": "wrangler.jsonc",
+    "target": {
+      "account_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "application": "app-a",
+      "environment": "production",
+      "action": "deploy",
+      "candidate_version": null
+    },
+    "official_skills_lock_digest": "296f2a111e4c5cb6fd6f6608ad95d3bef13f998ed4ef210b7302edf12beb5d12",
+    "policy_digest": "2312ecff40b38a74d728cf6a5c4b4429cbdd3511b65cfb78fd84907bd19bb856",
+    "rules_digest": "88fc454c8e182a2a254eb0e40b3e34ecc0066f4eb487fa41c95586a2562e2a28",
+    "tool_digest": "66654b1d231d8cb1064a3fee6c986219578e781f17427426e564fcebdc9a222f",
+    "toolchain": {
+      "node": "v24.11.1",
+      "typescript": "5.9.3",
+      "wrangler": "4.148.0",
+      "wrangler_locked": "4.148.0",
+      "wrangler_source": "trusted_tool_installed_package",
+      "wrangler_package_digest": "101ed6193158af11fe0633ad225bcc043d0cc5c6d62ff19ffb8dfbaacbe7757c",
+      "lockfiles": [
+        "package-lock.json"
+      ]
+    },
+    "migration_digest": "376221e076514089cf580fee1453edaf12cd90730e2484a5e21843f2b581f156",
+    "builder": "explicit-forward-direct-js@1",
+    "digest": "3fc0a30e1a0497195bc9a98bf3816268546cde8de372a52fb4526622b2865818"
+  },
+  "inventory": {
+    "application": "app-a",
+    "toolchain": "wrangler",
+    "tool_versions": {
+      "node": "v24.11.1",
+      "typescript": "5.9.3",
+      "wrangler": "4.148.0",
+      "wrangler_locked": "4.148.0",
+      "wrangler_source": "trusted_tool_installed_package",
+      "wrangler_package_digest": "101ed6193158af11fe0633ad225bcc043d0cc5c6d62ff19ffb8dfbaacbe7757c",
+      "lockfiles": [
+        "package-lock.json"
+      ]
+    },
+    "compatibility_date": "2026-10-08",
+    "compatibility_flags": [],
+    "has_do": true,
+    "static_only": false,
+    "bindings": [
+      {
+        "kind": "durable_object",
+        "name": "TASKS",
+        "status": "declared",
+        "evidence": {
+          "path": "wrangler.jsonc",
+          "start_line": 1
+        },
+        "config": {
+          "name": "TASKS",
+          "class_name": "Task"
+        },
+        "remote": false
+      }
+    ],
+    "entry_points": [
+      {
+        "name": "fetch",
+        "type": "fetch",
+        "status": "declared",
+        "location": {
+          "path": "main.js",
+          "start_line": 6,
+          "end_line": 6
+        }
+      }
+    ],
+    "environments": [],
+    "account_state": "unknown_not_accessed",
+    "migration_files": [
+      {
+        "path": "migrations/0001.sql",
+        "status": "parsed"
+      }
+    ]
+  },
+  "execution_graph": {
+    "nodes": [
+      {
+        "id": "main.js#module",
+        "kind": "logical_task",
+        "name": "module",
+        "entry_type": null,
+        "status": "declared",
+        "location": {
+          "path": "main.js",
+          "start_line": 1,
+          "end_line": 1
+        }
+      },
+      {
+        "id": "main.js#fetch@358",
+        "kind": "entry",
+        "name": "fetch",
+        "entry_type": "fetch",
+        "status": "declared",
+        "location": {
+          "path": "main.js",
+          "start_line": 6,
+          "end_line": 6
+        }
+      },
+      {
+        "id": "resource:TASKS",
+        "kind": "resource",
+        "product": "durable_object",
+        "status": "declared",
+        "location": {
+          "path": "wrangler.jsonc",
+          "start_line": 1
+        }
+      }
+    ],
+    "edges": []
+  },
+  "official_skills": [
+    {
+      "name": "workers-best-practices",
+      "required": true,
+      "applies": true,
+      "reason": "Cloudflare application preflight baseline",
+      "upstream": "https://github.com/cloudflare/skills",
+      "revision": "41e0d19858946d18af9ee2c2feebbe2e11d829ff",
+      "resolved_path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/vendor/workers-best-practices",
+      "content_digest": "131ab0c3d228c1c827bfc1ece886dd512ce92d3933e57e539b3a4a2c0147ed56",
+      "loaded_references": [
+        {
+          "path": "references/configuration.md",
+          "sha256": "cdb5c9cd5168231373523332c0e7a5cf8811dc244c48298823e3ccc5eb7157c1"
+        },
+        {
+          "path": "references/platform-apis.md",
+          "sha256": "9ca9f5a7a82f92de45d310f5e2ee05aa464ddb7a63a737529caa17fff3660f28"
+        },
+        {
+          "path": "references/runtime-patterns.md",
+          "sha256": "704ce8d4ff62c7655eb1d15f804ad566ed2012d11c2086e0d94bd3addb4d2c07"
+        }
+      ],
+      "load_status": "reviewed",
+      "review_status": "reviewed",
+      "findings": [],
+      "evidence": [
+        {
+          "path": "vendor/workers-best-practices/SKILL.md",
+          "sha256": "8ae8c6e7359171ba6a1688503850fa05ce47199c4e288343bf55b5e277351bae",
+          "operation": "read"
+        },
+        {
+          "path": "vendor/workers-best-practices/references/configuration.md",
+          "sha256": "cdb5c9cd5168231373523332c0e7a5cf8811dc244c48298823e3ccc5eb7157c1",
+          "operation": "read"
+        },
+        {
+          "path": "vendor/workers-best-practices/references/platform-apis.md",
+          "sha256": "9ca9f5a7a82f92de45d310f5e2ee05aa464ddb7a63a737529caa17fff3660f28",
+          "operation": "read"
+        },
+        {
+          "path": "vendor/workers-best-practices/references/runtime-patterns.md",
+          "sha256": "704ce8d4ff62c7655eb1d15f804ad566ed2012d11c2086e0d94bd3addb4d2c07",
+          "operation": "read"
+        },
+        {
+          "kind": "semantic_review",
+          "reason": "Actually read frozen entry and configuration/platform-apis/runtime-patterns references. Complete Worker module uses native Response and cloudflare:workers import, with no Node built-ins, eval, remote fetch or background-task handling. JSONC defines main, compatibility_date, observability and traces enabled. Synthetic plain-JS final artifact has no generated Env/TS-build claim. DO lifecycle, missing admission and row limits were separately reviewed; observability is not a cost cap. Reviewed means pinned advice was semantically applied in this scope, not passed runtime tests/live configuration/publication approval.",
+          "evidence": [
+            {
+              "path": "main.js",
+              "start_line": 1,
+              "end_line": 6
+            },
+            {
+              "path": "wrangler.jsonc",
+              "start_line": 1,
+              "end_line": 28
+            },
+            {
+              "path": "package-lock.json",
+              "start_line": 6
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "wrangler",
+      "required": true,
+      "applies": true,
+      "reason": "Wrangler effective configuration or release path",
+      "upstream": "https://github.com/cloudflare/skills",
+      "revision": "41e0d19858946d18af9ee2c2feebbe2e11d829ff",
+      "resolved_path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/vendor/wrangler",
+      "content_digest": "40e6f75362b34bcc90123146192e95a762c76d04134075becd8c6ccafce38d3b",
+      "loaded_references": [],
+      "load_status": "reviewed",
+      "review_status": "reviewed",
+      "findings": [],
+      "evidence": [
+        {
+          "path": "vendor/wrangler/SKILL.md",
+          "sha256": "9d9bd78c79823cdad36a88dbece8e48d8512c7262c66546ccbfac64ae08d310f",
+          "operation": "read"
+        },
+        {
+          "kind": "semantic_review",
+          "reason": "Actually read frozen Wrangler entry and inspected trusted installed Wrangler 4.148.0 package metadata and affected JSON-schema properties. Candidate lock version matches 4.148.0. Static JSONC main/name/account/compatibility/binding/class/new_sqlite_classes fields were checked against that schema. Explicit production target; no generated config/env override. No candidate script, Wrangler CLI, whoami, deploy, credential lookup or account operation ran. Synthetic target real existence/permission/history remain unknown. Completed offline config review is not live-account validation.",
+          "evidence": [
+            {
+              "path": "main.js",
+              "start_line": 1,
+              "end_line": 6
+            },
+            {
+              "path": "wrangler.jsonc",
+              "start_line": 1,
+              "end_line": 28
+            },
+            {
+              "path": "package-lock.json",
+              "start_line": 6
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "durable-objects",
+      "required": true,
+      "applies": true,
+      "reason": "DO class, binding, migration, alarm, or possible DO-backed framework",
+      "upstream": "https://github.com/cloudflare/skills",
+      "revision": "41e0d19858946d18af9ee2c2feebbe2e11d829ff",
+      "resolved_path": "/tmp/cloudflare-cost-safety-forward-corrected/tool/vendor/durable-objects",
+      "content_digest": "d503440a9907ceaf19a63c7f49052a16eb2d877eb7a1358b4f44e5090087d2ff",
+      "loaded_references": [
+        {
+          "path": "references/rules.md",
+          "sha256": "8ec51f1270d6014763139236c3fb9f3a21a3bed4054c99b101f392eb5cb363bf"
+        },
+        {
+          "path": "references/testing.md",
+          "sha256": "1a99e6a2e1bd7f2fa34573b07ad036e3c2ddcf97df6a42926d737eb2d87b3168"
+        },
+        {
+          "path": "references/workers.md",
+          "sha256": "3149c3ee371b5dbf3a84dac7d5bb42c4c6553762480741f6d2808e4ca20fd932"
+        }
+      ],
+      "load_status": "reviewed",
+      "review_status": "reviewed",
+      "findings": [],
+      "evidence": [
+        {
+          "path": "vendor/durable-objects/SKILL.md",
+          "sha256": "2468c1795f439f494f076eb13a2202a3c4e579e71e6e2ed98b4d1f5ce62fef1b",
+          "operation": "read"
+        },
+        {
+          "path": "vendor/durable-objects/references/rules.md",
+          "sha256": "8ec51f1270d6014763139236c3fb9f3a21a3bed4054c99b101f392eb5cb363bf",
+          "operation": "read"
+        },
+        {
+          "path": "vendor/durable-objects/references/testing.md",
+          "sha256": "1a99e6a2e1bd7f2fa34573b07ad036e3c2ddcf97df6a42926d737eb2d87b3168",
+          "operation": "read"
+        },
+        {
+          "path": "vendor/durable-objects/references/workers.md",
+          "sha256": "3149c3ee371b5dbf3a84dac7d5bb42c4c6553762480741f6d2808e4ca20fd932",
+          "operation": "read"
+        },
+        {
+          "kind": "semantic_review",
+          "reason": "Actually read frozen DO entry and rules/testing/workers references. Task extends imported DurableObject; TASKS class_name and v1 new_sqlite_classes migration match Task. Constant fetch does not activate Task; standalone SQL migration is not DO-owned schema initialization. Former loop BLOCK cannot be justified from these bytes. External callers/history/live scheduled alarms remain unknown. Testing advice was applied by leaving do-lifecycle/do-getalarm unexecuted, not asserting passed lifecycle tests.",
+          "evidence": [
+            {
+              "path": "main.js",
+              "start_line": 1,
+              "end_line": 6
+            },
+            {
+              "path": "wrangler.jsonc",
+              "start_line": 1,
+              "end_line": 28
+            },
+            {
+              "path": "package-lock.json",
+              "start_line": 6
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "rules": [
+    {
+      "rule_id": "CF-DO-001",
+      "status": "unknown",
+      "evidence": [
+        {
+          "kind": "durable_object_lifecycle"
+        },
+        {
+          "kind": "semantic_review",
+          "reason": "fetch line 6 returns a constant response; the bound Task class is never obtained or invoked locally. Constructor/alarm declarations lines 3-4 do not establish activation. Standalone migrations/0001.sql is not executed by the DO constructor and cannot prove DO-owned table initialization. External callers, pre-existing instances and scheduled alarms are unknown. No supported reachable billable recurrence is established, so the former BLOCK is unjustified for these bytes. Missing activation/history/lifecycle evidence remains INCOMPLETE.",
+          "evidence": [
+            {
+              "path": "main.js",
+              "start_line": 3,
+              "end_line": 4
+            },
+            {
+              "path": "main.js",
+              "start_line": 6
+            },
+            {
+              "path": "wrangler.jsonc",
+              "start_line": 12,
+              "end_line": 27
+            },
+            {
+              "path": "migrations/0001.sql",
+              "start_line": 1
+            }
+          ]
+        }
+      ],
+      "findings": [],
+      "gaps": [
+        {
+          "reason": "Declared DO namespace has no proven activation in the local call graph; external callers or previously scheduled alarms require evidence"
+        },
+        {
+          "reason": "fetch line 6 returns a constant response; the bound Task class is never obtained or invoked locally. Constructor/alarm declarations lines 3-4 do not establish activation. Standalone migrations/0001.sql is not executed by the DO constructor and cannot prove DO-owned table initialization. External callers, pre-existing instances and scheduled alarms are unknown. No supported reachable billable recurrence is established, so the former BLOCK is unjustified for these bytes. Missing activation/history/lifecycle evidence remains INCOMPLETE."
+        }
+      ],
+      "implementation": {
+        "static": "AST stub RPC activation \u2192 local constructor \u2192 alarm \u2192 storage \u2192 rearm; DO-owned schema required",
+        "agent": "Mandatory semantic review with actual source locations and official context; static candidates are not complete coverage",
+        "local_tests": "workerd activation/alarm/eviction, getAlarm null and empty-work tests",
+        "unsupported": "External activation/history, Agents SDK internals and conditional schema initialization"
+      }
+    },
+    {
+      "rule_id": "CF-DO-002",
+      "status": "unknown",
+      "evidence": [
+        {
+          "kind": "durable_object_lifecycle"
+        },
+        {
+          "kind": "semantic_review",
+          "reason": "The declared constructor/alarm contain no durable cumulative job/window budget, but no local entry activates the class. External activation/history and job contract are absent. No finite-job or periodic-window/eviction claim is justified.",
+          "evidence": [
+            {
+              "path": "main.js",
+              "start_line": 3,
+              "end_line": 4
+            },
+            {
+              "path": "main.js",
+              "start_line": 6
+            }
+          ]
+        }
+      ],
+      "findings": [],
+      "gaps": [
+        {
+          "reason": "Declared DO namespace has no proven activation in the local call graph; external callers or previously scheduled alarms require evidence"
+        },
+        {
+          "reason": "The declared constructor/alarm contain no durable cumulative job/window budget, but no local entry activates the class. External activation/history and job contract are absent. No finite-job or periodic-window/eviction claim is justified."
+        }
+      ],
+      "implementation": {
+        "static": "AST memory field/constructor reset plus alarm reschedule; persistent get guard distinguished",
+        "agent": "Mandatory semantic review with actual source locations and official context; static candidates are not complete coverage",
+        "local_tests": "workerd eviction resets attempts while durable runs persist; finite task and periodic window",
+        "unsupported": "General transaction/fault invariants and arbitrary counter names require Agent evidence"
+      }
+    },
+    {
+      "rule_id": "CF-DEP-001",
+      "status": "pass",
+      "evidence": [
+        {
+          "kind": "effective_environments",
+          "environments": [],
+          "note": "Preview URLs are not assumed to create namespaces"
+        },
+        {
+          "kind": "semantic_review",
+          "reason": "Scoped local config: one fixed application name, one TASKS binding and one new_sqlite_classes Task migration; no environment generator, preview resource creator or newUniqueId exists. No local object identity allocation exists. This passes only the supported multiplication pattern. Live namespace/environment counts, old objects and independent release systems were not inspected.",
+          "evidence": [
+            {
+              "path": "wrangler.jsonc",
+              "start_line": 1,
+              "end_line": 28
+            },
+            {
+              "path": "main.js",
+              "start_line": 6
+            }
+          ]
+        }
+      ],
+      "findings": [],
+      "gaps": [],
+      "implementation": {
+        "static": "AST newUniqueId plus activated class alarms; real JSONC/TOML environment bindings",
+        "agent": "Mandatory semantic review with actual source locations and official context; static candidates are not complete coverage",
+        "local_tests": "Config drift/generator gaps; bounded shared/independent-resource models",
+        "unsupported": "Live namespace counts and expiry; no claim that a preview URL creates resources"
+      }
+    },
+    {
+      "rule_id": "CF-SQL-001",
+      "status": "unknown",
+      "evidence": [
+        {
+          "kind": "inventory_and_call_graph",
+          "detail": "No applicable reachable operation in the selected source/configuration"
+        },
+        {
+          "kind": "semantic_review",
+          "reason": "The declared alarm contains full-table SELECT, but no proven activation or constructor-owned CREATE for jobs. The offline probe had zero reachable queries and did not validate this query/table. The standalone migration does not establish a DO-owned schema. Row-cost coverage is unresolved, not confirmed safe or confirmed billable.",
+          "evidence": [
+            {
+              "path": "main.js",
+              "start_line": 4
+            },
+            {
+              "path": "migrations/0001.sql",
+              "start_line": 1
+            }
+          ]
+        }
+      ],
+      "findings": [],
+      "gaps": [
+        {
+          "reason": "The declared alarm contains full-table SELECT, but no proven activation or constructor-owned CREATE for jobs. The offline probe had zero reachable queries and did not validate this query/table. The standalone migration does not establish a DO-owned schema. Row-cost coverage is unresolved, not confirmed safe or confirmed billable."
+        }
+      ],
+      "implementation": {
+        "static": "SQL AST predicates/order/LIMIT plus per-database committed indexes and hot call closure",
+        "agent": "Mandatory semantic review with actual source locations and official context; static candidates are not complete coverage",
+        "local_tests": "Actual DO SQL cursor rows and D1 local meta; SQLite plan probe separately labelled",
+        "unsupported": "Dynamic ORM/SQL, unsupported syntax, complex joins/selectivity and production schema"
+      }
+    },
+    {
+      "rule_id": "CF-SQL-002",
+      "status": "not_applicable",
+      "evidence": [
+        {
+          "kind": "inventory_and_call_graph",
+          "detail": "No applicable reachable operation in the selected source/configuration"
+        },
+        {
+          "kind": "semantic_review",
+          "reason": "Complete final artifact and schema inspected: no UPDATE, DELETE, INSERT, UPSERT or broad business-row write exists. The SQL file is table DDL and the declared alarm contains SELECT. Unobserved cloud state is not covered.",
+          "evidence": [
+            {
+              "path": "main.js",
+              "start_line": 1,
+              "end_line": 6
+            },
+            {
+              "path": "migrations/0001.sql",
+              "start_line": 1
+            }
+          ]
+        }
+      ],
+      "findings": [],
+      "gaps": [],
+      "implementation": {
+        "static": "SQL AST whole-table UPDATE/DELETE on known database schema; hot vs maintenance entry",
+        "agent": "Mandatory semantic review with actual source locations and official context; static candidates are not complete coverage",
+        "local_tests": "Actual DO broad writes, low selectivity, repeated upsert rowsWritten",
+        "unsupported": "General selective bounds, transactions, trigger/index amplification need workload evidence"
+      }
+    },
+    {
+      "rule_id": "CF-JOB-001",
+      "status": "not_applicable",
+      "evidence": [
+        {
+          "kind": "inventory_and_call_graph",
+          "detail": "No applicable reachable operation in the selected source/configuration"
+        },
+        {
+          "kind": "semantic_review",
+          "reason": "No scheduled Worker, seed/backfill/embedding routine or batch SELECT LIMIT plus business-write/checkpoint exists in complete artifact/config. Alarm scans and rearms but processes no job/checkpoint; recurrence is covered under DO-001/002. No bounded job-processor claim is made.",
+          "evidence": [
+            {
+              "path": "main.js",
+              "start_line": 1,
+              "end_line": 6
+            },
+            {
+              "path": "wrangler.jsonc",
+              "start_line": 1,
+              "end_line": 28
+            }
+          ]
+        }
+      ],
+      "findings": [],
+      "gaps": [],
+      "implementation": {
+        "static": "Scheduled/alarm SELECT LIMIT + writes with no committed progress transition",
+        "agent": "Mandatory semantic review with actual source locations and official context; static candidates are not complete coverage",
+        "local_tests": "Bounded checkpoint/crash simulation and finite DO work across eviction",
+        "unsupported": "Checkpoint transactions and external processing, arbitrary business progress semantics"
+      }
+    },
+    {
+      "rule_id": "CF-Q-001",
+      "status": "not_applicable",
+      "evidence": [
+        {
+          "kind": "inventory_and_call_graph",
+          "detail": "No applicable reachable operation in the selected source/configuration"
+        },
+        {
+          "kind": "semantic_review",
+          "reason": "No queue producer/consumer binding, queue handler, send or sendBatch operation exists in complete artifact/config. Absence was checked in actual source, not solely inferred from parser output. No external producer was audited.",
+          "evidence": [
+            {
+              "path": "main.js",
+              "start_line": 1,
+              "end_line": 6
+            },
+            {
+              "path": "wrangler.jsonc",
+              "start_line": 1,
+              "end_line": 28
+            }
+          ]
+        }
+      ],
+      "findings": [],
+      "gaps": [],
+      "implementation": {
+        "static": "Consumer \u2192 same-repository cross-file producer \u2192 new send without preserved root/hops guard",
+        "agent": "Mandatory semantic review with actual source locations and official context; static candidates are not complete coverage",
+        "local_tests": "Bounded 20-step fresh-ID/ack feedback and bounded root/hops chain with real Queue test helpers",
+        "unsupported": "External producers, DLQ replay semantics and real cloud Queue scheduling"
+      }
+    },
+    {
+      "rule_id": "CF-Q-002",
+      "status": "not_applicable",
+      "evidence": [
+        {
+          "kind": "inventory_and_call_graph",
+          "detail": "No applicable reachable operation in the selected source/configuration"
+        },
+        {
+          "kind": "semantic_review",
+          "reason": "No queue delivery, per-message ack/retry, retryAll, DLQ or side-effect-before-ack path exists in complete artifact/config. DO alarm retries are a different lifecycle and remain untested.",
+          "evidence": [
+            {
+              "path": "main.js",
+              "start_line": 1,
+              "end_line": 6
+            },
+            {
+              "path": "wrangler.jsonc",
+              "start_line": 1,
+              "end_line": 28
+            }
+          ]
+        }
+      ],
+      "findings": [],
+      "gaps": [],
+      "implementation": {
+        "static": "Billable side effects plus explicit retryAll without per-item ack",
+        "agent": "Mandatory semantic review with actual source locations and official context; static candidates are not complete coverage",
+        "local_tests": "Bounded partial-success/write-before-ack/DLQ simulation using Queue test helpers",
+        "unsupported": "Exactly-once side effects, external payments and production delivery behavior"
+      }
+    },
+    {
+      "rule_id": "CF-KV-001",
+      "status": "not_applicable",
+      "evidence": [
+        {
+          "kind": "inventory_and_call_graph",
+          "detail": "No applicable reachable operation in the selected source/configuration"
+        },
+        {
+          "kind": "semantic_review",
+          "reason": "No Workers KV binding or KV get/put/list pagination exists in complete artifact/config. ctx.storage is DO storage, so getAlarm and SQL are not Workers KV. Live cross-region KV state was not inspected.",
+          "evidence": [
+            {
+              "path": "main.js",
+              "start_line": 1,
+              "end_line": 6
+            },
+            {
+              "path": "wrangler.jsonc",
+              "start_line": 12,
+              "end_line": 27
+            }
+          ]
+        }
+      ],
+      "findings": [],
+      "gaps": [],
+      "implementation": {
+        "static": "KV list in unbounded AST loop without cursor advance; bounded loops distinguished",
+        "agent": "Mandatory semantic review with actual source locations and official context; static candidates are not complete coverage",
+        "local_tests": "Actual local KV miss/list/cursor pagination; stuck cursor mutation",
+        "unsupported": "Business miss cardinality, globally consistent admission and cross-region state"
+      }
+    },
+    {
+      "rule_id": "CF-R2-001",
+      "status": "not_applicable",
+      "evidence": [
+        {
+          "kind": "inventory_and_call_graph",
+          "detail": "No applicable reachable operation in the selected source/configuration"
+        },
+        {
+          "kind": "semantic_review",
+          "reason": "No R2 bucket binding, bucket put/list/get, S3/public object path or R2 event trigger exists in complete artifact/config. Alarm uses DO storage only; no R2 recurring-operation assertion is made.",
+          "evidence": [
+            {
+              "path": "main.js",
+              "start_line": 1,
+              "end_line": 6
+            },
+            {
+              "path": "wrangler.jsonc",
+              "start_line": 1,
+              "end_line": 28
+            }
+          ]
+        }
+      ],
+      "findings": [],
+      "gaps": [],
+      "implementation": {
+        "static": "Reachable fast timer/alarm with unconditional put/list; change guard candidate",
+        "agent": "Mandatory semantic review with actual source locations and official context; static candidates are not complete coverage",
+        "local_tests": "Actual local R2 put/list plus bounded frequency/environment arithmetic",
+        "unsupported": "S3/public access, object-event loops, change-detection/retry semantics and live scope"
+      }
+    },
+    {
+      "rule_id": "CF-HTTP-001",
+      "status": "unknown",
+      "evidence": [
+        {
+          "kind": "inventory_and_call_graph",
+          "detail": "No applicable reachable operation in the selected source/configuration"
+        },
+        {
+          "kind": "semantic_review",
+          "reason": "fetch returns a constant response, with no browser polling source or downstream call. Request rate and Cloudflare/native admission cannot be established from this fixture. WAF/cache/routes/account state was not accessed. Constant handler work is not a global request/spending bound.",
+          "evidence": [
+            {
+              "path": "main.js",
+              "start_line": 6
+            },
+            {
+              "path": "wrangler.jsonc",
+              "start_line": 1,
+              "end_line": 28
+            }
+          ]
+        }
+      ],
+      "findings": [],
+      "gaps": [
+        {
+          "reason": "fetch returns a constant response, with no browser polling source or downstream call. Request rate and Cloudflare/native admission cannot be established from this fixture. WAF/cache/routes/account state was not accessed. Constant handler work is not a global request/spending bound."
+        }
+      ],
+      "implementation": {
+        "static": "Literal browser script served by configured assets + fast relative polling + costly Worker handler",
+        "agent": "Mandatory semantic review with actual source locations and official context; static candidates are not complete coverage",
+        "local_tests": "Static same-origin asset fixture and public entry gaps; no live WAF test",
+        "unsupported": "Dynamic routes/templates, cache/WAF account state and general public traffic bounds"
+      }
+    },
+    {
+      "rule_id": "CF-SAFE-001",
+      "status": "pass",
+      "evidence": [
+        {
+          "kind": "control_claims_checked"
+        },
+        {
+          "kind": "semantic_review",
+          "reason": "No candidate monthly-hard-cap, global-pause, delete-all isolation or budget-alert-enforcement claim exists. getAlarm is not credited as a cumulative budget. No reset/delete/pause/remote SQL/control operation was executed. CPU is per invocation; deleteAlarm is per object runtime operation; budget alerts notify. Current plan/control configuration remains unknown. This scoped check grants no production safety guarantee.",
+          "evidence": [
+            {
+              "path": "main.js",
+              "start_line": 3,
+              "end_line": 4
+            },
+            {
+              "path": "wrangler.jsonc",
+              "start_line": 1,
+              "end_line": 28
+            }
+          ]
+        }
+      ],
+      "findings": [],
+      "gaps": [],
+      "implementation": {
+        "static": "Structured false control guarantees and reachable test reset helper",
+        "agent": "Mandatory semantic review with actual source locations and official context; static candidates are not complete coverage",
+        "local_tests": "Five native scope falsification tests, signed false hard-cap schema rejection",
+        "unsupported": "Plan/contract applicability, runtime control state and any production isolation"
+      }
+    }
+  ],
+  "findings": [],
+  "tests": [
+    {
+      "id": "bounded-local-probe",
+      "status": "passed",
+      "tool_error": false,
+      "input_digest": "3fc0a30e1a0497195bc9a98bf3816268546cde8de372a52fb4526622b2865818",
+      "command": [
+        "python3",
+        "trusted-skill/scripts/lib/probe.py"
+      ],
+      "runner_digest": "27455f39185a38c2bfc6ea7df931014826f671bd4cf78a522f4805e23d279245",
+      "duration_ms": 43,
+      "metrics": {
+        "status": "passed",
+        "engine": "sqlite3",
+        "version": "3.37.2",
+        "results": [],
+        "groups": [],
+        "billing_metrics": null,
+        "cloud_writes": 0,
+        "memory_limit_mb": 256
+      }
+    },
+    {
+      "id": "do-lifecycle",
+      "status": "not_run",
+      "input_digest": "3fc0a30e1a0497195bc9a98bf3816268546cde8de372a52fb4526622b2865818",
+      "command": null,
+      "runner_digest": null,
+      "duration_ms": null,
+      "metrics": {
+        "reason": "Application runtime test not executed in focused offline host rerun; no runner/result is asserted.",
+        "billing_rows_read": null,
+        "billing_rows_written": null
+      }
+    },
+    {
+      "id": "do-getalarm",
+      "status": "not_run",
+      "input_digest": "3fc0a30e1a0497195bc9a98bf3816268546cde8de372a52fb4526622b2865818",
+      "command": null,
+      "runner_digest": null,
+      "duration_ms": null,
+      "metrics": {
+        "reason": "Application runtime test not executed in focused offline host rerun; no runner/result is asserted.",
+        "billing_rows_read": null,
+        "billing_rows_written": null
+      }
+    }
+  ],
+  "native_controls": [
+    {
+      "product": "Workers",
+      "plan_backend": "unknown",
+      "control": "cpu_limit",
+      "control_surface": "runtime_configuration",
+      "scope": "CPU per invocation; not SQL, wait time, cross-event or monthly usage",
+      "official_source": "https://developers.cloudflare.com/workers/platform/limits/",
+      "checked_at": "2026-10-08",
+      "version_conditions": "Verify the candidate toolchain, plan and backend",
+      "configuration_evidence": "unknown",
+      "data_preservation": "unknown",
+      "reversible": "unknown",
+      "affects_running_tasks": "unknown",
+      "covers_new_producers": "unknown",
+      "propagation_delay": "unknown",
+      "uncovered_paths": [
+        "Other entry points",
+        "Background tasks",
+        "Storage and fixed charges"
+      ],
+      "manual_verification": [
+        "Verify this control against current product documentation and target configuration without executing changes"
+      ],
+      "execution_status": "NOT_EXECUTED"
+    },
+    {
+      "product": "Billing",
+      "plan_backend": "unknown",
+      "control": "budget_alert",
+      "control_surface": "management_notification",
+      "scope": "Notification only; no pause or hard cap",
+      "official_source": "https://developers.cloudflare.com/billing/manage/budget-alerts/",
+      "checked_at": "2026-10-08",
+      "version_conditions": "Verify the candidate toolchain, plan and backend",
+      "configuration_evidence": "unknown",
+      "data_preservation": "unknown",
+      "reversible": "unknown",
+      "affects_running_tasks": "unknown",
+      "covers_new_producers": "unknown",
+      "propagation_delay": "unknown",
+      "uncovered_paths": [
+        "Other entry points",
+        "Background tasks",
+        "Storage and fixed charges"
+      ],
+      "manual_verification": [
+        "Verify this control against current product documentation and target configuration without executing changes"
+      ],
+      "execution_status": "NOT_EXECUTED"
+    },
+    {
+      "product": "Durable Objects",
+      "plan_backend": "unknown",
+      "control": "deleteAlarm",
+      "control_surface": "object_runtime_api",
+      "scope": "Scheduled alarm on one object; not account isolation or cancellation of running work",
+      "official_source": "https://developers.cloudflare.com/durable-objects/api/alarms/",
+      "checked_at": "2026-10-08",
+      "version_conditions": "Verify the candidate toolchain, plan and backend",
+      "configuration_evidence": "unknown",
+      "data_preservation": "unknown",
+      "reversible": "unknown",
+      "affects_running_tasks": "unknown",
+      "covers_new_producers": "unknown",
+      "propagation_delay": "unknown",
+      "uncovered_paths": [
+        "Other entry points",
+        "Background tasks",
+        "Storage and fixed charges"
+      ],
+      "manual_verification": [
+        "Verify this control against current product documentation and target configuration without executing changes"
+      ],
+      "execution_status": "NOT_EXECUTED"
+    }
+  ],
+  "coverage": {
+    "rules_total": 12,
+    "rules_evaluated": [
+      "CF-DO-001",
+      "CF-DO-002",
+      "CF-DEP-001",
+      "CF-SQL-001",
+      "CF-SQL-002",
+      "CF-JOB-001",
+      "CF-Q-001",
+      "CF-Q-002",
+      "CF-KV-001",
+      "CF-R2-001",
+      "CF-HTTP-001",
+      "CF-SAFE-001"
+    ],
+    "unknown_edges": [],
+    "sql_gaps": [],
+    "required_tests": [
+      "bounded-local-probe",
+      "do-lifecycle",
+      "do-getalarm"
+    ],
+    "missing_tests": [
+      "do-lifecycle",
+      "do-getalarm"
+    ],
+    "uncovered_products": [
+      "AI/external charges",
+      "Workflows",
+      "DO WebSocket/active duration",
+      "R2 object event loops",
+      "logs/traces"
+    ],
+    "deployment_bypasses": [
+      "Direct CLI",
+      "Cloudflare dashboard",
+      "Unverified Workers Builds deployment and preview commands",
+      "Independent CI"
+    ]
+  },
+  "usage_assessment": {
+    "classification": "unknown",
+    "scope": "Supplied final main.js, static production JSONC, locked toolchain and local call closure; no Cloudflare account state.",
+    "vector": {
+      "events": null,
+      "queue_deliveries": null,
+      "new_messages": null,
+      "sql_rows_read": null,
+      "sql_rows_written": null,
+      "kv_reads": null,
+      "kv_writes": null,
+      "kv_lists": null,
+      "r2_class_a": null,
+      "r2_class_b": null,
+      "active_objects": null,
+      "environments": null
+    },
+    "assumptions": [
+      "Final artifact and explicit JSONC are intended publisher inputs.",
+      "Class/RPC/alarm behavior follows pinned reviewed context.",
+      "External cancellation/history/traffic/workload were not inspected."
+    ],
+    "enforced_limits": [],
+    "evidence": [
+      {
+        "path": "main.js",
+        "start_line": 1,
+        "end_line": 6
+      },
+      {
+        "path": "wrangler.jsonc",
+        "start_line": 1,
+        "end_line": 28
+      }
+    ],
+    "excluded": [
+      "Actual runtime alarm/eviction behavior",
+      "DO cursor billing rows/D1 metadata",
+      "Duration/storage/logs/traces/fixed fees/external AI",
+      "Live namespace/account/control state"
+    ],
+    "usd_estimate": null
+  },
+  "approvals": [],
+  "incomplete": [],
+  "tool_errors": [],
+  "overall_status": "INCOMPLETE",
+  "official_best_practices_status": "PASS",
+  "cost_safety_status": "INCOMPLETE",
+  "predeploy_gate_status": "DENY",
+  "deployment_gate_coverage": "partial",
+  "guarantees": {
+    "hard_monthly_cap": false,
+    "production_isolation_performed": false,
+    "cloud_writes": 0
+  },
+  "review_identity": {
+    "reviewer": "/root/skill_forward_review; independent host agent",
+    "model": "Codex, GPT-6 family; exact backend model identifier/version not exposed in session",
+    "invocation": "One focused actual host explicit $cloudflare-cost-safety review rerun covering dormant and activated; not implicit discovery or repeated independent trials",
+    "reviewed_at": "2026-10-08T11:13:32.141631+00:00",
+    "input_digest": "3fc0a30e1a0497195bc9a98bf3816268546cde8de372a52fb4526622b2865818"
+  }
+}

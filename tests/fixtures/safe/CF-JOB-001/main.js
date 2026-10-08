@@ -1,0 +1,1 @@
+export default {async scheduled(ctrl,env){const rows=await env.DB.prepare("SELECT id FROM jobs WHERE done=0 ORDER BY id LIMIT 10").all();for(const row of rows.results)await env.DB.prepare("UPDATE jobs SET done=1 WHERE id=?").bind(row.id).run()}};

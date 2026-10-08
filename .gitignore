@@ -1,0 +1,9 @@
+node_modules/
+.cost-safety/
+*.tgz
+.env
+.env.*
+.dev.vars*
+.wrangler/
+coverage/
+__pycache__/

@@ -1,0 +1,1140 @@
+{
+  "schema_version": "1.0",
+  "skill_version": "0.1.0",
+  "reviewed_at": "2026-10-08T10:28:30.532Z",
+  "scope": {
+    "repository": "/tmp/cloudflare-cost-safety-forward/app-c",
+    "commit": null,
+    "review_mode": "full",
+    "analysis_scope": "full_local_call_closure_including_configuration",
+    "changed_files": [],
+    "files": [
+      {
+        "path": "main.js",
+        "sha256": "4fbe14557de2f68ba449d1d4ea25c422a8799678a5e391f3c3243a859004d7d7",
+        "bytes": 134
+      },
+      {
+        "path": "migrations/0001.sql",
+        "sha256": "e94bb21bf79426c53ea2579dbc50c8cedcb17a0af5bebb131a4ca39da8699da6",
+        "bytes": 85
+      },
+      {
+        "path": "package-lock.json",
+        "sha256": "97a123aa68ccb918c140b085cc6a52aac04955c3ecdba02a6d34ef725e5a1f5d",
+        "bytes": 143
+      },
+      {
+        "path": "wrangler.jsonc",
+        "sha256": "11eabf77c7b9b1a703cb1683e99373b4191adea226a5ac92d073e433d02d934d",
+        "bytes": 360
+      }
+    ],
+    "cloud_account_accessed": false
+  },
+  "activation": {
+    "trigger": true,
+    "activation": "explicit_early_preflight",
+    "status": "resolved"
+  },
+  "deployment_identity": {
+    "schema_version": "1.0",
+    "source_snapshot_digest": "d301ec5165eb514642501b9da5d74819c2e54f175c39ee8d885dc1e6ad26c502",
+    "commit": null,
+    "artifact_digest": "4fbe14557de2f68ba449d1d4ea25c422a8799678a5e391f3c3243a859004d7d7",
+    "artifact_path": "main.js",
+    "effective_config_digest": "e4fc92e5f5e2cfd984196dc0c8ce1937d942bcdf00cbeb634084dc35af01c8de",
+    "config_path": "wrangler.jsonc",
+    "target": {
+      "account_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "application": "app-c",
+      "environment": "production",
+      "action": "deploy",
+      "candidate_version": null
+    },
+    "official_skills_lock_digest": "296f2a111e4c5cb6fd6f6608ad95d3bef13f998ed4ef210b7302edf12beb5d12",
+    "policy_digest": "2312ecff40b38a74d728cf6a5c4b4429cbdd3511b65cfb78fd84907bd19bb856",
+    "rules_digest": "6119ce77c6da4cbee3162e4b9960f576479a389c65ea6260ca77fe8ff3129c92",
+    "tool_digest": "78569fd83425ce443a71e3f84f65da95832db2bb311fd6f94b08126a9ab0ffe6",
+    "toolchain": {
+      "node": "v24.11.1",
+      "typescript": "5.9.3",
+      "wrangler": "4.148.0",
+      "lockfiles": [
+        "package-lock.json"
+      ]
+    },
+    "migration_digest": "376221e076514089cf580fee1453edaf12cd90730e2484a5e21843f2b581f156",
+    "builder": "synthetic-direct-js@1",
+    "digest": "72a95c342bec174b686d609606ac974d89c42a67a4d2b6415e2d5e2e67fa59df"
+  },
+  "inventory": {
+    "application": "app-c",
+    "toolchain": "wrangler",
+    "tool_versions": {
+      "node": "v24.11.1",
+      "typescript": "5.9.3",
+      "wrangler": "4.148.0",
+      "lockfiles": [
+        "package-lock.json"
+      ]
+    },
+    "compatibility_date": "2026-10-08",
+    "compatibility_flags": [],
+    "has_do": false,
+    "static_only": false,
+    "bindings": [
+      {
+        "kind": "d1",
+        "name": "DB",
+        "status": "declared",
+        "evidence": {
+          "path": "wrangler.jsonc",
+          "start_line": 1
+        },
+        "config": {
+          "binding": "DB",
+          "database_id": "synthetic-database",
+          "database_name": "fixture"
+        },
+        "remote": false
+      }
+    ],
+    "entry_points": [
+      {
+        "name": "fetch",
+        "type": "fetch",
+        "status": "declared",
+        "location": {
+          "path": "main.js",
+          "start_line": 1,
+          "end_line": 1
+        }
+      }
+    ],
+    "environments": [],
+    "account_state": "unknown_not_accessed",
+    "migration_files": [
+      {
+        "path": "migrations/0001.sql",
+        "status": "parsed"
+      }
+    ]
+  },
+  "execution_graph": {
+    "nodes": [
+      {
+        "id": "main.js#module",
+        "kind": "logical_task",
+        "name": "module",
+        "entry_type": null,
+        "status": "declared",
+        "location": {
+          "path": "main.js",
+          "start_line": 1,
+          "end_line": 1
+        }
+      },
+      {
+        "id": "main.js#fetch@16",
+        "kind": "entry",
+        "name": "fetch",
+        "entry_type": "fetch",
+        "status": "declared",
+        "location": {
+          "path": "main.js",
+          "start_line": 1,
+          "end_line": 1
+        }
+      },
+      {
+        "id": "resource:DB",
+        "kind": "resource",
+        "product": "d1",
+        "status": "declared",
+        "location": {
+          "path": "wrangler.jsonc",
+          "start_line": 1
+        }
+      },
+      {
+        "id": "op:main.js:42",
+        "kind": "billable_operation",
+        "operation": "run",
+        "resource": "DB",
+        "status": "declared",
+        "location": {
+          "path": "main.js",
+          "start_line": 1,
+          "end_line": 1
+        }
+      },
+      {
+        "id": "op:main.js:42",
+        "kind": "billable_operation",
+        "operation": "bind",
+        "resource": "DB",
+        "status": "declared",
+        "location": {
+          "path": "main.js",
+          "start_line": 1,
+          "end_line": 1
+        }
+      },
+      {
+        "id": "op:main.js:42",
+        "kind": "billable_operation",
+        "operation": "prepare",
+        "resource": "DB",
+        "status": "declared",
+        "location": {
+          "path": "main.js",
+          "start_line": 1,
+          "end_line": 1
+        }
+      }
+    ],
+    "edges": [
+      {
+        "from": "main.js#fetch@16",
+        "to": "op:main.js:42",
+        "kind": "run",
+        "location": {
+          "path": "main.js",
+          "start_line": 1,
+          "end_line": 1
+        }
+      },
+      {
+        "from": "op:main.js:42",
+        "to": "resource:DB",
+        "kind": "resource_access",
+        "location": {
+          "path": "main.js",
+          "start_line": 1,
+          "end_line": 1
+        }
+      },
+      {
+        "from": "main.js#fetch@16",
+        "to": "op:main.js:42",
+        "kind": "bind",
+        "location": {
+          "path": "main.js",
+          "start_line": 1,
+          "end_line": 1
+        }
+      },
+      {
+        "from": "op:main.js:42",
+        "to": "resource:DB",
+        "kind": "resource_access",
+        "location": {
+          "path": "main.js",
+          "start_line": 1,
+          "end_line": 1
+        }
+      },
+      {
+        "from": "main.js#fetch@16",
+        "to": "op:main.js:42",
+        "kind": "prepare",
+        "location": {
+          "path": "main.js",
+          "start_line": 1,
+          "end_line": 1
+        }
+      },
+      {
+        "from": "op:main.js:42",
+        "to": "resource:DB",
+        "kind": "resource_access",
+        "location": {
+          "path": "main.js",
+          "start_line": 1,
+          "end_line": 1
+        }
+      }
+    ]
+  },
+  "official_skills": [
+    {
+      "name": "workers-best-practices",
+      "required": true,
+      "applies": true,
+      "reason": "Cloudflare application preflight baseline",
+      "upstream": "https://github.com/cloudflare/skills",
+      "revision": "41e0d19858946d18af9ee2c2feebbe2e11d829ff",
+      "resolved_path": "/tmp/cloudflare-cost-safety-forward-tool/vendor/workers-best-practices",
+      "content_digest": "131ab0c3d228c1c827bfc1ece886dd512ce92d3933e57e539b3a4a2c0147ed56",
+      "loaded_references": [
+        {
+          "path": "references/configuration.md",
+          "sha256": "cdb5c9cd5168231373523332c0e7a5cf8811dc244c48298823e3ccc5eb7157c1"
+        },
+        {
+          "path": "references/platform-apis.md",
+          "sha256": "9ca9f5a7a82f92de45d310f5e2ee05aa464ddb7a63a737529caa17fff3660f28"
+        },
+        {
+          "path": "references/runtime-patterns.md",
+          "sha256": "704ce8d4ff62c7655eb1d15f804ad566ed2012d11c2086e0d94bd3addb4d2c07"
+        }
+      ],
+      "load_status": "reviewed",
+      "review_status": "reviewed",
+      "findings": [],
+      "evidence": [
+        {
+          "path": "vendor/workers-best-practices/SKILL.md",
+          "sha256": "8ae8c6e7359171ba6a1688503850fa05ce47199c4e288343bf55b5e277351bae",
+          "operation": "read"
+        },
+        {
+          "path": "vendor/workers-best-practices/references/configuration.md",
+          "sha256": "cdb5c9cd5168231373523332c0e7a5cf8811dc244c48298823e3ccc5eb7157c1",
+          "operation": "read"
+        },
+        {
+          "path": "vendor/workers-best-practices/references/platform-apis.md",
+          "sha256": "9ca9f5a7a82f92de45d310f5e2ee05aa464ddb7a63a737529caa17fff3660f28",
+          "operation": "read"
+        },
+        {
+          "path": "vendor/workers-best-practices/references/runtime-patterns.md",
+          "sha256": "704ce8d4ff62c7655eb1d15f804ad566ed2012d11c2086e0d94bd3addb4d2c07",
+          "operation": "read"
+        },
+        {
+          "kind": "semantic_review",
+          "reason": "Actually read entry plus configuration, platform-apis and runtime-patterns content from the pinned context. Logs and traces are enabled and date is 2026-10-08; inspected module/class binding access, platform import, async lifetimes, serialization and state. No Node built-ins are imported, so absent nodejs_compat alone is not a defect. JS fixtures contain no hand-written Env type. Application runtime checks remain unexecuted and no live observability cost/coverage is claimed.",
+          "evidence": [
+            {
+              "path": "wrangler.jsonc",
+              "start_line": 1
+            },
+            {
+              "path": "main.js",
+              "start_line": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "wrangler",
+      "required": true,
+      "applies": true,
+      "reason": "Wrangler effective configuration or release path",
+      "upstream": "https://github.com/cloudflare/skills",
+      "revision": "41e0d19858946d18af9ee2c2feebbe2e11d829ff",
+      "resolved_path": "/tmp/cloudflare-cost-safety-forward-tool/vendor/wrangler",
+      "content_digest": "40e6f75362b34bcc90123146192e95a762c76d04134075becd8c6ccafce38d3b",
+      "loaded_references": [],
+      "load_status": "loaded",
+      "review_status": "not_run",
+      "findings": [],
+      "evidence": [
+        {
+          "path": "vendor/wrangler/SKILL.md",
+          "sha256": "9d9bd78c79823cdad36a88dbece8e48d8512c7262c66546ccbfac64ae08d310f",
+          "operation": "read"
+        }
+      ]
+    },
+    {
+      "name": "durable-objects",
+      "required": false,
+      "applies": false,
+      "reason": "No DO declaration or observed lifecycle entry",
+      "upstream": "https://github.com/cloudflare/skills",
+      "revision": "41e0d19858946d18af9ee2c2feebbe2e11d829ff",
+      "resolved_path": null,
+      "content_digest": null,
+      "loaded_references": [],
+      "load_status": "not_applicable",
+      "review_status": "not_applicable",
+      "findings": [],
+      "evidence": []
+    }
+  ],
+  "rules": [
+    {
+      "rule_id": "CF-DO-001",
+      "status": "not_applicable",
+      "evidence": [
+        {
+          "kind": "inventory_and_call_graph",
+          "detail": "No applicable reachable operation in the selected source/configuration"
+        },
+        {
+          "kind": "semantic_review",
+          "reason": "Inspected every local JS module and final JSONC binding/trigger inventory; no corresponding product operation, handler, wrapper or generated configuration exists in this fixture. This conclusion does not cover uninspected live account integrations.",
+          "evidence": [
+            {
+              "path": "wrangler.jsonc",
+              "start_line": 1
+            },
+            {
+              "path": "main.js",
+              "start_line": 1
+            }
+          ]
+        }
+      ],
+      "findings": [],
+      "gaps": [],
+      "implementation": {
+        "static": "TypeScript AST, reachable local calls, effective bindings, SQL AST; narrow supported patterns only",
+        "agent": "Required for business semantics, platform applicability, budgets, false positives and unresolved edges",
+        "local_tests": "Dedicated safe/unsafe/unknown fixtures, bounded simulations and relevant Workers runtime/SQL tests",
+        "unsupported": "Arbitrary dynamic dispatch, external SDK internals, production configuration, prices and P1 products"
+      }
+    },
+    {
+      "rule_id": "CF-DO-002",
+      "status": "not_applicable",
+      "evidence": [
+        {
+          "kind": "inventory_and_call_graph",
+          "detail": "No applicable reachable operation in the selected source/configuration"
+        },
+        {
+          "kind": "semantic_review",
+          "reason": "Inspected every local JS module and final JSONC binding/trigger inventory; no corresponding product operation, handler, wrapper or generated configuration exists in this fixture. This conclusion does not cover uninspected live account integrations.",
+          "evidence": [
+            {
+              "path": "wrangler.jsonc",
+              "start_line": 1
+            },
+            {
+              "path": "main.js",
+              "start_line": 1
+            }
+          ]
+        }
+      ],
+      "findings": [],
+      "gaps": [],
+      "implementation": {
+        "static": "TypeScript AST, reachable local calls, effective bindings, SQL AST; narrow supported patterns only",
+        "agent": "Required for business semantics, platform applicability, budgets, false positives and unresolved edges",
+        "local_tests": "Dedicated safe/unsafe/unknown fixtures, bounded simulations and relevant Workers runtime/SQL tests",
+        "unsupported": "Arbitrary dynamic dispatch, external SDK internals, production configuration, prices and P1 products"
+      }
+    },
+    {
+      "rule_id": "CF-DEP-001",
+      "status": "not_applicable",
+      "evidence": [
+        {
+          "kind": "inventory_and_call_graph",
+          "detail": "No applicable reachable operation in the selected source/configuration"
+        },
+        {
+          "kind": "semantic_review",
+          "reason": "Inspected every local JS module and final JSONC binding/trigger inventory; no corresponding product operation, handler, wrapper or generated configuration exists in this fixture. This conclusion does not cover uninspected live account integrations.",
+          "evidence": [
+            {
+              "path": "wrangler.jsonc",
+              "start_line": 1
+            },
+            {
+              "path": "main.js",
+              "start_line": 1
+            }
+          ]
+        }
+      ],
+      "findings": [],
+      "gaps": [],
+      "implementation": {
+        "static": "TypeScript AST, reachable local calls, effective bindings, SQL AST; narrow supported patterns only",
+        "agent": "Required for business semantics, platform applicability, budgets, false positives and unresolved edges",
+        "local_tests": "Dedicated safe/unsafe/unknown fixtures, bounded simulations and relevant Workers runtime/SQL tests",
+        "unsupported": "Arbitrary dynamic dispatch, external SDK internals, production configuration, prices and P1 products"
+      }
+    },
+    {
+      "rule_id": "CF-SQL-001",
+      "status": "not_applicable",
+      "evidence": [
+        {
+          "kind": "inventory_and_call_graph",
+          "detail": "No applicable reachable operation in the selected source/configuration"
+        },
+        {
+          "kind": "semantic_review",
+          "reason": "Inspected every local JS module and final JSONC binding/trigger inventory; no corresponding product operation, handler, wrapper or generated configuration exists in this fixture. This conclusion does not cover uninspected live account integrations.",
+          "evidence": [
+            {
+              "path": "wrangler.jsonc",
+              "start_line": 1
+            },
+            {
+              "path": "main.js",
+              "start_line": 1
+            }
+          ]
+        }
+      ],
+      "findings": [],
+      "gaps": [],
+      "implementation": {
+        "static": "TypeScript AST, reachable local calls, effective bindings, SQL AST; narrow supported patterns only",
+        "agent": "Required for business semantics, platform applicability, budgets, false positives and unresolved edges",
+        "local_tests": "Dedicated safe/unsafe/unknown fixtures, bounded simulations and relevant Workers runtime/SQL tests",
+        "unsupported": "Arbitrary dynamic dispatch, external SDK internals, production configuration, prices and P1 products"
+      }
+    },
+    {
+      "rule_id": "CF-SQL-002",
+      "status": "finding",
+      "evidence": [
+        {
+          "location": {
+            "path": "main.js",
+            "start_line": 1,
+            "end_line": 1
+          },
+          "kind": "parsed_sql"
+        },
+        {
+          "location": {
+            "path": "main.js",
+            "start_line": 1,
+            "end_line": 1
+          }
+        },
+        {
+          "kind": "semantic_review",
+          "reason": "Every fetch executes UPDATE jobs SET status=? with done, with no WHERE, path/method guard, authentication, finite maintenance authorization, row limit or checkpoint. The actual SQLite EXPLAIN plan is SCAN jobs. For N table rows and H successful requests, the code attempts H whole-table updates; an idempotent final status does not establish zero duplicate billing. Actual D1 meta metrics remain unmeasured.",
+          "evidence": [
+            {
+              "path": "main.js",
+              "start_line": 1
+            },
+            {
+              "path": "migrations/0001.sql",
+              "start_line": 1
+            },
+            {
+              "path": "wrangler.jsonc",
+              "start_line": 12,
+              "end_line": 18
+            }
+          ]
+        }
+      ],
+      "findings": [
+        {
+          "id": "CF-SQL-002:0cad75af62e1",
+          "rule_id": "CF-SQL-002",
+          "origin": "cost_safety",
+          "severity": "high",
+          "confidence": "high_for_supported_pattern",
+          "status": "BLOCK",
+          "location": {
+            "path": "main.js",
+            "start_line": 1,
+            "end_line": 1
+          },
+          "summary": "Reachable SQL writes every row because its predicate is absent or always true",
+          "execution_path": [
+            "fetch",
+            "run",
+            "bind",
+            "prepare"
+          ],
+          "usage_assessment": {
+            "classification": "unbounded_path",
+            "units": [
+              "rows written",
+              "index writes",
+              "storage operations"
+            ],
+            "usd_estimate": null,
+            "assumptions": [],
+            "excluded": [
+              "fixed charges",
+              "storage duration",
+              "logs/traces",
+              "external AI",
+              "DO active duration"
+            ]
+          },
+          "native_control_limit": "Batch/upsert result idempotency does not imply zero write billing; indexes also incur writes.",
+          "recommendation": "优先官方存储/行数计量和现有受支持限制；不要自动删除数据或关闭必要持久化。",
+          "evidence": {
+            "ast": true,
+            "detail": "SQL parser confirms UPDATE/DELETE scope; a bounded authorized maintenance task needs explicit review",
+            "case_ids": [
+              "C03",
+              "C04",
+              "C05"
+            ],
+            "source_ids": [
+              "CF-D1-PRICE",
+              "CF-DO-SQL"
+            ],
+            "tests": []
+          }
+        }
+      ],
+      "gaps": [],
+      "implementation": {
+        "static": "TypeScript AST, reachable local calls, effective bindings, SQL AST; narrow supported patterns only",
+        "agent": "Required for business semantics, platform applicability, budgets, false positives and unresolved edges",
+        "local_tests": "Dedicated safe/unsafe/unknown fixtures, bounded simulations and relevant Workers runtime/SQL tests",
+        "unsupported": "Arbitrary dynamic dispatch, external SDK internals, production configuration, prices and P1 products"
+      }
+    },
+    {
+      "rule_id": "CF-JOB-001",
+      "status": "not_applicable",
+      "evidence": [
+        {
+          "kind": "inventory_and_call_graph",
+          "detail": "No applicable reachable operation in the selected source/configuration"
+        },
+        {
+          "kind": "semantic_review",
+          "reason": "Inspected every local JS module and final JSONC binding/trigger inventory; no corresponding product operation, handler, wrapper or generated configuration exists in this fixture. This conclusion does not cover uninspected live account integrations.",
+          "evidence": [
+            {
+              "path": "wrangler.jsonc",
+              "start_line": 1
+            },
+            {
+              "path": "main.js",
+              "start_line": 1
+            }
+          ]
+        }
+      ],
+      "findings": [],
+      "gaps": [],
+      "implementation": {
+        "static": "TypeScript AST, reachable local calls, effective bindings, SQL AST; narrow supported patterns only",
+        "agent": "Required for business semantics, platform applicability, budgets, false positives and unresolved edges",
+        "local_tests": "Dedicated safe/unsafe/unknown fixtures, bounded simulations and relevant Workers runtime/SQL tests",
+        "unsupported": "Arbitrary dynamic dispatch, external SDK internals, production configuration, prices and P1 products"
+      }
+    },
+    {
+      "rule_id": "CF-Q-001",
+      "status": "not_applicable",
+      "evidence": [
+        {
+          "kind": "inventory_and_call_graph",
+          "detail": "No applicable reachable operation in the selected source/configuration"
+        },
+        {
+          "kind": "semantic_review",
+          "reason": "Inspected every local JS module and final JSONC binding/trigger inventory; no corresponding product operation, handler, wrapper or generated configuration exists in this fixture. This conclusion does not cover uninspected live account integrations.",
+          "evidence": [
+            {
+              "path": "wrangler.jsonc",
+              "start_line": 1
+            },
+            {
+              "path": "main.js",
+              "start_line": 1
+            }
+          ]
+        }
+      ],
+      "findings": [],
+      "gaps": [],
+      "implementation": {
+        "static": "TypeScript AST, reachable local calls, effective bindings, SQL AST; narrow supported patterns only",
+        "agent": "Required for business semantics, platform applicability, budgets, false positives and unresolved edges",
+        "local_tests": "Dedicated safe/unsafe/unknown fixtures, bounded simulations and relevant Workers runtime/SQL tests",
+        "unsupported": "Arbitrary dynamic dispatch, external SDK internals, production configuration, prices and P1 products"
+      }
+    },
+    {
+      "rule_id": "CF-Q-002",
+      "status": "not_applicable",
+      "evidence": [
+        {
+          "kind": "inventory_and_call_graph",
+          "detail": "No applicable reachable operation in the selected source/configuration"
+        },
+        {
+          "kind": "semantic_review",
+          "reason": "Inspected every local JS module and final JSONC binding/trigger inventory; no corresponding product operation, handler, wrapper or generated configuration exists in this fixture. This conclusion does not cover uninspected live account integrations.",
+          "evidence": [
+            {
+              "path": "wrangler.jsonc",
+              "start_line": 1
+            },
+            {
+              "path": "main.js",
+              "start_line": 1
+            }
+          ]
+        }
+      ],
+      "findings": [],
+      "gaps": [],
+      "implementation": {
+        "static": "TypeScript AST, reachable local calls, effective bindings, SQL AST; narrow supported patterns only",
+        "agent": "Required for business semantics, platform applicability, budgets, false positives and unresolved edges",
+        "local_tests": "Dedicated safe/unsafe/unknown fixtures, bounded simulations and relevant Workers runtime/SQL tests",
+        "unsupported": "Arbitrary dynamic dispatch, external SDK internals, production configuration, prices and P1 products"
+      }
+    },
+    {
+      "rule_id": "CF-KV-001",
+      "status": "not_applicable",
+      "evidence": [
+        {
+          "kind": "inventory_and_call_graph",
+          "detail": "No applicable reachable operation in the selected source/configuration"
+        },
+        {
+          "kind": "semantic_review",
+          "reason": "Inspected every local JS module and final JSONC binding/trigger inventory; no corresponding product operation, handler, wrapper or generated configuration exists in this fixture. This conclusion does not cover uninspected live account integrations.",
+          "evidence": [
+            {
+              "path": "wrangler.jsonc",
+              "start_line": 1
+            },
+            {
+              "path": "main.js",
+              "start_line": 1
+            }
+          ]
+        }
+      ],
+      "findings": [],
+      "gaps": [],
+      "implementation": {
+        "static": "TypeScript AST, reachable local calls, effective bindings, SQL AST; narrow supported patterns only",
+        "agent": "Required for business semantics, platform applicability, budgets, false positives and unresolved edges",
+        "local_tests": "Dedicated safe/unsafe/unknown fixtures, bounded simulations and relevant Workers runtime/SQL tests",
+        "unsupported": "Arbitrary dynamic dispatch, external SDK internals, production configuration, prices and P1 products"
+      }
+    },
+    {
+      "rule_id": "CF-R2-001",
+      "status": "not_applicable",
+      "evidence": [
+        {
+          "kind": "inventory_and_call_graph",
+          "detail": "No applicable reachable operation in the selected source/configuration"
+        },
+        {
+          "kind": "semantic_review",
+          "reason": "Inspected every local JS module and final JSONC binding/trigger inventory; no corresponding product operation, handler, wrapper or generated configuration exists in this fixture. This conclusion does not cover uninspected live account integrations.",
+          "evidence": [
+            {
+              "path": "wrangler.jsonc",
+              "start_line": 1
+            },
+            {
+              "path": "main.js",
+              "start_line": 1
+            }
+          ]
+        }
+      ],
+      "findings": [],
+      "gaps": [],
+      "implementation": {
+        "static": "TypeScript AST, reachable local calls, effective bindings, SQL AST; narrow supported patterns only",
+        "agent": "Required for business semantics, platform applicability, budgets, false positives and unresolved edges",
+        "local_tests": "Dedicated safe/unsafe/unknown fixtures, bounded simulations and relevant Workers runtime/SQL tests",
+        "unsupported": "Arbitrary dynamic dispatch, external SDK internals, production configuration, prices and P1 products"
+      }
+    },
+    {
+      "rule_id": "CF-HTTP-001",
+      "status": "unknown",
+      "evidence": [
+        {
+          "location": {
+            "path": "main.js",
+            "start_line": 1,
+            "end_line": 1
+          }
+        },
+        {
+          "location": {
+            "path": "main.js",
+            "start_line": 1,
+            "end_line": 1
+          }
+        },
+        {
+          "kind": "semantic_review",
+          "reason": "HTTP fetch always reaches D1 UPDATE. No code-level admission control exists and account WAF/cache/routes/workers.dev coverage is unavailable. Neither client behavior nor CPU limits can establish a table-write or global monthly ceiling.",
+          "evidence": [
+            {
+              "path": "main.js",
+              "start_line": 1
+            },
+            {
+              "path": "wrangler.jsonc",
+              "start_line": 1,
+              "end_line": 19
+            }
+          ]
+        }
+      ],
+      "findings": [],
+      "gaps": [
+        {
+          "reason": "Public entry/WAF/cache/admission scope cannot be verified from this repository",
+          "location": {
+            "path": "main.js",
+            "start_line": 1,
+            "end_line": 1
+          }
+        },
+        {
+          "reason": "HTTP fetch always reaches D1 UPDATE. No code-level admission control exists and account WAF/cache/routes/workers.dev coverage is unavailable. Neither client behavior nor CPU limits can establish a table-write or global monthly ceiling."
+        }
+      ],
+      "implementation": {
+        "static": "TypeScript AST, reachable local calls, effective bindings, SQL AST; narrow supported patterns only",
+        "agent": "Required for business semantics, platform applicability, budgets, false positives and unresolved edges",
+        "local_tests": "Dedicated safe/unsafe/unknown fixtures, bounded simulations and relevant Workers runtime/SQL tests",
+        "unsupported": "Arbitrary dynamic dispatch, external SDK internals, production configuration, prices and P1 products"
+      }
+    },
+    {
+      "rule_id": "CF-SAFE-001",
+      "status": "pass",
+      "evidence": [
+        {
+          "kind": "control_claims_checked"
+        },
+        {
+          "kind": "semantic_review",
+          "reason": "No candidate hard-spend-cap or invented pause API claim is present. This review explicitly separates one-alarm scheduling, single-message retries, CPU scope, delivery pause, notifications and test helpers; none is treated as an account monthly spending cap. No controls were executed.",
+          "evidence": [
+            {
+              "path": "wrangler.jsonc",
+              "start_line": 1
+            },
+            {
+              "path": "main.js",
+              "start_line": 1
+            }
+          ]
+        }
+      ],
+      "findings": [],
+      "gaps": [],
+      "implementation": {
+        "static": "TypeScript AST, reachable local calls, effective bindings, SQL AST; narrow supported patterns only",
+        "agent": "Required for business semantics, platform applicability, budgets, false positives and unresolved edges",
+        "local_tests": "Dedicated safe/unsafe/unknown fixtures, bounded simulations and relevant Workers runtime/SQL tests",
+        "unsupported": "Arbitrary dynamic dispatch, external SDK internals, production configuration, prices and P1 products"
+      }
+    }
+  ],
+  "findings": [
+    {
+      "id": "CF-SQL-002:0cad75af62e1",
+      "rule_id": "CF-SQL-002",
+      "origin": "cost_safety",
+      "severity": "high",
+      "confidence": "high_for_supported_pattern",
+      "status": "BLOCK",
+      "location": {
+        "path": "main.js",
+        "start_line": 1,
+        "end_line": 1
+      },
+      "summary": "Reachable SQL writes every row because its predicate is absent or always true",
+      "execution_path": [
+        "fetch",
+        "run",
+        "bind",
+        "prepare"
+      ],
+      "usage_assessment": {
+        "classification": "unbounded_path",
+        "units": [
+          "rows written",
+          "index writes",
+          "storage operations"
+        ],
+        "usd_estimate": null,
+        "assumptions": [],
+        "excluded": [
+          "fixed charges",
+          "storage duration",
+          "logs/traces",
+          "external AI",
+          "DO active duration"
+        ]
+      },
+      "native_control_limit": "Batch/upsert result idempotency does not imply zero write billing; indexes also incur writes.",
+      "recommendation": "优先官方存储/行数计量和现有受支持限制；不要自动删除数据或关闭必要持久化。",
+      "evidence": {
+        "ast": true,
+        "detail": "SQL parser confirms UPDATE/DELETE scope; a bounded authorized maintenance task needs explicit review",
+        "case_ids": [
+          "C03",
+          "C04",
+          "C05"
+        ],
+        "source_ids": [
+          "CF-D1-PRICE",
+          "CF-DO-SQL"
+        ],
+        "tests": []
+      }
+    }
+  ],
+  "tests": [
+    {
+      "id": "bounded-local-probe",
+      "status": "passed",
+      "input_digest": "72a95c342bec174b686d609606ac974d89c42a67a4d2b6415e2d5e2e67fa59df",
+      "command": [
+        "python3",
+        "trusted-skill/scripts/lib/probe.py"
+      ],
+      "runner_digest": "2cda9761c5133ba6b5182ac54f7aaf70eb312f297a93dbe1d64c27353418a91c",
+      "duration_ms": 45,
+      "metrics": {
+        "status": "passed",
+        "engine": "sqlite3",
+        "version": "3.37.2",
+        "results": [
+          {
+            "location": {
+              "path": "main.js",
+              "start_line": 1,
+              "end_line": 1
+            },
+            "status": "passed",
+            "explain_query_plan": [
+              "SCAN jobs"
+            ],
+            "billing_rows_read": null,
+            "billing_rows_written": null,
+            "metric_status": "unsupported_sqlite_is_not_d1"
+          }
+        ],
+        "operation_budget": {
+          "max_vm_steps": 2000000,
+          "max_queries": 50
+        },
+        "billing_metrics": null,
+        "cloud_writes": 0
+      }
+    },
+    {
+      "id": "sql-plan",
+      "status": "passed",
+      "input_digest": "72a95c342bec174b686d609606ac974d89c42a67a4d2b6415e2d5e2e67fa59df",
+      "command": [
+        "python3",
+        "trusted-skill/scripts/lib/probe.py"
+      ],
+      "runner_digest": "2cda9761c5133ba6b5182ac54f7aaf70eb312f297a93dbe1d64c27353418a91c",
+      "duration_ms": 45,
+      "metrics": {
+        "status": "passed",
+        "engine": "sqlite3",
+        "version": "3.37.2",
+        "results": [
+          {
+            "location": {
+              "path": "main.js",
+              "start_line": 1,
+              "end_line": 1
+            },
+            "status": "passed",
+            "explain_query_plan": [
+              "SCAN jobs"
+            ],
+            "billing_rows_read": null,
+            "billing_rows_written": null,
+            "metric_status": "unsupported_sqlite_is_not_d1"
+          }
+        ],
+        "operation_budget": {
+          "max_vm_steps": 2000000,
+          "max_queries": 50
+        },
+        "billing_metrics": null,
+        "cloud_writes": 0
+      }
+    }
+  ],
+  "native_controls": [
+    {
+      "product": "Workers",
+      "plan_backend": "unknown",
+      "control": "cpu_limit",
+      "control_surface": "runtime_configuration",
+      "scope": "CPU per invocation; not SQL, wait time, cross-event or monthly usage",
+      "official_source": "https://developers.cloudflare.com/workers/platform/limits/",
+      "checked_at": "2026-10-08",
+      "version_conditions": "Verify the candidate toolchain, plan and backend",
+      "configuration_evidence": "unknown",
+      "data_preservation": "unknown",
+      "reversible": "unknown",
+      "affects_running_tasks": "unknown",
+      "covers_new_producers": "unknown",
+      "propagation_delay": "unknown",
+      "uncovered_paths": [
+        "Other entry points",
+        "Background tasks",
+        "Storage and fixed charges"
+      ],
+      "manual_verification": [
+        "Verify this control against current product documentation and target configuration without executing changes"
+      ],
+      "execution_status": "NOT_EXECUTED"
+    },
+    {
+      "product": "Billing",
+      "plan_backend": "unknown",
+      "control": "budget_alert",
+      "control_surface": "management_notification",
+      "scope": "Notification only; no pause or hard cap",
+      "official_source": "https://developers.cloudflare.com/billing/manage/budget-alerts/",
+      "checked_at": "2026-10-08",
+      "version_conditions": "Verify the candidate toolchain, plan and backend",
+      "configuration_evidence": "unknown",
+      "data_preservation": "unknown",
+      "reversible": "unknown",
+      "affects_running_tasks": "unknown",
+      "covers_new_producers": "unknown",
+      "propagation_delay": "unknown",
+      "uncovered_paths": [
+        "Other entry points",
+        "Background tasks",
+        "Storage and fixed charges"
+      ],
+      "manual_verification": [
+        "Verify this control against current product documentation and target configuration without executing changes"
+      ],
+      "execution_status": "NOT_EXECUTED"
+    },
+    {
+      "product": "D1",
+      "plan_backend": "unknown",
+      "control": "query_plan_and_meta",
+      "control_surface": "database_runtime_api",
+      "scope": "Measure reads/writes, including index writes; not a per-query price ceiling",
+      "official_source": "https://developers.cloudflare.com/d1/platform/pricing/",
+      "checked_at": "2026-10-08",
+      "version_conditions": "Verify the candidate toolchain, plan and backend",
+      "configuration_evidence": "unknown",
+      "data_preservation": "unknown",
+      "reversible": "unknown",
+      "affects_running_tasks": "unknown",
+      "covers_new_producers": "unknown",
+      "propagation_delay": "unknown",
+      "uncovered_paths": [
+        "Other entry points",
+        "Background tasks",
+        "Storage and fixed charges"
+      ],
+      "manual_verification": [
+        "Verify this control against current product documentation and target configuration without executing changes"
+      ],
+      "execution_status": "NOT_EXECUTED"
+    }
+  ],
+  "coverage": {
+    "rules_total": 12,
+    "rules_evaluated": [
+      "CF-DO-001",
+      "CF-DO-002",
+      "CF-DEP-001",
+      "CF-SQL-001",
+      "CF-SQL-002",
+      "CF-JOB-001",
+      "CF-Q-001",
+      "CF-Q-002",
+      "CF-KV-001",
+      "CF-R2-001",
+      "CF-HTTP-001",
+      "CF-SAFE-001"
+    ],
+    "unknown_edges": [],
+    "sql_gaps": [],
+    "required_tests": [
+      "bounded-local-probe",
+      "sql-plan",
+      "sql-rows"
+    ],
+    "missing_tests": [
+      "sql-rows"
+    ],
+    "uncovered_products": [
+      "AI/external charges",
+      "Workflows",
+      "DO WebSocket/active duration",
+      "R2 object event loops",
+      "logs/traces"
+    ],
+    "deployment_bypasses": [
+      "Direct CLI",
+      "Cloudflare dashboard",
+      "Unverified Workers Builds deployment and preview commands",
+      "Independent CI"
+    ]
+  },
+  "usage_assessment": {
+    "classification": "unbounded_path",
+    "vector": {
+      "events": null,
+      "queue_deliveries": null,
+      "new_messages": null,
+      "sql_rows_read": null,
+      "sql_rows_written": null,
+      "kv_reads": null,
+      "kv_writes": null,
+      "kv_lists": null,
+      "r2_class_a": null,
+      "r2_class_b": null,
+      "active_objects": null,
+      "environments": null
+    },
+    "usd_estimate": null,
+    "assumptions": [
+      "Declared configuration describes the reviewed artifact; live account state is not inspected"
+    ],
+    "enforced_limits": [],
+    "excluded": [
+      "duration",
+      "storage",
+      "fixed fees",
+      "logs/traces",
+      "external AI"
+    ]
+  },
+  "approvals": [],
+  "incomplete": [
+    "official_semantic_review_missing:wrangler"
+  ],
+  "tool_errors": [],
+  "overall_status": "BLOCK",
+  "official_best_practices_status": "INCOMPLETE",
+  "cost_safety_status": "BLOCK",
+  "predeploy_gate_status": "DENY",
+  "deployment_gate_coverage": "partial",
+  "guarantees": {
+    "hard_monthly_cap": false,
+    "production_isolation_performed": false,
+    "cloud_writes": 0
+  },
+  "review_identity": {
+    "reviewer": "Codex independent forward-test reviewer /root/skill_forward_review",
+    "model": "Codex, GPT-6 family; exact backend model identifier/version is not exposed",
+    "invocation": "One actual Codex desktop host explicit $cloudflare-cost-safety invocation, delegated to /root/skill_forward_review, covering three synthetic fixtures. CLI reruns within this invocation are recorded; no repeated host trials or implicit-discovery test.",
+    "reviewed_at": "2026-10-08T10:27:54.087092+00:00",
+    "input_digest": "72a95c342bec174b686d609606ac974d89c42a67a4d2b6415e2d5e2e67fa59df"
+  }
+}
