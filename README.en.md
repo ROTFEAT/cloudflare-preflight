@@ -66,6 +66,8 @@ The `/` entry uses the host's `/skills` selector; available menus depend on the 
 
 Requirements: Node ≥22, Python ≥3.10, Linux, bubblewrap, and libseccomp2. Download dependencies in a separate preparation phase without running npm lifecycle scripts:
 
+The offline sandbox uses `/usr/bin/node`. If Node comes from nvm or a tool cache, install the verified binary into that protected system path and run the tests with the same Node. The GitHub CI preparation step includes this setup.
+
 ```sh
 npm ci --ignore-scripts --registry=https://registry.npmjs.org
 npm test

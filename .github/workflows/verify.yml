@@ -19,9 +19,18 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y bubblewrap libseccomp2
+          # The sandbox exposes /usr read-only, not setup-node's /opt cache.
+          cost_safety_node="$(command -v node)"
+          if [ ! "$cost_safety_node" -ef /usr/bin/node ]; then
+            sudo install -m 0755 "$cost_safety_node" /usr/bin/node
+          fi
+          /usr/bin/node --version
           npm ci --ignore-scripts --registry=https://registry.npmjs.org
       - name: Run deterministic, sandboxed runtime and clean package checks
-        run: npm test
+        run: |
+          cost_safety_npm="$(command -v npm)"
+          export PATH="/usr/bin:/bin:$PATH"
+          "$cost_safety_npm" test
       - name: Save actual execution records
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4

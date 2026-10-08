@@ -66,6 +66,8 @@ $cloudflare-cost-safety 检查当前项目的 Cloudflare 成本风险，生成�
 
 需要 Node ≥22、Python ≥3.10、Linux、bubblewrap 和 libseccomp2。依赖下载只发生在独立准备阶段，禁止 npm lifecycle 脚本：
 
+离线沙箱使用 `/usr/bin/node`。若 Node 来自 nvm 或工具缓存，应先把核验过的二进制安装到受保护的系统路径，并使用同一 Node 运行测试；GitHub CI 的准备步骤包含此设置。
+
 ```sh
 npm ci --ignore-scripts --registry=https://registry.npmjs.org
 npm test

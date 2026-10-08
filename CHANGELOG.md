@@ -19,3 +19,5 @@ This first repository release includes the predeployment Skill, pinned official 
 已知边界 / Known limits: 宿主隐式触发、实际账户状态和线上发布配置尚未完整验证；直接 CLI／控制台／未接入的 Workers Builds 仍为 partial coverage。P1、价格引擎和生产隔离未实现。详见 [覆盖说明](docs/coverage.md)与[开发报告](docs/development-report.zh-CN.md)。
 
 Historical development evidence may show `0.1.0`; those original records are preserved and do not describe the published version. No Cloudflare production deployment is part of this release.
+
+发布后 CI 配置修正 / Post-release CI configuration: 首次 GitHub 工程验证发现 setup-node 的 `/opt` 路径在离线沙箱内不可见。主分支补充系统 Node 准备与测试 PATH 设置；Skill 与安装包代码保持 1.00，原 `v1.00` 标签保留。首次运行记录：[37781000054](https://github.com/ROTFEAT/cloudflare-preflight/actions/runs/37781000054)。

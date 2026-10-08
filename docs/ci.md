@@ -4,6 +4,8 @@
 
 `.github/workflows/verify.yml` 是本项目工程验证流程：联网准备依赖时禁止 lifecycle，随后执行 `npm test`，保存真实日志。它没有签名或 Cloudflare secrets；工程测试通过不代表某个应用可以发布。
 
+沙箱仅挂载受保护的系统路径，运行 Node 使用 `/usr/bin/node`。GitHub setup-node 默认的 `/opt` 缓存不会暴露给沙箱，因此准备阶段将其已安装的 Node 二进制复制到 `/usr/bin/node`，测试阶段保留该 npm 入口并优先使用系统 Node。这样无需把整个工具缓存挂入沙箱，也不改变断网、只读和凭证隔离约束。
+
 `examples/github-release.yml` 是应用仓库可采用的生产发布流程，尚未在 GitHub 执行。它要求受保护、独立的 self-hosted runner，标签为 `cost-safety-publisher`，以及需要维护者批准的 `cloudflare-production` environment。候选仓库不得获得写入 `/opt/cloudflare-cost-safety` 的权限，不要在曾运行不可信 PR 代码的常驻 runner 上保留发布凭证。
 
 步骤顺序为：下载签名证据 → 使用受保护公钥验签取得 commit → checkout 该 commit（不持久化 GitHub 凭证）→ 下载同一次审查的最终源码／产物 → 独立 gate → 核验全部文件并准备交接 → 仅在发布步骤注入 Cloudflare token → 只读密封快照发布。任何失败都会阻止发布步骤。使用 actions 固定 SHA，实际通过对应官方 Git 仓库 tag refs 核验过。
