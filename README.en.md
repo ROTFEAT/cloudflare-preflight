@@ -1,20 +1,23 @@
-# Cloudflare Cost Safety
+# cloudflare-preflight
 
 [简体中文](README.md) | **English**
 
 [![CI](https://github.com/ROTFEAT/cloudflare-preflight/actions/workflows/verify.yml/badge.svg?branch=main)](https://github.com/ROTFEAT/cloudflare-preflight/actions/workflows/verify.yml)
-**Version 1.0.2** · Codex Skill · [MIT](LICENSE) · [Changelog](CHANGELOG.md)
+**Version 1.0.3** · Codex Skill · [MIT](LICENSE) · [Changelog](CHANGELOG.md)
 
 **Required checks before deploying to Cloudflare**
 
 `cloudflare-cost-safety` is a cost review Skill for Codex. It checks your code and configuration before release to help you find problems that can make Cloudflare costs grow unexpectedly:
 
-- **Background tasks keep running:** Alarms repeatedly trigger storage reads and writes even without new requests.
+- **Background tasks keep running:** Alarms repeatedly trigger storage reads and writes even without new requests; some failures only appear at refresh or expiry boundaries.
 - **Queue tasks repeat:** Processing one message creates another, so the same logical task keeps running.
 - **Database operations touch too much data:** A query returns one row but reads many, or an update intended for one record changes the whole table.
 - **Tasks run too often or in too many environments:** Backups, synchronization, or polling run too frequently, or several preview environments all run the same background jobs.
+- **Paid origins remain directly accessible:** A downstream public URL or alternate entry point may bypass protections at the Cloudflare entry.
 
 The review tells you where the risks are, why they create extra usage, what limits are needed, and which tests remain unfinished. Run it before deployment, or start an early review through the `/skills` selector or an explicit `$cloudflare-cost-safety` mention.
+
+Reports distinguish code limits, local test results, and unverified cloud controls. Alarm, Cron, Queue, and public proxy paths also require applicable time-boundary, stop-behavior, and origin-access evidence. See the [additional checks](.agents/skills/cloudflare-cost-safety/references/delayed-and-origin-checks.md).
 
 [See it in action](#see-it-in-action) · [Quick start](#quick-start) · [Why it exists](#why-this-skill-exists) · [Boundaries](#boundaries) · [Documentation and verification](#documentation-and-verification)
 
@@ -165,9 +168,9 @@ npm ci --ignore-scripts --registry=https://registry.npmjs.org
 npm test
 ```
 
-Dependency downloads and offline verification are separate phases. Tests do not connect to Cloudflare accounts. The unified command runs rule, integration, gate, sandbox, real workerd, and clean installation/package checks. The [retained 1.0.2 verification](docs/test-results/v1.0.2/summary.json) contains 104 Node tests, 17 workerd tests, and a package check. Consult [CI](https://github.com/ROTFEAT/cloudflare-preflight/actions/workflows/verify.yml) for subsequent results.
+Dependency downloads and offline verification are separate phases. Tests do not connect to Cloudflare accounts. The unified command runs rule, integration, gate, sandbox, real workerd, and clean installation/package checks. The [retained 1.0.3 verification](docs/test-results/v1.0.3/summary.json) contains 112 Node tests, 22 workerd tests, and a package check. Consult [CI](https://github.com/ROTFEAT/cloudflare-preflight/actions/workflows/verify.yml) for subsequent results.
 
-The current version is **1.0.2**. The README, Skill, npm package, and reports use the same three-part version, with Git tag `v1.0.2`. **Every commit increments the version, including documentation and CI changes.** Small changes advance as `1.0.0 → 1.0.1 → 1.0.2`; compatible additions and breaking changes increment MINOR and MAJOR respectively. See the [versioning policy](docs/versioning.md) for the full workflow.
+The current version is **1.0.3**. The README, Skill, npm package, and reports use the same three-part version, with Git tag `v1.0.3`. **Every commit increments the version, including documentation and CI changes.** Small changes advance as `1.0.1 → 1.0.2 → 1.0.3`; compatible additions and breaking changes increment MINOR and MAJOR respectively. See the [versioning policy](docs/versioning.md) for the full workflow.
 
 ## Official references and acknowledgements
 
@@ -193,6 +196,8 @@ The case table lists all 15 message/community sources. These are all 17 official
 | Codex Skill discovery and invocation | [OpenAI Skills](https://developers.openai.com/codex/skills/) |
 
 Upstream main links locate the material; execution uses the pinned commit and content hashes described above. Thanks to the authors of Cloudflare's official Skills and documentation, developers who publicly shared incidents, and the KurosawaGeeker community project. Source status and verification dates are recorded in [sources.json](.agents/skills/cloudflare-cost-safety/assets/sources.json).
+
+Delayed refresh, origin bypass, remaining work after a stop, and layered reporting were informed by [ZPVIP/no-billshock@1250f01](https://github.com/ZPVIP/no-billshock/tree/1250f01a085cfe955e1189e38502b5a4428734da) ([MIT](https://github.com/ZPVIP/no-billshock/blob/1250f01a085cfe955e1189e38502b5a4428734da/LICENSE)) and adapted to this project's read-only Cloudflare preflight. This design reference is separate from the 32 incident and official sources above.
 
 </details>
 

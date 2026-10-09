@@ -1,17 +1,18 @@
 <!-- 中文 README 首页文案样本。报告部分是保留历史报告的中文摘要。 -->
 
-# Cloudflare Cost Safety
+# cloudflare-preflight
 
 **Cloudflare 部署前必须做的检查**
 
-**1.0.2** · Codex Skill · [English](../README.en.md) · [MIT](../LICENSE)
+**1.0.3** · Codex Skill · [English](../README.en.md) · [MIT](../LICENSE)
 
 `cloudflare-cost-safety` 是一个给 Codex 用的成本检查 Skill，帮你在上线前检查代码和配置，提前发现容易让 Cloudflare 费用超出预期的问题：
 
-- **后台任务一直跑：** 没有新请求，Alarm 仍在反复触发，持续读写数据。
+- **后台任务一直跑：** 没有新请求，Alarm 仍在反复触发，持续读写数据；有些问题要到刷新或过期时间才出现。
 - **队列任务反复执行：** 一条消息处理完，又创建下一条消息，同一个任务一直重复。
 - **数据库读写太多：** 查询只返回一行，却读取了很多行；本来只想改一条记录，却更新了整张表。
 - **任务频率或环境数量太多：** 备份、同步、轮询过于频繁，或者多个预览环境都在运行同一套后台任务。
+- **收费源站能被直接访问：** Cloudflare 入口设置了保护，下游服务的公开地址或其他入口仍可能被绕过调用。
 
 检查会告诉你：哪里有风险、为什么会产生额外用量、需要补什么限制，以及还有哪些测试没完成。
 
@@ -95,6 +96,6 @@ npm run install-skill -- --project /ABSOLUTE/APPLICATION
 
 [命令行与报告说明](usage.zh-CN.md) · [发布流程](ci.md) · [签名与信任](trust.md) · [实际验证记录](test-results/README.md)
 
-当前版本为 **1.0.2**，README、Skill、软件包和报告统一使用三段式版本号，Git 标签为 `v1.0.2`。每次提交都递增版本号，包括文档与 CI 改动，具体流程见[版本管理](versioning.md)。
+当前版本为 **1.0.3**，README、Skill、软件包和报告统一使用三段式版本号，Git 标签为 `v1.0.3`。每次提交都递增版本号，包括文档与 CI 改动，具体流程见[版本管理](versioning.md)。
 
 项目代码采用 [MIT](../LICENSE)。随包 Cloudflare 官方 Skill 的 [Apache-2.0 许可](../.agents/skills/cloudflare-cost-safety/vendor/CLOUDFLARE-LICENSE)与[出处说明](../.agents/skills/cloudflare-cost-safety/vendor/NOTICE)保持保留。

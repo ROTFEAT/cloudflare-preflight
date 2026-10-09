@@ -1,5 +1,19 @@
 # 更新日志 / Changelog
 
+## 1.0.3 — 2026-10-09
+
+Git tag: `v1.0.3`
+
+- 默认中文、独立英文及中文样本的 README 标题统一为仓库名 `cloudflare-preflight`，保留现有 Skill 和 CLI 名称。
+- 参考 [ZPVIP/no-billshock@1250f01](https://github.com/ZPVIP/no-billshock/tree/1250f01a085cfe955e1189e38502b5a4428734da) 的延迟刷新、源站绕过、停止后剩余工作量与报告分层，纳入现有 12 条 Cloudflare P0 规则及只读审查流程。
+- 为适用路径增加 `do-time-boundaries`、`background-stop` 和 `origin-access` 应用证据要求；缺失记录或伪造必需测试集合会拒绝门禁。
+- 修正对象／类方法被误当作模块局部函数的问题，避免 Worker 的 `fetch()` 方法遮蔽全局外部 `fetch()` 调用。
+- 增加 8 个集成回归及 5 个 workerd 测试，覆盖时间边界、陈旧时间戳、持久停用、源站路径和报告未知值；报告摘要区分代码证据、本地验证及未核验的云端控制。
+
+Uses the repository name for README titles and adopts delayed-state, origin-access, bounded-stop and reporting ideas within the existing Cloudflare preflight. Adds conditional application test requirements, fixes lexical fetch resolution, and retains the read-only reviewer and independent publisher boundary. No AWS account integration or live cloud controls are added.
+
+验证记录 / Verification: [1.0.3 离线测试与包检查](docs/test-results/v1.0.3/summary.json)。历史记录与标签保持原样。
+
 ## 1.0.2 — 2026-10-09
 
 Git tag: `v1.0.2`

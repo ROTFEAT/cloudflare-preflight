@@ -2,7 +2,7 @@
 
 **简体中文** | [English](usage.en.md) · [返回项目首页](../README.md)
 
-本页保留安装、命令行预检与受控发布的完整操作说明。当前版本为 **1.0.2**，Git 标签为 `v1.0.2`；README、Skill、软件包和报告使用同一个三段式版本号。首次了解项目可先阅读首页的检查示例。
+本页保留安装、命令行预检与受控发布的完整操作说明。当前版本为 **1.0.3**，Git 标签为 `v1.0.3`；README、Skill、软件包和报告使用同一个三段式版本号。首次了解项目可先阅读首页的检查示例。
 
 ## 本地准备与验证
 
@@ -25,7 +25,7 @@ npm run install-skill -- --project /ABSOLUTE/APPLICATION
 npm run install-skill -- --skills-dir /ABSOLUTE/TRUSTED/skills
 ```
 
-安装器不联网、不覆盖现有 Skill，复制已准备的 11 个生产依赖及许可证，包含 Python 沙箱。`npm run check:package` 会生成 `.cost-safety/cloudflare-cost-safety-1.0.2.tar.gz`，实际解包并在只能看到干净应用的离线环境中运行 CLI。也可解包到应用的 `.agents/skills/`。宿主需重新发现技能；本项目未验证当前 Codex build 的自动重载或隐式匹配。
+安装器不联网、不覆盖现有 Skill，复制已准备的 11 个生产依赖及许可证，包含 Python 沙箱。`npm run check:package` 会生成 `.cost-safety/cloudflare-cost-safety-1.0.3.tar.gz`，实际解包并在只能看到干净应用的离线环境中运行 CLI。也可解包到应用的 `.agents/skills/`。宿主需重新发现技能；本项目未验证当前 Codex build 的自动重载或隐式匹配。
 
 安装后的版本信息保存在 Skill 内的 [version.json](../.agents/skills/cloudflare-cost-safety/version.json)。运行 `node /TRUSTED/skill/scripts/cli.mjs version` 可查看版本和 Git 标签；`--version` 仅输出版本号。
 
@@ -49,6 +49,8 @@ CLI 只读实际安装的 Wrangler package 元数据及候选 lockfile；二者�
 第一遍通常返回 **INCOMPLETE / exit 2**。读取 `report.json`、`report.md`、`official-context.json`；完成真实语义审查和所需应用测试后，用 `--review /EXTERNAL/semantic-review.json` 再运行。不能把静态无发现、SQLite probe 成功或官方文件读取回执当成已完成审查。
 
 语义记录遵循 [schema](../.agents/skills/cloudflare-cost-safety/assets/semantic-review.schema.json)：包含全部 12 条规则、实际文件／行号、官方读取文件摘要、模型／调用方式、真实测试命令与 runner 摘要。未运行的测试用 `not_run` 和 null；不要伪造通过记录。可信审查人需要对语义质量负责，签名本身不能证明程序终止。
+
+报告顶部摘要分别呈现风险、工作量上限、代码限制、本地测试及未核验的云端控制。适用的 Alarm 路径需要 `do-time-boundaries`，后台 Alarm／Cron／Queue 需要 `background-stop`，公共 Worker 到外部／动态 fetch 的路径需要 `origin-access`。检查要求与边界见[补充说明](../.agents/skills/cloudflare-cost-safety/references/delayed-and-origin-checks.md)；缺少实际应用证据时仍为 INCOMPLETE，本工具自己的回归测试不能代替应用验收。
 
 | 退出码 | 含义 |
 | --- | --- |

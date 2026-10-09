@@ -25,6 +25,30 @@ export class PeriodicTask extends DurableObject {
   async alarm(){const bucket=Math.floor(Date.now()/3600000);const saved=await this.ctx.storage.get('window');const window=saved?.bucket===bucket?saved:{bucket,count:0};if(window.count<3){window.count++;await this.ctx.storage.put('window',window);await this.ctx.storage.put('work',(await this.ctx.storage.get('work')||0)+1);}await this.ctx.storage.setAlarm(Date.now()+60000);}
   async stats(){return {work:await this.ctx.storage.get('work')||0,next:await this.ctx.storage.getAlarm()};}
 }
+// Injected time exercises delayed transitions without waiting or using cloud
+// resources. "work" counts logical refreshes, not provider billing metrics.
+export class RefreshTask extends DurableObject {
+  async start(now,stale=false){
+    if(!Number.isSafeInteger(now)||now<=0)throw new Error('invalid fixture clock');
+    const day=86400000,state={expires:now+30*day,next:now+23*day,last:now,work:0,status:'active',stale};
+    await this.ctx.storage.put('checkpoint',state);await this.ctx.storage.setAlarm(state.next);
+  }
+  async tick(now){
+    if(!Number.isSafeInteger(now)||now<=0)throw new Error('invalid fixture clock');
+    const state=await this.ctx.storage.get('checkpoint');
+    if(!state||state.status!=='active')return {controlReads:1,work:0,rescheduled:false};
+    if(now<state.last)throw new Error('backwards fixture clock');
+    state.last=now;
+    if(now>=state.expires){state.status='expired';await this.ctx.storage.put('checkpoint',state);await this.ctx.storage.deleteAlarm();return {controlReads:1,work:0,rescheduled:false};}
+    let work=0;
+    if(now>=state.next){state.work++;work=1;if(!state.stale){state.expires=now+30*86400000;state.next=now+23*86400000;}}
+    await this.ctx.storage.put('checkpoint',state);await this.ctx.storage.setAlarm(state.next);
+    return {controlReads:1,work,rescheduled:true};
+  }
+  async alarm(){await this.tick(Date.now());}
+  async stop(){const state=await this.ctx.storage.get('checkpoint');if(state){state.status='disabled';await this.ctx.storage.put('checkpoint',state);}await this.ctx.storage.deleteAlarm();}
+  async stats(){return {...await this.ctx.storage.get('checkpoint'),alarm:await this.ctx.storage.getAlarm()};}
+}
 export class Meter extends DurableObject {
   seed(n,index='none') {
     if(![100,1000,10000].includes(n))throw new Error('row budget');

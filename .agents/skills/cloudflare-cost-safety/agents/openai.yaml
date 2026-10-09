@@ -1,6 +1,6 @@
 interface:
   display_name: "Cloudflare Cost Safety"
-  short_description: "v1.0.2: Review Cloudflare cost paths before a release"
+  short_description: "v1.0.3: Review Cloudflare cost paths before a release"
   default_prompt: "Use $cloudflare-cost-safety to review this Cloudflare release before any remote effect."
 policy:
   allow_implicit_invocation: true

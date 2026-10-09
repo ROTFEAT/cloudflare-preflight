@@ -1,0 +1,10 @@
+
+> cloudflare-cost-safety@1.0.3 test
+> node scripts/test.mjs
+
+Running unit-integration…
+passed: /home/ubuntu/github/cloudflare-preflight/.cost-safety/test-results/unit-integration.log
+Running workerd…
+passed: /home/ubuntu/github/cloudflare-preflight/.cost-safety/test-results/workerd.log
+Running package…
+passed: /home/ubuntu/github/cloudflare-preflight/.cost-safety/test-results/package.log

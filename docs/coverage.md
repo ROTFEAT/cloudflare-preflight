@@ -8,7 +8,7 @@
 
 | 规则 | 已实现静态范围 | 实际本地测试 | 仍需 Agent／应用证据或未覆盖范围 |
 | --- | --- | --- | --- |
-| CF-DO-001 | 本地 stub RPC/fetch 激活 → 对应类 constructor → Alarm → SQL／存储 → 重调度；SQL 要求 DO 自有建表依据 | workerd 激活、运行 Alarm、驱逐后再激活、空任务；独立审查区分未激活与已激活对象 | 旧对象／旧 Alarm、外部激活、SDK hook、条件初始化及云端历史 |
+| CF-DO-001 | 本地 stub RPC/fetch 激活 → 对应类 constructor → Alarm → SQL／存储 → 重调度；SQL 要求 DO 自有建表依据 | workerd 激活、运行 Alarm、驱逐后再激活、空任务；虚拟第 23／30 天刷新与过期、重复时间戳、时钟回退 | 旧对象／旧 Alarm、外部激活、SDK hook、条件初始化及云端历史 |
 | CF-DO-002 | 内存 attempts／预算重置与重调度；区分持久化读取守卫 | workerd 驱逐后内存重置、持久状态保留、有限任务、合法周期窗口 | 任意业务进度、事务和故障边界；变量名或一次 storage 调用不能独立证明预算 |
 | CF-DEP-001 | newUniqueId 与可达后台 Alarm；真实环境配置和 binding 关系 | 共享／独立／未知配置样例、配置漂移门禁；不按 URL 数虚构 Namespace | 实际环境／对象数量、资源到期、已有后台任务和生成器效果 |
 | CF-SQL-001 | 已执行 D1 prepare 链／DO exec；已知 schema 下的热路径非索引筛选排序；LIMIT 不作扫描上限 | SQLite EXPLAIN；workerd DO 100／1,000／10,000 行、有效／无效索引；D1 本地 meta | 复杂 JOIN、分布与选择性、ORM、动态 SQL、复杂 schema 迁移和实际线上行数 |
@@ -18,10 +18,18 @@
 | CF-Q-002 | 可计费副作用加显式 retryAll，缺少逐项 ack | Queue 辅助 API 的部分成功、写后 ack 前重放与有限 DLQ 模型 | 外部副作用幂等契约、exactly-once、实际投递与长期回灌行为 |
 | CF-KV-001 | AST 无界分页循环中 list／cursor 不推进；区分有限循环 | 本地 KV miss、list、cursor 分页；cursor 变异 | 热点命中率、key 分布、跨区域状态和全局准入；缓存不是强一致限流 |
 | CF-R2-001 | 可达快速 timer／Alarm 无条件 put/list；变更守卫候选 | 本地 R2 put/list；每分钟／每秒及环境倍数的有限算术模型 | S3／公开访问、真实同步器默认值、重试和变更检测、R2 事件回写 |
-| CF-HTTP-001 | 配置 assets 的 HTML 引用字面量脚本，快速同源相对地址轮询，加高成本 Worker handler | 独立 assets fixture、入口／缓存范围检查；无在线 WAF 测试 | 动态路由／模板、真实 WAF／缓存／限流／套餐、公开流量和多租户预算 |
+| CF-HTTP-001 | 配置 assets 的 HTML 引用字面量脚本，快速同源相对地址轮询，加高成本 Worker handler；公共 handler 的外部／动态 fetch 选择源站访问验收 | 独立 assets fixture、入口／缓存范围检查；跨文件源站验收缺失拒绝、局部 fetch／service binding 误报回归 | 动态路由／模板、真实 WAF／缓存／限流／套餐、公开流量和多租户预算；无在线源站或 WAF 测试 |
 | CF-SAFE-001 | 结构化伪控制声明及可达测试 reset API；预算声明缺执行证据保留 unknown | 预算邮件、测试 reset、对象内 deleteAlarm、CPU、Queue pause 五种范围反证；伪硬上限拒绝 | 企业合同、线上控制状态与传播；本工具不执行任何生产隔离 |
 
 完整契约、来源和案例映射见 [规则注册表](../rules/catalog.json)。独立 Agent 实际审查了 DO、Queue 和 SQL 应用；最后的 DO 复查覆盖全部 12 条规则，并把不适用和未知逐项列出。其余确定性测试中的语义审查记录明确标记 `MOCK_NO_MODEL_CALL`，用于测试编排和门禁，不能算实际 Agent 覆盖。
+
+## 延迟、源站与停止验证
+
+本次沿用现有 12 条 P0 规则，补充条件必需测试：可达 `setAlarm` 要求 `do-time-boundaries`；可达 Alarm、Cron handler 或配置的 Queue consumer 要求 `background-stop`；公共 Worker handler 经本地调用闭包到达外部／动态 `fetch` 时要求 `origin-access`。缺少通过且绑定当前输入的实际记录会保持 INCOMPLETE；签名报告也不能删掉这些要求来绕过独立门禁。
+
+本地新增 5 个 workerd 测试覆盖 30 天 TTL／提前 7 天刷新、重复已到期时间戳、错过刷新后的过期、非法／回退时钟，以及停用后排队回调与驱逐重放。这里的时间是显式注入的模型时钟，`work` 统计逻辑刷新，停止后的两个回调仍有两次控制状态读取；不是生产计费指标或云端自动调度验证，也未证明取消已在执行的远程副作用。
+
+源站访问目前落实为静态路径识别、语义审查要求和缺失证据拒绝测试，不自动验证线上鉴权或限流。公开端点可以合法存在，需证明收费工作有界；Worker 内的校验也不消除 Worker 调用本身。外部 SDK、完整跨云账单和未知 origin 契约仍属覆盖缺口。详细验收与设计出处见 [补充检查说明](../.agents/skills/cloudflare-cost-safety/references/delayed-and-origin-checks.md)。
 
 ## 解析与执行图的边界
 

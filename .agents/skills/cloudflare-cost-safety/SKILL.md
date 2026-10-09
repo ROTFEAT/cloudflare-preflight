@@ -8,12 +8,12 @@ description: >-
   and verified local-only builds/tests do not automatically trigger this skill.
   Review only; never deploy or isolate services.
 metadata:
-  version: "1.0.2"
+  version: "1.0.3"
 ---
 
 # Cloudflare Cost Safety
 
-Release **1.0.2**. The Skill, package, and report use the same version. Version identity is recorded in [version.json](version.json); use `scripts/cli.mjs version` to inspect it.
+Release **1.0.3**. The Skill, package, and report use the same version. Version identity is recorded in [version.json](version.json); use `scripts/cli.mjs version` to inspect it.
 
 Enter before the first remote effect of a Cloudflare release. Include package/framework wrappers, CI, preview, upload/activation, rollback, and secret commands that immediately deploy. Inspect actual scripts and versioned command semantics without executing them. Unknown effects enter target confirmation and remain INCOMPLETE. A bare skill installation does not intercept shell commands.
 
@@ -42,7 +42,7 @@ Read the actual resolved files or every relevant `content` entry in `official-co
 
 ## Review cost paths and test them
 
-Read [rules.md](references/rules.md), [platform-facts.md](references/platform-facts.md), and [native-controls.md](references/native-controls.md). Cover all 12 registered P0 rules in [catalog.json](assets/rules/catalog.json). Review the resource inventory and graph, including related callers, callees, callbacks, configuration, SQL migrations and unresolved edges. `diff` conservatively includes the full local call closure. Dynamic SDK/ORM/configuration or external effects need an explicit gap, never N/A by parsing failure.
+Read [rules.md](references/rules.md), [platform-facts.md](references/platform-facts.md), and [native-controls.md](references/native-controls.md). For alarms/background work or public paths to downstream origins, also read [delayed-and-origin-checks.md](references/delayed-and-origin-checks.md): verify time boundaries, direct access and bounded work after a stop. Cover all 12 registered P0 rules in [catalog.json](assets/rules/catalog.json). Review the resource inventory and graph, including related callers, callees, callbacks, configuration, SQL migrations and unresolved edges. `diff` conservatively includes the full local call closure. Dynamic SDK/ORM/configuration or external effects need an explicit gap, never N/A by parsing failure.
 
 Separate platform retries from newly scheduled events/messages, result idempotency from billable idempotency, returned from scanned rows, and per-call/regional limits from logical-job/account budgets. Legitimate periodic jobs and authorized finite maintenance are allowed with evidence. SQL plans from ordinary SQLite are not D1 billing metrics. Consume DO SQL cursors before recording `rowsRead/rowsWritten`; keep missing metrics null. Use bounded synthetic data and parent watchdogs; never reproduce incident-scale usage.
 

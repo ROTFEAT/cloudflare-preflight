@@ -1,5 +1,15 @@
 # 实际运行证据
 
+## 1.0.3 — 2026-10-09
+
+本次版本 **1.0.3** 的实际输出保存在 [v1.0.3/](v1.0.3/)。[summary.json](v1.0.3/summary.json) 记录统一命令全部三个阶段通过：112 个 Node 测试、22 个 workerd 测试，以及干净安装／离线打包检查。原始日志：[统一命令](v1.0.3/unified.log)、[Node](v1.0.3/unit-integration.log)、[workerd](v1.0.3/workerd.log)、[打包](v1.0.3/package.log)。这些文件是实际输出的原字节副本。
+
+新增集成回归覆盖应用时间边界／停止／源站证据缺失、伪造必需测试集合、真实局部 fetch 与 service binding，以及报告中的未知值。新增 workerd 模型覆盖虚拟第 23／30 天、重复时间戳、错过刷新、非法／回退时钟、持久停用与排队回调重放。模型统计逻辑刷新和控制读取，不是生产计费指标；停止后两个模拟回调仍发生两次状态读取，没有新增刷新或调度。
+
+[package-check.json](v1.0.3/package-check.json) 记录 `1.0.3`／`v1.0.3`、安装包字节数、实际 SHA-256，以及干净离线解包和 CLI 版本核验结果。测试没有连接 Cloudflare 账户；包检查中的 INCOMPLETE / exit 2 是缺少应用语义审查时的预期拒绝，不是应用发布许可。源站检查是应用证据门禁，未验证云端源站或 WAF 配置，也未取消正在执行的远程工作。
+
+The actual 1.0.3 outputs preserve 112 passing Node tests, 22 passing workerd tests, and the clean package check. New delayed-state and stop fixtures use bounded injected-clock models. Application-specific origin, time-boundary and stop evidence is still required; these engineering tests are not cloud verification or application release approval.
+
 ## 1.0.2 — 2026-10-09
 
 本次版本 **1.0.2** 的实际输出保存在 [v1.0.2/](v1.0.2/)。[summary.json](v1.0.2/summary.json) 记录统一命令全部三个阶段通过：104 个 Node 测试、17 个 workerd 测试，以及干净安装／离线打包检查。原始日志：[统一命令](v1.0.2/unified.log)、[Node](v1.0.2/unit-integration.log)、[workerd](v1.0.2/workerd.log)、[打包](v1.0.2/package.log)。这些文件是实际输出的原字节副本。

@@ -1,6 +1,6 @@
 {
   "name": "cloudflare-cost-safety",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Offline Cloudflare predeployment cost review skill and independent release gate",
   "type": "module",
   "license": "MIT",

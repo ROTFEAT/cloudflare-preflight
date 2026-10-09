@@ -1,20 +1,23 @@
-# Cloudflare Cost Safety
+# cloudflare-preflight
 
 **简体中文** | [English](README.en.md)
 
 [![CI](https://github.com/ROTFEAT/cloudflare-preflight/actions/workflows/verify.yml/badge.svg?branch=main)](https://github.com/ROTFEAT/cloudflare-preflight/actions/workflows/verify.yml)
-**版本 1.0.2** · Codex Skill · [MIT](LICENSE) · [更新日志](CHANGELOG.md)
+**版本 1.0.3** · Codex Skill · [MIT](LICENSE) · [更新日志](CHANGELOG.md)
 
 **Cloudflare 部署前必须做的检查**
 
 `cloudflare-cost-safety` 是一个给 Codex 用的成本检查 Skill，帮你在上线前检查代码和配置，提前发现容易让 Cloudflare 费用超出预期的问题：
 
-- **后台任务一直跑：** 没有新请求，Alarm 仍在反复触发，持续读写数据。
+- **后台任务一直跑：** 没有新请求，Alarm 仍在反复触发，持续读写数据；有些问题要到刷新或过期时间才出现。
 - **队列任务反复执行：** 一条消息处理完，又创建下一条消息，同一个任务一直重复。
 - **数据库读写太多：** 查询只返回一行，却读取了很多行；本来只想改一条记录，却更新了整张表。
 - **任务频率或环境数量太多：** 备份、同步、轮询过于频繁，或者多个预览环境都在运行同一套后台任务。
+- **收费源站能被直接访问：** Cloudflare 入口设置了保护，下游服务的公开地址或其他入口仍可能被绕过调用。
 
 检查会告诉你：哪里有风险、为什么会产生额外用量、需要补什么限制，以及还有哪些测试没完成。可以在部署前检查，也可以通过 `/skills` 选择 Skill，或用 `$cloudflare-cost-safety` 提前手动检查。
+
+报告会分别列出代码限制、本地测试结果和未核验的云端控制。涉及 Alarm、Cron、Queue 或公开代理时，还会要求适用的时间边界、停止行为和源站访问验证，见[补充检查说明](.agents/skills/cloudflare-cost-safety/references/delayed-and-origin-checks.md)。
 
 [先看效果](#先看检查效果) · [快速上手](#快速上手) · [项目由来](#为什么会有这个-skill) · [使用边界](#使用边界) · [文档与验证](#文档与验证)
 
@@ -165,9 +168,9 @@ npm ci --ignore-scripts --registry=https://registry.npmjs.org
 npm test
 ```
 
-依赖下载与离线验证分开；测试不连接 Cloudflare 账户。统一命令执行规则、集成、门禁、沙箱、真实 workerd 和干净安装／打包检查。1.0.2 的[保留验证记录](docs/test-results/v1.0.2/summary.json)包含 104 个 Node 测试、17 个 workerd 测试及包检查；后续结果以 [CI](https://github.com/ROTFEAT/cloudflare-preflight/actions/workflows/verify.yml) 为准。
+依赖下载与离线验证分开；测试不连接 Cloudflare 账户。统一命令执行规则、集成、门禁、沙箱、真实 workerd 和干净安装／打包检查。1.0.3 的[保留验证记录](docs/test-results/v1.0.3/summary.json)包含 112 个 Node 测试、22 个 workerd 测试及包检查；后续结果以 [CI](https://github.com/ROTFEAT/cloudflare-preflight/actions/workflows/verify.yml) 为准。
 
-当前版本为 **1.0.2**，README、Skill、npm 和报告统一使用三段式版本号，Git 标签为 `v1.0.2`。**每次提交都递增版本号，包括文档和 CI 改动**；小改动依次为 `1.0.0 → 1.0.1 → 1.0.2`。兼容新增和不兼容改动分别递增次版本、主版本，具体流程见[版本管理](docs/versioning.md)。
+当前版本为 **1.0.3**，README、Skill、npm 和报告统一使用三段式版本号，Git 标签为 `v1.0.3`。**每次提交都递增版本号，包括文档和 CI 改动**；小改动依次为 `1.0.1 → 1.0.2 → 1.0.3`。兼容新增和不兼容改动分别递增次版本、主版本，具体流程见[版本管理](docs/versioning.md)。
 
 ## 官方资料与致谢
 
@@ -193,6 +196,8 @@ npm test
 | Codex Skill 发现与调用 | [OpenAI Skills](https://developers.openai.com/codex/skills/) |
 
 上表的上游 main 链接用于定位资料；实际运行使用前文列出的固定 commit 和内容摘要。感谢 Cloudflare 官方 Skill 与文档作者、公开分享事故的开发者，以及 KurosawaGeeker 社区项目。来源状态和核验日期保存在 [sources.json](.agents/skills/cloudflare-cost-safety/assets/sources.json)。
+
+延迟刷新、源站绕过、停止后剩余工作量及报告分层的设计参考了 [ZPVIP/no-billshock@1250f01](https://github.com/ZPVIP/no-billshock/tree/1250f01a085cfe955e1189e38502b5a4428734da)（[MIT](https://github.com/ZPVIP/no-billshock/blob/1250f01a085cfe955e1189e38502b5a4428734da/LICENSE)），并适配到本项目的 Cloudflare 只读预检。该设计参考独立于上面的 32 条案例与官方来源。
 
 </details>
 

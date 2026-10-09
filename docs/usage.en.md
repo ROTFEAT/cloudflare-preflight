@@ -2,7 +2,7 @@
 
 [简体中文](usage.zh-CN.md) | **English** · [Back to the project](../README.en.md)
 
-This page contains the full installation, CLI preflight, and controlled release instructions. The current version is **1.0.2**, with Git tag `v1.0.2`. The README, Skill, package, and reports use the same three-part version. Start with the README examples for an introduction.
+This page contains the full installation, CLI preflight, and controlled release instructions. The current version is **1.0.3**, with Git tag `v1.0.3`. The README, Skill, package, and reports use the same three-part version. Start with the README examples for an introduction.
 
 ## Prepare and verify locally
 
@@ -25,7 +25,7 @@ npm run install-skill -- --project /ABSOLUTE/APPLICATION
 npm run install-skill -- --skills-dir /ABSOLUTE/TRUSTED/skills
 ```
 
-The installer stays offline, refuses to overwrite an existing Skill, and copies 11 prepared production dependencies with licenses, including the Python sandbox. `npm run check:package` creates `.cost-safety/cloudflare-cost-safety-1.0.2.tar.gz`, actually extracts it, and runs the CLI offline with only the clean application available. The archive can also be extracted into an application's `.agents/skills/`. Host discovery is required; this project's tests do not establish automatic reload or implicit matching for a particular Codex build.
+The installer stays offline, refuses to overwrite an existing Skill, and copies 11 prepared production dependencies with licenses, including the Python sandbox. `npm run check:package` creates `.cost-safety/cloudflare-cost-safety-1.0.3.tar.gz`, actually extracts it, and runs the CLI offline with only the clean application available. The archive can also be extracted into an application's `.agents/skills/`. Host discovery is required; this project's tests do not establish automatic reload or implicit matching for a particular Codex build.
 
 Installed version identity is recorded in the Skill's [version.json](../.agents/skills/cloudflare-cost-safety/version.json). Run `node /TRUSTED/skill/scripts/cli.mjs version` to inspect the version and Git tag. `--version` prints only the version number.
 
@@ -49,6 +49,8 @@ The CLI reads actual installed Wrangler package metadata and the candidate lockf
 The first pass usually returns **INCOMPLETE / exit 2**. Read `report.json`, `report.md`, and `official-context.json`. After actual semantic review and required application tests, rerun with `--review /EXTERNAL/semantic-review.json`. A lack of static findings, a successful SQLite probe, or official file read receipts alone do not establish a completed review.
 
 Semantic records follow the [schema](../.agents/skills/cloudflare-cost-safety/assets/semantic-review.schema.json): all 12 rules, actual files/lines, official file hashes, model/invocation details, and actual test commands and runner digests. Unexecuted tests use `not_run` and null. Trusted reviewers remain responsible for review quality; a signature does not prove program termination.
+
+The report summary separates risks, work bounds, code limits, local tests, and unverified cloud controls. Applicable alarm paths need `do-time-boundaries`; background Alarm/Cron/Queue paths need `background-stop`; public Worker paths reaching external/dynamic fetches need `origin-access`. See the [additional checks and limits](../.agents/skills/cloudflare-cost-safety/references/delayed-and-origin-checks.md). Missing application evidence remains INCOMPLETE; the tool's own regression suite does not complete an application's acceptance tests.
 
 | Exit code | Meaning |
 | --- | --- |

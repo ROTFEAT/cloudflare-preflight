@@ -1,0 +1,22 @@
+
+ RUN  v4.1.11 /workspace
+
+stdout | tests/runtime/mechanisms.spec.js > returning one row can read 100/1000/10000 rows; matching index changes growth
+DO SQL metrics {"unindexed":[101,1001,10001],"indexed":1}
+
+stdout | tests/runtime/mechanisms.spec.js > D1 local metrics are recorded only when supported, never replaced by result count
+D1 local metrics {"status":"local_runtime_metric","rows_read":1,"rows_written":0}
+
+ ✓ tests/runtime/mechanisms.spec.js (17 tests) 250ms
+stdout | tests/runtime/delayed.spec.js > a persisted stop bounds queued and replayed callbacks across eviction
+Stop model {"queuedCallbacks":2,"additionalLogicalRefreshes":0,"controlReads":2,"newSchedules":0}
+
+ ✓ tests/runtime/delayed.spec.js (5 tests) 160ms
+
+ Test Files  2 passed (2)
+      Tests  22 passed (22)
+   Start at  06:06:17
+   Duration  3.86s (transform 73ms, setup 0ms, import 173ms, tests 410ms, environment 0ms)
+
+
+{"status": "passed", "exit_code": 0, "duration_ms": 5373, "network": "isolated_namespace", "credentials": "not_inherited", "checkout": "read_only", "credential_files": "masked", "memory_limit_mb": 1024, "timeout_seconds": 50.0, "process_group_killed": true}

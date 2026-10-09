@@ -7,9 +7,10 @@
     {"name":"UNSAFE","class_name":"UnsafeTask"},
     {"name":"SAFE","class_name":"SafeTask"},
     {"name":"PERIODIC","class_name":"PeriodicTask"},
-    {"name":"METER","class_name":"Meter"}
+    {"name":"METER","class_name":"Meter"},
+    {"name":"REFRESH","class_name":"RefreshTask"}
   ]},
-  "migrations":[{"tag":"v1","new_sqlite_classes":["UnsafeTask","SafeTask","PeriodicTask","Meter"]}],
+  "migrations":[{"tag":"v1","new_sqlite_classes":["UnsafeTask","SafeTask","PeriodicTask","Meter","RefreshTask"]}],
   "d1_databases":[{"binding":"DB","database_id":"local-synthetic-db","database_name":"synthetic"}],
   "kv_namespaces":[{"binding":"KV","id":"local-synthetic-kv"}],
   "r2_buckets":[{"binding":"BUCKET","bucket_name":"local-synthetic-r2"}]

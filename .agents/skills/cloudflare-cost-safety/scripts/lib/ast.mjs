@@ -35,7 +35,9 @@ export function analyzeAST(texts,config) {
         const record={id:`${file}#${className?`${className}.`:''}${name}@${node.pos}`,name,file,className:isMethod?className:null,kind:isMethod?'method':'function',entry:false,entry_type:['fetch','scheduled','queue','alarm','constructor','onStart'].includes(name)?name:className?'rpc':null,location:loc(sf,node),node,facts:{calls:[],ifs:[],loops:[],assignments:[],returns:[]},aliases:new Map(module.aliases)};
         if(node.modifiers?.some(m=>m.kind===ts.SyntaxKind.PrivateKeyword))record.entry=false;
         functions.push(record);byNode.set(node,record);
-        if(directModule)exported.set(name,record.id);
+        // Object/class methods do not create lexical bindings. In particular,
+        // a Worker fetch() method must not shadow the global outbound fetch.
+        if(directModule&&!isMethod)exported.set(name,record.id);
         if(!isMethod&&(!directModule||ts.isCallExpression(node.parent))) calls.push({from:owner.id,to:record.id,kind:'callback',location:record.location});
         owner=record;
       }
