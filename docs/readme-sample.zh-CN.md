@@ -4,7 +4,7 @@
 
 **Cloudflare 部署前必须做的检查**
 
-**1.01** · Codex Skill · [English](../README.en.md) · [MIT](../LICENSE)
+**1.0.2** · Codex Skill · [English](../README.en.md) · [MIT](../LICENSE)
 
 `cloudflare-cost-safety` 是一个给 Codex 用的成本检查 Skill，帮你在上线前检查代码和配置，提前发现容易让 Cloudflare 费用超出预期的问题：
 
@@ -95,6 +95,6 @@ npm run install-skill -- --project /ABSOLUTE/APPLICATION
 
 [命令行与报告说明](usage.zh-CN.md) · [发布流程](ci.md) · [签名与信任](trust.md) · [实际验证记录](test-results/README.md)
 
-展示版本 **1.01**、标准版本 `1.0.1`、Git 标签 `v1.01` 对应同一版本。每次提交都递增版本号，包括文档与 CI 改动，具体流程见[版本管理](versioning.md)。
+当前版本为 **1.0.2**，README、Skill、软件包和报告统一使用三段式版本号，Git 标签为 `v1.0.2`。每次提交都递增版本号，包括文档与 CI 改动，具体流程见[版本管理](versioning.md)。
 
 项目代码采用 [MIT](../LICENSE)。随包 Cloudflare 官方 Skill 的 [Apache-2.0 许可](../.agents/skills/cloudflare-cost-safety/vendor/CLOUDFLARE-LICENSE)与[出处说明](../.agents/skills/cloudflare-cost-safety/vendor/NOTICE)保持保留。

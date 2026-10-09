@@ -1,0 +1,59 @@
+{
+  "ran_at": "2026-10-09T05:49:16.120Z",
+  "node": "v24.11.1",
+  "records": [
+    {
+      "name": "unit-integration",
+      "command": [
+        "/usr/bin/node",
+        "--test",
+        "--test-concurrency=1",
+        "tests/unit/fixtures.test.mjs",
+        "tests/integration/deployment-official.test.mjs",
+        "tests/integration/forward-regressions.test.mjs",
+        "tests/integration/mutations.test.mjs",
+        "tests/integration/native-controls.test.mjs",
+        "tests/integration/release.test.mjs",
+        "tests/integration/safety-gate.test.mjs",
+        "tests/integration/sandbox.test.mjs",
+        "tests/integration/sealed-publisher.test.mjs"
+      ],
+      "exit_code": 0,
+      "duration_ms": 37659,
+      "log": "/home/ubuntu/github/cloudflare-preflight/.cost-safety/test-results/unit-integration.log",
+      "status": "passed"
+    },
+    {
+      "name": "workerd",
+      "command": [
+        "python3",
+        "scripts/sandbox.py",
+        "--runtime",
+        "--timeout",
+        "50",
+        "--",
+        "/usr/bin/node",
+        "node_modules/vitest/vitest.mjs",
+        "run",
+        "--configLoader",
+        "native"
+      ],
+      "exit_code": 0,
+      "duration_ms": 4016,
+      "log": "/home/ubuntu/github/cloudflare-preflight/.cost-safety/test-results/workerd.log",
+      "status": "passed"
+    },
+    {
+      "name": "package",
+      "command": [
+        "/usr/bin/node",
+        "scripts/check-package.mjs"
+      ],
+      "exit_code": 0,
+      "duration_ms": 9462,
+      "log": "/home/ubuntu/github/cloudflare-preflight/.cost-safety/test-results/package.log",
+      "status": "passed"
+    }
+  ],
+  "passed": true
+}

@@ -2,7 +2,7 @@
 
 **简体中文** | [English](usage.en.md) · [返回项目首页](../README.md)
 
-本页保留安装、命令行预检与受控发布的完整操作说明。当前展示版本为 **1.01**，标准版本为 `1.0.1`，Git 标签为 `v1.01`。首次了解项目可先阅读首页的检查示例。
+本页保留安装、命令行预检与受控发布的完整操作说明。当前版本为 **1.0.2**，Git 标签为 `v1.0.2`；README、Skill、软件包和报告使用同一个三段式版本号。首次了解项目可先阅读首页的检查示例。
 
 ## 本地准备与验证
 
@@ -25,9 +25,9 @@ npm run install-skill -- --project /ABSOLUTE/APPLICATION
 npm run install-skill -- --skills-dir /ABSOLUTE/TRUSTED/skills
 ```
 
-安装器不联网、不覆盖现有 Skill，复制已准备的 11 个生产依赖及许可证，包含 Python 沙箱。`npm run check:package` 会生成 `.cost-safety/cloudflare-cost-safety-1.0.1.tar.gz`，实际解包并在只能看到干净应用的离线环境中运行 CLI。也可解包到应用的 `.agents/skills/`。宿主需重新发现技能；本项目未验证当前 Codex build 的自动重载或隐式匹配。
+安装器不联网、不覆盖现有 Skill，复制已准备的 11 个生产依赖及许可证，包含 Python 沙箱。`npm run check:package` 会生成 `.cost-safety/cloudflare-cost-safety-1.0.2.tar.gz`，实际解包并在只能看到干净应用的离线环境中运行 CLI。也可解包到应用的 `.agents/skills/`。宿主需重新发现技能；本项目未验证当前 Codex build 的自动重载或隐式匹配。
 
-安装后的版本信息保存在 Skill 内的 [version.json](../.agents/skills/cloudflare-cost-safety/version.json)。运行 `node /TRUSTED/skill/scripts/cli.mjs version` 可查看展示版本、标准版本和 Git 标签；`--version` 仅输出标准版本号。
+安装后的版本信息保存在 Skill 内的 [version.json](../.agents/skills/cloudflare-cost-safety/version.json)。运行 `node /TRUSTED/skill/scripts/cli.mjs version` 可查看版本和 Git 标签；`--version` 仅输出版本号。
 
 项目级 Skill 用于发现与审查。真正的发布验证器、信任文件和签名私钥必须放在候选仓库之外，使用受保护的安装版本。不要让候选代码修改验证器后再获得签名或发布凭证。
 

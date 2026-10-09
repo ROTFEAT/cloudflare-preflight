@@ -1,5 +1,17 @@
 # 更新日志 / Changelog
 
+## 1.0.2 — 2026-10-09
+
+Git tag: `v1.0.2`
+
+- 统一使用 `MAJOR.MINOR.PATCH` 三段式版本号，README、Skill、软件包、报告与 Git 标签不再维护单独的两位小数展示编号。
+- 保留“每次提交都升版”的约定；文档和 CI 改动也至少递增 PATCH，兼容新增和不兼容改动分别递增 MINOR、MAJOR。
+- 同步版本清单、Skill 元数据、规则表和双语文档；为兼容现有 CLI 输出，`display_version` 字段保留且与 `version` 相同。
+
+Uses one SemVer across the README, Skill, package, reports, and Git tags. Every commit still increments the version, including documentation and CI changes. The retained `display_version` field equals `version`. Historical records and published tags keep their original identifiers.
+
+验证记录 / Verification: [1.0.2 离线测试与包检查](docs/test-results/v1.0.2/summary.json)。
+
 ## 1.01 — 2026-10-09
 
 标准版本 / Package version: `1.0.1` · Git tag: `v1.01`

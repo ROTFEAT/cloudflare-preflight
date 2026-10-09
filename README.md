@@ -3,7 +3,7 @@
 **简体中文** | [English](README.en.md)
 
 [![CI](https://github.com/ROTFEAT/cloudflare-preflight/actions/workflows/verify.yml/badge.svg?branch=main)](https://github.com/ROTFEAT/cloudflare-preflight/actions/workflows/verify.yml)
-**版本 1.01** · Codex Skill · [MIT](LICENSE) · [更新日志](CHANGELOG.md)
+**版本 1.0.2** · Codex Skill · [MIT](LICENSE) · [更新日志](CHANGELOG.md)
 
 **Cloudflare 部署前必须做的检查**
 
@@ -165,9 +165,9 @@ npm ci --ignore-scripts --registry=https://registry.npmjs.org
 npm test
 ```
 
-依赖下载与离线验证分开；测试不连接 Cloudflare 账户。统一命令执行规则、集成、门禁、沙箱、真实 workerd 和干净安装／打包检查。1.01 的[保留验证记录](docs/test-results/v1.01/summary.json)包含 104 个 Node 测试、17 个 workerd 测试及包检查；后续结果以 [CI](https://github.com/ROTFEAT/cloudflare-preflight/actions/workflows/verify.yml) 为准。
+依赖下载与离线验证分开；测试不连接 Cloudflare 账户。统一命令执行规则、集成、门禁、沙箱、真实 workerd 和干净安装／打包检查。1.0.2 的[保留验证记录](docs/test-results/v1.0.2/summary.json)包含 104 个 Node 测试、17 个 workerd 测试及包检查；后续结果以 [CI](https://github.com/ROTFEAT/cloudflare-preflight/actions/workflows/verify.yml) 为准。
 
-展示版本 **1.01**、npm／报告版本 `1.0.1` 与 Git 标签 `v1.01` 对应同一版本。**每次提交都递增版本号，包括文档和 CI 改动**；展示版本依次为 `1.00 → 1.01 → 1.02`。已发布标签保持不变，具体流程见[版本管理](docs/versioning.md)。
+当前版本为 **1.0.2**，README、Skill、npm 和报告统一使用三段式版本号，Git 标签为 `v1.0.2`。**每次提交都递增版本号，包括文档和 CI 改动**；小改动依次为 `1.0.0 → 1.0.1 → 1.0.2`。兼容新增和不兼容改动分别递增次版本、主版本，具体流程见[版本管理](docs/versioning.md)。
 
 ## 官方资料与致谢
 

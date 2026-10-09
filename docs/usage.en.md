@@ -2,7 +2,7 @@
 
 [简体中文](usage.zh-CN.md) | **English** · [Back to the project](../README.en.md)
 
-This page contains the full installation, CLI preflight, and controlled release instructions. The display release is **1.01**, its standard version is `1.0.1`, and its Git tag is `v1.01`. Start with the README examples for an introduction.
+This page contains the full installation, CLI preflight, and controlled release instructions. The current version is **1.0.2**, with Git tag `v1.0.2`. The README, Skill, package, and reports use the same three-part version. Start with the README examples for an introduction.
 
 ## Prepare and verify locally
 
@@ -25,9 +25,9 @@ npm run install-skill -- --project /ABSOLUTE/APPLICATION
 npm run install-skill -- --skills-dir /ABSOLUTE/TRUSTED/skills
 ```
 
-The installer stays offline, refuses to overwrite an existing Skill, and copies 11 prepared production dependencies with licenses, including the Python sandbox. `npm run check:package` creates `.cost-safety/cloudflare-cost-safety-1.0.1.tar.gz`, actually extracts it, and runs the CLI offline with only the clean application available. The archive can also be extracted into an application's `.agents/skills/`. Host discovery is required; this project's tests do not establish automatic reload or implicit matching for a particular Codex build.
+The installer stays offline, refuses to overwrite an existing Skill, and copies 11 prepared production dependencies with licenses, including the Python sandbox. `npm run check:package` creates `.cost-safety/cloudflare-cost-safety-1.0.2.tar.gz`, actually extracts it, and runs the CLI offline with only the clean application available. The archive can also be extracted into an application's `.agents/skills/`. Host discovery is required; this project's tests do not establish automatic reload or implicit matching for a particular Codex build.
 
-Installed version identity is recorded in the Skill's [version.json](../.agents/skills/cloudflare-cost-safety/version.json). Run `node /TRUSTED/skill/scripts/cli.mjs version` to inspect the display version, standard version, and Git tag. `--version` prints only the standard version.
+Installed version identity is recorded in the Skill's [version.json](../.agents/skills/cloudflare-cost-safety/version.json). Run `node /TRUSTED/skill/scripts/cli.mjs version` to inspect the version and Git tag. `--version` prints only the version number.
 
 A repository Skill supports discovery and review. The actual release verifier, trust file, and signing key must stay outside the candidate repository in a protected installation. Candidate code must not be able to modify the verifier and then obtain a signature or deployment credentials.
 

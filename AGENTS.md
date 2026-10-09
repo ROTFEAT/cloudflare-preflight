@@ -4,9 +4,9 @@ This repository builds a review tool. Use `npm ci --ignore-scripts` for dependen
 
 ## Commit versioning
 
-Every new commit must increment the project version, including documentation-only, CI, and metadata changes. Keep the version bump, changelog, and intended changes in the same commit. Display versions advance one step at a time (`1.00 → 1.01 → 1.02`, with two digits after the dot); the package/report version advances by at least a SemVer PATCH, or MINOR/MAJOR when the change warrants it.
+Every new commit must increment the project version, including documentation-only, CI, and metadata changes. Keep the version bump, changelog, and intended changes in the same commit. Use one SemVer (`MAJOR.MINOR.PATCH`) for the Skill, package/report, and README display (`1.0.0 → 1.0.1 → 1.0.2`). Each commit increments at least PATCH, or MINOR/MAJOR when the change warrants it. The retained `display_version` field must equal `version`.
 
-Before committing, update the Skill's version.json, package.json/package-lock.json, SKILL.md metadata/body, agents/openai.yaml, both README files, current usage/sample documentation, CHANGELOG.md, and docs/versioning.md. Regenerate both rule catalogs with `node scripts/generate-data.mjs` and run `npm test`. Preserve historical test records and original requirements with their recorded versions. Tag each committed version with an annotated `vDISPLAY_VERSION` tag when pushing to GitHub; never move a published tag. The full policy is in [docs/versioning.md](docs/versioning.md).
+Before committing, update the Skill's version.json, package.json/package-lock.json, SKILL.md metadata/body, agents/openai.yaml, both README files, current usage/sample documentation, CHANGELOG.md, and docs/versioning.md. Regenerate both rule catalogs with `node scripts/generate-data.mjs` and run `npm test`. Preserve historical test records and original requirements with their recorded versions. Tag each committed version with an annotated `vVERSION` tag (for example, `v1.0.2`) when pushing to GitHub; never move a published tag. The full policy is in [docs/versioning.md](docs/versioning.md).
 
 ## Cloudflare deployment preflight
 

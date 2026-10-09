@@ -3,7 +3,7 @@
 [简体中文](README.md) | **English**
 
 [![CI](https://github.com/ROTFEAT/cloudflare-preflight/actions/workflows/verify.yml/badge.svg?branch=main)](https://github.com/ROTFEAT/cloudflare-preflight/actions/workflows/verify.yml)
-**Version 1.01** · Codex Skill · [MIT](LICENSE) · [Changelog](CHANGELOG.md)
+**Version 1.0.2** · Codex Skill · [MIT](LICENSE) · [Changelog](CHANGELOG.md)
 
 **Required checks before deploying to Cloudflare**
 
@@ -165,9 +165,9 @@ npm ci --ignore-scripts --registry=https://registry.npmjs.org
 npm test
 ```
 
-Dependency downloads and offline verification are separate phases. Tests do not connect to Cloudflare accounts. The unified command runs rule, integration, gate, sandbox, real workerd, and clean installation/package checks. The [retained 1.01 verification](docs/test-results/v1.01/summary.json) contains 104 Node tests, 17 workerd tests, and a package check. Consult [CI](https://github.com/ROTFEAT/cloudflare-preflight/actions/workflows/verify.yml) for subsequent results.
+Dependency downloads and offline verification are separate phases. Tests do not connect to Cloudflare accounts. The unified command runs rule, integration, gate, sandbox, real workerd, and clean installation/package checks. The [retained 1.0.2 verification](docs/test-results/v1.0.2/summary.json) contains 104 Node tests, 17 workerd tests, and a package check. Consult [CI](https://github.com/ROTFEAT/cloudflare-preflight/actions/workflows/verify.yml) for subsequent results.
 
-Display version **1.01**, npm/report version `1.0.1`, and Git tag `v1.01` identify the same release. **Every commit increments the version, including documentation and CI changes.** Display releases advance as `1.00 → 1.01 → 1.02`. Published tags remain unchanged. See the [versioning policy](docs/versioning.md) for the full workflow.
+The current version is **1.0.2**. The README, Skill, npm package, and reports use the same three-part version, with Git tag `v1.0.2`. **Every commit increments the version, including documentation and CI changes.** Small changes advance as `1.0.0 → 1.0.1 → 1.0.2`; compatible additions and breaking changes increment MINOR and MAJOR respectively. See the [versioning policy](docs/versioning.md) for the full workflow.
 
 ## Official references and acknowledgements
 
