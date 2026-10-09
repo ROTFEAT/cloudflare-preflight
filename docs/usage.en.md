@@ -2,7 +2,7 @@
 
 [简体中文](usage.zh-CN.md) | **English** · [Back to the project](../README.en.md)
 
-This page contains the full installation, CLI preflight, and controlled release instructions. The current version is **1.0.3**, with Git tag `v1.0.3`. The README, Skill, package, and reports use the same three-part version. Start with the README examples for an introduction.
+This page contains the full installation, CLI preflight, and controlled release instructions. The current version is **1.0.4**, with Git tag `v1.0.4`. The README, Skill, package, and reports use the same three-part version. Start with the README examples for an introduction.
 
 ## Prepare and verify locally
 
@@ -25,11 +25,25 @@ npm run install-skill -- --project /ABSOLUTE/APPLICATION
 npm run install-skill -- --skills-dir /ABSOLUTE/TRUSTED/skills
 ```
 
-The installer stays offline, refuses to overwrite an existing Skill, and copies 11 prepared production dependencies with licenses, including the Python sandbox. `npm run check:package` creates `.cost-safety/cloudflare-cost-safety-1.0.3.tar.gz`, actually extracts it, and runs the CLI offline with only the clean application available. The archive can also be extracted into an application's `.agents/skills/`. Host discovery is required; this project's tests do not establish automatic reload or implicit matching for a particular Codex build.
+The installer stays offline, refuses to overwrite an existing Skill, and copies 11 prepared production dependencies with licenses, including the Python sandbox. `npm run check:package` creates `.cost-safety/cloudflare-cost-safety-1.0.4.tar.gz`, actually extracts it, and runs the CLI offline with only the clean application available. The archive can also be extracted into an application's `.agents/skills/`. Host discovery is required; this project's tests do not establish automatic reload or implicit matching for a particular Codex build.
 
 Installed version identity is recorded in the Skill's [version.json](../.agents/skills/cloudflare-cost-safety/version.json). Run `node /TRUSTED/skill/scripts/cli.mjs version` to inspect the version and Git tag. `--version` prints only the version number.
 
 A repository Skill supports discovery and review. The actual release verifier, trust file, and signing key must stay outside the candidate repository in a protected installation. Candidate code must not be able to modify the verifier and then obtain a signature or deployment credentials.
+
+## Deployment Hook
+
+`--project` installation also registers a synchronous `PreToolUse` handler in the application's `.codex/hooks.json`, preserving other hooks. In a Codex CLI with Hooks enabled, open `/hooks` to review and trust the exact new definition; the project layer must also be trusted. Installation does not automatically grant trust or establish host loading. `--skills-dir` and manual archive extraction do not register a handler; register an existing prepared Skill with:
+
+```sh
+npm run install-hook -- --project /APPLICATION --skill /TRUSTED/skills/cloudflare-cost-safety
+```
+
+The Hook recognizes Wrangler/cf publication, remote previews, version and secret writes, package lifecycle scripts, literal Node/shell wrappers, framework releases, and HTTP/MCP publication calls. It denies the pending tool call and asks the agent to actually perform `$cloudflare-cost-safety`. Relevant unresolved wrappers stay INCOMPLETE; inspection never executes candidate scripts or dynamic configuration.
+
+A plain PASS file does not unlock direct deployment. Register `--release-entry /PROTECTED/cloudflare-preflight/scripts/release.mjs` during a new project installation, or pass that option plus `--replace` to `install-hook` to update an existing cost safety handler, then trust the changed definition. The external entry must match this version's source; the Hook pins its SHA-256 and permits only the documented invocation. The independent gate still verifies current signed evidence before publishing. See the [complete Hook guide](../.agents/skills/cloudflare-cost-safety/references/deployment-hook.md).
+
+Coverage is limited to observed calls in a loaded, trusted Codex host. External terminals, the dashboard, unconnected CI/Workers Builds, interactive shell input and arbitrary dynamic code remain gaps. This release verifies the offline protocol and actual extracted-package execution, not every host's loading/implicit selection or a remote deployment.
 
 ## CLI preflight and reports
 

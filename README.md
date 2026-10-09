@@ -3,7 +3,7 @@
 **简体中文** | [English](README.en.md)
 
 [![CI](https://github.com/ROTFEAT/cloudflare-preflight/actions/workflows/verify.yml/badge.svg?branch=main)](https://github.com/ROTFEAT/cloudflare-preflight/actions/workflows/verify.yml)
-**版本 1.0.3** · Codex Skill · [MIT](LICENSE) · [更新日志](CHANGELOG.md)
+**版本 1.0.4** · Codex Skill · [MIT](LICENSE) · [更新日志](CHANGELOG.md)
 
 **Cloudflare 部署前必须做的检查**
 
@@ -65,11 +65,17 @@ npm ci --ignore-scripts --registry=https://registry.npmjs.org
 npm run install-skill -- --project /ABSOLUTE/APPLICATION
 ```
 
-把 `/ABSOLUTE/APPLICATION` 替换为你的应用目录。安装器把 Skill 放入应用的 `.agents/skills/cloudflare-cost-safety/`，离线复制已准备的依赖，不覆盖现有安装。安装后确认 Codex 能发现 Skill；未显示时重新启动客户端。
+把 `/ABSOLUTE/APPLICATION` 替换为你的应用目录。安装器把 Skill 放入应用的 `.agents/skills/cloudflare-cost-safety/`，离线复制已准备的依赖，不覆盖现有安装，并在 `.codex/hooks.json` 注册部署前 Hook，保留其他 Hook。安装后确认 Codex 能发现 Skill；未显示时重新启动客户端。
+
+在支持 Hook 的 Codex CLI 中打开 `/hooks`，审阅并信任新定义，之后 Hook 才会运行。解压安装包或使用 `--skills-dir` 时，需要[单独注册 Hook](.agents/skills/cloudflare-cost-safety/references/deployment-hook.md)。
 
 ### 2. 选择检查入口
 
-**部署前检查**
+**部署前自动拦截**
+
+Hook 启用后，会在 Codex 执行相关工具前拦住 Cloudflare 发布操作，提示使用 `$cloudflare-cost-safety` 完成检查。它会识别 Worker／Pages 部署、版本上传与回滚、远程预览、会触发部署的 secret 操作，以及 npm／框架包装脚本和 Cloudflare 发布工具调用。
+
+例如，`wrangler deploy`、`wrangler versions upload`、`wrangler preview` 和脚本中实际执行部署的 `npm run ship` 都会进入检查。普通查看代码、编辑和可识别的本地 build／test 不启动完整预检；无法确定效果的发布脚本会先被拦住。
 
 向 Codex 给出部署任务，并明确要求先检查：
 
@@ -79,7 +85,7 @@ npm run install-skill -- --project /ABSOLUTE/APPLICATION
 
 部署、发布、preview、staging、版本晋升和 rollback 都属于检查范围，包括 npm／框架脚本包装的发布命令。普通编辑和已确认的纯本地 build／test 不会默认触发。
 
-Skill 描述引导宿主在这些任务中选用预检；隐式匹配依赖客户端版本，本项目尚未验证完整触发矩阵。受控发布入口会显式运行独立门禁。
+Hook 负责拦截并提示，Agent 仍需实际执行 Skill 审查。检查完成后，通过已登记的受保护发布入口继续，由独立门禁重新核验当前证据；旧报告或普通 PASS 文件不能解锁直接部署。安装、命令范围和继续发布方式见[Hook 说明](.agents/skills/cloudflare-cost-safety/references/deployment-hook.md)。完整的客户端隐式选择和 Hook 加载矩阵尚未验证。
 
 **手动检查：通过 /skills 选择 Skill**
 
@@ -147,7 +153,7 @@ flowchart TD
 ## 使用边界
 
 - **预检只做审查。** 不连接 Cloudflare 账户，不持有部署凭证，不发布，也不会停止已运行的 Alarm／Queue 任务。
-- **安装 Skill 不会自动管住所有发布路径。** 直接 CLI、控制台、未接入的 Workers Builds 或其他 CI 仍属于部分覆盖，需要逐个接入受控入口。
+- **Hook 只覆盖受支持的 Codex 工具调用。** 外部终端、控制台、未接入的 Workers Builds 或其他 CI 仍属于部分覆盖，需要逐个接入受控入口。
 - **它不承诺月度金额硬上限。** 预算告警、CPU 限制和 Queue 暂停各有作用范围，不能直接当作账户费用封顶。
 - **看不清的部分会保留为未知或未完成。** ORM、动态派发、外部 SDK、云端状态及 P1 产品有明确缺口，见[覆盖说明](docs/coverage.md)。
 
@@ -156,6 +162,7 @@ flowchart TD
 | 你想做什么 | 从这里开始 |
 | --- | --- |
 | 安装、查看版本、运行 CLI、理解报告与退出码 | [使用指南](docs/usage.zh-CN.md) |
+| 启用部署 Hook、查看触发命令与继续发布 | [Hook 说明](.agents/skills/cloudflare-cost-safety/references/deployment-hook.md) |
 | 把门禁接入发布流程 | [GitHub Actions 与发布入口](docs/ci.md) |
 | 配置信任、签名与逐项审批 | [签名与信任](docs/trust.md) |
 | 了解规则支持范围与测试依据 | [覆盖说明](docs/coverage.md) |
@@ -168,9 +175,9 @@ npm ci --ignore-scripts --registry=https://registry.npmjs.org
 npm test
 ```
 
-依赖下载与离线验证分开；测试不连接 Cloudflare 账户。统一命令执行规则、集成、门禁、沙箱、真实 workerd 和干净安装／打包检查。1.0.3 的[保留验证记录](docs/test-results/v1.0.3/summary.json)包含 112 个 Node 测试、22 个 workerd 测试及包检查；后续结果以 [CI](https://github.com/ROTFEAT/cloudflare-preflight/actions/workflows/verify.yml) 为准。
+依赖下载与离线验证分开；测试不连接 Cloudflare 账户。统一命令执行规则、集成、门禁、沙箱、真实 workerd 和干净安装／打包检查。1.0.4 的[保留验证记录](docs/test-results/v1.0.4/summary.json)包含 129 个 Node 测试、22 个 workerd 测试及包检查；后续结果以 [CI](https://github.com/ROTFEAT/cloudflare-preflight/actions/workflows/verify.yml) 为准。
 
-当前版本为 **1.0.3**，README、Skill、npm 和报告统一使用三段式版本号，Git 标签为 `v1.0.3`。**每次提交都递增版本号，包括文档和 CI 改动**；小改动依次为 `1.0.1 → 1.0.2 → 1.0.3`。兼容新增和不兼容改动分别递增次版本、主版本，具体流程见[版本管理](docs/versioning.md)。
+当前版本为 **1.0.4**，README、Skill、npm 和报告统一使用三段式版本号，Git 标签为 `v1.0.4`。**每次提交都递增版本号，包括文档和 CI 改动**；小改动依次为 `1.0.2 → 1.0.3 → 1.0.4`。兼容新增和不兼容改动分别递增次版本、主版本，具体流程见[版本管理](docs/versioning.md)。
 
 ## 官方资料与致谢
 

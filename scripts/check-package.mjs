@@ -4,6 +4,7 @@ import os from 'node:os';
 import path from 'node:path';
 import {spawnSync} from 'node:child_process';
 import {installSkill,repository} from './package-lib.mjs';
+import {installHook} from './install-hook.mjs';
 import {sha256,writeJSON,json,VERSION,DISPLAY_VERSION,SKILL_ROOT} from '../.agents/skills/cloudflare-cost-safety/scripts/lib/core.mjs';
 
 const directory=fs.mkdtempSync(path.join(os.tmpdir(),'cf-cost-package-'));
@@ -28,6 +29,16 @@ try {
   if(installedRelease.version!==VERSION||installedRelease.display_version!==DISPLAY_VERSION)throw new Error('installed_release_version_mismatch');
   const inventory=JSON.parse(fs.readFileSync(path.join(skill,'runtime-dependencies.json')));
   for(const pkg of inventory.packages)for(const [file,expected] of Object.entries(pkg.files))if(sha256(fs.readFileSync(path.join(skill,pkg.path,file)))!==expected)throw new Error('dependency_bytes_changed');
+  const hookInstallation=installHook({project:candidate,skill,node:'/usr/bin/node'});
+  const hookChecks=[];
+  for(const [command,expected] of [['wrangler deploy','deny'],['wrangler types','allow']]) {
+    const input=JSON.stringify({hook_event_name:'PreToolUse',cwd:'/workspace',tool_name:'Bash',tool_input:{command}});
+    const checked=spawnSync('python3',[path.join(repository,'scripts/sandbox.py'),'--cwd',candidate,'--runtime','--memory-mb','512','--timeout','12','--','/usr/bin/python3','-I','.agents/skills/cloudflare-cost-safety/hooks/pre-tool-use.py','--node','/usr/bin/node'],{input,encoding:'utf8',timeout:15000,maxBuffer:65536,env:{PATH:process.env.PATH}});
+    const output=JSON.parse(checked.stdout.split('\n').find(line=>line.startsWith('{"hookSpecificOutput"')||line==='{}')||'null');
+    const decision=output?.hookSpecificOutput?.permissionDecision||(output&&Object.keys(output).length===0?'allow':null);
+    if(checked.status!==0||decision!==expected)throw new Error(`isolated_package_hook_check_failed:${expected}`);
+    hookChecks.push({command,decision,network:'denied',exit_code:checked.status,stdout:checked.stdout});
+  }
   // The namespace can see only this clean app and OS files; it cannot fall
   // back to this repository's node_modules or access the network/home.
   const executed=spawnSync('python3',[path.join(repository,'scripts/sandbox.py'),'--cwd',candidate,'--timeout','20','--','node','.agents/skills/cloudflare-cost-safety/scripts/cli.mjs','preflight','--root','/workspace','--artifact','main.js','--builder','package-check-direct-js@1','--local-tests','--output','/tmp/package-report'],{encoding:'utf8',timeout:30000,maxBuffer:100000,env:{PATH:process.env.PATH}});
@@ -37,7 +48,7 @@ try {
   // Missing semantic review must deny the gate even in a clean installation.
   if(!fs.existsSync(path.join(skill,'scripts/sandbox.py')))throw new Error('bundled_sandbox_missing');
   let refused=false;try{installSkill(distribution);}catch{refused=true;}if(!refused)throw new Error('installer_overwrote_existing_skill');
-  const record={status:'passed',version:VERSION,display_version:DISPLAY_VERSION,tag:`v${DISPLAY_VERSION}`,archive,sha256:sha256(fs.readFileSync(archive)),bytes:fs.statSync(archive).size,prepared_dependencies:installed.dependencies,official_revision:installed.official_revision,clean_install:'actual tar extraction and offline isolated CLI',version_check:versionCheck.stdout,semantic_review:'not executed; expected exit 2',runtime_network:'denied',stdout:executed.stdout};
+  const record={status:'passed',version:VERSION,display_version:DISPLAY_VERSION,tag:`v${DISPLAY_VERSION}`,archive,sha256:sha256(fs.readFileSync(archive)),bytes:fs.statSync(archive).size,prepared_dependencies:installed.dependencies,official_revision:installed.official_revision,clean_install:'actual tar extraction and offline isolated CLI and Hook',hook_installation:hookInstallation,hook_checks:hookChecks,host_hook_activation:'not tested; requires host trust',version_check:versionCheck.stdout,semantic_review:'not executed; expected exit 2',runtime_network:'denied',stdout:executed.stdout};
   writeJSON(path.join(repository,'.cost-safety/package-check.json'),record);
   console.log(JSON.stringify(record,null,2));
 } finally {fs.rmSync(directory,{recursive:true,force:true});}

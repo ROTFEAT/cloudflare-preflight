@@ -2,7 +2,7 @@
 
 **简体中文** | [English](usage.en.md) · [返回项目首页](../README.md)
 
-本页保留安装、命令行预检与受控发布的完整操作说明。当前版本为 **1.0.3**，Git 标签为 `v1.0.3`；README、Skill、软件包和报告使用同一个三段式版本号。首次了解项目可先阅读首页的检查示例。
+本页保留安装、命令行预检与受控发布的完整操作说明。当前版本为 **1.0.4**，Git 标签为 `v1.0.4`；README、Skill、软件包和报告使用同一个三段式版本号。首次了解项目可先阅读首页的检查示例。
 
 ## 本地准备与验证
 
@@ -25,11 +25,25 @@ npm run install-skill -- --project /ABSOLUTE/APPLICATION
 npm run install-skill -- --skills-dir /ABSOLUTE/TRUSTED/skills
 ```
 
-安装器不联网、不覆盖现有 Skill，复制已准备的 11 个生产依赖及许可证，包含 Python 沙箱。`npm run check:package` 会生成 `.cost-safety/cloudflare-cost-safety-1.0.3.tar.gz`，实际解包并在只能看到干净应用的离线环境中运行 CLI。也可解包到应用的 `.agents/skills/`。宿主需重新发现技能；本项目未验证当前 Codex build 的自动重载或隐式匹配。
+安装器不联网、不覆盖现有 Skill，复制已准备的 11 个生产依赖及许可证，包含 Python 沙箱。`npm run check:package` 会生成 `.cost-safety/cloudflare-cost-safety-1.0.4.tar.gz`，实际解包并在只能看到干净应用的离线环境中运行 CLI。也可解包到应用的 `.agents/skills/`。宿主需重新发现技能；本项目未验证当前 Codex build 的自动重载或隐式匹配。
 
 安装后的版本信息保存在 Skill 内的 [version.json](../.agents/skills/cloudflare-cost-safety/version.json)。运行 `node /TRUSTED/skill/scripts/cli.mjs version` 可查看版本和 Git 标签；`--version` 仅输出版本号。
 
 项目级 Skill 用于发现与审查。真正的发布验证器、信任文件和签名私钥必须放在候选仓库之外，使用受保护的安装版本。不要让候选代码修改验证器后再获得签名或发布凭证。
+
+## 部署前 Hook
+
+`--project` 安装会同时在应用的 `.codex/hooks.json` 注册同步 `PreToolUse` Hook，并保留其他 Hook。在支持且启用了 Hooks 的 Codex CLI 中打开 `/hooks`，审阅并信任新定义；项目配置层也必须可信。仅安装不会自动信任或证明客户端已加载 Hook。`--skills-dir` 或手动解压不注册 Hook，已有安装可单独运行：
+
+```sh
+npm run install-hook -- --project /APPLICATION --skill /TRUSTED/skills/cloudflare-cost-safety
+```
+
+Hook 识别 Wrangler／cf 发布、远程预览、版本与 secret 写入，以及实际执行这些操作的 npm 前后置脚本、字面量 Node／shell 包装、框架、HTTP 和 MCP 调用。命中后先拒绝工具调用，提示 Agent 真实执行 `$cloudflare-cost-safety`。无法展开的相关脚本保持 INCOMPLETE；不会执行候选脚本或动态配置来试探效果。
+
+普通 PASS 文件不会解锁直接发布。要在受保护入口完成检查后继续，给新安装传入 `--release-entry /PROTECTED/cloudflare-preflight/scripts/release.mjs`，或给 `install-hook` 传入同一选项及 `--replace` 更新现有本项目 handler，再重新信任。入口必须在应用外且匹配本版本源码；Hook 固定其 SHA-256，只允许规定格式的调用，实际证据仍由独立 gate 核验。完整步骤与命令表见 [Hook 说明](../.agents/skills/cloudflare-cost-safety/references/deployment-hook.md)。
+
+Hook 仅覆盖已加载的、可信的 Codex 工具调用；外部终端、控制台、未接入 CI／Workers Builds、交互式 shell 输入和任意动态代码仍有缺口。本版本已验证离线协议与打包后的实际执行，未验证每种客户端的加载／自动选择，也没有进行远程发布。
 
 ## 命令行预检与报告
 

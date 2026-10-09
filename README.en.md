@@ -3,7 +3,7 @@
 [简体中文](README.md) | **English**
 
 [![CI](https://github.com/ROTFEAT/cloudflare-preflight/actions/workflows/verify.yml/badge.svg?branch=main)](https://github.com/ROTFEAT/cloudflare-preflight/actions/workflows/verify.yml)
-**Version 1.0.3** · Codex Skill · [MIT](LICENSE) · [Changelog](CHANGELOG.md)
+**Version 1.0.4** · Codex Skill · [MIT](LICENSE) · [Changelog](CHANGELOG.md)
 
 **Required checks before deploying to Cloudflare**
 
@@ -65,11 +65,17 @@ npm ci --ignore-scripts --registry=https://registry.npmjs.org
 npm run install-skill -- --project /ABSOLUTE/APPLICATION
 ```
 
-Replace `/ABSOLUTE/APPLICATION` with your application directory. The installer writes `.agents/skills/cloudflare-cost-safety/` inside that application, copies prepared dependencies offline, and refuses to overwrite an existing installation. Confirm Codex discovers the Skill; restart the client if it does not appear.
+Replace `/ABSOLUTE/APPLICATION` with your application directory. The installer writes `.agents/skills/cloudflare-cost-safety/`, copies prepared dependencies offline, refuses to overwrite an existing Skill, and registers the deployment Hook in `.codex/hooks.json` while preserving other hooks. Confirm Codex discovers the Skill; restart the client if it does not appear.
+
+In a Codex CLI that supports Hooks, open `/hooks` and review and trust the new definition before it can run. Archive extraction and `--skills-dir` installations need [separate Hook registration](.agents/skills/cloudflare-cost-safety/references/deployment-hook.md).
 
 ### 2. Choose a review entry point
 
-**Before deployment**
+**Automatic interception before deployment**
+
+Once enabled, the Hook intercepts Cloudflare publication before Codex executes the tool and asks the agent to use `$cloudflare-cost-safety`. It recognizes Worker/Pages deployments, version uploads and rollbacks, remote previews, secret writes that deploy, package/framework wrappers, and Cloudflare publishing tools.
+
+Examples include `wrangler deploy`, `wrangler versions upload`, `wrangler preview`, and `npm run ship` when its actual script deploys. Ordinary code reads, edits and recognized local build/test commands do not start the full preflight. Unresolved release wrappers are blocked pending inspection.
 
 Give Codex the deployment task and explicitly request the review first:
 
@@ -79,7 +85,7 @@ Deploy this project to Cloudflare production after completing the cost safety re
 
 Deployment, publishing, previews, staging, version promotion, and rollback are in scope, including release commands wrapped by npm or frameworks. Ordinary edits and confirmed local-only builds/tests do not trigger the default review.
 
-The Skill description guides the host toward preflight for these tasks. Implicit matching depends on the client version; the complete trigger matrix has not been verified. The controlled release entry runs the independent gate explicitly.
+The Hook intercepts and provides instructions; the agent must actually perform the Skill review. Continue through a registered protected release entry, whose independent gate checks current evidence. An old report or plain PASS file does not unlock direct deployment. See [Hook setup, command coverage and release handoff](.agents/skills/cloudflare-cost-safety/references/deployment-hook.md). The full client implicit-selection and Hook-loading matrix has not been verified.
 
 **Manual review: select the Skill through /skills**
 
@@ -147,7 +153,7 @@ In a connected release workflow, the independent gate checks trusted signed evid
 ## Boundaries
 
 - **Preflight performs review only.** It does not connect to Cloudflare accounts, hold deployment credentials, publish, or stop existing alarm/Queue work.
-- **Installing the Skill does not control every release path.** Direct CLI, dashboard, unconnected Workers Builds, and other CI remain partial coverage and need individual integration.
+- **The Hook covers supported Codex tool calls.** External terminals, the dashboard, unconnected Workers Builds, and other CI remain partial coverage and need individual integration.
 - **It does not promise a hard monthly spending cap.** Budget alerts, CPU limits, and Queue pauses have specific scopes; none independently establishes an account-wide cap.
 - **Unresolved behavior remains unknown or incomplete.** ORM, dynamic dispatch, external SDKs, cloud state, and P1 products have explicit gaps. See [coverage documentation, in Chinese](docs/coverage.md).
 
@@ -156,6 +162,7 @@ In a connected release workflow, the independent gate checks trusted signed evid
 | What you want to do | Start here |
 | --- | --- |
 | Install, inspect versions, run the CLI, understand reports and exit codes | [Usage guide](docs/usage.en.md) |
+| Enable the deployment Hook, inspect triggers and continue a release | [Hook guide](.agents/skills/cloudflare-cost-safety/references/deployment-hook.md) |
 | Connect a gate to your release workflow | [GitHub Actions and release entry, in Chinese](docs/ci.md) |
 | Configure trust, signing, and per-finding approvals | [Trust and signing, in Chinese](docs/trust.md) |
 | Inspect supported rules and their test evidence | [Coverage, in Chinese](docs/coverage.md) |
@@ -168,9 +175,9 @@ npm ci --ignore-scripts --registry=https://registry.npmjs.org
 npm test
 ```
 
-Dependency downloads and offline verification are separate phases. Tests do not connect to Cloudflare accounts. The unified command runs rule, integration, gate, sandbox, real workerd, and clean installation/package checks. The [retained 1.0.3 verification](docs/test-results/v1.0.3/summary.json) contains 112 Node tests, 22 workerd tests, and a package check. Consult [CI](https://github.com/ROTFEAT/cloudflare-preflight/actions/workflows/verify.yml) for subsequent results.
+Dependency downloads and offline verification are separate phases. Tests do not connect to Cloudflare accounts. The unified command runs rule, integration, gate, sandbox, real workerd, and clean installation/package checks. The [retained 1.0.4 verification](docs/test-results/v1.0.4/summary.json) contains 129 Node tests, 22 workerd tests, and a package check. Consult [CI](https://github.com/ROTFEAT/cloudflare-preflight/actions/workflows/verify.yml) for subsequent results.
 
-The current version is **1.0.3**. The README, Skill, npm package, and reports use the same three-part version, with Git tag `v1.0.3`. **Every commit increments the version, including documentation and CI changes.** Small changes advance as `1.0.1 → 1.0.2 → 1.0.3`; compatible additions and breaking changes increment MINOR and MAJOR respectively. See the [versioning policy](docs/versioning.md) for the full workflow.
+The current version is **1.0.4**. The README, Skill, npm package, and reports use the same three-part version, with Git tag `v1.0.4`. **Every commit increments the version, including documentation and CI changes.** Small changes advance as `1.0.2 → 1.0.3 → 1.0.4`; compatible additions and breaking changes increment MINOR and MAJOR respectively. See the [versioning policy](docs/versioning.md) for the full workflow.
 
 ## Official references and acknowledgements
 

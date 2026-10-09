@@ -43,6 +43,10 @@ SQL 使用 `node-sql-parser` 的 SQLite 语法及 Python SQLite EXPLAIN。schema
 
 DEP-01…10／OFF-01…10 共 20 个自动化场景实际执行意图分类、静态脚本展开、官方文件读取、门禁及模拟发布器断言。npm/pnpm/yarn 生命周期和字面量 Node 包装器只读展开；动态命令需要确认目标。这些测试不等同于 Codex 宿主的隐式 Skill 选择。
 
+1.0.4 增加同步 `PreToolUse` Hook，项目安装自动注册定义，现有无关 Hook 保留；定义必须由宿主审阅信任后运行。17 项新增集成测试覆盖命令／包装／生命周期识别、工作目录、Cloudflare MCP／HTTP 发布、只读负例、异常与不可信输入，以及登记入口到实际 gate 和模拟发布器的交接。干净打包检查实际在断网只读 namespace 中运行解包后的 Python／Node Hook，分别核验 deny 和 allow；未声称完成 Codex 宿主实际加载或隐式前向评估。
+
+Hook 拒绝直接发布并提示真实执行 Skill；有效签名也不让直接命令绕过 gate。登记的外部入口固定本版本发布代码 SHA-256，只允许精确的字面量调用，由入口核验当前签名／源码／产物／目标后执行已经授权的受信发布器。详情见 [Hook 说明](../.agents/skills/cloudflare-cost-safety/references/deployment-hook.md)。外部终端、交互式 `write_stdin` 输入、任意解释器／SDK／插件和未接入云端入口仍是覆盖缺口。启动后的分析异常有显式 deny；未加载、未信任、禁用或 launcher 启动前失败不能由脚本强制拦截。
+
 已完成两个独立显式前向评估批次：第一批三个应用，修正后针对两个 DO 应用复查；不是每个场景重复三次。当前会话没有可查询的精确宿主 build／模型后端 ID，也没有安装后重载和隔离宿主隐式选择测试接口，因此隐式触发为 **未验证**。受控发布入口总是显式调用独立 gate，不依赖隐式选择。
 
 固定官方 `cloudflare/skills` commit 为 `41e0d19858946d18af9ee2c2feebbe2e11d829ff`。普通 Worker 实际读取 workers-best-practices 入口及三份 reference、wrangler 入口；DO 场景再读 durable-objects 入口及三份 reference，共九份。loaded 与 reviewed 分开；来源、版本、缺文件或内容漂移均有拒绝测试。

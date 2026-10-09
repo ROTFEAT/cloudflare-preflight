@@ -4,7 +4,7 @@
 
 **Cloudflare 部署前必须做的检查**
 
-**1.0.3** · Codex Skill · [English](../README.en.md) · [MIT](../LICENSE)
+**1.0.4** · Codex Skill · [English](../README.en.md) · [MIT](../LICENSE)
 
 `cloudflare-cost-safety` 是一个给 Codex 用的成本检查 Skill，帮你在上线前检查代码和配置，提前发现容易让 Cloudflare 费用超出预期的问题：
 
@@ -74,7 +74,7 @@ npm run install-skill -- --project /ABSOLUTE/APPLICATION
 把这个项目部署到 Cloudflare production，先完成成本安全检查。
 ```
 
-部署、发布、preview、staging、版本晋升和 rollback 都属于检查范围。宿主的隐式选用依赖客户端版本，完整触发矩阵尚未验证；接入受控发布流程时，入口会显式执行独立门禁。
+部署、发布、preview、staging、版本晋升和 rollback 都属于检查范围。项目安装会注册部署前 Hook；在 Codex CLI 的 `/hooks` 中审阅并信任后，它会先拦截相关发布命令并提示运行 Skill。普通 PASS 文件不能解锁直接部署，检查完成后通过已登记的受保护入口继续，由独立门禁重新核验。命令范围和步骤见 [Hook 说明](../.agents/skills/cloudflare-cost-safety/references/deployment-hook.md)。客户端完整加载和隐式选择矩阵尚未验证。
 
 **想提前检查时：**
 
@@ -92,10 +92,10 @@ npm run install-skill -- --project /ABSOLUTE/APPLICATION
 
 预检只读，不连接 Cloudflare 账户，不持有部署凭证，也不会停止正在运行的任务。
 
-接入独立门禁的发布入口会拒绝 BLOCK、INCOMPLETE、工具错误和未批准的 REVIEW。直接 CLI、控制台与未接入的 Workers Builds 等路径仍属于部分覆盖。这个 Skill 不承诺月度金额硬上限。
+接入独立门禁的发布入口会拒绝 BLOCK、INCOMPLETE、工具错误和未批准的 REVIEW。Hook 只覆盖受支持的 Codex 工具调用；外部终端、控制台与未接入的 Workers Builds 等路径仍属于部分覆盖。这个 Skill 不承诺月度金额硬上限。
 
 [命令行与报告说明](usage.zh-CN.md) · [发布流程](ci.md) · [签名与信任](trust.md) · [实际验证记录](test-results/README.md)
 
-当前版本为 **1.0.3**，README、Skill、软件包和报告统一使用三段式版本号，Git 标签为 `v1.0.3`。每次提交都递增版本号，包括文档与 CI 改动，具体流程见[版本管理](versioning.md)。
+当前版本为 **1.0.4**，README、Skill、软件包和报告统一使用三段式版本号，Git 标签为 `v1.0.4`。每次提交都递增版本号，包括文档与 CI 改动，具体流程见[版本管理](versioning.md)。
 
 项目代码采用 [MIT](../LICENSE)。随包 Cloudflare 官方 Skill 的 [Apache-2.0 许可](../.agents/skills/cloudflare-cost-safety/vendor/CLOUDFLARE-LICENSE)与[出处说明](../.agents/skills/cloudflare-cost-safety/vendor/NOTICE)保持保留。

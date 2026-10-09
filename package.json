@@ -1,6 +1,6 @@
 {
   "name": "cloudflare-cost-safety",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Offline Cloudflare predeployment cost review skill and independent release gate",
   "type": "module",
   "license": "MIT",
@@ -16,6 +16,7 @@
     "preflight": "node .agents/skills/cloudflare-cost-safety/scripts/cli.mjs preflight",
     "gate": "node .agents/skills/cloudflare-cost-safety/scripts/cli.mjs gate",
     "install-skill": "node scripts/install.mjs",
+    "install-hook": "node scripts/install-hook.mjs",
     "test": "node scripts/test.mjs",
     "test:unit": "node --test --test-concurrency=1 tests/unit/*.test.mjs tests/integration/*.test.mjs",
     "test:runtime": "python3 scripts/sandbox.py --runtime --timeout 50 -- node node_modules/vitest/vitest.mjs run --configLoader native",

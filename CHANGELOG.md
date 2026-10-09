@@ -1,5 +1,19 @@
 # 更新日志 / Changelog
 
+## 1.0.4 — 2026-10-09
+
+Git tag: `v1.0.4`
+
+- 增加同步 Codex `PreToolUse` Hook，在发布工具执行前拦截相关 Cloudflare 操作并引导真实执行 Skill 审查。项目安装同时注册 Hook，保留无关配置；新增单独注册、定向替换和外部发布入口登记。
+- 扩展共用部署意图识别：Worker／Pages／版本／远程预览／secret 操作，npm/pnpm/yarn/bun 生命周期、工作目录、字面量 Node／shell 包装、框架、HTTP 和 MCP 发布调用。区分被引用的示例、帮助、可识别的本地命令与显式 false 标记；相关未知保持 INCOMPLETE。
+- Hook 不接受 PASS 标记解锁直接发布。登记的受保护入口固定源码 SHA-256，独立 gate 仍重新核验当前签名证据与同一产物，再调用已有授权发布器。
+- launcher 限制输入、分析内存与时间，清理分析进程环境，对捕获的错误返回受支持的 deny；候选输入始终只读，不执行脚本或动态配置。
+- 新增 17 项集成测试和干净解包后的断网 Hook deny／allow 验证。完整验证为 129 项 Node、22 项 workerd 与包检查；Node 集成阶段总 watchdog 调整为 90 秒，单个分析与运行时限制保留。
+
+Adds the Codex deployment Hook, project registration and a pinned protected-entry handoff. Offline tests cover command/tool selection, failures, installation, fake evidence and source drift using mock publishers. Host trust/loading remains explicit and unverified; external terminals, dashboard and independent cloud builds remain partial coverage. No Cloudflare remote operation is executed.
+
+验证记录 / Verification: [1.0.4 离线测试与包检查](docs/test-results/v1.0.4/summary.json)。
+
 ## 1.0.3 — 2026-10-09
 
 Git tag: `v1.0.3`

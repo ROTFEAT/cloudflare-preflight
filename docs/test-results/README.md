@@ -1,5 +1,15 @@
 # 实际运行证据
 
+## 1.0.4 — 2026-10-09
+
+版本 **1.0.4** 的实际输出保存在 [v1.0.4/](v1.0.4/)。[summary.json](v1.0.4/summary.json) 记录统一命令全部三个阶段通过：129 个 Node 测试、22 个 workerd 测试，以及干净安装／离线打包检查。原始日志：[统一命令](v1.0.4/unified.log)、[Node](v1.0.4/unit-integration.log)、[workerd](v1.0.4/workerd.log)、[打包](v1.0.4/package.log)。这些文件是最终代码实际输出的原字节副本。
+
+新增 17 项 Hook 集成测试实际执行 Python／Node 协议、只读命令分析与安装器，覆盖部署／预览／secret／MCP／HTTP、包生命周期、工作目录、引用示例、本地负例、异常与输入限制，以及受保护入口到真实 gate 的交接。测试签名明确为 `MOCK_NO_MODEL_CALL`，发布器只写本地模拟标记；伪造证据、源码漂移、额外命令、后台操作符和入口变化均不会触发该模拟发布器。没有执行候选脚本或远程 Cloudflare 操作。
+
+[package-check.json](v1.0.4/package-check.json) 记录当前版本、安装包实际 SHA-256，以及干净解包后在断网／只读 namespace 中运行 Hook 的 deny 与 allow 输出；allow 负例避免把运行时启动失败的 deny 误当成成功识别。版本查询和缺少语义审查时的预期 INCOMPLETE / exit 2 也保留。未执行客户端实际加载／隐式选择或生产发布评估；Hook 仍需宿主信任，独立发布门禁仍为必要边界。
+
+The actual 1.0.4 outputs preserve 129 passing Node tests, 22 passing workerd tests, and clean installation/package verification. The extracted Hook is exercised offline for both denial and allowed local work. Host trust/loading is not established by these tests; synthetic reviews and local mock publishers are not production release evidence.
+
 ## 1.0.3 — 2026-10-09
 
 本次版本 **1.0.3** 的实际输出保存在 [v1.0.3/](v1.0.3/)。[summary.json](v1.0.3/summary.json) 记录统一命令全部三个阶段通过：112 个 Node 测试、22 个 workerd 测试，以及干净安装／离线打包检查。原始日志：[统一命令](v1.0.3/unified.log)、[Node](v1.0.3/unit-integration.log)、[workerd](v1.0.3/workerd.log)、[打包](v1.0.3/package.log)。这些文件是实际输出的原字节副本。

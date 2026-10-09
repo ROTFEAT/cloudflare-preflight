@@ -46,6 +46,6 @@
 
 ## 仍未受控的路径
 
-直接 Wrangler/cf CLI、Cloudflare dashboard、Workers Builds 的独立 deploy/preview command、其他 CI、已有后台 Alarm/Queue 任务不会被本项目自动禁止或停止。PR required check 不能覆盖这些路径。管理员需要逐个接入真实命令或禁用旁路，再更新 `deployment_gate_coverage`；本实现始终保守报告 partial，尚未实现通过云端配置核验证明全覆盖的适配器。
+1.0.4 的 [Codex Hook](../.agents/skills/cloudflare-cost-safety/references/deployment-hook.md) 可在宿主加载并信任后拦截受支持的工具调用；它不替代这里的独立 gate。外部终端的 Wrangler/cf CLI、Cloudflare dashboard、Workers Builds 的独立 deploy/preview command、其他 CI、已有后台 Alarm/Queue 任务不会被本项目自动禁止或停止。PR required check 不能覆盖这些路径。管理员需要逐个接入真实命令或禁用旁路，再更新 `deployment_gate_coverage`；本实现始终保守报告 partial，尚未实现通过云端配置核验证明全覆盖的适配器。
 
 本次未修改组织权限、branch protection、Workers Builds、账户设置或 secrets。真实目标、账户套餐、传播延迟、已有任务与原生控制执行状态均未在线核验。

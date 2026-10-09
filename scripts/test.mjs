@@ -6,7 +6,7 @@ import {spawnSync} from 'node:child_process';
 const output=path.resolve('.cost-safety/test-results');fs.mkdirSync(output,{recursive:true});
 const files=directories=>directories.flatMap(dir=>fs.readdirSync(dir).filter(f=>f.endsWith('.test.mjs')).sort().map(f=>`${dir}/${f}`));
 const stages=[
-  ['unit-integration',[process.execPath,'--test','--test-concurrency=1',...files(['tests/unit','tests/integration'])],60000],
+  ['unit-integration',[process.execPath,'--test','--test-concurrency=1',...files(['tests/unit','tests/integration'])],90000],
   ['workerd',['python3','scripts/sandbox.py','--runtime','--timeout','50','--',process.execPath,'node_modules/vitest/vitest.mjs','run','--configLoader','native'],60000],
   ['package',[process.execPath,'scripts/check-package.mjs'],60000]
 ];

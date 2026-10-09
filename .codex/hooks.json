@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "^(Bash|mcp__.*)$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/usr/bin/python3 -I \"$(git rev-parse --show-toplevel)/.agents/skills/cloudflare-cost-safety/hooks/pre-tool-use.py\" --node /usr/bin/node",
+            "timeout": 15,
+            "statusMessage": "Checking Cloudflare release intent"
+          }
+        ]
+      }
+    ]
+  }
+}

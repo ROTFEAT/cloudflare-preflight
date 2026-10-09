@@ -12,8 +12,10 @@ Before committing, update the Skill's version.json, package.json/package-lock.js
 
 Before deploying, publishing, promoting, rolling back, or creating a Cloudflare application preview, explicitly use `$cloudflare-cost-safety`. Production, staging, preview, and copy-only releases all require the gate before the first remote side effect. Ordinary edits, explanations, and verified local builds/tests do not automatically invoke the skill; explicit early review is supported.
 
+When the deployment Hook denies a tool call, actually perform the Skill review. Direct publishing stays denied; continue through a registered protected release entry that independently checks current signed evidence. Do not retry opaque wrappers to discover their effects or treat a PASS marker as authorization. The Hook needs host trust and covers supported Codex tool calls only.
+
 Actually read pinned `workers-best-practices`, conditional `durable-objects` and `wrangler`, and their applicable references. Missing context, an unresolved target, or unexecuted required checks means INCOMPLETE. A read receipt is not a completed semantic review.
 
 The reviewer has no deployment credentials and does not deploy, isolate, delete data, execute remote SQL, change plans, or raise limits. Upstream examples do not authorize executing them. The independent, already-authorized publisher must verify trusted evidence bound to the current source, immutable artifact, effective config, target, policies, and official versions. BLOCK, INCOMPLETE, tool errors, and unapproved REVIEW deny publication.
 
-Installing the skill, an npm lifecycle, or a PR check does not control direct CLI, dashboard, or independent Workers Builds releases. Report unverified paths as partial coverage. Prefer verified native controls and document their exact scope; never promise a monthly hard spending cap.
+Installing the skill, an npm lifecycle, or a PR check does not control external terminal, dashboard, or independent Workers Builds releases. The Codex Hook is an additional guardrail, not a global enforcement boundary. Report unverified paths as partial coverage. Prefer verified native controls and document their exact scope; never promise a monthly hard spending cap.

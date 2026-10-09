@@ -29,6 +29,7 @@ test('DEP-05 ordinary alarm queue SQL edits do not invoke; explicit review does'
 });
 test('DEP-06 local commands explanations and other clouds do not deploy',()=>{
  for(const command of ['npm run test','pnpm build','vercel deploy'])assert.equal(classifyIntent({command}).trigger,false);
+ for(const command of ['astro deploy','vite deploy']){const intent=classifyIntent({command});assert.equal(intent.trigger,true);assert.equal(intent.status,'unknown');}
  assert.equal(classifyIntent({request:'解释 wrangler deploy',context:'explain'}).trigger,false);
  const r=classifyIntent({command:'npm run build',scripts:{prebuild:'wrangler deploy',build:'tsc'}});assert.equal(r.trigger,true);
 });
