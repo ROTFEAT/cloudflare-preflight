@@ -1,0 +1,18 @@
+
+ RUN  v4.1.11 /workspace
+
+stdout | tests/runtime/mechanisms.spec.js > returning one row can read 100/1000/10000 rows; matching index changes growth
+DO SQL metrics {"unindexed":[101,1001,10001],"indexed":1}
+
+stdout | tests/runtime/mechanisms.spec.js > D1 local metrics are recorded only when supported, never replaced by result count
+D1 local metrics {"status":"local_runtime_metric","rows_read":1,"rows_written":0}
+
+ ✓ tests/runtime/mechanisms.spec.js (17 tests) 295ms
+
+ Test Files  1 passed (1)
+      Tests  17 passed (17)
+   Start at  03:49:43
+   Duration  2.62s (transform 55ms, setup 0ms, import 112ms, tests 295ms, environment 1ms)
+
+
+{"status": "passed", "exit_code": 0, "duration_ms": 4288, "network": "isolated_namespace", "credentials": "not_inherited", "checkout": "read_only", "credential_files": "masked", "memory_limit_mb": 1024, "timeout_seconds": 50.0, "process_group_killed": true}

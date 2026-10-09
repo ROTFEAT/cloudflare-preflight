@@ -1,5 +1,18 @@
 # 更新日志 / Changelog
 
+## 1.01 — 2026-10-09
+
+标准版本 / Package version: `1.0.1` · Git tag: `v1.01`
+
+- 重写默认中文与独立英文 README，直接说明部署前检查的用途和四类常见成本问题。
+- 增加真实 SQL 读取量对比、历史 Alarm 报告摘录和检查流程图；完整保留 9 个案例与 32 条来源。
+- 将详细安装、CLI 与受控发布说明移到双语使用指南，保留独立中文文案样本。
+- 明确从本次起每次提交都递增版本号，文档和 CI 改动同样升版；同步 Skill、软件包、规则表和文档中的版本标识。
+
+Rewrites the Chinese and English READMEs around the deployment review and common cost problems, adds examples backed by retained evidence, preserves all sources, and moves detailed operations into bilingual usage guides. Every commit now increments the display and package versions, including documentation and CI changes. Review behavior and the pinned official dependencies are unchanged.
+
+验证记录 / Verification: [1.01 离线测试与包检查](docs/test-results/v1.01/summary.json)。历史记录与已发布的 `v1.00` 标签保持原样。
+
 ## 1.00 — 2026-10-08
 
 标准版本 / Package version: `1.0.0` · Git tag: `v1.00`

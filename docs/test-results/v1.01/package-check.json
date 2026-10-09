@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "version": "1.0.1",
+  "display_version": "1.01",
+  "tag": "v1.01",
+  "archive": "/home/ubuntu/github/cloudflare-preflight/.cost-safety/cloudflare-cost-safety-1.0.1.tar.gz",
+  "sha256": "dac4bf2a863a12aa9076fa74ad7a143c58bc4b63b0bb18684070fca24b29d837",
+  "bytes": 16834810,
+  "prepared_dependencies": 11,
+  "official_revision": "41e0d19858946d18af9ee2c2feebbe2e11d829ff",
+  "clean_install": "actual tar extraction and offline isolated CLI",
+  "version_check": "1.0.1\n\n{\"status\": \"passed\", \"exit_code\": 0, \"duration_ms\": 941, \"network\": \"isolated_namespace\", \"credentials\": \"not_inherited\", \"checkout\": \"read_only\", \"credential_files\": \"masked\", \"memory_limit_mb\": 512, \"timeout_seconds\": 10.0, \"process_group_killed\": true}\n",
+  "semantic_review": "not executed; expected exit 2",
+  "runtime_network": "denied",
+  "stdout": "INCOMPLETE: /tmp/package-report/report.md\n\n{\"status\": \"failed\", \"exit_code\": 2, \"duration_ms\": 2316, \"network\": \"isolated_namespace\", \"credentials\": \"not_inherited\", \"checkout\": \"read_only\", \"credential_files\": \"masked\", \"memory_limit_mb\": 512, \"timeout_seconds\": 20.0, \"process_group_killed\": true}\n"
+}

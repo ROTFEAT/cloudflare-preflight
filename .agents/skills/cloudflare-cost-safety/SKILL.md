@@ -8,12 +8,12 @@ description: >-
   and verified local-only builds/tests do not automatically trigger this skill.
   Review only; never deploy or isolate services.
 metadata:
-  version: "1.00"
+  version: "1.01"
 ---
 
 # Cloudflare Cost Safety
 
-Release **1.00**; package and report version **1.0.0**. Version identity is recorded in [version.json](version.json); use `scripts/cli.mjs version` to inspect it.
+Release **1.01**; package and report version **1.0.1**. Version identity is recorded in [version.json](version.json); use `scripts/cli.mjs version` to inspect it.
 
 Enter before the first remote effect of a Cloudflare release. Include package/framework wrappers, CI, preview, upload/activation, rollback, and secret commands that immediately deploy. Inspect actual scripts and versioned command semantics without executing them. Unknown effects enter target confirmation and remain INCOMPLETE. A bare skill installation does not intercept shell commands.
 

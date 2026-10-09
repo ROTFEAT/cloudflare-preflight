@@ -2,25 +2,112 @@
 
 [简体中文](README.md) | **English**
 
-**Current release: 1.00** · npm/report version: `1.0.0` · Git tag: `v1.00` · [Changelog](CHANGELOG.md) · [Versioning](docs/versioning.md)
+[![CI](https://github.com/ROTFEAT/cloudflare-preflight/actions/workflows/verify.yml/badge.svg?branch=main)](https://github.com/ROTFEAT/cloudflare-preflight/actions/workflows/verify.yml)
+**Version 1.01** · Codex Skill · [MIT](LICENSE) · [Changelog](CHANGELOG.md)
 
-A Codex Skill for **reviewing cost risks before a Cloudflare deployment**, named `cloudflare-cost-safety`. It combines official best practices, source and configuration analysis, bounded local tests, and an independent release gate to find self-scheduling alarms, Queue feedback, SQL read/write amplification, preview environment multipliers, and excessive polling or synchronization.
+**Required checks before deploying to Cloudflare**
 
-It answers four questions: **Where does usage originate? How can it multiply? Where are limits enforced? What evidence is still missing?** Reports include actual source locations, execution paths, test records, and gaps in controls.
+`cloudflare-cost-safety` is a cost review Skill for Codex. It checks your code and configuration before release to help you find problems that can make Cloudflare costs grow unexpectedly:
 
-**Preflight does not deploy, connect to your account, stop services, or promise a hard monthly spending cap.** Missing reviews, dependencies, targets, or required tests deny release. Installing the Skill does not intercept arbitrary CLI, dashboard, or Workers Builds deployments.
+- **Background tasks keep running:** Alarms repeatedly trigger storage reads and writes even without new requests.
+- **Queue tasks repeat:** Processing one message creates another, so the same logical task keeps running.
+- **Database operations touch too much data:** A query returns one row but reads many, or an update intended for one record changes the whole table.
+- **Tasks run too often or in too many environments:** Backups, synchronization, or polling run too frequently, or several preview environments all run the same background jobs.
+
+The review tells you where the risks are, why they create extra usage, what limits are needed, and which tests remain unfinished. Run it before deployment, or start an early review through the `/skills` selector or an explicit `$cloudflare-cost-safety` mention.
+
+[See it in action](#see-it-in-action) · [Quick start](#quick-start) · [Why it exists](#why-this-skill-exists) · [Boundaries](#boundaries) · [Documentation and verification](#documentation-and-verification)
+
+## See it in action
+
+### A query returns one row but reads many
+
+The same query, with `LIMIT 1` in both cases:
+
+```sql
+SELECT id FROM jobs WHERE status = 'rare' ORDER BY value LIMIT 1;
+```
+
+| Local test scenario | Rows returned | Actual `rowsRead` |
+| --- | ---: | ---: |
+| 10,000 rows without a matching index | 1 | **10,001** |
+| The same data with a matching index | 1 | **1** |
+
+These are saved **local workerd / Durable Objects SQL measurements**, illustrating the difference between rows returned and rows read. The exact values belong to this test dataset. See the [raw log](docs/test-results/workerd.log) and [test code](tests/runtime/mechanisms.spec.js).
+
+### An alarm keeps scheduling another run
+
+In a historical test application, activation starts an alarm. The alarm performs storage work and schedules another alarm. An excerpt from its report:
+
+> **BLOCK · gate DENY**
+>
+> Official best practices: **PASS**. Cost safety: **BLOCK**.
+>
+> **CF-DO-001 · `main.js:5`** — Object activation starts an alarm that performs storage work and schedules another alarm without a durable work boundary
+>
+> Path: `alarm → setAlarm`
+
+The [full report](docs/test-results/forward/corrected/activated/report.md) also preserves unknowns and uncompleted tests. This historical example shows how a finding is reported; it cannot approve a current application release.
+
+## Quick start
+
+### 1. Install into the application you want to review
+
+Requirements: **Linux, Node ≥22, Python ≥3.10, bubblewrap, and libseccomp2**. The offline sandbox uses `/usr/bin/node`. For Node installed through nvm or a tool cache, see the [usage guide](docs/usage.en.md).
+
+```sh
+git clone https://github.com/ROTFEAT/cloudflare-preflight.git
+cd cloudflare-preflight
+npm ci --ignore-scripts --registry=https://registry.npmjs.org
+npm run install-skill -- --project /ABSOLUTE/APPLICATION
+```
+
+Replace `/ABSOLUTE/APPLICATION` with your application directory. The installer writes `.agents/skills/cloudflare-cost-safety/` inside that application, copies prepared dependencies offline, and refuses to overwrite an existing installation. Confirm Codex discovers the Skill; restart the client if it does not appear.
+
+### 2. Choose a review entry point
+
+**Before deployment**
+
+Give Codex the deployment task and explicitly request the review first:
+
+```text
+Deploy this project to Cloudflare production after completing the cost safety review.
+```
+
+Deployment, publishing, previews, staging, version promotion, and rollback are in scope, including release commands wrapped by npm or frameworks. Ordinary edits and confirmed local-only builds/tests do not trigger the default review.
+
+The Skill description guides the host toward preflight for these tasks. Implicit matching depends on the client version; the complete trigger matrix has not been verified. The controlled release entry runs the independent gate explicitly.
+
+**Manual review: select the Skill through /skills**
+
+In supported Codex CLI/IDE clients, enter `/skills` and select **cloudflare-cost-safety**. You can also mention it explicitly in a conversation:
+
+```text
+$cloudflare-cost-safety Review this project's Cloudflare cost risks and generate a report. Do not deploy yet.
+```
+
+The `/` entry uses the host's `/skills` selector; available menus depend on the client version. [Official invocation documentation](https://developers.openai.com/codex/skills/) · [CLI and CI usage](docs/usage.en.md)
 
 ## Why this Skill exists
 
-Working code, successful acknowledgements, and a query returning one row do not independently establish a usage bound. Public billing self-reports, incident writeups, and community work informed these checks:
+Developers' public billing accounts, incident writeups, and community reviews exposed recurring problems. This project turns those mechanisms into predeployment checks.
 
-- **Background work without users:** DO activation and alarm rescheduling can keep storage operations running. In-memory budgets may reset after reactivation.
-- **A message ends while the logical task continues:** A Queue consumer may call an API that creates a fresh message. Per-message retries may not bound the whole business chain.
-- **One query affects many rows:** Missing indexes, a removed WHERE clause, repeated upserts, or stalled batch progress can amplify rows read or written.
-- **Frequency and environments multiply small tasks:** Preview background jobs, R2 backups, and client polling can repeatedly multiply otherwise small operations.
-- **Controls have narrower scopes than expected:** Budget emails, CPU limits, paused Queue delivery, and local test resets do not establish an account-wide spending cap.
+**Background tasks keep running without new users**
 
-### Incidents and all message/community sources
+Will Moss described alarms scheduled during activation/initialization and preview environments multiplying background work. We check who starts an alarm, what keeps it running, and whether budgets survive object reactivation. [First-person account](https://news.ycombinator.com/item?id=47787042)
+
+**Processing a message creates another message**
+
+RetainDB's account and corrections describe a Queue → API → Queue chain that creates fresh messages. We review the identity, hop count, and cumulative work of the logical task. The incident also involved repeated writes, KV, and external traffic; its entire bill cannot be attributed to one loop. [Original account and corrections](https://www.reddit.com/r/CloudFlare/comments/1t1e8nh/i_accidentally_generated_16_billion_durable/)
+
+**An update intended for one record changes the whole table**
+
+OSM's postmortem describes a refactor that removed WHERE from an UPDATE. We inspect actual read/write scope alongside missing indexes, stalled batch progress, and repeated upserts. [Author's postmortem](https://www.ofsecman.io/post/postmortem-5-000-incident-in-10-seconds-due-to-cloudflare-d1)
+
+Other cases cover R2 synchronization frequency, client polling, and loops inside a small number of DOs. Together, these mechanisms inform [12 P0 rules](rules/catalog.json). All cases and their sources are preserved below.
+
+<details>
+<summary><strong>Expand all 9 cases and 15 message/community sources</strong></summary>
 
 These nine cases and 15 message/community sources come from the project's original requirements. The table distinguishes first-person accounts, snippets, and secondary archives. We have not independently audited their invoices or complete production code. Cases motivate mechanisms; official documentation and controlled tests support technical judgments. Amounts and causal caveats are preserved in [section 5 of the original requirements, in Chinese](docs/requirements.zh-CN.md).
 
@@ -38,102 +125,56 @@ These nine cases and 15 message/community sources come from the project's origin
 
 Attribution is preserved, and reposts of one incident are not counted as separate cases. Machine-readable records are in the [incident index](.agents/skills/cloudflare-cost-safety/assets/incidents.json) and [source index](.agents/skills/cloudflare-cost-safety/assets/sources.json).
 
-## When checks run
+</details>
 
-There are two entry points: **before deployment** and **manual invocation through a `/` command**. Explicit Skill mentions also support an early review.
+## How the review works
 
-### 1. Before deployment
-
-When a task is about to deploy, publish, preview, release to staging, promote a version, or roll back on Cloudflare, the Skill description guides Codex toward preflight. This includes release commands wrapped by npm, frameworks, or Node scripts. For example:
-
-```text
-Deploy this project to Cloudflare production after completing the cost safety review.
+```mermaid
+flowchart TD
+    A["Deployment request or manual review"] --> B["Read pinned official practices, source and config"]
+    B --> C["Semantic review and required bounded local tests"]
+    C --> D["Report source locations, paths, findings and gaps"]
+    D --> E["Connected release entry: independent evidence gate"]
 ```
 
-Ordinary Alarm/Queue/SQL edits, command explanations, and confirmed local-only builds/tests are outside the default trigger scope. A copy-only change that needs a release still requires review. Implicit selection depends on the host version and matching behavior, so the controlled release entry always calls the gate explicitly. The complete host implicit-trigger matrix has not been verified.
+The first CLI pass usually returns **INCOMPLETE**: actual semantic review or required tests are still needed. No static findings or a receipt for reading official files is sufficient on its own.
 
-### 2. `/` command or explicit mention
+In a connected release workflow, the independent gate checks trusted signed evidence against current source, final artifacts, configuration, target, policies, and versions. **BLOCK, INCOMPLETE, tool errors, and unapproved REVIEW deny publication.** See the [usage guide](docs/usage.en.md) and [trust/signing documentation, in Chinese](docs/trust.md).
 
-In supported Codex CLI/IDE clients, enter `/skills`, select **cloudflare-cost-safety**, and describe the project and review target. You can also write:
+## Boundaries
 
-```text
-$cloudflare-cost-safety Review this project's Cloudflare cost risks and generate a report before deploying.
-```
+- **Preflight performs review only.** It does not connect to Cloudflare accounts, hold deployment credentials, publish, or stop existing alarm/Queue work.
+- **Installing the Skill does not control every release path.** Direct CLI, dashboard, unconnected Workers Builds, and other CI remain partial coverage and need individual integration.
+- **It does not promise a hard monthly spending cap.** Budget alerts, CPU limits, and Queue pauses have specific scopes; none independently establishes an account-wide cap.
+- **Unresolved behavior remains unknown or incomplete.** ORM, dynamic dispatch, external SDKs, cloud state, and P1 products have explicit gaps. See [coverage documentation, in Chinese](docs/coverage.md).
 
-The `/` entry uses the host's `/skills` selector; available menus depend on the client version. See the [official OpenAI Skills documentation](https://developers.openai.com/codex/skills/). Confirm the host discovers the installed Skill; restart the client if it does not appear.
+## Documentation and verification
 
-## Prepare and verify locally
+| What you want to do | Start here |
+| --- | --- |
+| Install, inspect versions, run the CLI, understand reports and exit codes | [Usage guide](docs/usage.en.md) |
+| Connect a gate to your release workflow | [GitHub Actions and release entry, in Chinese](docs/ci.md) |
+| Configure trust, signing, and per-finding approvals | [Trust and signing, in Chinese](docs/trust.md) |
+| Inspect supported rules and their test evidence | [Coverage, in Chinese](docs/coverage.md) |
+| Read delivery status, original requirements, and retained evidence | [Development report, in Chinese](docs/development-report.zh-CN.md) · [Original requirements, in Chinese](docs/requirements.zh-CN.md) · [Execution records, in Chinese](docs/test-results/README.md) |
 
-Requirements: Node ≥22, Python ≥3.10, Linux, bubblewrap, and libseccomp2. Download dependencies in a separate preparation phase without running npm lifecycle scripts:
-
-The offline sandbox uses `/usr/bin/node`. If Node comes from nvm or a tool cache, install the verified binary into that protected system path and run the tests with the same Node. The GitHub CI preparation step includes this setup.
+With the local prerequisites ready, developers can run:
 
 ```sh
 npm ci --ignore-scripts --registry=https://registry.npmjs.org
 npm test
 ```
 
-The unified command runs rule, integration, gate, and sandbox checks; real workerd tests; and a clean installation/package check. Actual logs go to `.cost-safety/test-results/`. Any failed stage exits nonzero. workerd runs with network isolation, a read-only checkout, and a parent watchdog. Unavailable namespaces cause failure rather than a fallback to networked tests.
+Dependency downloads and offline verification are separate phases. Tests do not connect to Cloudflare accounts. The unified command runs rule, integration, gate, sandbox, real workerd, and clean installation/package checks. The [retained 1.01 verification](docs/test-results/v1.01/summary.json) contains 104 Node tests, 17 workerd tests, and a package check. Consult [CI](https://github.com/ROTFEAT/cloudflare-preflight/actions/workflows/verify.yml) for subsequent results.
 
-## Install the Skill
-
-```sh
-npm run install-skill -- --project /ABSOLUTE/APPLICATION
-# Or use a maintainer-protected tool directory for the reviewer:
-npm run install-skill -- --skills-dir /ABSOLUTE/TRUSTED/skills
-```
-
-The installer stays offline, refuses to overwrite an existing Skill, and copies 11 prepared production dependencies with licenses, including the Python sandbox. `npm run check:package` creates `.cost-safety/cloudflare-cost-safety-1.0.0.tar.gz`, actually extracts it, and runs the CLI offline with only the clean application available. The archive can also be extracted into an application's `.agents/skills/`. Host discovery is required; this project's tests do not establish automatic reload or implicit matching for a particular Codex build.
-
-Installed version identity is recorded in the Skill's [version.json](.agents/skills/cloudflare-cost-safety/version.json). Run `node /TRUSTED/skill/scripts/cli.mjs version` to inspect the display version, standard version, and Git tag. `--version` prints only the standard version.
-
-A repository Skill supports discovery and review. The actual release verifier, trust file, and signing key must stay outside the candidate repository in a protected installation. Candidate code must not be able to modify the verifier and then obtain a signature or deployment credentials.
-
-## CLI preflight and reports
-
-The read-only analyzer can be invoked explicitly from a terminal or CI. Replace uppercase paths and versions with real values, using a protected external tool installation:
-
-```sh
-node /TRUSTED/skill/scripts/cli.mjs preflight \
-  --root /APPLICATION --config wrangler.jsonc --env production \
-  --artifact dist --builder ACTUAL_BUILDER_VERSION --action deploy \
-  --local-tests --output /APPLICATION/.cost-safety
-```
-
-`main` must point to the final artifact under review. Build it beforehand; preflight does not execute your build scripts. `--env default` selects the top-level configuration. `production` selects `env.production` when present, otherwise the top level. The config path is relative to the repository; its `main` is relative to the config file.
-
-The CLI reads actual installed Wrangler package metadata and the candidate lockfile; versions must match. For an externally installed publisher CLI, pass `--wrangler-package /TRUSTED/node_modules/wrangler/package.json` to both review and gate. Reading metadata does not run the candidate CLI. The publisher example also verifies its protected CLI version and metadata digest.
-
-The first pass usually returns **INCOMPLETE / exit 2**. Read `report.json`, `report.md`, and `official-context.json`. After actual semantic review and required application tests, rerun with `--review /EXTERNAL/semantic-review.json`. A lack of static findings, a successful SQLite probe, or official file read receipts alone do not establish a completed review.
-
-Semantic records follow the [schema](.agents/skills/cloudflare-cost-safety/assets/semantic-review.schema.json): all 12 rules, actual files/lines, official file hashes, model/invocation details, and actual test commands and runner digests. Unexecuted tests use `not_run` and null. Trusted reviewers remain responsible for review quality; a signature does not prove program termination.
-
-| Exit code | Meaning |
-| --- | --- |
-| 0 | PASS, or REVIEW with valid signed approval for each finding |
-| 1 | Known BLOCK, taking precedence over missing information |
-| 2 | INCOMPLETE or unapproved REVIEW |
-| 3 | Tool invocation/execution error |
-
-## Official dependencies and rules
-
-The project vendors `workers-best-practices`, `wrangler`, and `durable-objects` from `cloudflare/skills` at commit `41e0d19858946d18af9ee2c2feebbe2e11d829ff`, preserving Apache-2.0 licensing. Each run reads entries and applicable references and checks hashes against the [lock](.agents/skills/cloudflare-cost-safety/official-skills.lock.json). It never silently updates from main. Reports distinguish loaded/reviewed and official/cost conclusions.
-
-The [rule catalog](rules/catalog.json) contains all 12 P0 contracts, cases, and sources. The implementation uses TypeScript AST, local call closure, real JSONC/TOML parsing, and a SQL parser. [Coverage documentation, in Chinese](docs/coverage.md) details each rule and its test evidence. ORM, dynamic dispatch, external SDKs, unknown cloud state, and P1 products have explicit gaps; no static candidates does not establish safety.
-
-## Independent gate and controlled releases
-
-A trusted external reviewer uses `attest --review ... --private-key /EXTERNAL/key.pem --key-id ... --origin ... --run-id ...` to produce an Ed25519 envelope. `gate` accepts only keys/origins allowed by external trust and rechecks current source, artifacts, config, target, locks, policy, rules, tools, and required tests. A plain PASS JSON is insufficient. REVIEW requires scoped, expiring signed approvals and compensating controls; BLOCK and INCOMPLETE cannot be waived.
-
-[Trust and signing documentation, in Chinese](docs/trust.md) provides the structures and local workflow. The [controlled local entry](scripts/release.mjs) defaults to gate and read-only handoff. It calls a publisher only with an explicit external publisher and `--execute`. Analysis refuses inherited Cloudflare credentials. The remote publication phase was not run during development.
-
-The [Wrangler publisher example](examples/publisher-wrangler.mjs) supports prebuilt JavaScript deploy only. It rejects build.command and consumes verified bytes through sealed memfd files and a read-only namespace, with bundling/rebuilds disabled. Its offline dry-run was tested. Administrators, protected publishers, and actors with host debugging access are within the trust boundary; chmod alone does not guarantee immutability.
-
-The [GitHub Actions example and setup instructions, in Chinese](docs/ci.md) separate gate and credentialed publication into distinct steps using a protected tool installation. Engineering CI is configured for pushes and pull requests; consult the repository's Actions for online results. The actual Cloudflare release workflow has not been executed. Direct CLI, dashboard, unconnected Workers Builds, and other CI remain **partial coverage**.
-
-Actual implementation status, test counts, independent forward evaluations, and unexecuted items are in the [development report, in Chinese](docs/development-report.zh-CN.md). The original requirements are preserved in [requirements.zh-CN.md](docs/requirements.zh-CN.md).
+Display version **1.01**, npm/report version `1.0.1`, and Git tag `v1.01` identify the same release. **Every commit increments the version, including documentation and CI changes.** Display releases advance as `1.00 → 1.01 → 1.02`. Published tags remain unchanged. See the [versioning policy](docs/versioning.md) for the full workflow.
 
 ## Official references and acknowledgements
+
+Official dependencies are pinned to `cloudflare/skills@41e0d19858946d18af9ee2c2feebbe2e11d829ff`: `workers-best-practices`, `wrangler`, and conditional `durable-objects`. Entries and applicable references are checked against the [content lock](.agents/skills/cloudflare-cost-safety/official-skills.lock.json) and reviewed.
+
+<details>
+<summary><strong>Expand all 17 official references (32 sources including the cases)</strong></summary>
 
 The case table lists all 15 message/community sources. These are all 17 official references from the source index, for 32 sources in total. Official capabilities, metering units, and command semantics are checked against the appropriate official references; community material provides incident context and practical experience.
 
@@ -152,6 +193,10 @@ The case table lists all 15 message/community sources. These are all 17 official
 | Codex Skill discovery and invocation | [OpenAI Skills](https://developers.openai.com/codex/skills/) |
 
 Upstream main links locate the material; execution uses the pinned commit and content hashes described above. Thanks to the authors of Cloudflare's official Skills and documentation, developers who publicly shared incidents, and the KurosawaGeeker community project. Source status and verification dates are recorded in [sources.json](.agents/skills/cloudflare-cost-safety/assets/sources.json).
+
+</details>
+
+Thanks to developers who publicly shared incidents, the authors of Cloudflare's official Skills and documentation, and the KurosawaGeeker community project.
 
 ## License
 
