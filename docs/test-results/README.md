@@ -1,5 +1,18 @@
 # 实际运行证据
 
+
+## 1.1.0 — 2026-10-10
+
+版本 **1.1.0** 的实际输出保存在 [v1.1.0/](v1.1.0/)。[summary.json](v1.1.0/summary.json) 记录统一命令三个阶段全部通过：136 个 Node 测试、22 个 workerd 测试，以及干净安装／离线打包检查。原始日志：[统一命令](v1.1.0/unified.log)、[Node](v1.1.0/unit-integration.log)、[workerd](v1.1.0/workerd.log)、[打包](v1.1.0/package.log)。这些文件是最终代码实际输出的原字节副本。
+
+新增 7 项集成测试验证从代码生成的逐路径工作量审查义务，覆盖跨文件辅助函数、改名、Alarm／Cron／Queue／timer、递归、死代码、有限任务与合法周期窗口，以及缺路径／场景／计量单位、上限被突破、源码证据无效和签名篡改。集成测试的成功语义／用量记录明确标记 `MOCK_NO_MODEL_CALL`，只验证编排和独立门禁，不冒充应用测量。现有 22 个 workerd 测试继续验证本地平台机制。
+
+另有[独立前向评估](v1.1.0/forward/README.md)：未提供事故文档，实际读取两份应用和本版本 Skill，完成六次受限离线模型探测。无进展的重排路径为 BLOCK；有限进度任务因运行时／入口／发布证据未齐保持 INCOMPLETE。原始输入、命令、runner、观测、报告与逐文件摘要均保留，模型观测没有冒充完整应用测试或生产计费。
+
+[package-check.json](v1.1.0/package-check.json) 记录版本、归档实际 SHA-256、干净解包 CLI 版本及断网 Hook deny／allow 输出。完整测试没有连接 Cloudflare 账户；源码图和指标结构校验仍不能证明任意程序终止或替代可信 Agent 的审查。宿主 Hook 加载与云端控制仍未核验。
+
+The actual 1.1.0 outputs preserve 136 passing Node tests, 22 workerd tests and the clean package check. New generic obligations and metrics checks are exercised with explicit orchestration doubles; these are not application runtime evidence or cloud billing observations.
+
 ## 1.0.4 — 2026-10-09
 
 版本 **1.0.4** 的实际输出保存在 [v1.0.4/](v1.0.4/)。[summary.json](v1.0.4/summary.json) 记录统一命令全部三个阶段通过：129 个 Node 测试、22 个 workerd 测试，以及干净安装／离线打包检查。原始日志：[统一命令](v1.0.4/unified.log)、[Node](v1.0.4/unit-integration.log)、[workerd](v1.0.4/workerd.log)、[打包](v1.0.4/package.log)。这些文件是最终代码实际输出的原字节副本。

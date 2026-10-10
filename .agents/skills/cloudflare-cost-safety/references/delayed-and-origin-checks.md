@@ -4,7 +4,7 @@ Apply these checks within the existing Cloudflare cost review: CF-DO-001/002, CF
 
 ## Delayed alarms and checkpoints
 
-For an alarm schedule, review every refresh, expiry, lease and retry transition, including stored timestamps left by earlier releases. Advance a local injected clock before, at and after each boundary. A 30-day TTL with a 7-day refresh window needs coverage around days 23 and 30, plus a missed refresh and a restart during the transition.
+Apply the general [execution-bound review](execution-bounds.md) first. For an alarm schedule, derive every refresh, expiry, lease and retry transition from code/configuration, including stored timestamps left by earlier releases. Advance a local injected clock before, at and after each boundary. For example, a 30-day TTL with a 7-day refresh window needs coverage around days 23 and 30, plus a missed refresh and a restart during the transition; those dates are illustrative, not fixed test requirements.
 
 Check past, repeated, non-finite and backwards timestamps. A successful handler can create another already-due alarm without entering the platform's exception retry budget. Require persistent progress or a verified per-window work bound; a future timestamp or backoff alone does not prove bounded cumulative work. Legitimate recurring services may continue with enforced work and instance limits.
 

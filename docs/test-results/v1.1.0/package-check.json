@@ -1,0 +1,39 @@
+{
+  "status": "passed",
+  "version": "1.1.0",
+  "display_version": "1.1.0",
+  "tag": "v1.1.0",
+  "archive": "/home/ubuntu/github/cloudflare-preflight/.cost-safety/cloudflare-cost-safety-1.1.0.tar.gz",
+  "sha256": "35749ef71d8820e4b8ed892b69671846d1750997f173864b44be586bf840aa66",
+  "bytes": 16856382,
+  "prepared_dependencies": 11,
+  "official_revision": "41e0d19858946d18af9ee2c2feebbe2e11d829ff",
+  "clean_install": "actual tar extraction and offline isolated CLI and Hook",
+  "hook_installation": {
+    "file": "/tmp/cf-cost-package-nnQJuP/clean-application/.codex/hooks.json",
+    "status": "installed",
+    "release_entry": null,
+    "trust": "Open /hooks in Codex, review and trust this definition; installing does not trust or activate it automatically."
+  },
+  "hook_checks": [
+    {
+      "command": "wrangler deploy",
+      "decision": "deny",
+      "network": "denied",
+      "exit_code": 0,
+      "stdout": "{\"hookSpecificOutput\": {\"hookEventName\": \"PreToolUse\", \"permissionDecision\": \"deny\", \"permissionDecisionReason\": \"Cloudflare release intercepted before execution. Use $cloudflare-cost-safety now. Review the pinned official guidance, current source, final artifact, effective config and target; run the required application checks. Then use a registered protected release entry, which independently verifies signed evidence before publishing. A report.json, gate.json or an earlier PASS does not unlock direct deployment.\"}}\n\n{\"status\": \"passed\", \"exit_code\": 0, \"duration_ms\": 781, \"network\": \"isolated_namespace\", \"credentials\": \"not_inherited\", \"checkout\": \"read_only\", \"credential_files\": \"masked\", \"memory_limit_mb\": 512, \"timeout_seconds\": 12.0, \"process_group_killed\": true}\n"
+    },
+    {
+      "command": "wrangler types",
+      "decision": "allow",
+      "network": "denied",
+      "exit_code": 0,
+      "stdout": "{}\n\n{\"status\": \"passed\", \"exit_code\": 0, \"duration_ms\": 835, \"network\": \"isolated_namespace\", \"credentials\": \"not_inherited\", \"checkout\": \"read_only\", \"credential_files\": \"masked\", \"memory_limit_mb\": 512, \"timeout_seconds\": 12.0, \"process_group_killed\": true}\n"
+    }
+  ],
+  "host_hook_activation": "not tested; requires host trust",
+  "version_check": "1.1.0\n\n{\"status\": \"passed\", \"exit_code\": 0, \"duration_ms\": 992, \"network\": \"isolated_namespace\", \"credentials\": \"not_inherited\", \"checkout\": \"read_only\", \"credential_files\": \"masked\", \"memory_limit_mb\": 512, \"timeout_seconds\": 10.0, \"process_group_killed\": true}\n",
+  "semantic_review": "not executed; expected exit 2",
+  "runtime_network": "denied",
+  "stdout": "INCOMPLETE: /tmp/package-report/report.md\n\n{\"status\": \"failed\", \"exit_code\": 2, \"duration_ms\": 2324, \"network\": \"isolated_namespace\", \"credentials\": \"not_inherited\", \"checkout\": \"read_only\", \"credential_files\": \"masked\", \"memory_limit_mb\": 512, \"timeout_seconds\": 20.0, \"process_group_killed\": true}\n"
+}

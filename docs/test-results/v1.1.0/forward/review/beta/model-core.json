@@ -1,0 +1,244 @@
+{
+  "observation": {
+    "status": "observations_completed",
+    "candidate": "beta",
+    "group": "core",
+    "source_digest": "3235679d96467f581f58e45906471080b05dabed5753d4ce66393fc9052d5621",
+    "budgets": {
+      "max_events": 50,
+      "charged_events": 24,
+      "max_storage_api_calls": 500,
+      "charged_storage_api_calls": 63,
+      "max_fixtures": 50,
+      "charged_fixtures": 7,
+      "max_rows_per_fixture": 1,
+      "clock": "injected",
+      "network": "sandbox namespace isolated"
+    },
+    "meter": "local double API calls; not Cloudflare billing rows",
+    "totals": {
+      "worker_invocations": 2,
+      "rpc_events": 7,
+      "alarm_events": 15,
+      "do_get_calls": 22,
+      "do_put_calls": 13,
+      "set_alarm_calls": 10,
+      "delete_alarm_calls": 3,
+      "transaction_calls": 15,
+      "transaction_commits": 15,
+      "transaction_rollbacks": 0,
+      "stub_lookups": 2
+    },
+    "observations": [
+      {
+        "scenario": "normal",
+        "case": "three committed countdown transactions close the ledger",
+        "events": 4,
+        "work": {
+          "worker_invocations": 0,
+          "rpc_events": 1,
+          "alarm_events": 3,
+          "do_get_calls": 4,
+          "do_put_calls": 4,
+          "set_alarm_calls": 3,
+          "delete_alarm_calls": 1,
+          "transaction_calls": 3,
+          "transaction_commits": 3,
+          "transaction_rollbacks": 0,
+          "stub_lookups": 0
+        },
+        "record": {
+          "remaining": 0,
+          "closed": true
+        },
+        "pending_alarm": null,
+        "durable_puts_in_double": 4,
+        "sql_rows_read": null,
+        "sql_rows_written": null,
+        "safety": "finite_nominal_job"
+      },
+      {
+        "scenario": "exhaustion",
+        "case": "pending/replayed callback, restart and begin after close",
+        "events": 3,
+        "work": {
+          "worker_invocations": 0,
+          "rpc_events": 1,
+          "alarm_events": 2,
+          "do_get_calls": 3,
+          "do_put_calls": 0,
+          "set_alarm_calls": 0,
+          "delete_alarm_calls": 0,
+          "transaction_calls": 2,
+          "transaction_commits": 2,
+          "transaction_rollbacks": 0,
+          "stub_lookups": 0
+        },
+        "record": {
+          "remaining": 0,
+          "closed": true
+        },
+        "pending_alarm": null,
+        "durable_puts_in_double": 0,
+        "sql_rows_read": null,
+        "sql_rows_written": null,
+        "safety": "bounded_control_reads",
+        "note": "three extra events still require three get calls"
+      },
+      {
+        "scenario": "no_progress",
+        "case": "alarm with no ledger returns",
+        "events": 1,
+        "work": {
+          "worker_invocations": 0,
+          "rpc_events": 0,
+          "alarm_events": 1,
+          "do_get_calls": 1,
+          "do_put_calls": 0,
+          "set_alarm_calls": 0,
+          "delete_alarm_calls": 0,
+          "transaction_calls": 1,
+          "transaction_commits": 1,
+          "transaction_rollbacks": 0,
+          "stub_lookups": 0
+        },
+        "record": null,
+        "pending_alarm": null,
+        "durable_puts_in_double": 0,
+        "sql_rows_read": null,
+        "sql_rows_written": null,
+        "safety": "bounded_empty_case"
+      },
+      {
+        "scenario": "restart",
+        "case": "begin after reconstruction does not reset the persisted allowance",
+        "events": 5,
+        "work": {
+          "worker_invocations": 0,
+          "rpc_events": 2,
+          "alarm_events": 3,
+          "do_get_calls": 5,
+          "do_put_calls": 4,
+          "set_alarm_calls": 3,
+          "delete_alarm_calls": 1,
+          "transaction_calls": 3,
+          "transaction_commits": 3,
+          "transaction_rollbacks": 0,
+          "stub_lookups": 0
+        },
+        "record": {
+          "remaining": 0,
+          "closed": true
+        },
+        "pending_alarm": null,
+        "durable_puts_in_double": 4,
+        "sql_rows_read": null,
+        "sql_rows_written": null,
+        "safety": "finite_nominal_job"
+      },
+      {
+        "scenario": "replay",
+        "case": "duplicate callbacks consume allowance then further callback only reads",
+        "events": 5,
+        "work": {
+          "worker_invocations": 0,
+          "rpc_events": 1,
+          "alarm_events": 4,
+          "do_get_calls": 5,
+          "do_put_calls": 4,
+          "set_alarm_calls": 3,
+          "delete_alarm_calls": 1,
+          "transaction_calls": 4,
+          "transaction_commits": 4,
+          "transaction_rollbacks": 0,
+          "stub_lookups": 0
+        },
+        "record": {
+          "remaining": 0,
+          "closed": true
+        },
+        "pending_alarm": null,
+        "durable_puts_in_double": 4,
+        "sql_rows_read": null,
+        "sql_rows_written": null,
+        "safety": "finite_nominal_job",
+        "note": "early exhaustion may affect business behavior; no extra job writes"
+      },
+      {
+        "scenario": "amplification",
+        "case": "invalid credential GET and arbitrary-host OPTIONS both reach ledger reads",
+        "events": 4,
+        "work": {
+          "worker_invocations": 2,
+          "rpc_events": 2,
+          "alarm_events": 0,
+          "do_get_calls": 2,
+          "do_put_calls": 1,
+          "set_alarm_calls": 1,
+          "delete_alarm_calls": 0,
+          "transaction_calls": 0,
+          "transaction_commits": 0,
+          "transaction_rollbacks": 0,
+          "stub_lookups": 2
+        },
+        "record": {
+          "remaining": 3,
+          "closed": false
+        },
+        "pending_alarm": 1000000120000,
+        "durable_puts_in_double": 1,
+        "sql_rows_read": null,
+        "sql_rows_written": null,
+        "safety": "unrestricted_request_control_work"
+      },
+      {
+        "scenario": "stop",
+        "case": "closed ledger survives reconstructed instance and pending callbacks",
+        "events": 2,
+        "work": {
+          "worker_invocations": 0,
+          "rpc_events": 0,
+          "alarm_events": 2,
+          "do_get_calls": 2,
+          "do_put_calls": 0,
+          "set_alarm_calls": 0,
+          "delete_alarm_calls": 0,
+          "transaction_calls": 2,
+          "transaction_commits": 2,
+          "transaction_rollbacks": 0,
+          "stub_lookups": 0
+        },
+        "record": {
+          "remaining": 0,
+          "closed": true
+        },
+        "pending_alarm": null,
+        "durable_puts_in_double": 0,
+        "sql_rows_read": null,
+        "sql_rows_written": null,
+        "safety": "bounded_control_reads",
+        "note": "explicit mid-job disable surface is absent; actual transaction concurrency remains unsupported"
+      }
+    ],
+    "unsupported": [
+      "actual Workerd storage/cache billing metrics",
+      "native alarm retry/delivery limits and timings",
+      "actual eviction and storage transaction rollback/commit gates",
+      "concurrent begin/alarm interleavings",
+      "target-account controls and existing persisted state"
+    ]
+  },
+  "sandbox": {
+    "status": "passed",
+    "exit_code": 0,
+    "duration_ms": 224,
+    "network": "isolated_namespace",
+    "credentials": "not_inherited",
+    "checkout": "read_only",
+    "credential_files": "masked",
+    "memory_limit_mb": 256,
+    "timeout_seconds": 10,
+    "process_group_killed": true
+  }
+}
+

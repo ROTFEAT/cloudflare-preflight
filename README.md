@@ -3,7 +3,7 @@
 **简体中文** | [English](README.en.md)
 
 [![CI](https://github.com/ROTFEAT/cloudflare-preflight/actions/workflows/verify.yml/badge.svg?branch=main)](https://github.com/ROTFEAT/cloudflare-preflight/actions/workflows/verify.yml)
-**版本 1.0.4** · Codex Skill · [MIT](LICENSE) · [更新日志](CHANGELOG.md)
+**版本 1.1.0** · Codex Skill · [MIT](LICENSE) · [更新日志](CHANGELOG.md)
 
 **Cloudflare 部署前必须做的检查**
 
@@ -18,6 +18,8 @@
 检查会告诉你：哪里有风险、为什么会产生额外用量、需要补什么限制，以及还有哪些测试没完成。可以在部署前检查，也可以通过 `/skills` 选择 Skill，或用 `$cloudflare-cost-safety` 提前手动检查。
 
 报告会分别列出代码限制、本地测试结果和未核验的云端控制。涉及 Alarm、Cron、Queue 或公开代理时，还会要求适用的时间边界、停止行为和源站访问验证，见[补充检查说明](.agents/skills/cloudflare-cost-safety/references/delayed-and-origin-checks.md)。
+
+**检查从代码开始，不需要先拿到事故调查文档。** 每次沿着“谁启动任务 → 做了哪些计费操作 → 会不会继续产生任务 → 什么状态能让它停止”追踪，检查单次调用、整个任务或固定时间窗口内的工作量边界，再测试无进展、重启、重放、时间变化和数据量放大。预检会生成需要交代的路径；缺少对应证据就保持 INCOMPLETE。公开案例用于验证检查方法，12 条规则也不是风险的穷尽清单。见[通用检查方法](.agents/skills/cloudflare-cost-safety/references/execution-bounds.md)。
 
 [先看效果](#先看检查效果) · [快速上手](#快速上手) · [项目由来](#为什么会有这个-skill) · [使用边界](#使用边界) · [文档与验证](#文档与验证)
 
@@ -175,22 +177,22 @@ npm ci --ignore-scripts --registry=https://registry.npmjs.org
 npm test
 ```
 
-依赖下载与离线验证分开；测试不连接 Cloudflare 账户。统一命令执行规则、集成、门禁、沙箱、真实 workerd 和干净安装／打包检查。1.0.4 的[保留验证记录](docs/test-results/v1.0.4/summary.json)包含 129 个 Node 测试、22 个 workerd 测试及包检查；后续结果以 [CI](https://github.com/ROTFEAT/cloudflare-preflight/actions/workflows/verify.yml) 为准。
+依赖下载与离线验证分开；测试不连接 Cloudflare 账户。统一命令执行规则、集成、门禁、沙箱、真实 workerd 和干净安装／打包检查。1.1.0 的[保留验证记录](docs/test-results/v1.1.0/summary.json)包含 136 个 Node 测试、22 个 workerd 测试及包检查；后续结果以 [CI](https://github.com/ROTFEAT/cloudflare-preflight/actions/workflows/verify.yml) 为准。
 
-当前版本为 **1.0.4**，README、Skill、npm 和报告统一使用三段式版本号，Git 标签为 `v1.0.4`。**每次提交都递增版本号，包括文档和 CI 改动**；小改动依次为 `1.0.2 → 1.0.3 → 1.0.4`。兼容新增和不兼容改动分别递增次版本、主版本，具体流程见[版本管理](docs/versioning.md)。
+当前版本为 **1.1.0**，README、Skill、npm 和报告统一使用三段式版本号，Git 标签为 `v1.1.0`。**每次提交都递增版本号，包括文档和 CI 改动**；小改动依次为 `1.0.3 → 1.0.4 → 1.0.5`。兼容新增和不兼容改动分别递增次版本、主版本，具体流程见[版本管理](docs/versioning.md)。
 
 ## 官方资料与致谢
 
 官方依赖固定为 `cloudflare/skills@41e0d19858946d18af9ee2c2feebbe2e11d829ff` 的 `workers-best-practices`、`wrangler` 和按需加载的 `durable-objects`，入口及适用 references 按[内容锁](.agents/skills/cloudflare-cost-safety/official-skills.lock.json)核对并审查。
 
 <details>
-<summary><strong>展开全部 17 条官方参考资料（连同案例来源，共 32 条）</strong></summary>
+<summary><strong>展开全部 18 条官方参考资料（连同案例来源，共 33 条）</strong></summary>
 
-上述案例表列出全部 15 条消息／社区来源。以下再列出来源索引中的全部 17 条官方参考，共 32 条；官方能力、计量单位和命令语义使用相应官方资料核对，社区材料用于问题背景与实践参考。
+上述案例表列出全部 15 条消息／社区来源。以下再列出来源索引中的全部 18 条官方参考，共 33 条；官方能力、计量单位和命令语义使用相应官方资料核对，社区材料用于问题背景与实践参考。
 
 | 主题 | 官方来源 |
 | --- | --- |
-| DO Alarm 与存储计量 | [Alarms](https://developers.cloudflare.com/durable-objects/api/alarms/)、[SQLite storage API](https://developers.cloudflare.com/durable-objects/api/sqlite-storage-api/) |
+| DO Alarm 与存储计量 | [Alarms](https://developers.cloudflare.com/durable-objects/api/alarms/)、[SQLite storage API](https://developers.cloudflare.com/durable-objects/api/sqlite-storage-api/)、[DO Pricing](https://developers.cloudflare.com/durable-objects/platform/pricing/) |
 | D1 行计量 | [D1 Pricing](https://developers.cloudflare.com/d1/platform/pricing/) |
 | Queues 重试与暂停范围 | [Batching and retries](https://developers.cloudflare.com/queues/configuration/batching-retries/)、[Pause and purge](https://developers.cloudflare.com/queues/configuration/pause-purge/) |
 | 本地运行时测试 | [Workers Vitest test APIs](https://developers.cloudflare.com/workers/testing/vitest-integration/test-apis/) |
@@ -204,7 +206,7 @@ npm test
 
 上表的上游 main 链接用于定位资料；实际运行使用前文列出的固定 commit 和内容摘要。感谢 Cloudflare 官方 Skill 与文档作者、公开分享事故的开发者，以及 KurosawaGeeker 社区项目。来源状态和核验日期保存在 [sources.json](.agents/skills/cloudflare-cost-safety/assets/sources.json)。
 
-延迟刷新、源站绕过、停止后剩余工作量及报告分层的设计参考了 [ZPVIP/no-billshock@1250f01](https://github.com/ZPVIP/no-billshock/tree/1250f01a085cfe955e1189e38502b5a4428734da)（[MIT](https://github.com/ZPVIP/no-billshock/blob/1250f01a085cfe955e1189e38502b5a4428734da/LICENSE)），并适配到本项目的 Cloudflare 只读预检。该设计参考独立于上面的 32 条案例与官方来源。
+延迟刷新、源站绕过、停止后剩余工作量及报告分层的设计参考了 [ZPVIP/no-billshock@1250f01](https://github.com/ZPVIP/no-billshock/tree/1250f01a085cfe955e1189e38502b5a4428734da)（[MIT](https://github.com/ZPVIP/no-billshock/blob/1250f01a085cfe955e1189e38502b5a4428734da/LICENSE)），并适配到本项目的 Cloudflare 只读预检。该设计参考独立于上面的 33 条案例与官方来源。
 
 </details>
 

@@ -1,0 +1,138 @@
+{
+  "observation": {
+    "status": "observations_completed",
+    "candidate": "beta",
+    "group": "fault",
+    "source_digest": "3235679d96467f581f58e45906471080b05dabed5753d4ce66393fc9052d5621",
+    "budgets": {
+      "max_events": 50,
+      "charged_events": 8,
+      "max_storage_api_calls": 500,
+      "charged_storage_api_calls": 27,
+      "max_fixtures": 50,
+      "charged_fixtures": 3,
+      "max_rows_per_fixture": 1,
+      "clock": "injected",
+      "network": "sandbox namespace isolated"
+    },
+    "meter": "local double API calls; not Cloudflare billing rows",
+    "totals": {
+      "worker_invocations": 0,
+      "rpc_events": 2,
+      "alarm_events": 6,
+      "do_get_calls": 8,
+      "do_put_calls": 7,
+      "set_alarm_calls": 3,
+      "delete_alarm_calls": 3,
+      "transaction_calls": 6,
+      "transaction_commits": 4,
+      "transaction_rollbacks": 2,
+      "stub_lookups": 0
+    },
+    "observations": [
+      {
+        "scenario": "partial_failure",
+        "case": "double rolls transaction back after put, then replay consumes three commits",
+        "events": 4,
+        "work": {
+          "worker_invocations": 0,
+          "rpc_events": 0,
+          "alarm_events": 4,
+          "do_get_calls": 4,
+          "do_put_calls": 4,
+          "set_alarm_calls": 2,
+          "delete_alarm_calls": 1,
+          "transaction_calls": 4,
+          "transaction_commits": 3,
+          "transaction_rollbacks": 1,
+          "stub_lookups": 0
+        },
+        "record": {
+          "remaining": 0,
+          "closed": true
+        },
+        "pending_alarm": null,
+        "durable_puts_in_double": 3,
+        "sql_rows_read": null,
+        "sql_rows_written": null,
+        "safety": "finite_under_assumed_atomicity",
+        "note": "storage transaction atomicity is implemented by this double; actual Workerd validation is not run"
+      },
+      {
+        "scenario": "partial_failure",
+        "case": "failure before cancellation rolls back terminal transaction in double",
+        "events": 2,
+        "work": {
+          "worker_invocations": 0,
+          "rpc_events": 0,
+          "alarm_events": 2,
+          "do_get_calls": 2,
+          "do_put_calls": 2,
+          "set_alarm_calls": 0,
+          "delete_alarm_calls": 2,
+          "transaction_calls": 2,
+          "transaction_commits": 1,
+          "transaction_rollbacks": 1,
+          "stub_lookups": 0
+        },
+        "record": {
+          "remaining": 0,
+          "closed": true
+        },
+        "pending_alarm": null,
+        "durable_puts_in_double": 1,
+        "sql_rows_read": null,
+        "sql_rows_written": null,
+        "safety": "finite_under_assumed_atomicity"
+      },
+      {
+        "scenario": "partial_failure",
+        "case": "double crashes after initial ledger put before alarm schedule; begin replay returns",
+        "events": 2,
+        "work": {
+          "worker_invocations": 0,
+          "rpc_events": 2,
+          "alarm_events": 0,
+          "do_get_calls": 2,
+          "do_put_calls": 1,
+          "set_alarm_calls": 1,
+          "delete_alarm_calls": 0,
+          "transaction_calls": 0,
+          "transaction_commits": 0,
+          "transaction_rollbacks": 0,
+          "stub_lookups": 0
+        },
+        "record": {
+          "remaining": 3,
+          "closed": false
+        },
+        "pending_alarm": null,
+        "durable_puts_in_double": 1,
+        "sql_rows_read": null,
+        "sql_rows_written": null,
+        "safety": "runtime_atomicity_and_recovery_unverified",
+        "note": "possible orphan task is a reliability verification gap, not an unbounded-cost finding"
+      }
+    ],
+    "unsupported": [
+      "actual Workerd storage/cache billing metrics",
+      "native alarm retry/delivery limits and timings",
+      "actual eviction and storage transaction rollback/commit gates",
+      "concurrent begin/alarm interleavings",
+      "target-account controls and existing persisted state"
+    ]
+  },
+  "sandbox": {
+    "status": "passed",
+    "exit_code": 0,
+    "duration_ms": 230,
+    "network": "isolated_namespace",
+    "credentials": "not_inherited",
+    "checkout": "read_only",
+    "credential_files": "masked",
+    "memory_limit_mb": 256,
+    "timeout_seconds": 10,
+    "process_group_killed": true
+  }
+}
+

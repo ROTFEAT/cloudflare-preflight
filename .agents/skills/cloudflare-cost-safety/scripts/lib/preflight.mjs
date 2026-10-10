@@ -9,6 +9,7 @@ import {catalog,evaluateRules} from './rules.mjs';
 import {resolveOfficial,publicOfficial} from './official.mjs';
 import {classifyIntent} from './intent.mjs';
 import {validate} from './schema.mjs';
+import {executionBounds,executionBoundsGaps} from './bounds.mjs';
 
 export const defaultPolicy=()=>json(asset('default-policy.json'));
 export const toolDigest=()=>snapshot(SKILL_ROOT).digest;
@@ -22,6 +23,7 @@ function artifactDigest(root,relative) {
 }
 export function requiredTests(inventory,sql,policy,ast) {
   const tests=new Set(['bounded-local-probe',...(policy.required_tests||[])]);
+  if(executionBounds(ast).length)tests.add('execution-bounds');
   if(inventory.has_do){tests.add('do-lifecycle');tests.add('do-getalarm');}
   if(inventory.bindings.some(b=>b.kind==='queue_consumer')){tests.add('queue-feedback');tests.add('queue-partial');}
   const alarms=ast.operations.some(o=>o.method==='setAlarm'&&ast.reachable.has(o.owner));
@@ -110,13 +112,15 @@ function nativeControls(inventory) {
   ];
   return definitions.map(d=>({product:d.product,plan_backend:'unknown',control:d.control,control_surface:d.surface,scope:d.scope,official_source:sources.find(s=>s.id===d.source)?.url,checked_at:'2026-10-08',version_conditions:'Verify the candidate toolchain, plan and backend',configuration_evidence:'unknown',data_preservation:'unknown',reversible:'unknown',affects_running_tasks:'unknown',covers_new_producers:d.control==='pause_delivery'?false:'unknown',propagation_delay:'unknown',uncovered_paths:['Other entry points','Background tasks','Storage and fixed charges'],manual_verification:['Verify this control against current product documentation and target configuration without executing changes'],execution_status:'NOT_EXECUTED'}));
 }
-export function aggregate(report) {
+export function aggregate(report,texts) {
   const officialFindings=report.findings.filter(f=>f.origin!=='cost_safety');
   const costFindings=report.findings.filter(f=>f.origin!=='official_best_practices');
   const statuses=fs=>fs.map(f=>f.status).filter(s=>s!=='ADVISORY');
   report.official_best_practices_status=precedence([...statuses(officialFindings),...(report.official_skills.some(s=>s.required&&(s.review_status!=='reviewed'||s.load_status!=='reviewed'))?['INCOMPLETE']:[])]);
-  report.cost_safety_status=precedence([...statuses(costFindings),...(report.rules.some(r=>['unknown','not_run'].includes(r.status))?['INCOMPLETE']:[])]);
+  report.coverage.execution_bounds_gaps=executionBoundsGaps(report,texts);
+  report.cost_safety_status=precedence([...statuses(costFindings),...(report.rules.some(r=>['unknown','not_run'].includes(r.status))||report.coverage.execution_bounds_gaps.length?['INCOMPLETE']:[])]);
   const missing=report.coverage.required_tests.filter(id=>!report.tests.some(t=>t.id===id&&t.status==='passed'&&t.input_digest===report.deployment_identity.digest));
+  if(report.coverage.execution_bounds_gaps.length&&!missing.includes('execution-bounds'))missing.push('execution-bounds');
   report.coverage.missing_tests=missing;
   report.overall_status=precedence([report.official_best_practices_status,report.cost_safety_status,...(report.tests.some(t=>t.status==='failed'&&!t.tool_error)?['BLOCK']:[]),...(report.incomplete.length||missing.length||report.tool_errors.length?['INCOMPLETE']:[])]);
   report.predeploy_gate_status=report.overall_status==='PASS'?'ALLOW':'DENY';
@@ -163,12 +167,13 @@ export function preflight(options={}) {
     else try{changedFiles=execFileSync('git',['-C',root,'diff','--name-only',options.base,'--'],{encoding:'utf8',timeout:2000}).trim().split('\n').filter(Boolean);}catch{incomplete.push('diff_base_unreadable');}
   }
   const report={schema_version:'1.0',skill_version:VERSION,reviewed_at:new Date().toISOString(),scope:{repository:root,commit:snap.commit,review_mode:options.mode||'full',analysis_scope:'full_local_call_closure_including_configuration',changed_files:changedFiles,files:snap.files,cloud_account_accessed:false},activation:{...activation,expanded:activation.expanded?.map(()=> '[command inspected, values omitted]')},deployment_identity:identity,inventory,execution_graph:ast.graph,official_skills:publicOfficial(official.skills),rules:results,findings,tests:[],native_controls:nativeControls(inventory),coverage:{rules_total:12,rules_evaluated:results.map(r=>r.rule_id),unknown_edges:ast.gaps,sql_gaps:sql.gaps,required_tests:requiredTests(inventory,sql,policy,ast),missing_tests:[],uncovered_products:['AI/external charges','Workflows','DO WebSocket/active duration','R2 object event loops','logs/traces'],deployment_bypasses:['Direct CLI','Cloudflare dashboard','Unverified Workers Builds deployment and preview commands','Independent CI']},usage_assessment:{classification:findings.some(f=>f.status==='BLOCK')?'unbounded_path':'unknown',vector:{events:null,queue_deliveries:null,new_messages:null,sql_rows_read:null,sql_rows_written:null,kv_reads:null,kv_writes:null,kv_lists:null,r2_class_a:null,r2_class_b:null,active_objects:null,environments:null},usd_estimate:null,assumptions:['Declared configuration describes the reviewed artifact; live account state is not inspected'],enforced_limits:[],excluded:['duration','storage','fixed fees','logs/traces','external AI']},approvals:[],incomplete,tool_errors:[],overall_status:'INCOMPLETE',official_best_practices_status:'INCOMPLETE',cost_safety_status:'INCOMPLETE',predeploy_gate_status:'DENY',deployment_gate_coverage:'partial',guarantees:{hard_monthly_cap:false,production_isolation_performed:false,cloud_writes:0},review_identity:null};
+  report.coverage.execution_bounds=executionBounds(ast);
   if(options.localTests) {
     const probe=runLocalProbe(sql,snap.texts,identity,policy);report.tests.push(probe);
     if(probe.tool_error)report.tool_errors.push('bounded_local_probe_execution_failed_or_timed_out');
     if(sql.queries.length&&probe.status==='passed'&&probe.metrics.results?.every(r=>r.status==='passed'))report.tests.push({...probe,id:'sql-plan'});
   }
   if(options.review)applySemantic(report,options.review,snap);
-  aggregate(report);validate('report',redact(report));
+  aggregate(report,snap.texts);validate('report',redact(report));
   return {report:redact(report),context:official.context,options:{...options,root,policy},ast,sql};
 }

@@ -49,7 +49,7 @@ export function gate({envelope,trust,approvals=[],options,now=Date.now()}) {
     if(trust.official_skills_lock_digest!==report.deployment_identity.official_skills_lock_digest||trust.policy_digest!==report.deployment_identity.policy_digest)throw new Error('unapproved_policy_or_official_lock');
     // Recompute from actual bytes and explicit publisher target; never use the
     // report's own target as the publisher's target, or a source commit alone.
-    const current=preflight({...options,review:undefined,localTests:true}).report;
+    const analysis=preflight({...options,review:undefined,localTests:true}),current=analysis.report;
     if(current.deployment_identity.digest!==report.deployment_identity.digest)throw new Error('release_identity_changed');
     if(current.overall_status==='BLOCK')return {allowed:false,exit_code:1,status:'DENY',reason:'current_static_or_local_test_BLOCK',report:current};
     if(current.tool_errors.length)return {allowed:false,exit_code:3,status:'DENY',reason:'current_tool_execution_error',report:current};
@@ -58,6 +58,7 @@ export function gate({envelope,trust,approvals=[],options,now=Date.now()}) {
     if(report.tests.some(t=>t.status==='passed'&&(!Array.isArray(t.command)||!t.command.length||!/^[a-f0-9]{64}$/.test(t.runner_digest||'')||!Number.isFinite(t.duration_ms)||t.duration_ms<0)))throw new Error('passed_test_record_incomplete');
     if(current.incomplete.length)throw new Error('current_required_inputs_incomplete');
     if(digest([...current.coverage.required_tests].sort())!==digest([...report.coverage.required_tests].sort()))throw new Error('required_test_set_changed_or_forged');
+    if(digest(current.coverage.execution_bounds)!==digest(report.coverage.execution_bounds))throw new Error('execution_bounds_set_changed_or_forged');
     if(report.official_skills.length!==current.official_skills.length||new Set(report.official_skills.map(s=>s.name)).size!==current.official_skills.length)throw new Error('official_dependency_set_changed_or_forged');
     for(const expected of current.official_skills) {
       const actual=report.official_skills.find(s=>s.name===expected.name);
@@ -66,7 +67,7 @@ export function gate({envelope,trust,approvals=[],options,now=Date.now()}) {
     if(report.official_skills.some(s=>s.required&&(s.load_status!=='reviewed'||s.review_status!=='reviewed'||!s.evidence.some(e=>e.kind==='semantic_review'))))throw new Error('official_review_missing');
     if(report.rules.some(r=>r.status==='not_run'||r.status==='unknown'||!r.evidence.length))throw new Error('required_rule_not_completed');
     if(report.rules.some(r=>r.status==='finding'&&!report.findings.some(f=>f.rule_id===r.rule_id)))throw new Error('rule_finding_missing');
-    const computed=aggregate(structuredClone(report));
+    const computed=aggregate(structuredClone(report),analysis.ast.sources);
     if(computed.overall_status!==report.overall_status)throw new Error('forged_summary_status');
     if(computed.overall_status==='BLOCK')return {allowed:false,exit_code:1,status:'DENY',reason:'BLOCK_is_not_approvable',report:computed};
     if(computed.tool_errors.length)return {allowed:false,exit_code:3,status:'DENY',reason:'recorded_tool_execution_error',report:computed};

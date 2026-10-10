@@ -1,0 +1,22 @@
+{
+  "name": "review-beta",
+  "account_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "main": "main.js",
+  "compatibility_date": "2026-10-08",
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "CELLS",
+        "class_name": "Cell"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": [
+        "Cell"
+      ]
+    }
+  ]
+}

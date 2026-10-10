@@ -9,6 +9,7 @@ const sources=Object.fromEntries([...spec.matchAll(/^\[([A-Z0-9-]+)\]: (https:\/
  const id=m[1],primary=id.startsWith('CF-')||id==='OPENAI-SKILLS',name=officialNames[id];
  return [id,{id,url:m[2],checked_at:primary?'2026-10-08':null,status:primary?'primary_source':'user_supplied_not_independently_verified',verification_basis:!primary?'Original user-provided source status; no independent source/invoice audit':name?'Actual pinned upstream file read; main URL is discovery only':'Official documentation/repository read during preparation; no cloud account or price validation',...(name?{resolved_url:`https://raw.githubusercontent.com/cloudflare/skills/${upstreamRevision}/skills/${name}/SKILL.md`}:{})}];
 }));
+sources['CF-DO-PRICE']={id:'CF-DO-PRICE',url:'https://developers.cloudflare.com/durable-objects/platform/pricing/',checked_at:'2026-10-10',status:'primary_source',verification_basis:'Official storage billing documentation read; SQLite-backed KV methods and setAlarm row-write semantics, not account or dollar verification'};
 writeJSON(path.join(SKILL_ROOT,'assets/sources.json'),{schema_version:'1.0',sources:Object.values(sources)});
 const nativeLimits={
  'CF-DO-001':'One scheduled alarm per object does not cap future alarm invocations; deleteAlarm is object runtime API.',
@@ -40,13 +41,13 @@ const coverage={
  'CF-HTTP-001':['Literal browser script served by configured assets + fast relative polling + costly Worker handler; public external/dynamic fetch selects required origin-access evidence','Static assets and cross-file/dynamic proxy evidence-denial tests; lexical fetch/service-binding regressions; no live origin/WAF test','Dynamic routes/templates, cache/WAF account state and general public traffic bounds'],
  'CF-SAFE-001':['Structured false control guarantees and reachable test reset helper','Five native scope falsification tests, signed false hard-cap schema rejection; persistent-stop queued/replayed callback model','Plan/contract applicability, already-running remote effects, runtime control state and any production isolation']
 };
-for(const rule of rules){const c=coverage[rule.id];rule.implementation={static:c[0],agent:'Mandatory semantic review with actual source locations and official context; static candidates are not complete coverage',local_tests:c[1],unsupported:c[2]};}
+for(const rule of rules){const c=coverage[rule.id];rule.implementation={static:c[0],agent:'Mandatory code-derived execution-bound review: activation, work, continuation, progress/stop, scope and amplification; actual source and official evidence, without incident prerequisites',local_tests:c[1],unsupported:c[2]};}
 if(rules.length!==12||rules.some(r=>r.samples.length!==3))throw new Error('Requirements extraction failed');
-writeJSON(path.join(SKILL_ROOT,'assets/rules/catalog.json'),{schema_version:'1.0',version:VERSION,rules});
+writeJSON(path.join(SKILL_ROOT,'assets/rules/catalog.json'),{schema_version:'1.0',version:VERSION,review_method:{reference:'references/execution-bounds.md',required_test:'execution-bounds',incident_reports:'optional_context'},rules});
 fs.mkdirSync('rules',{recursive:true});fs.copyFileSync(path.join(SKILL_ROOT,'assets/rules/catalog.json'),'rules/catalog.json');
 const cases=[...spec.matchAll(/^### 5\.\d+ (C\d\d) · ([^\n]+)\n([\s\S]*?)(?=\n### 5\.|\n\n## 6)/gm)].map(([,id,title,body])=>({id,title,evidence_level:body.match(/\*\*证据层级：\*\* `([^`]+)`/)?.[1],independently_audited:false,rule_ids:[...new Set(body.match(/CF-[A-Z0-9]+-\d+/g)||[])],sources:[...new Set([...body.matchAll(/\[([A-Z0-9-]+)\]/g)].map(m=>m[1]))]}));
 writeJSON(path.join(SKILL_ROOT,'assets/incidents.json'),{schema_version:'1.0',cases,amounts_are_not_price_tests:true});
-fs.writeFileSync(path.join(SKILL_ROOT,'references/rules.md'),spec.slice(spec.indexOf('## 8.'),spec.indexOf('## 9.')));
+fs.writeFileSync(path.join(SKILL_ROOT,'references/rules.md'),'Apply [the code-derived execution-bound method](execution-bounds.md) to every review. These product rules and incident mappings are not an exhaustive risk list; incident reports are optional.\n\n'+spec.slice(spec.indexOf('## 8.'),spec.indexOf('## 9.')));
 fs.writeFileSync(path.join(SKILL_ROOT,'references/incident-index.md'),'# Incident evidence\n\nNine user-supplied public self-reports/archives motivate mechanisms, not verified invoices or price expectations. See [machine-readable incident index](../assets/incidents.json), [sources](../assets/sources.json), and the project requirements for original caveats. Never present a fixture or third-party incident as evidence about the candidate repository.\n');
 const filesIn=dir=>fs.readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?filesIn(path.join(dir,e.name)):[path.join(dir,e.name)]);
 const skills=['workers-best-practices','wrangler','durable-objects'].map(name=>{

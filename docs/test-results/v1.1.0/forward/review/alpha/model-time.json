@@ -1,0 +1,375 @@
+{
+  "observation": {
+    "status": "observations_completed",
+    "candidate": "alpha",
+    "group": "time",
+    "source_digest": "de12556396270d3f4bb96bd20cf7671ce77c89631b63d9fcc00ba31fe96fa1fe",
+    "budgets": {
+      "max_events": 50,
+      "charged_events": 12,
+      "max_storage_api_calls": 500,
+      "charged_storage_api_calls": 36,
+      "max_fixtures": 50,
+      "charged_fixtures": 11,
+      "max_rows_per_fixture": 1,
+      "clock": "injected",
+      "network": "sandbox namespace isolated"
+    },
+    "meter": "local double API calls; not Cloudflare billing rows",
+    "totals": {
+      "worker_invocations": 0,
+      "rpc_events": 0,
+      "alarm_events": 12,
+      "do_get_calls": 12,
+      "do_put_calls": 12,
+      "set_alarm_calls": 12,
+      "delete_alarm_calls": 0,
+      "transaction_calls": 0,
+      "transaction_commits": 0,
+      "transaction_rollbacks": 0,
+      "stub_lookups": 0
+    },
+    "observations": [
+      {
+        "scenario": "time_boundary",
+        "case": "forced callback at T+259199999ms",
+        "events": 1,
+        "work": {
+          "worker_invocations": 0,
+          "rpc_events": 0,
+          "alarm_events": 1,
+          "do_get_calls": 1,
+          "do_put_calls": 1,
+          "set_alarm_calls": 1,
+          "delete_alarm_calls": 0,
+          "transaction_calls": 0,
+          "transaction_commits": 0,
+          "transaction_rollbacks": 0,
+          "stub_lookups": 0
+        },
+        "record": {
+          "expires": 1000432000000,
+          "value": 1
+        },
+        "pending_alarm": 1000259200000,
+        "durable_puts_in_double": 1,
+        "sql_rows_read": null,
+        "sql_rows_written": null,
+        "safety": "future_rearm",
+        "due_boundary_ms": 259200000,
+        "expiry_boundary_ms": 432000000,
+        "note": "direct callback probe includes early delivery; it does not assert platform early delivery"
+      },
+      {
+        "scenario": "time_boundary",
+        "case": "forced callback at T+259200000ms",
+        "events": 1,
+        "work": {
+          "worker_invocations": 0,
+          "rpc_events": 0,
+          "alarm_events": 1,
+          "do_get_calls": 1,
+          "do_put_calls": 1,
+          "set_alarm_calls": 1,
+          "delete_alarm_calls": 0,
+          "transaction_calls": 0,
+          "transaction_commits": 0,
+          "transaction_rollbacks": 0,
+          "stub_lookups": 0
+        },
+        "record": {
+          "expires": 1000432000000,
+          "value": 1
+        },
+        "pending_alarm": 1000259200000,
+        "durable_puts_in_double": 1,
+        "sql_rows_read": null,
+        "sql_rows_written": null,
+        "safety": "unsafe_due_rearm",
+        "due_boundary_ms": 259200000,
+        "expiry_boundary_ms": 432000000,
+        "note": "direct callback probe includes early delivery; it does not assert platform early delivery"
+      },
+      {
+        "scenario": "time_boundary",
+        "case": "forced callback at T+259200001ms",
+        "events": 1,
+        "work": {
+          "worker_invocations": 0,
+          "rpc_events": 0,
+          "alarm_events": 1,
+          "do_get_calls": 1,
+          "do_put_calls": 1,
+          "set_alarm_calls": 1,
+          "delete_alarm_calls": 0,
+          "transaction_calls": 0,
+          "transaction_commits": 0,
+          "transaction_rollbacks": 0,
+          "stub_lookups": 0
+        },
+        "record": {
+          "expires": 1000432000000,
+          "value": 1
+        },
+        "pending_alarm": 1000259200001,
+        "durable_puts_in_double": 1,
+        "sql_rows_read": null,
+        "sql_rows_written": null,
+        "safety": "unsafe_due_rearm",
+        "due_boundary_ms": 259200000,
+        "expiry_boundary_ms": 432000000,
+        "note": "direct callback probe includes early delivery; it does not assert platform early delivery"
+      },
+      {
+        "scenario": "time_boundary",
+        "case": "forced callback at T+431999999ms",
+        "events": 1,
+        "work": {
+          "worker_invocations": 0,
+          "rpc_events": 0,
+          "alarm_events": 1,
+          "do_get_calls": 1,
+          "do_put_calls": 1,
+          "set_alarm_calls": 1,
+          "delete_alarm_calls": 0,
+          "transaction_calls": 0,
+          "transaction_commits": 0,
+          "transaction_rollbacks": 0,
+          "stub_lookups": 0
+        },
+        "record": {
+          "expires": 1000432000000,
+          "value": 1
+        },
+        "pending_alarm": 1000431999999,
+        "durable_puts_in_double": 1,
+        "sql_rows_read": null,
+        "sql_rows_written": null,
+        "safety": "unsafe_due_rearm",
+        "due_boundary_ms": 259200000,
+        "expiry_boundary_ms": 432000000,
+        "note": "direct callback probe includes early delivery; it does not assert platform early delivery"
+      },
+      {
+        "scenario": "time_boundary",
+        "case": "forced callback at T+432000000ms",
+        "events": 1,
+        "work": {
+          "worker_invocations": 0,
+          "rpc_events": 0,
+          "alarm_events": 1,
+          "do_get_calls": 1,
+          "do_put_calls": 1,
+          "set_alarm_calls": 1,
+          "delete_alarm_calls": 0,
+          "transaction_calls": 0,
+          "transaction_commits": 0,
+          "transaction_rollbacks": 0,
+          "stub_lookups": 0
+        },
+        "record": {
+          "expires": 1000432000000,
+          "value": 1
+        },
+        "pending_alarm": 1000432000000,
+        "durable_puts_in_double": 1,
+        "sql_rows_read": null,
+        "sql_rows_written": null,
+        "safety": "unsafe_due_rearm",
+        "due_boundary_ms": 259200000,
+        "expiry_boundary_ms": 432000000,
+        "note": "direct callback probe includes early delivery; it does not assert platform early delivery"
+      },
+      {
+        "scenario": "time_boundary",
+        "case": "forced callback at T+432000001ms",
+        "events": 1,
+        "work": {
+          "worker_invocations": 0,
+          "rpc_events": 0,
+          "alarm_events": 1,
+          "do_get_calls": 1,
+          "do_put_calls": 1,
+          "set_alarm_calls": 1,
+          "delete_alarm_calls": 0,
+          "transaction_calls": 0,
+          "transaction_commits": 0,
+          "transaction_rollbacks": 0,
+          "stub_lookups": 0
+        },
+        "record": {
+          "expires": 1000432000000,
+          "value": 1
+        },
+        "pending_alarm": 1000432000001,
+        "durable_puts_in_double": 1,
+        "sql_rows_read": null,
+        "sql_rows_written": null,
+        "safety": "unsafe_due_rearm",
+        "due_boundary_ms": 259200000,
+        "expiry_boundary_ms": 432000000,
+        "note": "direct callback probe includes early delivery; it does not assert platform early delivery"
+      },
+      {
+        "scenario": "time_boundary",
+        "case": "forced callback at T+691200000ms",
+        "events": 1,
+        "work": {
+          "worker_invocations": 0,
+          "rpc_events": 0,
+          "alarm_events": 1,
+          "do_get_calls": 1,
+          "do_put_calls": 1,
+          "set_alarm_calls": 1,
+          "delete_alarm_calls": 0,
+          "transaction_calls": 0,
+          "transaction_commits": 0,
+          "transaction_rollbacks": 0,
+          "stub_lookups": 0
+        },
+        "record": {
+          "expires": 1000432000000,
+          "value": 1
+        },
+        "pending_alarm": 1000691200000,
+        "durable_puts_in_double": 1,
+        "sql_rows_read": null,
+        "sql_rows_written": null,
+        "safety": "unsafe_due_rearm",
+        "due_boundary_ms": 259200000,
+        "expiry_boundary_ms": 432000000,
+        "note": "direct callback probe includes early delivery; it does not assert platform early delivery"
+      },
+      {
+        "scenario": "time_boundary",
+        "case": "clock moves backwards after a due callback",
+        "events": 2,
+        "work": {
+          "worker_invocations": 0,
+          "rpc_events": 0,
+          "alarm_events": 2,
+          "do_get_calls": 2,
+          "do_put_calls": 2,
+          "set_alarm_calls": 2,
+          "delete_alarm_calls": 0,
+          "transaction_calls": 0,
+          "transaction_commits": 0,
+          "transaction_rollbacks": 0,
+          "stub_lookups": 0
+        },
+        "record": {
+          "expires": 1000432000000,
+          "value": 1
+        },
+        "pending_alarm": 1000259200000,
+        "durable_puts_in_double": 2,
+        "sql_rows_read": null,
+        "sql_rows_written": null,
+        "safety": "unchanged_transition"
+      },
+      {
+        "scenario": "time_boundary",
+        "case": "invalid stored expiry Infinity",
+        "events": 1,
+        "work": {
+          "worker_invocations": 0,
+          "rpc_events": 0,
+          "alarm_events": 1,
+          "do_get_calls": 1,
+          "do_put_calls": 1,
+          "set_alarm_calls": 1,
+          "delete_alarm_calls": 0,
+          "transaction_calls": 0,
+          "transaction_commits": 0,
+          "transaction_rollbacks": 0,
+          "stub_lookups": 0
+        },
+        "record": {
+          "expires": null,
+          "value": 1
+        },
+        "pending_alarm": null,
+        "durable_puts_in_double": 1,
+        "sql_rows_read": null,
+        "sql_rows_written": null,
+        "safety": "unknown_platform_fault",
+        "note": "double rejects non-finite timestamps; real API/retry handling is unsupported"
+      },
+      {
+        "scenario": "time_boundary",
+        "case": "invalid stored expiry NaN",
+        "events": 1,
+        "work": {
+          "worker_invocations": 0,
+          "rpc_events": 0,
+          "alarm_events": 1,
+          "do_get_calls": 1,
+          "do_put_calls": 1,
+          "set_alarm_calls": 1,
+          "delete_alarm_calls": 0,
+          "transaction_calls": 0,
+          "transaction_commits": 0,
+          "transaction_rollbacks": 0,
+          "stub_lookups": 0
+        },
+        "record": {
+          "expires": null,
+          "value": 1
+        },
+        "pending_alarm": null,
+        "durable_puts_in_double": 1,
+        "sql_rows_read": null,
+        "sql_rows_written": null,
+        "safety": "unknown_platform_fault",
+        "note": "double rejects non-finite timestamps; real API/retry handling is unsupported"
+      },
+      {
+        "scenario": "time_boundary",
+        "case": "invalid stored expiry undefined",
+        "events": 1,
+        "work": {
+          "worker_invocations": 0,
+          "rpc_events": 0,
+          "alarm_events": 1,
+          "do_get_calls": 1,
+          "do_put_calls": 1,
+          "set_alarm_calls": 1,
+          "delete_alarm_calls": 0,
+          "transaction_calls": 0,
+          "transaction_commits": 0,
+          "transaction_rollbacks": 0,
+          "stub_lookups": 0
+        },
+        "record": {
+          "value": 1
+        },
+        "pending_alarm": null,
+        "durable_puts_in_double": 1,
+        "sql_rows_read": null,
+        "sql_rows_written": null,
+        "safety": "unknown_platform_fault",
+        "note": "double rejects non-finite timestamps; real API/retry handling is unsupported"
+      }
+    ],
+    "unsupported": [
+      "actual Workerd storage/cache billing metrics",
+      "native alarm retry/delivery limits and timings",
+      "actual eviction and storage transaction rollback/commit gates",
+      "concurrent begin/alarm interleavings",
+      "target-account controls and existing persisted state"
+    ]
+  },
+  "sandbox": {
+    "status": "passed",
+    "exit_code": 0,
+    "duration_ms": 224,
+    "network": "isolated_namespace",
+    "credentials": "not_inherited",
+    "checkout": "read_only",
+    "credential_files": "masked",
+    "memory_limit_mb": 256,
+    "timeout_seconds": 10,
+    "process_group_killed": true
+  }
+}
+

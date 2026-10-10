@@ -1,0 +1,1130 @@
+{
+  "schema_version": "1.0",
+  "skill_version": "1.1.0",
+  "reviewed_at": "2026-10-10T08:30:43.955Z",
+  "scope": {
+    "repository": "/tmp/cf-general-forward-c7lbv0vm/alpha",
+    "commit": null,
+    "review_mode": "full",
+    "analysis_scope": "full_local_call_closure_including_configuration",
+    "changed_files": [],
+    "files": [
+      {
+        "path": "main.js",
+        "sha256": "de12556396270d3f4bb96bd20cf7671ce77c89631b63d9fcc00ba31fe96fa1fe",
+        "bytes": 651
+      },
+      {
+        "path": "package-lock.json",
+        "sha256": "93faabe1ad45604f67da1fd2dbf4dbcf185f89fe03eadf898da666243c85ca10",
+        "bytes": 112
+      },
+      {
+        "path": "wrangler.jsonc",
+        "sha256": "9562bcae5c67d823cc7d1059e0c02b4f9f3eb7ad2c4255b3fada0e5f22ff8c72",
+        "bytes": 369
+      }
+    ],
+    "cloud_account_accessed": false
+  },
+  "activation": {
+    "trigger": true,
+    "activation": "explicit_early_preflight",
+    "status": "resolved"
+  },
+  "deployment_identity": {
+    "schema_version": "1.0",
+    "source_snapshot_digest": "a2236ebd67a0ba4e3ad2b7772a9f92e65f239d9d547b8ba8d5832cf70501ebab",
+    "commit": null,
+    "artifact_digest": "de12556396270d3f4bb96bd20cf7671ce77c89631b63d9fcc00ba31fe96fa1fe",
+    "artifact_path": "main.js",
+    "effective_config_digest": "00bca26046694e5e80324ecf073c8a678f4f04fa933ec5e66f596780058b6bec",
+    "config_path": "wrangler.jsonc",
+    "target": {
+      "account_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "application": "review-alpha",
+      "environment": "default",
+      "action": "deploy",
+      "candidate_version": null
+    },
+    "official_skills_lock_digest": "296f2a111e4c5cb6fd6f6608ad95d3bef13f998ed4ef210b7302edf12beb5d12",
+    "policy_digest": "2312ecff40b38a74d728cf6a5c4b4429cbdd3511b65cfb78fd84907bd19bb856",
+    "rules_digest": "88847ac0a2f78a61ffb32e2898f7e2286e34ecfa800739237d11dffa44990d57",
+    "tool_digest": "a7c937b3c958d69e59e2a4c9ddfa8e2ce2848380a9e834937dc411985f868f76",
+    "toolchain": {
+      "node": "v24.11.1",
+      "typescript": "5.9.3",
+      "wrangler": "4.148.0",
+      "wrangler_locked": "4.148.0",
+      "wrangler_source": "explicit_publisher_package",
+      "wrangler_package_digest": "101ed6193158af11fe0633ad225bcc043d0cc5c6d62ff19ffb8dfbaacbe7757c",
+      "lockfiles": [
+        "package-lock.json"
+      ]
+    },
+    "migration_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "builder": "unknown",
+    "digest": "2e4201551bfa2b8ed038c60d33ebf2b6a407f3b43b6765d8b553e0bb647c82ee"
+  },
+  "inventory": {
+    "application": "review-alpha",
+    "toolchain": "wrangler",
+    "tool_versions": {
+      "node": "v24.11.1",
+      "typescript": "5.9.3",
+      "wrangler": "4.148.0",
+      "wrangler_locked": "4.148.0",
+      "wrangler_source": "explicit_publisher_package",
+      "wrangler_package_digest": "101ed6193158af11fe0633ad225bcc043d0cc5c6d62ff19ffb8dfbaacbe7757c",
+      "lockfiles": [
+        "package-lock.json"
+      ]
+    },
+    "compatibility_date": "2026-10-08",
+    "compatibility_flags": [],
+    "has_do": true,
+    "static_only": false,
+    "bindings": [
+      {
+        "kind": "durable_object",
+        "name": "CELLS",
+        "status": "declared",
+        "evidence": {
+          "path": "wrangler.jsonc",
+          "start_line": 1
+        },
+        "config": {
+          "name": "CELLS",
+          "class_name": "Cell"
+        },
+        "remote": false
+      }
+    ],
+    "entry_points": [
+      {
+        "name": "fetch",
+        "type": "fetch",
+        "status": "declared",
+        "location": {
+          "path": "main.js",
+          "start_line": 8,
+          "end_line": 8
+        }
+      }
+    ],
+    "environments": [],
+    "account_state": "unknown_not_accessed",
+    "migration_files": []
+  },
+  "execution_graph": {
+    "nodes": [
+      {
+        "id": "main.js#module",
+        "kind": "logical_task",
+        "name": "module",
+        "entry_type": null,
+        "status": "declared",
+        "location": {
+          "path": "main.js",
+          "start_line": 1,
+          "end_line": 1
+        }
+      },
+      {
+        "id": "main.js#Cell.begin@139",
+        "kind": "logical_task",
+        "name": "begin",
+        "entry_type": "rpc",
+        "status": "declared",
+        "location": {
+          "path": "main.js",
+          "start_line": 4,
+          "end_line": 4
+        }
+      },
+      {
+        "id": "main.js#Cell.plan@276",
+        "kind": "logical_task",
+        "name": "plan",
+        "entry_type": "rpc",
+        "status": "declared",
+        "location": {
+          "path": "main.js",
+          "start_line": 5,
+          "end_line": 5
+        }
+      },
+      {
+        "id": "main.js#Cell.alarm@377",
+        "kind": "logical_task",
+        "name": "alarm",
+        "entry_type": "alarm",
+        "status": "declared",
+        "location": {
+          "path": "main.js",
+          "start_line": 6,
+          "end_line": 6
+        }
+      },
+      {
+        "id": "main.js#fetch@550",
+        "kind": "entry",
+        "name": "fetch",
+        "entry_type": "fetch",
+        "status": "declared",
+        "location": {
+          "path": "main.js",
+          "start_line": 8,
+          "end_line": 8
+        }
+      },
+      {
+        "id": "resource:CELLS",
+        "kind": "resource",
+        "product": "durable_object",
+        "status": "declared",
+        "location": {
+          "path": "wrangler.jsonc",
+          "start_line": 1
+        }
+      },
+      {
+        "id": "resource:DO.storage",
+        "kind": "resource",
+        "product": "do_storage",
+        "status": "declared",
+        "location": {
+          "path": "main.js",
+          "start_line": 4,
+          "end_line": 4
+        }
+      },
+      {
+        "id": "op:main.js:212:250",
+        "kind": "billable_operation",
+        "operation": "put",
+        "resource": "DO.storage",
+        "status": "declared",
+        "location": {
+          "path": "main.js",
+          "start_line": 4,
+          "end_line": 4
+        }
+      },
+      {
+        "id": "op:main.js:303:375",
+        "kind": "billable_operation",
+        "operation": "setAlarm",
+        "resource": "DO.storage",
+        "status": "declared",
+        "location": {
+          "path": "main.js",
+          "start_line": 5,
+          "end_line": 5
+        }
+      },
+      {
+        "id": "op:main.js:412:443",
+        "kind": "billable_operation",
+        "operation": "get",
+        "resource": "DO.storage",
+        "status": "declared",
+        "location": {
+          "path": "main.js",
+          "start_line": 6,
+          "end_line": 6
+        }
+      },
+      {
+        "id": "op:main.js:467:505",
+        "kind": "billable_operation",
+        "operation": "put",
+        "resource": "DO.storage",
+        "status": "declared",
+        "location": {
+          "path": "main.js",
+          "start_line": 6,
+          "end_line": 6
+        }
+      },
+      {
+        "id": "op:main.js:580:615",
+        "kind": "billable_operation",
+        "operation": "begin",
+        "resource": "CELLS",
+        "status": "declared",
+        "location": {
+          "path": "main.js",
+          "start_line": 8,
+          "end_line": 8
+        }
+      },
+      {
+        "id": "op:main.js:580:607",
+        "kind": "billable_operation",
+        "operation": "getByName",
+        "resource": "CELLS",
+        "status": "declared",
+        "location": {
+          "path": "main.js",
+          "start_line": 8,
+          "end_line": 8
+        }
+      }
+    ],
+    "edges": [
+      {
+        "from": "main.js#Cell.begin@139",
+        "to": "main.js#Cell.plan@276",
+        "kind": "local_call",
+        "location": {
+          "path": "main.js",
+          "start_line": 4,
+          "end_line": 4
+        }
+      },
+      {
+        "from": "main.js#Cell.plan@276",
+        "to": "main.js#Cell.alarm@377",
+        "kind": "schedule",
+        "location": {
+          "path": "main.js",
+          "start_line": 5,
+          "end_line": 5
+        }
+      },
+      {
+        "from": "main.js#Cell.alarm@377",
+        "to": "main.js#Cell.plan@276",
+        "kind": "local_call",
+        "location": {
+          "path": "main.js",
+          "start_line": 6,
+          "end_line": 6
+        }
+      },
+      {
+        "from": "main.js#fetch@550",
+        "to": "main.js#Cell.begin@139",
+        "kind": "durable_object_activation",
+        "location": {
+          "path": "main.js",
+          "start_line": 8,
+          "end_line": 8
+        }
+      },
+      {
+        "from": "main.js#Cell.begin@139",
+        "to": "op:main.js:212:250",
+        "kind": "put",
+        "location": {
+          "path": "main.js",
+          "start_line": 4,
+          "end_line": 4
+        }
+      },
+      {
+        "from": "op:main.js:212:250",
+        "to": "resource:DO.storage",
+        "kind": "resource_access",
+        "location": {
+          "path": "main.js",
+          "start_line": 4,
+          "end_line": 4
+        }
+      },
+      {
+        "from": "main.js#Cell.plan@276",
+        "to": "op:main.js:303:375",
+        "kind": "setAlarm",
+        "location": {
+          "path": "main.js",
+          "start_line": 5,
+          "end_line": 5
+        }
+      },
+      {
+        "from": "op:main.js:303:375",
+        "to": "resource:DO.storage",
+        "kind": "resource_access",
+        "location": {
+          "path": "main.js",
+          "start_line": 5,
+          "end_line": 5
+        }
+      },
+      {
+        "from": "main.js#Cell.alarm@377",
+        "to": "op:main.js:412:443",
+        "kind": "get",
+        "location": {
+          "path": "main.js",
+          "start_line": 6,
+          "end_line": 6
+        }
+      },
+      {
+        "from": "op:main.js:412:443",
+        "to": "resource:DO.storage",
+        "kind": "resource_access",
+        "location": {
+          "path": "main.js",
+          "start_line": 6,
+          "end_line": 6
+        }
+      },
+      {
+        "from": "main.js#Cell.alarm@377",
+        "to": "op:main.js:467:505",
+        "kind": "put",
+        "location": {
+          "path": "main.js",
+          "start_line": 6,
+          "end_line": 6
+        }
+      },
+      {
+        "from": "op:main.js:467:505",
+        "to": "resource:DO.storage",
+        "kind": "resource_access",
+        "location": {
+          "path": "main.js",
+          "start_line": 6,
+          "end_line": 6
+        }
+      },
+      {
+        "from": "main.js#fetch@550",
+        "to": "op:main.js:580:615",
+        "kind": "begin",
+        "location": {
+          "path": "main.js",
+          "start_line": 8,
+          "end_line": 8
+        }
+      },
+      {
+        "from": "op:main.js:580:615",
+        "to": "resource:CELLS",
+        "kind": "resource_access",
+        "location": {
+          "path": "main.js",
+          "start_line": 8,
+          "end_line": 8
+        }
+      },
+      {
+        "from": "main.js#fetch@550",
+        "to": "op:main.js:580:607",
+        "kind": "getByName",
+        "location": {
+          "path": "main.js",
+          "start_line": 8,
+          "end_line": 8
+        }
+      },
+      {
+        "from": "op:main.js:580:607",
+        "to": "resource:CELLS",
+        "kind": "resource_access",
+        "location": {
+          "path": "main.js",
+          "start_line": 8,
+          "end_line": 8
+        }
+      }
+    ]
+  },
+  "official_skills": [
+    {
+      "name": "workers-best-practices",
+      "required": true,
+      "applies": true,
+      "reason": "Cloudflare application preflight baseline",
+      "upstream": "https://github.com/cloudflare/skills",
+      "revision": "41e0d19858946d18af9ee2c2feebbe2e11d829ff",
+      "resolved_path": "/home/ubuntu/github/cloudflare-preflight/.agents/skills/cloudflare-cost-safety/vendor/workers-best-practices",
+      "content_digest": "131ab0c3d228c1c827bfc1ece886dd512ce92d3933e57e539b3a4a2c0147ed56",
+      "loaded_references": [
+        {
+          "path": "references/configuration.md",
+          "sha256": "cdb5c9cd5168231373523332c0e7a5cf8811dc244c48298823e3ccc5eb7157c1"
+        },
+        {
+          "path": "references/platform-apis.md",
+          "sha256": "9ca9f5a7a82f92de45d310f5e2ee05aa464ddb7a63a737529caa17fff3660f28"
+        },
+        {
+          "path": "references/runtime-patterns.md",
+          "sha256": "704ce8d4ff62c7655eb1d15f804ad566ed2012d11c2086e0d94bd3addb4d2c07"
+        }
+      ],
+      "load_status": "loaded",
+      "review_status": "not_run",
+      "findings": [],
+      "evidence": [
+        {
+          "path": "vendor/workers-best-practices/SKILL.md",
+          "sha256": "8ae8c6e7359171ba6a1688503850fa05ce47199c4e288343bf55b5e277351bae",
+          "operation": "read"
+        },
+        {
+          "path": "vendor/workers-best-practices/references/configuration.md",
+          "sha256": "cdb5c9cd5168231373523332c0e7a5cf8811dc244c48298823e3ccc5eb7157c1",
+          "operation": "read"
+        },
+        {
+          "path": "vendor/workers-best-practices/references/platform-apis.md",
+          "sha256": "9ca9f5a7a82f92de45d310f5e2ee05aa464ddb7a63a737529caa17fff3660f28",
+          "operation": "read"
+        },
+        {
+          "path": "vendor/workers-best-practices/references/runtime-patterns.md",
+          "sha256": "704ce8d4ff62c7655eb1d15f804ad566ed2012d11c2086e0d94bd3addb4d2c07",
+          "operation": "read"
+        }
+      ]
+    },
+    {
+      "name": "wrangler",
+      "required": true,
+      "applies": true,
+      "reason": "Wrangler effective configuration or release path",
+      "upstream": "https://github.com/cloudflare/skills",
+      "revision": "41e0d19858946d18af9ee2c2feebbe2e11d829ff",
+      "resolved_path": "/home/ubuntu/github/cloudflare-preflight/.agents/skills/cloudflare-cost-safety/vendor/wrangler",
+      "content_digest": "40e6f75362b34bcc90123146192e95a762c76d04134075becd8c6ccafce38d3b",
+      "loaded_references": [],
+      "load_status": "loaded",
+      "review_status": "not_run",
+      "findings": [],
+      "evidence": [
+        {
+          "path": "vendor/wrangler/SKILL.md",
+          "sha256": "9d9bd78c79823cdad36a88dbece8e48d8512c7262c66546ccbfac64ae08d310f",
+          "operation": "read"
+        }
+      ]
+    },
+    {
+      "name": "durable-objects",
+      "required": true,
+      "applies": true,
+      "reason": "DO class, binding, migration, alarm, or possible DO-backed framework",
+      "upstream": "https://github.com/cloudflare/skills",
+      "revision": "41e0d19858946d18af9ee2c2feebbe2e11d829ff",
+      "resolved_path": "/home/ubuntu/github/cloudflare-preflight/.agents/skills/cloudflare-cost-safety/vendor/durable-objects",
+      "content_digest": "d503440a9907ceaf19a63c7f49052a16eb2d877eb7a1358b4f44e5090087d2ff",
+      "loaded_references": [
+        {
+          "path": "references/rules.md",
+          "sha256": "8ec51f1270d6014763139236c3fb9f3a21a3bed4054c99b101f392eb5cb363bf"
+        },
+        {
+          "path": "references/testing.md",
+          "sha256": "1a99e6a2e1bd7f2fa34573b07ad036e3c2ddcf97df6a42926d737eb2d87b3168"
+        },
+        {
+          "path": "references/workers.md",
+          "sha256": "3149c3ee371b5dbf3a84dac7d5bb42c4c6553762480741f6d2808e4ca20fd932"
+        }
+      ],
+      "load_status": "loaded",
+      "review_status": "not_run",
+      "findings": [],
+      "evidence": [
+        {
+          "path": "vendor/durable-objects/SKILL.md",
+          "sha256": "2468c1795f439f494f076eb13a2202a3c4e579e71e6e2ed98b4d1f5ce62fef1b",
+          "operation": "read"
+        },
+        {
+          "path": "vendor/durable-objects/references/rules.md",
+          "sha256": "8ec51f1270d6014763139236c3fb9f3a21a3bed4054c99b101f392eb5cb363bf",
+          "operation": "read"
+        },
+        {
+          "path": "vendor/durable-objects/references/testing.md",
+          "sha256": "1a99e6a2e1bd7f2fa34573b07ad036e3c2ddcf97df6a42926d737eb2d87b3168",
+          "operation": "read"
+        },
+        {
+          "path": "vendor/durable-objects/references/workers.md",
+          "sha256": "3149c3ee371b5dbf3a84dac7d5bb42c4c6553762480741f6d2808e4ca20fd932",
+          "operation": "read"
+        }
+      ]
+    }
+  ],
+  "rules": [
+    {
+      "rule_id": "CF-DO-001",
+      "status": "unknown",
+      "evidence": [
+        {
+          "kind": "durable_object_lifecycle"
+        },
+        {
+          "location": {
+            "path": "main.js",
+            "start_line": 5,
+            "end_line": 5
+          }
+        }
+      ],
+      "findings": [],
+      "gaps": [
+        {
+          "reason": "Alarm rescheduling needs a verified work or time-window boundary",
+          "location": {
+            "path": "main.js",
+            "start_line": 5,
+            "end_line": 5
+          }
+        }
+      ],
+      "implementation": {
+        "static": "AST stub RPC activation → local constructor → alarm → storage → rearm; DO-owned schema required",
+        "agent": "Mandatory code-derived execution-bound review: activation, work, continuation, progress/stop, scope and amplification; actual source and official evidence, without incident prerequisites",
+        "local_tests": "workerd activation/alarm/eviction, getAlarm null, empty work and injected-clock refresh/expiry/stale-time tests",
+        "unsupported": "External activation/history, Agents SDK internals and conditional schema initialization"
+      }
+    },
+    {
+      "rule_id": "CF-DO-002",
+      "status": "unknown",
+      "evidence": [
+        {
+          "kind": "durable_object_lifecycle"
+        },
+        {
+          "location": {
+            "path": "main.js",
+            "start_line": 5,
+            "end_line": 5
+          }
+        }
+      ],
+      "findings": [],
+      "gaps": [
+        {
+          "reason": "No verified cumulative logical-job or periodic-window budget",
+          "location": {
+            "path": "main.js",
+            "start_line": 5,
+            "end_line": 5
+          }
+        }
+      ],
+      "implementation": {
+        "static": "AST memory field/constructor reset plus alarm reschedule; persistent get guard distinguished",
+        "agent": "Mandatory code-derived execution-bound review: activation, work, continuation, progress/stop, scope and amplification; actual source and official evidence, without incident prerequisites",
+        "local_tests": "workerd eviction resets attempts while durable runs persist; finite task and periodic window",
+        "unsupported": "General transaction/fault invariants and arbitrary counter names require Agent evidence"
+      }
+    },
+    {
+      "rule_id": "CF-DEP-001",
+      "status": "pass",
+      "evidence": [
+        {
+          "kind": "effective_environments",
+          "environments": [],
+          "note": "Preview URLs are not assumed to create namespaces"
+        }
+      ],
+      "findings": [],
+      "gaps": [],
+      "implementation": {
+        "static": "AST newUniqueId plus activated class alarms; real JSONC/TOML environment bindings",
+        "agent": "Mandatory code-derived execution-bound review: activation, work, continuation, progress/stop, scope and amplification; actual source and official evidence, without incident prerequisites",
+        "local_tests": "Config drift/generator gaps; bounded shared/independent-resource models",
+        "unsupported": "Live namespace counts and expiry; no claim that a preview URL creates resources"
+      }
+    },
+    {
+      "rule_id": "CF-SQL-001",
+      "status": "not_applicable",
+      "evidence": [
+        {
+          "kind": "inventory_and_call_graph",
+          "detail": "No applicable reachable operation in the selected source/configuration"
+        }
+      ],
+      "findings": [],
+      "gaps": [],
+      "implementation": {
+        "static": "SQL AST predicates/order/LIMIT plus per-database committed indexes and hot call closure",
+        "agent": "Mandatory code-derived execution-bound review: activation, work, continuation, progress/stop, scope and amplification; actual source and official evidence, without incident prerequisites",
+        "local_tests": "Actual DO SQL cursor rows and D1 local meta; SQLite plan probe separately labelled",
+        "unsupported": "Dynamic ORM/SQL, unsupported syntax, complex joins/selectivity and production schema"
+      }
+    },
+    {
+      "rule_id": "CF-SQL-002",
+      "status": "not_applicable",
+      "evidence": [
+        {
+          "kind": "inventory_and_call_graph",
+          "detail": "No applicable reachable operation in the selected source/configuration"
+        }
+      ],
+      "findings": [],
+      "gaps": [],
+      "implementation": {
+        "static": "SQL AST whole-table UPDATE/DELETE on known database schema; hot vs maintenance entry",
+        "agent": "Mandatory code-derived execution-bound review: activation, work, continuation, progress/stop, scope and amplification; actual source and official evidence, without incident prerequisites",
+        "local_tests": "Actual DO broad writes, low selectivity, repeated upsert rowsWritten",
+        "unsupported": "General selective bounds, transactions, trigger/index amplification need workload evidence"
+      }
+    },
+    {
+      "rule_id": "CF-JOB-001",
+      "status": "not_applicable",
+      "evidence": [
+        {
+          "kind": "inventory_and_call_graph",
+          "detail": "No applicable reachable operation in the selected source/configuration"
+        }
+      ],
+      "findings": [],
+      "gaps": [],
+      "implementation": {
+        "static": "Scheduled/alarm SELECT LIMIT + writes with no committed progress transition",
+        "agent": "Mandatory code-derived execution-bound review: activation, work, continuation, progress/stop, scope and amplification; actual source and official evidence, without incident prerequisites",
+        "local_tests": "Bounded checkpoint/crash simulation and finite DO work across eviction",
+        "unsupported": "Checkpoint transactions and external processing, arbitrary business progress semantics"
+      }
+    },
+    {
+      "rule_id": "CF-Q-001",
+      "status": "not_applicable",
+      "evidence": [
+        {
+          "kind": "inventory_and_call_graph",
+          "detail": "No applicable reachable operation in the selected source/configuration"
+        }
+      ],
+      "findings": [],
+      "gaps": [],
+      "implementation": {
+        "static": "Consumer → same-repository cross-file producer → new send without preserved root/hops guard",
+        "agent": "Mandatory code-derived execution-bound review: activation, work, continuation, progress/stop, scope and amplification; actual source and official evidence, without incident prerequisites",
+        "local_tests": "Bounded 20-step fresh-ID/ack feedback and bounded root/hops chain with real Queue test helpers",
+        "unsupported": "External producers, DLQ replay semantics and real cloud Queue scheduling"
+      }
+    },
+    {
+      "rule_id": "CF-Q-002",
+      "status": "not_applicable",
+      "evidence": [
+        {
+          "kind": "inventory_and_call_graph",
+          "detail": "No applicable reachable operation in the selected source/configuration"
+        }
+      ],
+      "findings": [],
+      "gaps": [],
+      "implementation": {
+        "static": "Billable side effects plus explicit retryAll without per-item ack",
+        "agent": "Mandatory code-derived execution-bound review: activation, work, continuation, progress/stop, scope and amplification; actual source and official evidence, without incident prerequisites",
+        "local_tests": "Bounded partial-success/write-before-ack/DLQ simulation using Queue test helpers",
+        "unsupported": "Exactly-once side effects, external payments and production delivery behavior"
+      }
+    },
+    {
+      "rule_id": "CF-KV-001",
+      "status": "not_applicable",
+      "evidence": [
+        {
+          "kind": "inventory_and_call_graph",
+          "detail": "No applicable reachable operation in the selected source/configuration"
+        }
+      ],
+      "findings": [],
+      "gaps": [],
+      "implementation": {
+        "static": "KV list in unbounded AST loop without cursor advance; bounded loops distinguished",
+        "agent": "Mandatory code-derived execution-bound review: activation, work, continuation, progress/stop, scope and amplification; actual source and official evidence, without incident prerequisites",
+        "local_tests": "Actual local KV miss/list/cursor pagination; stuck cursor mutation",
+        "unsupported": "Business miss cardinality, globally consistent admission and cross-region state"
+      }
+    },
+    {
+      "rule_id": "CF-R2-001",
+      "status": "not_applicable",
+      "evidence": [
+        {
+          "kind": "inventory_and_call_graph",
+          "detail": "No applicable reachable operation in the selected source/configuration"
+        }
+      ],
+      "findings": [],
+      "gaps": [],
+      "implementation": {
+        "static": "Reachable fast timer/alarm with unconditional put/list; change guard candidate",
+        "agent": "Mandatory code-derived execution-bound review: activation, work, continuation, progress/stop, scope and amplification; actual source and official evidence, without incident prerequisites",
+        "local_tests": "Actual local R2 put/list plus bounded frequency/environment arithmetic",
+        "unsupported": "S3/public access, object-event loops, change-detection/retry semantics and live scope"
+      }
+    },
+    {
+      "rule_id": "CF-HTTP-001",
+      "status": "unknown",
+      "evidence": [
+        {
+          "location": {
+            "path": "main.js",
+            "start_line": 8,
+            "end_line": 8
+          }
+        },
+        {
+          "location": {
+            "path": "main.js",
+            "start_line": 8,
+            "end_line": 8
+          }
+        }
+      ],
+      "findings": [],
+      "gaps": [
+        {
+          "reason": "Public entry/WAF/cache/admission scope cannot be verified from this repository",
+          "location": {
+            "path": "main.js",
+            "start_line": 8,
+            "end_line": 8
+          }
+        }
+      ],
+      "implementation": {
+        "static": "Literal browser script served by configured assets + fast relative polling + costly Worker handler; public external/dynamic fetch selects required origin-access evidence",
+        "agent": "Mandatory code-derived execution-bound review: activation, work, continuation, progress/stop, scope and amplification; actual source and official evidence, without incident prerequisites",
+        "local_tests": "Static assets and cross-file/dynamic proxy evidence-denial tests; lexical fetch/service-binding regressions; no live origin/WAF test",
+        "unsupported": "Dynamic routes/templates, cache/WAF account state and general public traffic bounds"
+      }
+    },
+    {
+      "rule_id": "CF-SAFE-001",
+      "status": "pass",
+      "evidence": [
+        {
+          "kind": "control_claims_checked"
+        }
+      ],
+      "findings": [],
+      "gaps": [],
+      "implementation": {
+        "static": "Structured false control guarantees and reachable test reset helper",
+        "agent": "Mandatory code-derived execution-bound review: activation, work, continuation, progress/stop, scope and amplification; actual source and official evidence, without incident prerequisites",
+        "local_tests": "Five native scope falsification tests, signed false hard-cap schema rejection; persistent-stop queued/replayed callback model",
+        "unsupported": "Plan/contract applicability, already-running remote effects, runtime control state and any production isolation"
+      }
+    }
+  ],
+  "findings": [],
+  "tests": [
+    {
+      "id": "bounded-local-probe",
+      "status": "passed",
+      "tool_error": false,
+      "input_digest": "2e4201551bfa2b8ed038c60d33ebf2b6a407f3b43b6765d8b553e0bb647c82ee",
+      "command": [
+        "python3",
+        "/home/ubuntu/github/cloudflare-preflight/.agents/skills/cloudflare-cost-safety/scripts/lib/probe.py",
+        "256"
+      ],
+      "runner_digest": "27455f39185a38c2bfc6ea7df931014826f671bd4cf78a522f4805e23d279245",
+      "duration_ms": 51,
+      "metrics": {
+        "status": "passed",
+        "engine": "sqlite3",
+        "version": "3.37.2",
+        "results": [],
+        "groups": [],
+        "billing_metrics": null,
+        "cloud_writes": 0,
+        "memory_limit_mb": 256
+      }
+    }
+  ],
+  "native_controls": [
+    {
+      "product": "Workers",
+      "plan_backend": "unknown",
+      "control": "cpu_limit",
+      "control_surface": "runtime_configuration",
+      "scope": "CPU per invocation; not SQL, wait time, cross-event or monthly usage",
+      "official_source": "https://developers.cloudflare.com/workers/platform/limits/",
+      "checked_at": "2026-10-08",
+      "version_conditions": "Verify the candidate toolchain, plan and backend",
+      "configuration_evidence": "unknown",
+      "data_preservation": "unknown",
+      "reversible": "unknown",
+      "affects_running_tasks": "unknown",
+      "covers_new_producers": "unknown",
+      "propagation_delay": "unknown",
+      "uncovered_paths": [
+        "Other entry points",
+        "Background tasks",
+        "Storage and fixed charges"
+      ],
+      "manual_verification": [
+        "Verify this control against current product documentation and target configuration without executing changes"
+      ],
+      "execution_status": "NOT_EXECUTED"
+    },
+    {
+      "product": "Billing",
+      "plan_backend": "unknown",
+      "control": "budget_alert",
+      "control_surface": "management_notification",
+      "scope": "Notification only; no pause or hard cap",
+      "official_source": "https://developers.cloudflare.com/billing/manage/budget-alerts/",
+      "checked_at": "2026-10-08",
+      "version_conditions": "Verify the candidate toolchain, plan and backend",
+      "configuration_evidence": "unknown",
+      "data_preservation": "unknown",
+      "reversible": "unknown",
+      "affects_running_tasks": "unknown",
+      "covers_new_producers": "unknown",
+      "propagation_delay": "unknown",
+      "uncovered_paths": [
+        "Other entry points",
+        "Background tasks",
+        "Storage and fixed charges"
+      ],
+      "manual_verification": [
+        "Verify this control against current product documentation and target configuration without executing changes"
+      ],
+      "execution_status": "NOT_EXECUTED"
+    },
+    {
+      "product": "Durable Objects",
+      "plan_backend": "unknown",
+      "control": "deleteAlarm",
+      "control_surface": "object_runtime_api",
+      "scope": "Scheduled alarm on one object; not account isolation or cancellation of running work",
+      "official_source": "https://developers.cloudflare.com/durable-objects/api/alarms/",
+      "checked_at": "2026-10-08",
+      "version_conditions": "Verify the candidate toolchain, plan and backend",
+      "configuration_evidence": "unknown",
+      "data_preservation": "unknown",
+      "reversible": "unknown",
+      "affects_running_tasks": "unknown",
+      "covers_new_producers": "unknown",
+      "propagation_delay": "unknown",
+      "uncovered_paths": [
+        "Other entry points",
+        "Background tasks",
+        "Storage and fixed charges"
+      ],
+      "manual_verification": [
+        "Verify this control against current product documentation and target configuration without executing changes"
+      ],
+      "execution_status": "NOT_EXECUTED"
+    }
+  ],
+  "coverage": {
+    "rules_total": 12,
+    "rules_evaluated": [
+      "CF-DO-001",
+      "CF-DO-002",
+      "CF-DEP-001",
+      "CF-SQL-001",
+      "CF-SQL-002",
+      "CF-JOB-001",
+      "CF-Q-001",
+      "CF-Q-002",
+      "CF-KV-001",
+      "CF-R2-001",
+      "CF-HTTP-001",
+      "CF-SAFE-001"
+    ],
+    "unknown_edges": [],
+    "sql_gaps": [],
+    "required_tests": [
+      "bounded-local-probe",
+      "execution-bounds",
+      "do-lifecycle",
+      "do-getalarm",
+      "do-time-boundaries",
+      "background-stop"
+    ],
+    "missing_tests": [
+      "execution-bounds",
+      "do-lifecycle",
+      "do-getalarm",
+      "do-time-boundaries",
+      "background-stop"
+    ],
+    "uncovered_products": [
+      "AI/external charges",
+      "Workflows",
+      "DO WebSocket/active duration",
+      "R2 object event loops",
+      "logs/traces"
+    ],
+    "deployment_bypasses": [
+      "Direct CLI",
+      "Cloudflare dashboard",
+      "Unverified Workers Builds deployment and preview commands",
+      "Independent CI"
+    ],
+    "execution_bounds": [
+      {
+        "path_id": "main.js#Cell.begin@139",
+        "location": {
+          "path": "main.js",
+          "start_line": 4,
+          "end_line": 4
+        },
+        "entry_type": "rpc",
+        "operation_ids": [
+          "op:main.js:212:250",
+          "op:main.js:303:375",
+          "op:main.js:412:443",
+          "op:main.js:467:505"
+        ],
+        "requires_cumulative_bound": true,
+        "required_scenarios": [
+          "normal",
+          "no_progress",
+          "amplification",
+          "exhaustion",
+          "restart",
+          "replay",
+          "stop",
+          "time_boundary"
+        ]
+      },
+      {
+        "path_id": "main.js#Cell.plan@276",
+        "location": {
+          "path": "main.js",
+          "start_line": 5,
+          "end_line": 5
+        },
+        "entry_type": "rpc",
+        "operation_ids": [
+          "op:main.js:303:375",
+          "op:main.js:412:443",
+          "op:main.js:467:505"
+        ],
+        "requires_cumulative_bound": true,
+        "required_scenarios": [
+          "normal",
+          "no_progress",
+          "amplification",
+          "exhaustion",
+          "restart",
+          "replay",
+          "stop",
+          "time_boundary"
+        ]
+      },
+      {
+        "path_id": "main.js#Cell.alarm@377",
+        "location": {
+          "path": "main.js",
+          "start_line": 6,
+          "end_line": 6
+        },
+        "entry_type": "alarm",
+        "operation_ids": [
+          "op:main.js:303:375",
+          "op:main.js:412:443",
+          "op:main.js:467:505"
+        ],
+        "requires_cumulative_bound": true,
+        "required_scenarios": [
+          "normal",
+          "no_progress",
+          "amplification",
+          "exhaustion",
+          "restart",
+          "replay",
+          "stop",
+          "time_boundary"
+        ]
+      },
+      {
+        "path_id": "main.js#fetch@550",
+        "location": {
+          "path": "main.js",
+          "start_line": 8,
+          "end_line": 8
+        },
+        "entry_type": "fetch",
+        "operation_ids": [
+          "op:main.js:212:250",
+          "op:main.js:303:375",
+          "op:main.js:412:443",
+          "op:main.js:467:505",
+          "op:main.js:580:615",
+          "op:main.js:580:607"
+        ],
+        "requires_cumulative_bound": true,
+        "required_scenarios": [
+          "normal",
+          "no_progress",
+          "amplification",
+          "exhaustion",
+          "restart",
+          "replay",
+          "stop",
+          "time_boundary"
+        ]
+      }
+    ],
+    "execution_bounds_gaps": [
+      "execution_bounds:one_current_application_test_required"
+    ]
+  },
+  "usage_assessment": {
+    "classification": "unknown",
+    "vector": {
+      "events": null,
+      "queue_deliveries": null,
+      "new_messages": null,
+      "sql_rows_read": null,
+      "sql_rows_written": null,
+      "kv_reads": null,
+      "kv_writes": null,
+      "kv_lists": null,
+      "r2_class_a": null,
+      "r2_class_b": null,
+      "active_objects": null,
+      "environments": null
+    },
+    "usd_estimate": null,
+    "assumptions": [
+      "Declared configuration describes the reviewed artifact; live account state is not inspected"
+    ],
+    "enforced_limits": [],
+    "excluded": [
+      "duration",
+      "storage",
+      "fixed fees",
+      "logs/traces",
+      "external AI"
+    ]
+  },
+  "approvals": [],
+  "incomplete": [
+    "builder_identity_unknown"
+  ],
+  "tool_errors": [],
+  "overall_status": "INCOMPLETE",
+  "official_best_practices_status": "INCOMPLETE",
+  "cost_safety_status": "INCOMPLETE",
+  "predeploy_gate_status": "DENY",
+  "deployment_gate_coverage": "partial",
+  "guarantees": {
+    "hard_monthly_cap": false,
+    "production_isolation_performed": false,
+    "cloud_writes": 0
+  },
+  "review_identity": null
+}

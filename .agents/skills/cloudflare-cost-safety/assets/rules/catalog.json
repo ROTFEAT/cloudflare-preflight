@@ -1,6 +1,11 @@
 {
   "schema_version": "1.0",
-  "version": "1.0.4",
+  "version": "1.1.0",
+  "review_method": {
+    "reference": "references/execution-bounds.md",
+    "required_test": "execution-bounds",
+    "incident_reports": "optional_context"
+  },
   "rules": [
     {
       "id": "CF-DO-001",
@@ -37,7 +42,7 @@
       ],
       "implementation": {
         "static": "AST stub RPC activation → local constructor → alarm → storage → rearm; DO-owned schema required",
-        "agent": "Mandatory semantic review with actual source locations and official context; static candidates are not complete coverage",
+        "agent": "Mandatory code-derived execution-bound review: activation, work, continuation, progress/stop, scope and amplification; actual source and official evidence, without incident prerequisites",
         "local_tests": "workerd activation/alarm/eviction, getAlarm null, empty work and injected-clock refresh/expiry/stale-time tests",
         "unsupported": "External activation/history, Agents SDK internals and conditional schema initialization"
       }
@@ -79,7 +84,7 @@
       ],
       "implementation": {
         "static": "AST memory field/constructor reset plus alarm reschedule; persistent get guard distinguished",
-        "agent": "Mandatory semantic review with actual source locations and official context; static candidates are not complete coverage",
+        "agent": "Mandatory code-derived execution-bound review: activation, work, continuation, progress/stop, scope and amplification; actual source and official evidence, without incident prerequisites",
         "local_tests": "workerd eviction resets attempts while durable runs persist; finite task and periodic window",
         "unsupported": "General transaction/fault invariants and arbitrary counter names require Agent evidence"
       }
@@ -118,7 +123,7 @@
       ],
       "implementation": {
         "static": "AST newUniqueId plus activated class alarms; real JSONC/TOML environment bindings",
-        "agent": "Mandatory semantic review with actual source locations and official context; static candidates are not complete coverage",
+        "agent": "Mandatory code-derived execution-bound review: activation, work, continuation, progress/stop, scope and amplification; actual source and official evidence, without incident prerequisites",
         "local_tests": "Config drift/generator gaps; bounded shared/independent-resource models",
         "unsupported": "Live namespace counts and expiry; no claim that a preview URL creates resources"
       }
@@ -158,7 +163,7 @@
       ],
       "implementation": {
         "static": "SQL AST predicates/order/LIMIT plus per-database committed indexes and hot call closure",
-        "agent": "Mandatory semantic review with actual source locations and official context; static candidates are not complete coverage",
+        "agent": "Mandatory code-derived execution-bound review: activation, work, continuation, progress/stop, scope and amplification; actual source and official evidence, without incident prerequisites",
         "local_tests": "Actual DO SQL cursor rows and D1 local meta; SQLite plan probe separately labelled",
         "unsupported": "Dynamic ORM/SQL, unsupported syntax, complex joins/selectivity and production schema"
       }
@@ -199,7 +204,7 @@
       ],
       "implementation": {
         "static": "SQL AST whole-table UPDATE/DELETE on known database schema; hot vs maintenance entry",
-        "agent": "Mandatory semantic review with actual source locations and official context; static candidates are not complete coverage",
+        "agent": "Mandatory code-derived execution-bound review: activation, work, continuation, progress/stop, scope and amplification; actual source and official evidence, without incident prerequisites",
         "local_tests": "Actual DO broad writes, low selectivity, repeated upsert rowsWritten",
         "unsupported": "General selective bounds, transactions, trigger/index amplification need workload evidence"
       }
@@ -238,7 +243,7 @@
       ],
       "implementation": {
         "static": "Scheduled/alarm SELECT LIMIT + writes with no committed progress transition",
-        "agent": "Mandatory semantic review with actual source locations and official context; static candidates are not complete coverage",
+        "agent": "Mandatory code-derived execution-bound review: activation, work, continuation, progress/stop, scope and amplification; actual source and official evidence, without incident prerequisites",
         "local_tests": "Bounded checkpoint/crash simulation and finite DO work across eviction",
         "unsupported": "Checkpoint transactions and external processing, arbitrary business progress semantics"
       }
@@ -276,7 +281,7 @@
       ],
       "implementation": {
         "static": "Consumer → same-repository cross-file producer → new send without preserved root/hops guard",
-        "agent": "Mandatory semantic review with actual source locations and official context; static candidates are not complete coverage",
+        "agent": "Mandatory code-derived execution-bound review: activation, work, continuation, progress/stop, scope and amplification; actual source and official evidence, without incident prerequisites",
         "local_tests": "Bounded 20-step fresh-ID/ack feedback and bounded root/hops chain with real Queue test helpers",
         "unsupported": "External producers, DLQ replay semantics and real cloud Queue scheduling"
       }
@@ -315,7 +320,7 @@
       ],
       "implementation": {
         "static": "Billable side effects plus explicit retryAll without per-item ack",
-        "agent": "Mandatory semantic review with actual source locations and official context; static candidates are not complete coverage",
+        "agent": "Mandatory code-derived execution-bound review: activation, work, continuation, progress/stop, scope and amplification; actual source and official evidence, without incident prerequisites",
         "local_tests": "Bounded partial-success/write-before-ack/DLQ simulation using Queue test helpers",
         "unsupported": "Exactly-once side effects, external payments and production delivery behavior"
       }
@@ -353,7 +358,7 @@
       ],
       "implementation": {
         "static": "KV list in unbounded AST loop without cursor advance; bounded loops distinguished",
-        "agent": "Mandatory semantic review with actual source locations and official context; static candidates are not complete coverage",
+        "agent": "Mandatory code-derived execution-bound review: activation, work, continuation, progress/stop, scope and amplification; actual source and official evidence, without incident prerequisites",
         "local_tests": "Actual local KV miss/list/cursor pagination; stuck cursor mutation",
         "unsupported": "Business miss cardinality, globally consistent admission and cross-region state"
       }
@@ -392,7 +397,7 @@
       ],
       "implementation": {
         "static": "Reachable fast timer/alarm with unconditional put/list; change guard candidate",
-        "agent": "Mandatory semantic review with actual source locations and official context; static candidates are not complete coverage",
+        "agent": "Mandatory code-derived execution-bound review: activation, work, continuation, progress/stop, scope and amplification; actual source and official evidence, without incident prerequisites",
         "local_tests": "Actual local R2 put/list plus bounded frequency/environment arithmetic",
         "unsupported": "S3/public access, object-event loops, change-detection/retry semantics and live scope"
       }
@@ -434,7 +439,7 @@
       ],
       "implementation": {
         "static": "Literal browser script served by configured assets + fast relative polling + costly Worker handler; public external/dynamic fetch selects required origin-access evidence",
-        "agent": "Mandatory semantic review with actual source locations and official context; static candidates are not complete coverage",
+        "agent": "Mandatory code-derived execution-bound review: activation, work, continuation, progress/stop, scope and amplification; actual source and official evidence, without incident prerequisites",
         "local_tests": "Static assets and cross-file/dynamic proxy evidence-denial tests; lexical fetch/service-binding regressions; no live origin/WAF test",
         "unsupported": "Dynamic routes/templates, cache/WAF account state and general public traffic bounds"
       }
@@ -477,7 +482,7 @@
       ],
       "implementation": {
         "static": "Structured false control guarantees and reachable test reset helper",
-        "agent": "Mandatory semantic review with actual source locations and official context; static candidates are not complete coverage",
+        "agent": "Mandatory code-derived execution-bound review: activation, work, continuation, progress/stop, scope and amplification; actual source and official evidence, without incident prerequisites",
         "local_tests": "Five native scope falsification tests, signed false hard-cap schema rejection; persistent-stop queued/replayed callback model",
         "unsupported": "Plan/contract applicability, already-running remote effects, runtime control state and any production isolation"
       }

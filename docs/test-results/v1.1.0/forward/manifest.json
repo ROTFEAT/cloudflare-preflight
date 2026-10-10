@@ -1,0 +1,210 @@
+{
+  "skill_version": "1.1.0",
+  "reviewer": "independent Codex sub-agent /root/general_forward_review",
+  "incident_report_supplied": false,
+  "source_root": "/tmp/cf-general-forward-c7lbv0vm",
+  "copy_method": "byte-for-byte; original absolute paths and uncertainty statements retained",
+  "results": {
+    "alpha": "BLOCK",
+    "beta": "INCOMPLETE"
+  },
+  "limitations": [
+    "Six injected-clock VM/storage-double probes are not Workerd runtime safety tests or production billing observations.",
+    "Generated graph misses transaction callback storage aliases; independent semantic review inspected them.",
+    "Required application platform tests and release/cloud evidence remain incomplete."
+  ],
+  "files": [
+    {
+      "path": "review/alpha/final/official-context.json",
+      "source_path": "/tmp/cf-general-forward-c7lbv0vm/review/alpha/final/official-context.json",
+      "bytes": 61990,
+      "sha256": "eae3384ecf5f128018f9a2c1f4beef3b54315377c92c63ce10f5e0fa8d7ff784"
+    },
+    {
+      "path": "review/alpha/final/report.json",
+      "source_path": "/tmp/cf-general-forward-c7lbv0vm/review/alpha/final/report.json",
+      "bytes": 92365,
+      "sha256": "09b9b4254c83542c46a228f89c28262ff7b2dae91282bcc94647fee4d5e44117"
+    },
+    {
+      "path": "review/alpha/final/report.md",
+      "source_path": "/tmp/cf-general-forward-c7lbv0vm/review/alpha/final/report.md",
+      "bytes": 9411,
+      "sha256": "18c5e93eed82a387ed3b520b23432c664647d8aa9411245fbd2200a00811d78c"
+    },
+    {
+      "path": "review/alpha/initial/official-context.json",
+      "source_path": "/tmp/cf-general-forward-c7lbv0vm/review/alpha/initial/official-context.json",
+      "bytes": 61990,
+      "sha256": "eae3384ecf5f128018f9a2c1f4beef3b54315377c92c63ce10f5e0fa8d7ff784"
+    },
+    {
+      "path": "review/alpha/initial/report.json",
+      "source_path": "/tmp/cf-general-forward-c7lbv0vm/review/alpha/initial/report.json",
+      "bytes": 36166,
+      "sha256": "d64ee95f8be31a4011487f675ddcd45046241407fecaf5409bc2126a82422fef"
+    },
+    {
+      "path": "review/alpha/initial/report.md",
+      "source_path": "/tmp/cf-general-forward-c7lbv0vm/review/alpha/initial/report.md",
+      "bytes": 4019,
+      "sha256": "c45e726dfc193a2ecec3dacedcab66642a82f38e74d337d3b5f26b1175e8c8e0"
+    },
+    {
+      "path": "review/alpha/model-core.json",
+      "source_path": "/tmp/cf-general-forward-c7lbv0vm/review/alpha/model-core.json",
+      "bytes": 7317,
+      "sha256": "a2cb2cf3aac42213a8443dbd6b1a91b6061d266112b89c0f0975109ec549d76a"
+    },
+    {
+      "path": "review/alpha/model-fault.json",
+      "source_path": "/tmp/cf-general-forward-c7lbv0vm/review/alpha/model-fault.json",
+      "bytes": 3270,
+      "sha256": "16abcdd0c12941297fcff38e2350dddf4b9ca4414ab02b5c39872082b5299d8c"
+    },
+    {
+      "path": "review/alpha/model-time.json",
+      "source_path": "/tmp/cf-general-forward-c7lbv0vm/review/alpha/model-time.json",
+      "bytes": 11641,
+      "sha256": "011b019342313433ce118c2b9de766e74b1c0fc2953bf66c0c468bd9d125d5aa"
+    },
+    {
+      "path": "review/alpha/semantic-review.json",
+      "source_path": "/tmp/cf-general-forward-c7lbv0vm/review/alpha/semantic-review.json",
+      "bytes": 53986,
+      "sha256": "ad02e9468dc5b26eeedac9f91aeb7e3acc7a05a5284a91ec86ed55b9ab3793ce"
+    },
+    {
+      "path": "review/beta/final/official-context.json",
+      "source_path": "/tmp/cf-general-forward-c7lbv0vm/review/beta/final/official-context.json",
+      "bytes": 61990,
+      "sha256": "eae3384ecf5f128018f9a2c1f4beef3b54315377c92c63ce10f5e0fa8d7ff784"
+    },
+    {
+      "path": "review/beta/final/report.json",
+      "source_path": "/tmp/cf-general-forward-c7lbv0vm/review/beta/final/report.json",
+      "bytes": 84260,
+      "sha256": "7f1fd4e884fe71903164211925215cd648bef8224a3f51a980e43289c5871325"
+    },
+    {
+      "path": "review/beta/final/report.md",
+      "source_path": "/tmp/cf-general-forward-c7lbv0vm/review/beta/final/report.md",
+      "bytes": 7599,
+      "sha256": "037d0186c70bfda165f08df0f794a1af6a801515ff6c1e019adab2843ea29b3b"
+    },
+    {
+      "path": "review/beta/initial/official-context.json",
+      "source_path": "/tmp/cf-general-forward-c7lbv0vm/review/beta/initial/official-context.json",
+      "bytes": 61990,
+      "sha256": "eae3384ecf5f128018f9a2c1f4beef3b54315377c92c63ce10f5e0fa8d7ff784"
+    },
+    {
+      "path": "review/beta/initial/report.json",
+      "source_path": "/tmp/cf-general-forward-c7lbv0vm/review/beta/initial/report.json",
+      "bytes": 37132,
+      "sha256": "0c5e1596db3e4ad40e44463cd47e5f05c727443dc8dad4b42415a34a2af8a21e"
+    },
+    {
+      "path": "review/beta/initial/report.md",
+      "source_path": "/tmp/cf-general-forward-c7lbv0vm/review/beta/initial/report.md",
+      "bytes": 4018,
+      "sha256": "481ec9b743d1c6d7bcbb3b9941b76c5ecfd8f2405327000d82f6cb98f44de46b"
+    },
+    {
+      "path": "review/beta/model-core.json",
+      "source_path": "/tmp/cf-general-forward-c7lbv0vm/review/beta/model-core.json",
+      "bytes": 7306,
+      "sha256": "69777c67190fb32014d6fef87b01fc4e549759fbe49d6857913be57752216dcd"
+    },
+    {
+      "path": "review/beta/model-fault.json",
+      "source_path": "/tmp/cf-general-forward-c7lbv0vm/review/beta/model-fault.json",
+      "bytes": 4262,
+      "sha256": "daa37e47b5ea2ab2a034f8290b31b848a1eb9ee18616c836c7f73630282d15a8"
+    },
+    {
+      "path": "review/beta/model-time.json",
+      "source_path": "/tmp/cf-general-forward-c7lbv0vm/review/beta/model-time.json",
+      "bytes": 9460,
+      "sha256": "4e7fe8c8dec45eab6525f3283226498669cc31ae9e42ed111657c9fe735436cc"
+    },
+    {
+      "path": "review/beta/semantic-review.json",
+      "source_path": "/tmp/cf-general-forward-c7lbv0vm/review/beta/semantic-review.json",
+      "bytes": 47492,
+      "sha256": "f0862e7a447c0a52e39177697d8a4442c1cfc561416ddb638f825a55c6cb9268"
+    },
+    {
+      "path": "review/commands-and-results.json",
+      "source_path": "/tmp/cf-general-forward-c7lbv0vm/review/commands-and-results.json",
+      "bytes": 371339,
+      "sha256": "ea31a9316dce63700801ea0346de85b900d5b3758fc9018e877984001d123b47"
+    },
+    {
+      "path": "review/commands.json",
+      "source_path": "/tmp/cf-general-forward-c7lbv0vm/review/commands.json",
+      "bytes": 207405,
+      "sha256": "2479eedfacc5d9b1de6b63295048eb5cb43c1d8e499d4a475175a8c7dfdba4a0"
+    },
+    {
+      "path": "review/independent-review.md",
+      "source_path": "/tmp/cf-general-forward-c7lbv0vm/review/independent-review.md",
+      "bytes": 7609,
+      "sha256": "af7b6c6b3d8993f342dac6af22d006144426466bbaf1e1629071c72bf7836cb5"
+    },
+    {
+      "path": "review/official-read-receipts.json",
+      "source_path": "/tmp/cf-general-forward-c7lbv0vm/review/official-read-receipts.json",
+      "bytes": 2876,
+      "sha256": "446448b78afb73809efdbbd4f0119248120530fb84d9223f7e54fe9fc374b124"
+    },
+    {
+      "path": "review/offline-authorization.md",
+      "source_path": "/tmp/cf-general-forward-c7lbv0vm/review/offline-authorization.md",
+      "bytes": 2444,
+      "sha256": "585f4e1366d5153df483cccf172dff9b5423b8ccc33f1f47bd8149ac3115b127"
+    },
+    {
+      "path": "review/offline-model.mjs",
+      "source_path": "/tmp/cf-general-forward-c7lbv0vm/review/offline-model.mjs",
+      "bytes": 16971,
+      "sha256": "b02c34dae31b68f51e7714b7aaa413281c167c556d9bd96588b5e1cc517bf7f2"
+    },
+    {
+      "path": "input/alpha/main.js",
+      "source_path": "/tmp/cf-general-forward-c7lbv0vm/alpha/main.js",
+      "bytes": 651,
+      "sha256": "de12556396270d3f4bb96bd20cf7671ce77c89631b63d9fcc00ba31fe96fa1fe"
+    },
+    {
+      "path": "input/alpha/wrangler.jsonc",
+      "source_path": "/tmp/cf-general-forward-c7lbv0vm/alpha/wrangler.jsonc",
+      "bytes": 369,
+      "sha256": "9562bcae5c67d823cc7d1059e0c02b4f9f3eb7ad2c4255b3fada0e5f22ff8c72"
+    },
+    {
+      "path": "input/alpha/package-lock.json",
+      "source_path": "/tmp/cf-general-forward-c7lbv0vm/alpha/package-lock.json",
+      "bytes": 112,
+      "sha256": "93faabe1ad45604f67da1fd2dbf4dbcf185f89fe03eadf898da666243c85ca10"
+    },
+    {
+      "path": "input/beta/main.js",
+      "source_path": "/tmp/cf-general-forward-c7lbv0vm/beta/main.js",
+      "bytes": 717,
+      "sha256": "3235679d96467f581f58e45906471080b05dabed5753d4ce66393fc9052d5621"
+    },
+    {
+      "path": "input/beta/wrangler.jsonc",
+      "source_path": "/tmp/cf-general-forward-c7lbv0vm/beta/wrangler.jsonc",
+      "bytes": 368,
+      "sha256": "c6ceeb9cfc73fa83b13fd5f75d8baa82bfc7553163cfc477e56358bc64f296a0"
+    },
+    {
+      "path": "input/beta/package-lock.json",
+      "source_path": "/tmp/cf-general-forward-c7lbv0vm/beta/package-lock.json",
+      "bytes": 112,
+      "sha256": "93faabe1ad45604f67da1fd2dbf4dbcf185f89fe03eadf898da666243c85ca10"
+    }
+  ]
+}

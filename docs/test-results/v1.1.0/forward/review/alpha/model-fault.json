@@ -1,0 +1,110 @@
+{
+  "observation": {
+    "status": "observations_completed",
+    "candidate": "alpha",
+    "group": "fault",
+    "source_digest": "de12556396270d3f4bb96bd20cf7671ce77c89631b63d9fcc00ba31fe96fa1fe",
+    "budgets": {
+      "max_events": 50,
+      "charged_events": 3,
+      "max_storage_api_calls": 500,
+      "charged_storage_api_calls": 6,
+      "max_fixtures": 50,
+      "charged_fixtures": 2,
+      "max_rows_per_fixture": 1,
+      "clock": "injected",
+      "network": "sandbox namespace isolated"
+    },
+    "meter": "local double API calls; not Cloudflare billing rows",
+    "totals": {
+      "worker_invocations": 0,
+      "rpc_events": 1,
+      "alarm_events": 2,
+      "do_get_calls": 2,
+      "do_put_calls": 3,
+      "set_alarm_calls": 1,
+      "delete_alarm_calls": 0,
+      "transaction_calls": 0,
+      "transaction_commits": 0,
+      "transaction_rollbacks": 0,
+      "stub_lookups": 0
+    },
+    "observations": [
+      {
+        "scenario": "partial_failure",
+        "case": "double crashes after initial record put before plan",
+        "events": 1,
+        "work": {
+          "worker_invocations": 0,
+          "rpc_events": 1,
+          "alarm_events": 0,
+          "do_get_calls": 0,
+          "do_put_calls": 1,
+          "set_alarm_calls": 0,
+          "delete_alarm_calls": 0,
+          "transaction_calls": 0,
+          "transaction_commits": 0,
+          "transaction_rollbacks": 0,
+          "stub_lookups": 0
+        },
+        "record": {
+          "expires": 1000432000000,
+          "value": 1
+        },
+        "pending_alarm": null,
+        "durable_puts_in_double": 1,
+        "sql_rows_read": null,
+        "sql_rows_written": null,
+        "safety": "runtime_atomicity_unverified"
+      },
+      {
+        "scenario": "partial_failure",
+        "case": "alarm write failure followed by reconstructed instance and replay",
+        "events": 2,
+        "work": {
+          "worker_invocations": 0,
+          "rpc_events": 0,
+          "alarm_events": 2,
+          "do_get_calls": 2,
+          "do_put_calls": 2,
+          "set_alarm_calls": 1,
+          "delete_alarm_calls": 0,
+          "transaction_calls": 0,
+          "transaction_commits": 0,
+          "transaction_rollbacks": 0,
+          "stub_lookups": 0
+        },
+        "record": {
+          "expires": 1000432000000,
+          "value": 1
+        },
+        "pending_alarm": 1000259200000,
+        "durable_puts_in_double": 2,
+        "sql_rows_read": null,
+        "sql_rows_written": null,
+        "safety": "unsafe_feedback",
+        "note": "double shows repeated write attempts; native retry count is not simulated"
+      }
+    ],
+    "unsupported": [
+      "actual Workerd storage/cache billing metrics",
+      "native alarm retry/delivery limits and timings",
+      "actual eviction and storage transaction rollback/commit gates",
+      "concurrent begin/alarm interleavings",
+      "target-account controls and existing persisted state"
+    ]
+  },
+  "sandbox": {
+    "status": "passed",
+    "exit_code": 0,
+    "duration_ms": 223,
+    "network": "isolated_namespace",
+    "credentials": "not_inherited",
+    "checkout": "read_only",
+    "credential_files": "masked",
+    "memory_limit_mb": 256,
+    "timeout_seconds": 10,
+    "process_group_killed": true
+  }
+}
+

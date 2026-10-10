@@ -2,7 +2,7 @@
 
 [简体中文](usage.zh-CN.md) | **English** · [Back to the project](../README.en.md)
 
-This page contains the full installation, CLI preflight, and controlled release instructions. The current version is **1.0.4**, with Git tag `v1.0.4`. The README, Skill, package, and reports use the same three-part version. Start with the README examples for an introduction.
+This page contains the full installation, CLI preflight, and controlled release instructions. The current version is **1.1.0**, with Git tag `v1.1.0`. The README, Skill, package, and reports use the same three-part version. Start with the README examples for an introduction.
 
 ## Prepare and verify locally
 
@@ -17,6 +17,10 @@ npm test
 
 The unified command runs rule, integration, gate, and sandbox checks; real workerd tests; and a clean installation/package check. Actual logs go to `.cost-safety/test-results/`. Any failed stage exits nonzero. workerd runs with network isolation, a read-only checkout, and a parent watchdog. Unavailable namespaces cause failure rather than a fallback to networked tests.
 
+## General review method
+
+Derive activation, billable work, continuation, progress/stop invariants and work bounds from code, without incident documents. `coverage.execution_bounds` lists paths requiring application `execution-bounds` test observations, validated by the bundled `assets/execution-bounds.schema.json`. Missing or inconsistent evidence stays INCOMPLETE; the publisher gate independently recomputes obligations. See the [method and evidence contract](../.agents/skills/cloudflare-cost-safety/references/execution-bounds.md). Refresh external trust pins and application evidence when upgrading the tool.
+
 ## Install the Skill
 
 ```sh
@@ -25,7 +29,7 @@ npm run install-skill -- --project /ABSOLUTE/APPLICATION
 npm run install-skill -- --skills-dir /ABSOLUTE/TRUSTED/skills
 ```
 
-The installer stays offline, refuses to overwrite an existing Skill, and copies 11 prepared production dependencies with licenses, including the Python sandbox. `npm run check:package` creates `.cost-safety/cloudflare-cost-safety-1.0.4.tar.gz`, actually extracts it, and runs the CLI offline with only the clean application available. The archive can also be extracted into an application's `.agents/skills/`. Host discovery is required; this project's tests do not establish automatic reload or implicit matching for a particular Codex build.
+The installer stays offline, refuses to overwrite an existing Skill, and copies 11 prepared production dependencies with licenses, including the Python sandbox. `npm run check:package` creates `.cost-safety/cloudflare-cost-safety-1.1.0.tar.gz`, actually extracts it, and runs the CLI offline with only the clean application available. The archive can also be extracted into an application's `.agents/skills/`. Host discovery is required; this project's tests do not establish automatic reload or implicit matching for a particular Codex build.
 
 Installed version identity is recorded in the Skill's [version.json](../.agents/skills/cloudflare-cost-safety/version.json). Run `node /TRUSTED/skill/scripts/cli.mjs version` to inspect the version and Git tag. `--version` prints only the version number.
 

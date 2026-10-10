@@ -1,0 +1,245 @@
+{
+  "observation": {
+    "status": "observations_completed",
+    "candidate": "alpha",
+    "group": "core",
+    "source_digest": "de12556396270d3f4bb96bd20cf7671ce77c89631b63d9fcc00ba31fe96fa1fe",
+    "budgets": {
+      "max_events": 50,
+      "charged_events": 23,
+      "max_storage_api_calls": 500,
+      "charged_storage_api_calls": 54,
+      "max_fixtures": 50,
+      "charged_fixtures": 7,
+      "max_rows_per_fixture": 1,
+      "clock": "injected",
+      "network": "sandbox namespace isolated"
+    },
+    "meter": "local double API calls; not Cloudflare billing rows",
+    "totals": {
+      "worker_invocations": 2,
+      "rpc_events": 7,
+      "alarm_events": 14,
+      "do_get_calls": 14,
+      "do_put_calls": 20,
+      "set_alarm_calls": 20,
+      "delete_alarm_calls": 0,
+      "transaction_calls": 0,
+      "transaction_commits": 0,
+      "transaction_rollbacks": 0,
+      "stub_lookups": 2
+    },
+    "observations": [
+      {
+        "scenario": "normal",
+        "case": "first due alarm preserves expiry and schedules the same due timestamp",
+        "events": 2,
+        "work": {
+          "worker_invocations": 0,
+          "rpc_events": 1,
+          "alarm_events": 1,
+          "do_get_calls": 1,
+          "do_put_calls": 2,
+          "set_alarm_calls": 2,
+          "delete_alarm_calls": 0,
+          "transaction_calls": 0,
+          "transaction_commits": 0,
+          "transaction_rollbacks": 0,
+          "stub_lookups": 0
+        },
+        "record": {
+          "expires": 1000432000000,
+          "value": 1
+        },
+        "pending_alarm": 1000259200000,
+        "durable_puts_in_double": 2,
+        "sql_rows_read": null,
+        "sql_rows_written": null,
+        "safety": "unsafe_feedback"
+      },
+      {
+        "scenario": "no_progress",
+        "case": "eight successful alarm callbacks at the refresh boundary",
+        "events": 9,
+        "work": {
+          "worker_invocations": 0,
+          "rpc_events": 1,
+          "alarm_events": 8,
+          "do_get_calls": 8,
+          "do_put_calls": 9,
+          "set_alarm_calls": 9,
+          "delete_alarm_calls": 0,
+          "transaction_calls": 0,
+          "transaction_commits": 0,
+          "transaction_rollbacks": 0,
+          "stub_lookups": 0
+        },
+        "record": {
+          "expires": 1000432000000,
+          "value": 1
+        },
+        "pending_alarm": 1000259200000,
+        "durable_puts_in_double": 9,
+        "sql_rows_read": null,
+        "sql_rows_written": null,
+        "safety": "unsafe_feedback",
+        "cutoff": "explicit eight-callback harness cutoff; no application exhaustion"
+      },
+      {
+        "scenario": "no_progress",
+        "case": "missing record returns after one control read",
+        "events": 1,
+        "work": {
+          "worker_invocations": 0,
+          "rpc_events": 0,
+          "alarm_events": 1,
+          "do_get_calls": 1,
+          "do_put_calls": 0,
+          "set_alarm_calls": 0,
+          "delete_alarm_calls": 0,
+          "transaction_calls": 0,
+          "transaction_commits": 0,
+          "transaction_rollbacks": 0,
+          "stub_lookups": 0
+        },
+        "record": null,
+        "pending_alarm": null,
+        "durable_puts_in_double": 0,
+        "sql_rows_read": null,
+        "sql_rows_written": null,
+        "safety": "bounded_empty_case"
+      },
+      {
+        "scenario": "restart",
+        "case": "new object instances use unchanged persisted expiry",
+        "events": 3,
+        "work": {
+          "worker_invocations": 0,
+          "rpc_events": 1,
+          "alarm_events": 2,
+          "do_get_calls": 2,
+          "do_put_calls": 3,
+          "set_alarm_calls": 3,
+          "delete_alarm_calls": 0,
+          "transaction_calls": 0,
+          "transaction_commits": 0,
+          "transaction_rollbacks": 0,
+          "stub_lookups": 0
+        },
+        "record": {
+          "expires": 1000432000000,
+          "value": 1
+        },
+        "pending_alarm": 1000259200000,
+        "durable_puts_in_double": 3,
+        "sql_rows_read": null,
+        "sql_rows_written": null,
+        "safety": "unsafe_feedback"
+      },
+      {
+        "scenario": "replay",
+        "case": "begin replay overwrites expiry and later alarm still has no progress",
+        "events": 3,
+        "work": {
+          "worker_invocations": 0,
+          "rpc_events": 2,
+          "alarm_events": 1,
+          "do_get_calls": 1,
+          "do_put_calls": 3,
+          "set_alarm_calls": 3,
+          "delete_alarm_calls": 0,
+          "transaction_calls": 0,
+          "transaction_commits": 0,
+          "transaction_rollbacks": 0,
+          "stub_lookups": 0
+        },
+        "record": {
+          "expires": 1000518400000,
+          "value": 1
+        },
+        "pending_alarm": 1000345600000,
+        "durable_puts_in_double": 3,
+        "sql_rows_read": null,
+        "sql_rows_written": null,
+        "safety": "unsafe_feedback"
+      },
+      {
+        "scenario": "amplification",
+        "case": "invalid credential GET and arbitrary-host OPTIONS both initiate writes",
+        "events": 4,
+        "work": {
+          "worker_invocations": 2,
+          "rpc_events": 2,
+          "alarm_events": 0,
+          "do_get_calls": 0,
+          "do_put_calls": 2,
+          "set_alarm_calls": 2,
+          "delete_alarm_calls": 0,
+          "transaction_calls": 0,
+          "transaction_commits": 0,
+          "transaction_rollbacks": 0,
+          "stub_lookups": 2
+        },
+        "record": {
+          "expires": 1000432001000,
+          "value": 1
+        },
+        "pending_alarm": 1000259201000,
+        "durable_puts_in_double": 2,
+        "sql_rows_read": null,
+        "sql_rows_written": null,
+        "safety": "unrestricted_request_control_work"
+      },
+      {
+        "scenario": "stop",
+        "case": "extra persisted closed/disabled fields are ignored",
+        "events": 1,
+        "work": {
+          "worker_invocations": 0,
+          "rpc_events": 0,
+          "alarm_events": 1,
+          "do_get_calls": 1,
+          "do_put_calls": 1,
+          "set_alarm_calls": 1,
+          "delete_alarm_calls": 0,
+          "transaction_calls": 0,
+          "transaction_commits": 0,
+          "transaction_rollbacks": 0,
+          "stub_lookups": 0
+        },
+        "record": {
+          "expires": 1000432000000,
+          "value": 1,
+          "closed": true,
+          "disabled": true
+        },
+        "pending_alarm": 1000259200000,
+        "durable_puts_in_double": 1,
+        "sql_rows_read": null,
+        "sql_rows_written": null,
+        "safety": "no_supported_stop",
+        "note": "fields are synthetic negative evidence, not a claimed stop API"
+      }
+    ],
+    "unsupported": [
+      "actual Workerd storage/cache billing metrics",
+      "native alarm retry/delivery limits and timings",
+      "actual eviction and storage transaction rollback/commit gates",
+      "concurrent begin/alarm interleavings",
+      "target-account controls and existing persisted state"
+    ]
+  },
+  "sandbox": {
+    "status": "passed",
+    "exit_code": 0,
+    "duration_ms": 224,
+    "network": "isolated_namespace",
+    "credentials": "not_inherited",
+    "checkout": "read_only",
+    "credential_files": "masked",
+    "memory_limit_mb": 256,
+    "timeout_seconds": 10,
+    "process_group_killed": true
+  }
+}
+

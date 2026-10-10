@@ -2,7 +2,7 @@
 
 **简体中文** | [English](usage.en.md) · [返回项目首页](../README.md)
 
-本页保留安装、命令行预检与受控发布的完整操作说明。当前版本为 **1.0.4**，Git 标签为 `v1.0.4`；README、Skill、软件包和报告使用同一个三段式版本号。首次了解项目可先阅读首页的检查示例。
+本页保留安装、命令行预检与受控发布的完整操作说明。当前版本为 **1.1.0**，Git 标签为 `v1.1.0`；README、Skill、软件包和报告使用同一个三段式版本号。首次了解项目可先阅读首页的检查示例。
 
 ## 本地准备与验证
 
@@ -17,6 +17,10 @@ npm test
 
 统一命令依次执行规则／集成／门禁／沙箱检查、真实 workerd 测试、干净安装与打包检查。实际日志写入 `.cost-safety/test-results/`；任何阶段失败都会非零退出。workerd 在断网 namespace、只读工作目录和父进程 watchdog 下运行。命名空间不可用时明确失败，不降级为联网测试。
 
+## 通用检查方法
+
+每次从代码推导执行路径、计费操作、继续调度、进度／停止条件和工作量上限，不依赖事故调查文档。`coverage.execution_bounds` 列出必须交代的路径；适用应用需提供 `execution-bounds` 测试记录，指标格式为 Skill 的 `assets/execution-bounds.schema.json`。缺项或不一致保持 INCOMPLETE，发布门禁独立重算并拒绝。具体场景、实际观测与限制作用范围见[通用方法](../.agents/skills/cloudflare-cost-safety/references/execution-bounds.md)。工具升级后需更新外部 trust pins 和应用证据。
+
 ## 安装 Skill
 
 ```sh
@@ -25,7 +29,7 @@ npm run install-skill -- --project /ABSOLUTE/APPLICATION
 npm run install-skill -- --skills-dir /ABSOLUTE/TRUSTED/skills
 ```
 
-安装器不联网、不覆盖现有 Skill，复制已准备的 11 个生产依赖及许可证，包含 Python 沙箱。`npm run check:package` 会生成 `.cost-safety/cloudflare-cost-safety-1.0.4.tar.gz`，实际解包并在只能看到干净应用的离线环境中运行 CLI。也可解包到应用的 `.agents/skills/`。宿主需重新发现技能；本项目未验证当前 Codex build 的自动重载或隐式匹配。
+安装器不联网、不覆盖现有 Skill，复制已准备的 11 个生产依赖及许可证，包含 Python 沙箱。`npm run check:package` 会生成 `.cost-safety/cloudflare-cost-safety-1.1.0.tar.gz`，实际解包并在只能看到干净应用的离线环境中运行 CLI。也可解包到应用的 `.agents/skills/`。宿主需重新发现技能；本项目未验证当前 Codex build 的自动重载或隐式匹配。
 
 安装后的版本信息保存在 Skill 内的 [version.json](../.agents/skills/cloudflare-cost-safety/version.json)。运行 `node /TRUSTED/skill/scripts/cli.mjs version` 可查看版本和 Git 标签；`--version` 仅输出版本号。
 

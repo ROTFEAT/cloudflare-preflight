@@ -5,6 +5,15 @@ const dimensions=['events','queue_deliveries','new_messages','sql_rows_read','sq
 function object(required,properties,additionalProperties=false){return {type:'object',required,properties,additionalProperties};}
 function schema(name,definition){writeJSON(asset(`${name}.schema.json`),{$schema:'http://json-schema.org/draft-07/schema#',$id:`https://cloudflare-cost-safety.local/schema/${name}`, ...definition});}
 const location=object(['path','start_line'],{path:string,start_line:{type:'integer',minimum:1},end_line:{type:'integer',minimum:1}},false);
+const count={type:'integer',minimum:0,maximum:Number.MAX_SAFE_INTEGER};
+const work={type:'object',minProperties:1,additionalProperties:count};
+schema('execution-bounds',object(['paths'],{paths:{type:'array',minItems:1,items:{
+ ...object(['path_id','scope','max_events','work_limits','reason','enforcement','observations'],{
+  path_id:string,scope:{enum:['invocation','logical_job','time_window']},max_events:{...count,minimum:1},window_ms:{...count,minimum:1},work_limits:work,reason:string,
+  enforcement:{type:'array',minItems:1,items:location},
+  observations:{type:'array',minItems:1,items:object(['scenario','case','events','work'],{scenario:{enum:['normal','no_progress','amplification','exhaustion','restart','replay','stop','time_boundary','partial_failure']},case:string,events:count,work})}
+ }),allOf:[{if:{properties:{scope:{const:'time_window'}}},then:{required:['window_ms']}}]
+}}}));
 schema('policy',object(['schema_version','mode','cloud_access','remote_tests','local_test_budget'],{
  schema_version:{const:'1.0'},mode:{const:'review_only'},cloud_access:{const:'disabled'},remote_tests:{const:false},
  local_test_budget:object(['max_events','max_messages','max_fixture_rows','max_wall_seconds_per_child','max_memory_mb','network'],{max_events:{type:'integer',minimum:1,maximum:1000},max_messages:{type:'integer',minimum:1,maximum:1000},max_fixture_rows:{type:'integer',minimum:1,maximum:10000},max_wall_seconds_per_child:{type:'integer',minimum:1,maximum:60},max_memory_mb:{type:'integer',minimum:64,maximum:1024},network:{const:'deny'}},false),

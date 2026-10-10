@@ -227,6 +227,13 @@
       "checked_at": "2026-10-08",
       "status": "primary_source",
       "verification_basis": "Official documentation/repository read during preparation; no cloud account or price validation"
+    },
+    {
+      "id": "CF-DO-PRICE",
+      "url": "https://developers.cloudflare.com/durable-objects/platform/pricing/",
+      "checked_at": "2026-10-10",
+      "status": "primary_source",
+      "verification_basis": "Official storage billing documentation read; SQLite-backed KV methods and setAlarm row-write semantics, not account or dollar verification"
     }
   ]
 }

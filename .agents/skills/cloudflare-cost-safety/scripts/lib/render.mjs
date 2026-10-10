@@ -10,6 +10,7 @@ export function renderReport(input) {
 - **Risk paths:** ${r.findings.filter(f=>f.status==='BLOCK').length} BLOCK findings; ${r.findings.filter(f=>f.status==='REVIEW').length} REVIEW findings; ${r.coverage.unknown_edges.length} unresolved edges.
 - **Work bound:** ${cell(usage.classification)}. Scope: ${cell(usage.scope)}.
 - **Code-limit evidence:** ${limits.join('; ')||'No enforced limits recorded.'}
+- **Execution-bound paths:** ${(r.coverage.execution_bounds||[]).length}. Evidence gaps: ${(r.coverage.execution_bounds_gaps||[]).map(cell).join('; ')||'none'}.
 - **Local tests:** ${new Set(r.tests.filter(t=>t.status==='passed').map(t=>t.id)).size} passed. Required checks still missing: ${r.coverage.missing_tests.map(cell).join(', ')||'none'}.
 - **Cloud controls:** NOT VERIFIED by this read-only tool. Local tests and code/configuration declarations do not establish operational protection.
 

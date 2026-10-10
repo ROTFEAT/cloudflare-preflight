@@ -3,7 +3,7 @@
 [简体中文](README.md) | **English**
 
 [![CI](https://github.com/ROTFEAT/cloudflare-preflight/actions/workflows/verify.yml/badge.svg?branch=main)](https://github.com/ROTFEAT/cloudflare-preflight/actions/workflows/verify.yml)
-**Version 1.0.4** · Codex Skill · [MIT](LICENSE) · [Changelog](CHANGELOG.md)
+**Version 1.1.0** · Codex Skill · [MIT](LICENSE) · [Changelog](CHANGELOG.md)
 
 **Required checks before deploying to Cloudflare**
 
@@ -51,6 +51,8 @@ In a historical test application, activation starts an alarm. The alarm performs
 > Path: `alarm → setAlarm`
 
 The [full report](docs/test-results/forward/corrected/activated/report.md) also preserves unknowns and uncompleted tests. This historical example shows how a finding is reported; it cannot approve a current application release.
+
+**Reviews start from code; incident reports are optional.** Trace activation → billable work → continuation/fan-out → persistent progress or a window bound → stop. Derive no-progress, restart, replay, time-boundary and amplification tests from the application. Preflight generates the paths that need evidence; missing evidence stays INCOMPLETE. The 12 product rules and public incidents help challenge the review rather than exhaust its scope. See the [general review method](.agents/skills/cloudflare-cost-safety/references/execution-bounds.md).
 
 ## Quick start
 
@@ -175,22 +177,22 @@ npm ci --ignore-scripts --registry=https://registry.npmjs.org
 npm test
 ```
 
-Dependency downloads and offline verification are separate phases. Tests do not connect to Cloudflare accounts. The unified command runs rule, integration, gate, sandbox, real workerd, and clean installation/package checks. The [retained 1.0.4 verification](docs/test-results/v1.0.4/summary.json) contains 129 Node tests, 22 workerd tests, and a package check. Consult [CI](https://github.com/ROTFEAT/cloudflare-preflight/actions/workflows/verify.yml) for subsequent results.
+Dependency downloads and offline verification are separate phases. Tests do not connect to Cloudflare accounts. The unified command runs rule, integration, gate, sandbox, real workerd, and clean installation/package checks. The [retained 1.1.0 verification](docs/test-results/v1.1.0/summary.json) contains 136 Node tests, 22 workerd tests, and a package check. Consult [CI](https://github.com/ROTFEAT/cloudflare-preflight/actions/workflows/verify.yml) for subsequent results.
 
-The current version is **1.0.4**. The README, Skill, npm package, and reports use the same three-part version, with Git tag `v1.0.4`. **Every commit increments the version, including documentation and CI changes.** Small changes advance as `1.0.2 → 1.0.3 → 1.0.4`; compatible additions and breaking changes increment MINOR and MAJOR respectively. See the [versioning policy](docs/versioning.md) for the full workflow.
+The current version is **1.1.0**. The README, Skill, npm package, and reports use the same three-part version, with Git tag `v1.1.0`. **Every commit increments the version, including documentation and CI changes.** Small changes advance as `1.0.3 → 1.0.4 → 1.0.5`; compatible additions and breaking changes increment MINOR and MAJOR respectively. See the [versioning policy](docs/versioning.md) for the full workflow.
 
 ## Official references and acknowledgements
 
 Official dependencies are pinned to `cloudflare/skills@41e0d19858946d18af9ee2c2feebbe2e11d829ff`: `workers-best-practices`, `wrangler`, and conditional `durable-objects`. Entries and applicable references are checked against the [content lock](.agents/skills/cloudflare-cost-safety/official-skills.lock.json) and reviewed.
 
 <details>
-<summary><strong>Expand all 17 official references (32 sources including the cases)</strong></summary>
+<summary><strong>Expand all 18 official references (33 sources including the cases)</strong></summary>
 
-The case table lists all 15 message/community sources. These are all 17 official references from the source index, for 32 sources in total. Official capabilities, metering units, and command semantics are checked against the appropriate official references; community material provides incident context and practical experience.
+The case table lists all 15 message/community sources. These are all 18 official references from the source index, for 33 sources in total. Official capabilities, metering units, and command semantics are checked against the appropriate official references; community material provides incident context and practical experience.
 
 | Topic | Official sources |
 | --- | --- |
-| DO alarms and storage metering | [Alarms](https://developers.cloudflare.com/durable-objects/api/alarms/), [SQLite storage API](https://developers.cloudflare.com/durable-objects/api/sqlite-storage-api/) |
+| DO alarms and storage metering | [Alarms](https://developers.cloudflare.com/durable-objects/api/alarms/), [SQLite storage API](https://developers.cloudflare.com/durable-objects/api/sqlite-storage-api/), [DO Pricing](https://developers.cloudflare.com/durable-objects/platform/pricing/) |
 | D1 row metering | [D1 Pricing](https://developers.cloudflare.com/d1/platform/pricing/) |
 | Queue retry and pause scopes | [Batching and retries](https://developers.cloudflare.com/queues/configuration/batching-retries/), [Pause and purge](https://developers.cloudflare.com/queues/configuration/pause-purge/) |
 | Local runtime tests | [Workers Vitest test APIs](https://developers.cloudflare.com/workers/testing/vitest-integration/test-apis/) |
@@ -204,7 +206,7 @@ The case table lists all 15 message/community sources. These are all 17 official
 
 Upstream main links locate the material; execution uses the pinned commit and content hashes described above. Thanks to the authors of Cloudflare's official Skills and documentation, developers who publicly shared incidents, and the KurosawaGeeker community project. Source status and verification dates are recorded in [sources.json](.agents/skills/cloudflare-cost-safety/assets/sources.json).
 
-Delayed refresh, origin bypass, remaining work after a stop, and layered reporting were informed by [ZPVIP/no-billshock@1250f01](https://github.com/ZPVIP/no-billshock/tree/1250f01a085cfe955e1189e38502b5a4428734da) ([MIT](https://github.com/ZPVIP/no-billshock/blob/1250f01a085cfe955e1189e38502b5a4428734da/LICENSE)) and adapted to this project's read-only Cloudflare preflight. This design reference is separate from the 32 incident and official sources above.
+Delayed refresh, origin bypass, remaining work after a stop, and layered reporting were informed by [ZPVIP/no-billshock@1250f01](https://github.com/ZPVIP/no-billshock/tree/1250f01a085cfe955e1189e38502b5a4428734da) ([MIT](https://github.com/ZPVIP/no-billshock/blob/1250f01a085cfe955e1189e38502b5a4428734da/LICENSE)) and adapted to this project's read-only Cloudflare preflight. This design reference is separate from the 33 incident and official sources above.
 
 </details>
 

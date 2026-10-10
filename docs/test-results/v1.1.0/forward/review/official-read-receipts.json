@@ -1,0 +1,61 @@
+{
+  "revision": "41e0d19858946d18af9ee2c2feebbe2e11d829ff",
+  "files": [
+    {
+      "skill": "workers-best-practices",
+      "path": "/home/ubuntu/github/cloudflare-preflight/.agents/skills/cloudflare-cost-safety/vendor/workers-best-practices/SKILL.md",
+      "sha256": "8ae8c6e7359171ba6a1688503850fa05ce47199c4e288343bf55b5e277351bae",
+      "matches_pin": true
+    },
+    {
+      "skill": "workers-best-practices",
+      "path": "/home/ubuntu/github/cloudflare-preflight/.agents/skills/cloudflare-cost-safety/vendor/workers-best-practices/references/configuration.md",
+      "sha256": "cdb5c9cd5168231373523332c0e7a5cf8811dc244c48298823e3ccc5eb7157c1",
+      "matches_pin": true
+    },
+    {
+      "skill": "workers-best-practices",
+      "path": "/home/ubuntu/github/cloudflare-preflight/.agents/skills/cloudflare-cost-safety/vendor/workers-best-practices/references/platform-apis.md",
+      "sha256": "9ca9f5a7a82f92de45d310f5e2ee05aa464ddb7a63a737529caa17fff3660f28",
+      "matches_pin": true
+    },
+    {
+      "skill": "workers-best-practices",
+      "path": "/home/ubuntu/github/cloudflare-preflight/.agents/skills/cloudflare-cost-safety/vendor/workers-best-practices/references/runtime-patterns.md",
+      "sha256": "704ce8d4ff62c7655eb1d15f804ad566ed2012d11c2086e0d94bd3addb4d2c07",
+      "matches_pin": true
+    },
+    {
+      "skill": "wrangler",
+      "path": "/home/ubuntu/github/cloudflare-preflight/.agents/skills/cloudflare-cost-safety/vendor/wrangler/SKILL.md",
+      "sha256": "9d9bd78c79823cdad36a88dbece8e48d8512c7262c66546ccbfac64ae08d310f",
+      "matches_pin": true
+    },
+    {
+      "skill": "durable-objects",
+      "path": "/home/ubuntu/github/cloudflare-preflight/.agents/skills/cloudflare-cost-safety/vendor/durable-objects/SKILL.md",
+      "sha256": "2468c1795f439f494f076eb13a2202a3c4e579e71e6e2ed98b4d1f5ce62fef1b",
+      "matches_pin": true
+    },
+    {
+      "skill": "durable-objects",
+      "path": "/home/ubuntu/github/cloudflare-preflight/.agents/skills/cloudflare-cost-safety/vendor/durable-objects/references/rules.md",
+      "sha256": "8ec51f1270d6014763139236c3fb9f3a21a3bed4054c99b101f392eb5cb363bf",
+      "matches_pin": true
+    },
+    {
+      "skill": "durable-objects",
+      "path": "/home/ubuntu/github/cloudflare-preflight/.agents/skills/cloudflare-cost-safety/vendor/durable-objects/references/testing.md",
+      "sha256": "1a99e6a2e1bd7f2fa34573b07ad036e3c2ddcf97df6a42926d737eb2d87b3168",
+      "matches_pin": true
+    },
+    {
+      "skill": "durable-objects",
+      "path": "/home/ubuntu/github/cloudflare-preflight/.agents/skills/cloudflare-cost-safety/vendor/durable-objects/references/workers.md",
+      "sha256": "3149c3ee371b5dbf3a84dac7d5bb42c4c6553762480741f6d2808e4ca20fd932",
+      "matches_pin": true
+    }
+  ],
+  "all_actual_digests_match_pin": true,
+  "read_receipts_are_not_semantic_conclusions": true
+}

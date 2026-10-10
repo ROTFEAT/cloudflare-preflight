@@ -1,3 +1,5 @@
+Apply [the code-derived execution-bound method](execution-bounds.md) to every review. These product rules and incident mappings are not an exhaustive risk list; incident reports are optional.
+
 ## 8. 十二条P0成本规则及36个基础样例
 
 以下规则全部必须实现；标题、ID、计费路径和验收语义是稳定契约。每条至少提供一个危险、一个正常、一个不确定样例，合计至少36个。三类样例都是独立测试，不得以一段文字描述代替。

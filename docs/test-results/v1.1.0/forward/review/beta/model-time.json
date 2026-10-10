@@ -1,0 +1,306 @@
+{
+  "observation": {
+    "status": "observations_completed",
+    "candidate": "beta",
+    "group": "time",
+    "source_digest": "3235679d96467f581f58e45906471080b05dabed5753d4ce66393fc9052d5621",
+    "budgets": {
+      "max_events": 50,
+      "charged_events": 19,
+      "max_storage_api_calls": 500,
+      "charged_storage_api_calls": 76,
+      "max_fixtures": 50,
+      "charged_fixtures": 9,
+      "max_rows_per_fixture": 1,
+      "clock": "injected",
+      "network": "sandbox namespace isolated"
+    },
+    "meter": "local double API calls; not Cloudflare billing rows",
+    "totals": {
+      "worker_invocations": 0,
+      "rpc_events": 0,
+      "alarm_events": 19,
+      "do_get_calls": 19,
+      "do_put_calls": 19,
+      "set_alarm_calls": 18,
+      "delete_alarm_calls": 1,
+      "transaction_calls": 19,
+      "transaction_commits": 19,
+      "transaction_rollbacks": 0,
+      "stub_lookups": 0
+    },
+    "observations": [
+      {
+        "scenario": "time_boundary",
+        "case": "forced callback at T+119999ms",
+        "events": 1,
+        "work": {
+          "worker_invocations": 0,
+          "rpc_events": 0,
+          "alarm_events": 1,
+          "do_get_calls": 1,
+          "do_put_calls": 1,
+          "set_alarm_calls": 1,
+          "delete_alarm_calls": 0,
+          "transaction_calls": 1,
+          "transaction_commits": 1,
+          "transaction_rollbacks": 0,
+          "stub_lookups": 0
+        },
+        "record": {
+          "remaining": 2,
+          "closed": false
+        },
+        "pending_alarm": 1000000239999,
+        "durable_puts_in_double": 1,
+        "sql_rows_read": null,
+        "sql_rows_written": null,
+        "safety": "finite_progress",
+        "note": "direct callback probe; application does not enforce minimum delay for stale deliveries"
+      },
+      {
+        "scenario": "time_boundary",
+        "case": "forced callback at T+120000ms",
+        "events": 1,
+        "work": {
+          "worker_invocations": 0,
+          "rpc_events": 0,
+          "alarm_events": 1,
+          "do_get_calls": 1,
+          "do_put_calls": 1,
+          "set_alarm_calls": 1,
+          "delete_alarm_calls": 0,
+          "transaction_calls": 1,
+          "transaction_commits": 1,
+          "transaction_rollbacks": 0,
+          "stub_lookups": 0
+        },
+        "record": {
+          "remaining": 2,
+          "closed": false
+        },
+        "pending_alarm": 1000000240000,
+        "durable_puts_in_double": 1,
+        "sql_rows_read": null,
+        "sql_rows_written": null,
+        "safety": "finite_progress",
+        "note": "direct callback probe; application does not enforce minimum delay for stale deliveries"
+      },
+      {
+        "scenario": "time_boundary",
+        "case": "forced callback at T+120001ms",
+        "events": 1,
+        "work": {
+          "worker_invocations": 0,
+          "rpc_events": 0,
+          "alarm_events": 1,
+          "do_get_calls": 1,
+          "do_put_calls": 1,
+          "set_alarm_calls": 1,
+          "delete_alarm_calls": 0,
+          "transaction_calls": 1,
+          "transaction_commits": 1,
+          "transaction_rollbacks": 0,
+          "stub_lookups": 0
+        },
+        "record": {
+          "remaining": 2,
+          "closed": false
+        },
+        "pending_alarm": 1000000240001,
+        "durable_puts_in_double": 1,
+        "sql_rows_read": null,
+        "sql_rows_written": null,
+        "safety": "finite_progress",
+        "note": "direct callback probe; application does not enforce minimum delay for stale deliveries"
+      },
+      {
+        "scenario": "time_boundary",
+        "case": "forced callback at T+240000ms",
+        "events": 1,
+        "work": {
+          "worker_invocations": 0,
+          "rpc_events": 0,
+          "alarm_events": 1,
+          "do_get_calls": 1,
+          "do_put_calls": 1,
+          "set_alarm_calls": 1,
+          "delete_alarm_calls": 0,
+          "transaction_calls": 1,
+          "transaction_commits": 1,
+          "transaction_rollbacks": 0,
+          "stub_lookups": 0
+        },
+        "record": {
+          "remaining": 2,
+          "closed": false
+        },
+        "pending_alarm": 1000000360000,
+        "durable_puts_in_double": 1,
+        "sql_rows_read": null,
+        "sql_rows_written": null,
+        "safety": "finite_progress",
+        "note": "direct callback probe; application does not enforce minimum delay for stale deliveries"
+      },
+      {
+        "scenario": "time_boundary",
+        "case": "forced callback at T+360000ms",
+        "events": 1,
+        "work": {
+          "worker_invocations": 0,
+          "rpc_events": 0,
+          "alarm_events": 1,
+          "do_get_calls": 1,
+          "do_put_calls": 1,
+          "set_alarm_calls": 1,
+          "delete_alarm_calls": 0,
+          "transaction_calls": 1,
+          "transaction_commits": 1,
+          "transaction_rollbacks": 0,
+          "stub_lookups": 0
+        },
+        "record": {
+          "remaining": 2,
+          "closed": false
+        },
+        "pending_alarm": 1000000480000,
+        "durable_puts_in_double": 1,
+        "sql_rows_read": null,
+        "sql_rows_written": null,
+        "safety": "finite_progress",
+        "note": "direct callback probe; application does not enforce minimum delay for stale deliveries"
+      },
+      {
+        "scenario": "time_boundary",
+        "case": "forced callback at T+691200000ms",
+        "events": 1,
+        "work": {
+          "worker_invocations": 0,
+          "rpc_events": 0,
+          "alarm_events": 1,
+          "do_get_calls": 1,
+          "do_put_calls": 1,
+          "set_alarm_calls": 1,
+          "delete_alarm_calls": 0,
+          "transaction_calls": 1,
+          "transaction_commits": 1,
+          "transaction_rollbacks": 0,
+          "stub_lookups": 0
+        },
+        "record": {
+          "remaining": 2,
+          "closed": false
+        },
+        "pending_alarm": 1000691320000,
+        "durable_puts_in_double": 1,
+        "sql_rows_read": null,
+        "sql_rows_written": null,
+        "safety": "finite_progress",
+        "note": "direct callback probe; application does not enforce minimum delay for stale deliveries"
+      },
+      {
+        "scenario": "time_boundary",
+        "case": "backwards and repeated clock changes still exhaust allowance",
+        "events": 3,
+        "work": {
+          "worker_invocations": 0,
+          "rpc_events": 0,
+          "alarm_events": 3,
+          "do_get_calls": 3,
+          "do_put_calls": 3,
+          "set_alarm_calls": 2,
+          "delete_alarm_calls": 1,
+          "transaction_calls": 3,
+          "transaction_commits": 3,
+          "transaction_rollbacks": 0,
+          "stub_lookups": 0
+        },
+        "record": {
+          "remaining": 0,
+          "closed": true
+        },
+        "pending_alarm": null,
+        "durable_puts_in_double": 3,
+        "sql_rows_read": null,
+        "sql_rows_written": null,
+        "safety": "finite_progress"
+      },
+      {
+        "scenario": "no_progress",
+        "case": "legacy/corrupt ledger missing remaining",
+        "events": 5,
+        "work": {
+          "worker_invocations": 0,
+          "rpc_events": 0,
+          "alarm_events": 5,
+          "do_get_calls": 5,
+          "do_put_calls": 5,
+          "set_alarm_calls": 5,
+          "delete_alarm_calls": 0,
+          "transaction_calls": 5,
+          "transaction_commits": 5,
+          "transaction_rollbacks": 0,
+          "stub_lookups": 0
+        },
+        "record": {
+          "closed": false,
+          "remaining": null
+        },
+        "pending_alarm": 1000000720000,
+        "durable_puts_in_double": 5,
+        "sql_rows_read": null,
+        "sql_rows_written": null,
+        "safety": "unknown_existing_state",
+        "note": "current begin creates valid remaining=3; reachability from prior deployed state is unverified; explicit five-callback harness cutoff"
+      },
+      {
+        "scenario": "no_progress",
+        "case": "legacy/corrupt ledger Infinity",
+        "events": 5,
+        "work": {
+          "worker_invocations": 0,
+          "rpc_events": 0,
+          "alarm_events": 5,
+          "do_get_calls": 5,
+          "do_put_calls": 5,
+          "set_alarm_calls": 5,
+          "delete_alarm_calls": 0,
+          "transaction_calls": 5,
+          "transaction_commits": 5,
+          "transaction_rollbacks": 0,
+          "stub_lookups": 0
+        },
+        "record": {
+          "remaining": null,
+          "closed": false
+        },
+        "pending_alarm": 1000000720000,
+        "durable_puts_in_double": 5,
+        "sql_rows_read": null,
+        "sql_rows_written": null,
+        "safety": "unknown_existing_state",
+        "note": "current begin creates valid remaining=3; reachability from prior deployed state is unverified; explicit five-callback harness cutoff"
+      }
+    ],
+    "unsupported": [
+      "actual Workerd storage/cache billing metrics",
+      "native alarm retry/delivery limits and timings",
+      "actual eviction and storage transaction rollback/commit gates",
+      "concurrent begin/alarm interleavings",
+      "target-account controls and existing persisted state"
+    ]
+  },
+  "sandbox": {
+    "status": "passed",
+    "exit_code": 0,
+    "duration_ms": 229,
+    "network": "isolated_namespace",
+    "credentials": "not_inherited",
+    "checkout": "read_only",
+    "credential_files": "masked",
+    "memory_limit_mb": 256,
+    "timeout_seconds": 10,
+    "process_group_killed": true
+  }
+}
+

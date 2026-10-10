@@ -4,7 +4,7 @@
 
 **Cloudflare 部署前必须做的检查**
 
-**1.0.4** · Codex Skill · [English](../README.en.md) · [MIT](../LICENSE)
+**1.1.0** · Codex Skill · [English](../README.en.md) · [MIT](../LICENSE)
 
 `cloudflare-cost-safety` 是一个给 Codex 用的成本检查 Skill，帮你在上线前检查代码和配置，提前发现容易让 Cloudflare 费用超出预期的问题：
 
@@ -15,6 +15,8 @@
 - **收费源站能被直接访问：** Cloudflare 入口设置了保护，下游服务的公开地址或其他入口仍可能被绕过调用。
 
 检查会告诉你：哪里有风险、为什么会产生额外用量、需要补什么限制，以及还有哪些测试没完成。
+
+检查从代码里的执行路径、状态和工作量边界开始，不需要先拿到事故调查文档。每条识别出的路径都要交代如何限制工作量，并用适用的无进展、重启、重放、时间边界和放大测试验证；缺少证据会保持 INCOMPLETE。见[通用检查方法](../.agents/skills/cloudflare-cost-safety/references/execution-bounds.md)。
 
 ## 示例：Alarm 反复运行
 
@@ -86,7 +88,7 @@ npm run install-skill -- --project /ABSOLUTE/APPLICATION
 
 这个项目把其中的机制整理成部署前检查规则。公开资料包含作者自述、原帖片段和二手归档，账单与完整生产代码未由本项目独立审计。
 
-[全部 9 个案例与 15 条消息／社区来源](../README.md#为什么会有这个-skill) · [全部 17 条官方参考资料](../README.md#官方资料与致谢)
+[全部 9 个案例与 15 条消息／社区来源](../README.md#为什么会有这个-skill) · [全部 18 条官方参考资料](../README.md#官方资料与致谢)
 
 ## 使用边界
 
@@ -96,6 +98,6 @@ npm run install-skill -- --project /ABSOLUTE/APPLICATION
 
 [命令行与报告说明](usage.zh-CN.md) · [发布流程](ci.md) · [签名与信任](trust.md) · [实际验证记录](test-results/README.md)
 
-当前版本为 **1.0.4**，README、Skill、软件包和报告统一使用三段式版本号，Git 标签为 `v1.0.4`。每次提交都递增版本号，包括文档与 CI 改动，具体流程见[版本管理](versioning.md)。
+当前版本为 **1.1.0**，README、Skill、软件包和报告统一使用三段式版本号，Git 标签为 `v1.1.0`。每次提交都递增版本号，包括文档与 CI 改动，具体流程见[版本管理](versioning.md)。
 
 项目代码采用 [MIT](../LICENSE)。随包 Cloudflare 官方 Skill 的 [Apache-2.0 许可](../.agents/skills/cloudflare-cost-safety/vendor/CLOUDFLARE-LICENSE)与[出处说明](../.agents/skills/cloudflare-cost-safety/vendor/NOTICE)保持保留。

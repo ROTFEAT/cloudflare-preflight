@@ -16,10 +16,17 @@ export function application(extra={}) {
 }
 export function fixture(kind,id) {return path.resolve(`tests/fixtures/${kind}/${id}`);}
 export const opts=root=>({root,artifact:'main.js',builder:'synthetic-direct-js@1',localTests:true});
+export function mockBounds(report) {
+  // Orchestration data only. These values are not observed application bounds.
+  return {paths:report.coverage.execution_bounds.map(p=>({path_id:p.path_id,
+    scope:p.requires_cumulative_bound?'logical_job':'invocation',max_events:4,
+    work_limits:{synthetic_operations:4},reason:'MOCK_NO_MODEL_CALL: test-double assumption, not an application proof',
+    enforcement:[p.location],observations:p.required_scenarios.map(s=>({scenario:s,case:'Synthetic orchestration record; not executed application work',events:1,work:{synthetic_operations:1}}))}))};
+}
 export function mockReview(report,{findings=[]}={}) {
   // This is a mock semantic reviewer, never evidence of an actual Agent review.
   const evidence=[{path:'main.js',start_line:1}];
-  return {schema_version:'1.0',input_digest:report.deployment_identity.digest,reviewer:'synthetic-test-reviewer',model:'MOCK_NO_MODEL_CALL',invocation:'deterministic-test-double',reviewed_at:new Date().toISOString(),rules:report.rules.map(r=>({rule_id:r.rule_id,status:r.status==='not_applicable'?'not_applicable':r.status==='finding'?'finding':'pass',reason:'Synthetic test assumption; not a real repository review',evidence})),official_skills:report.official_skills.filter(s=>s.required).map(s=>({name:s.name,status:'reviewed',reviewed_files:s.evidence.filter(e=>e.operation==='read').map(e=>({path:e.path,sha256:e.sha256})),reason:'Test double confirms orchestration; this is not Agent coverage',evidence})),tests:report.coverage.required_tests.filter(id=>!report.tests.some(t=>t.id===id)).map(id=>({id,status:'passed',input_digest:report.deployment_identity.digest,command:['mock-local-test',id],runner_digest:digest('synthetic-runner'),duration_ms:1,metrics:{synthetic_test_double:true}})),findings};
+  return {schema_version:'1.0',input_digest:report.deployment_identity.digest,reviewer:'synthetic-test-reviewer',model:'MOCK_NO_MODEL_CALL',invocation:'deterministic-test-double',reviewed_at:new Date().toISOString(),rules:report.rules.map(r=>({rule_id:r.rule_id,status:r.status==='not_applicable'?'not_applicable':r.status==='finding'?'finding':'pass',reason:'Synthetic test assumption; not a real repository review',evidence})),official_skills:report.official_skills.filter(s=>s.required).map(s=>({name:s.name,status:'reviewed',reviewed_files:s.evidence.filter(e=>e.operation==='read').map(e=>({path:e.path,sha256:e.sha256})),reason:'Test double confirms orchestration; this is not Agent coverage',evidence})),tests:report.coverage.required_tests.filter(id=>!report.tests.some(t=>t.id===id)).map(id=>({id,status:'passed',input_digest:report.deployment_identity.digest,command:['mock-local-test',id],runner_digest:digest('synthetic-runner'),duration_ms:1,metrics:id==='execution-bounds'?mockBounds(report):{synthetic_test_double:true}})),findings};
 }
 export function reviewed(root=application(),extra={}) {
   const options={...opts(root),...extra.options};

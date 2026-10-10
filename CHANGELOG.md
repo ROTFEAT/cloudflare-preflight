@@ -1,5 +1,21 @@
 # 更新日志 / Changelog
 
+
+## 1.1.0 — 2026-10-10
+
+Git tag: `v1.1.0`
+
+- 每次审查从源码／配置推导启动、计费操作、继续调度、进度／停止条件与工作量边界；公开事故仅作为检验材料，不再以事故报告是否可得决定检查范围。
+- 从可达入口、初始化、生命周期、操作、循环和递归生成逐路径 `execution-bounds` 应用证据要求，覆盖适用的无进展、放大、耗尽、重启、重放、停止、时间边界与部分失败。
+- 预检和独立门禁核对路径、作用范围、观测单位／上限、必要场景和源码依据；已签名的空 PASS 指标、删减路径或仅用单次限制解释跨事件任务均不能放行。结构检查仍不能替代可信 Agent 的语义审查和实际应用测试。
+- 保留 12 条产品规则、原有 Hook 和离线边界，更新双语文档；补充 DO SQLite 后端 KV 调用及 setAlarm 本身的存储写入计量资料。
+- 增加 7 项通用集成回归，覆盖辅助函数／改名、不同触发机制、递归／死代码、有限任务与合法周期窗口、证据缺失和签名篡改。测试里的语义／用量记录明确为模拟编排，不作为应用真实测试。
+- 未提供事故材料的独立前向评估实际完成六次受限模型探测，区分无进展反馈路径与有限进度任务，并保留静态图漏识别和运行时未核验项；见[原始证据](docs/test-results/v1.1.0/forward/README.md)。
+
+Introduces a code-derived work-bound review and application evidence obligations, independent of incident documents. The publisher gate recomputes obligations and checks scope, scenarios, units, observations and source locations. Existing protocols, 12 product rules, offline execution and the trusted-review boundary remain; upgrade tool trust pins and application evidence.
+
+验证记录 / Verification: [1.1.0 离线测试与包检查](docs/test-results/v1.1.0/summary.json)。历史记录与标签保持原样。
+
 ## 1.0.4 — 2026-10-09
 
 Git tag: `v1.0.4`

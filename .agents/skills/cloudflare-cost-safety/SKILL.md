@@ -8,12 +8,12 @@ description: >-
   and verified local-only builds/tests do not automatically trigger this skill.
   Review only; never deploy or isolate services.
 metadata:
-  version: "1.0.4"
+  version: "1.1.0"
 ---
 
 # Cloudflare Cost Safety
 
-Release **1.0.4**. The Skill, package, and report use the same version. Version identity is recorded in [version.json](version.json); use `scripts/cli.mjs version` to inspect it.
+Release **1.1.0**. The Skill, package, and report use the same version. Version identity is recorded in [version.json](version.json); use `scripts/cli.mjs version` to inspect it.
 
 Enter before the first remote effect of a Cloudflare release. Include package/framework wrappers, CI, preview, upload/activation, rollback, and secret commands that immediately deploy. Inspect actual scripts and versioned command semantics without executing them. Unknown effects enter target confirmation and remain INCOMPLETE. A bare skill installation does not intercept shell commands.
 
@@ -43,6 +43,8 @@ Read [official-skills.md](references/official-skills.md). Every preflight reads 
 Read the actual resolved files or every relevant `content` entry in `official-context.json`, then apply their guidance to the candidate. Confirm platform claims against the project's installed versions, schema and approved current primary documentation. Follow upstream `cf` CLI routing; the non-Wrangler adapter is not implemented and must stay INCOMPLETE. Missing/unreadable/drifting context is INCOMPLETE; memory is not a replacement. `loaded` is distinct from `reviewed`.
 
 ## Review cost paths and test them
+
+Apply [execution-bounds.md](references/execution-bounds.md) on every review: trace activation → billable work → continuation/fan-out → persistent progress or window bound → stop. Derive states, time boundaries and adversarial tests from the candidate code and configuration. Incidents are optional validation material, never a prerequisite or an exhaustive checklist. Complete the generated `coverage.execution_bounds` paths with actual application `execution-bounds` observations; unknown or missing bounds remain INCOMPLETE.
 
 Read [rules.md](references/rules.md), [platform-facts.md](references/platform-facts.md), and [native-controls.md](references/native-controls.md). For alarms/background work or public paths to downstream origins, also read [delayed-and-origin-checks.md](references/delayed-and-origin-checks.md): verify time boundaries, direct access and bounded work after a stop. Cover all 12 registered P0 rules in [catalog.json](assets/rules/catalog.json). Review the resource inventory and graph, including related callers, callees, callbacks, configuration, SQL migrations and unresolved edges. `diff` conservatively includes the full local call closure. Dynamic SDK/ORM/configuration or external effects need an explicit gap, never N/A by parsing failure.
 
